@@ -1,26 +1,29 @@
 import { Button } from "@thing/ui";
 import React from "react";
 import { useDispatch, useSelector } from "./StateProvider";
+import { getPhase } from "@thing/utils";
 
 export const Actions = () => {
-  const autoIncrement = useSelector((state) => state.autoIncrement);
+  const action = useSelector((state) => state.action);
+  const time = useSelector((state) => state.time);
+
   const dispatch = useDispatch();
+  const phase = getPhase(time);
+
   return (
-    <>
-      <Button
-        onClick={() => {
-          dispatch({ type: "INCREMENT" });
-        }}
-      >
-        Make a thing
-      </Button>
-      <Button
-        onClick={() => {
-          dispatch({ type: "AUTO_INCREMENT" });
-        }}
-      >
-        Make a thing maker (costs {(autoIncrement + 1) * 10} things)
-      </Button>
-    </>
+    <Button
+      disabled={action !== "idle"}
+      onClick={() => {
+        dispatch({ type: "NEXT" });
+      }}
+    >
+      {buttonText[phase]}
+    </Button>
   );
+};
+
+const buttonText = {
+  sleeping: "Go to sleep",
+  working: "Go to work",
+  gaming: "Play a game",
 };

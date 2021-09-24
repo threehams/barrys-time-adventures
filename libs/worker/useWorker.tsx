@@ -1,4 +1,4 @@
-import { ReduxAction, State } from "@thing/store";
+import { StateAction, State } from "@thing/store";
 import { useMemo, useCallback, useState } from "react";
 import { applyPatches, enablePatches } from "immer";
 import { Message } from "./types";
@@ -23,7 +23,7 @@ export const useWorker = () => {
     setState(applyPatches(state!, action.payload));
   };
 
-  const dispatch = useCallback((message: ReduxAction) => {
+  const dispatch = useCallback((message: StateAction) => {
     worker?.postMessage(message);
   }, []);
 

@@ -1,11 +1,13 @@
-import { ReduxAction, State } from "@thing/store";
+import { StateAction, State } from "@thing/store";
 import { enablePatches, produceWithPatches } from "immer";
+import { games } from "libs/data/games";
+import { jobs } from "libs/data/jobs";
 import localForage from "localforage";
 import { eventHandler, gameLoop } from "./gameLoop";
 
 const VERSION = 1;
 
-const databaseName = "thing_game";
+const databaseName = "laundry_game";
 const savedGameKey = "saved_game";
 
 localForage.config({
@@ -18,11 +20,22 @@ enablePatches();
 const worker = self as unknown as Worker;
 
 const initialState: State = {
-  count: 0,
-  autoIncrement: 0,
-  timers: {
-    autoIncrement: 0,
+  apartmentSpace: 700,
+  clothing: {
+    pants: { 0: 7 },
+    shirt: { 0: 7 },
+    sock: { 0: 14 },
+    underpants: { 0: 7 },
   },
+  game: games[0],
+  day: 0,
+  desperation: 0,
+  job: jobs[0],
+  money: 10,
+  shame: 0,
+  time: 0,
+  upgrades: {},
+  action: "idle",
 };
 
 const main = async () => {
@@ -38,7 +51,7 @@ const main = async () => {
     localForage.setItem(savedGameKey, state);
   }, 5000);
 
-  worker.addEventListener("message", (event: { data: ReduxAction }) => {
+  worker.addEventListener("message", (event: { data: StateAction }) => {
     const action = event.data;
 
     const [nextState, patches] = produceWithPatches(state, (draft) => {
