@@ -3,24 +3,27 @@ import { Job } from "./Job";
 import { UpgradeKey } from "./Upgrade";
 
 type ReuseCount = number;
-type Day = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
-type ClothingName = "shirt" | "pants" | "sock" | "underpants";
-type Action = "idle" | "working" | "gaming" | "sleeping";
+export type ClothingName = "shirt" | "pants" | "sock" | "underpants";
+export type Action = "idle" | "working" | "gaming" | "sleeping";
+export type WornClothing = {
+  [Clothing in ClothingName]: ReuseCount | undefined;
+};
 
 export type State = {
-  day: Day;
   time: number;
   money: number;
   shame: number;
   desperation: number;
   job: Job;
   game: Game;
+  messages: ReadonlyArray<string>;
   clothing: {
     [Clothing in ClothingName]: {
-      [Reuse in ReuseCount]: number | undefined;
+      [Reuse: /* reuseCount */ string]: number | undefined;
     };
   };
+  wornClothing: WornClothing;
   upgrades: {
     [Key in UpgradeKey]: number;
   };

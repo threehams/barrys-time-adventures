@@ -1,4 +1,4 @@
-export * from "./Action";
+export * from "./StateAction";
 export * from "./Game";
 export * from "./State";
 export * from "./Upgrade";

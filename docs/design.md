@@ -14,14 +14,62 @@
   I somehow have to make time pass faster over time... or appear to go faster
   "play Factorio"
 
+## Trigger Warnings
+
+The game should be possible to play without specific psychological effects. A trigger warning screen should show between phase 3 and phase 4, allowing players to disable certain simulations (panic attacks and emotional outbursts).
+
+## Phase 1: Dumb Game
+
+This is just a dumb game about putting on clothes, then they get dirty, then I do laundry. I don't know why I'm playing this.
+
+## Phase 2: Procrastination
+
+The player will not do laundry, but they will compulsively set reminders, despite always snoozing/dismissing them. The reminders become more dire over time.
+
+## Phase 3: Absurd
+
+The player goes to more desperate, absurd, and expensive lengths to avoid doing laundry, to the point of renting multiple apartments and abandoning them as they become full of dirty laundry.
+
+## Phase 4: Psychological Horror
+
+This is a game about procrastination, and the resulting shame, which loops to more procrastination. This causes increasingly negative effects on the player:
+
+- Panic attacks in the middle of the night
+- Insomnia (after / resulting from panic attacks)
+- Workaholism
+
+As these effects worsen, performance at work improves due to the compulsive focus on work and self-improvement. This causes imposter syndrome, worsening anxiety.
+
+The game has hidden stats for "anxiety" and "sleep" which aren't exposed directly, but affect various parts of the game. Anxiety combined with sleep deprivation may result in:
+
+- social isolation
+- compulsive social media usage
+- exhaustion, followed by napping for hours during the day
+- difficulty with reading comprehension
+- blurry vision
+- hallucinations
+- calling in sick
+- breaking down and crying during work
+
+This game does _not_ deal with depression or suicide.
+
+## Phase 5: Redemption
+
+The game ends with the player breaking the loop. This must be handled _very carefully_.
+
+Guidelines:
+
+- This should not follow the trope of hitting "rock bottom," which is overplayed and is not universally true. [Notes on addiction therapy and resource loss](https://sci-hub.se/https://www.tandfonline.com/doi/abs/10.3109/08039488.2015.1123293?journalCode=ipsc20)
+- The game cannot prescribe a specific solution to a procrastination loop. What works for one person will not necessarily work for another.
+
 ## Loop
 
-- Daily decision of what to wear\
-  This is where you decide how to manage the clothes you have left
-
-  At first, you don't have enough money to buy more clothes
-
-  This eventually gets automated (somehow?) to be "make the same decision each day until you run out"
+- Sleep
+  Decide what to wear at work
+- Work
+  Decide how to spend free time
+- Play games, binge TV, maybe other options
+  Decide what to wear to sleep
 
 # Modeling
 
@@ -39,6 +87,8 @@
   - Hand towels
 - Shame (from wearing old clothes)
 - Desperation
+- Anxiety (hidden)
+- Sleep (hidden)
 - Apartment space (m³) current/max
 
 ## Upgrades
@@ -102,7 +152,7 @@ Select aspects of a new apartment based on your experiences (highest desperation
 - Time of day and day of week\
   No specified year, month, or date
 
-  Passage of time is highly situational. Buy upgrades to speed up time, e.g. play Factorio to make the entire day pass by almost instantly
+  Passage of time is relative. Buy upgrades to speed up time, e.g. play Factorio to make the entire day pass by almost instantly
 
 ## Save Data
 

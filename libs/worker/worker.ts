@@ -18,24 +18,31 @@ localForage.config({
 
 enablePatches();
 const worker = self as unknown as Worker;
+const MORNING = 60 * 60 * 8 * 1000;
 
 const initialState: State = {
   apartmentSpace: 700,
   clothing: {
     pants: { 0: 7 },
     shirt: { 0: 7 },
-    sock: { 0: 14 },
+    sock: { 0: 7 },
     underpants: { 0: 7 },
   },
   game: games[0],
-  day: 0,
   desperation: 0,
   job: jobs[0],
   money: 10,
   shame: 0,
-  time: 0,
+  time: MORNING,
   upgrades: {},
   action: "idle",
+  wornClothing: {
+    pants: undefined,
+    shirt: undefined,
+    sock: undefined,
+    underpants: undefined,
+  },
+  messages: [],
 };
 
 const main = async () => {

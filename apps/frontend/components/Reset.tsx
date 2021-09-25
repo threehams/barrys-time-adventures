@@ -3,7 +3,10 @@ import { Button } from "@thing/ui";
 import React from "react";
 import { useDispatch } from "./StateProvider";
 
-export const Reset = () => {
+type Props = {
+  className?: string;
+};
+export const Reset = ({ className }: Props) => {
   const dispatch = useDispatch();
   const [resetState, send] = useStateMachine()({
     initial: "inactive",
@@ -32,7 +35,7 @@ export const Reset = () => {
   });
 
   return (
-    <>
+    <div className={className}>
       {resetState.value === "inactive" && (
         <Button
           variant="danger"
@@ -62,6 +65,6 @@ export const Reset = () => {
           </Button>
         </>
       )}
-    </>
+    </div>
   );
 };
