@@ -16,6 +16,7 @@ export const Button = React.memo(
     disabled,
     onClick,
     variant = "primary",
+    ...rest
   }: ButtonProps) => {
     return (
       <button
@@ -26,10 +27,11 @@ export const Button = React.memo(
           }
         }}
         className={clsx(
-          "border border-gray-50 border-solid cursor-pointer px-3 relative",
+          "border border-gray-700 border-solid cursor-pointer px-3 relative",
           variant === "danger" && "bg-red-900 text-white",
           className,
         )}
+        {...rest}
       >
         {children}
       </button>

@@ -1,7 +1,8 @@
-import { StateAction, State } from "@thing/store";
-import { getPhase, Phase } from "@thing/utils";
+import { StateAction, State } from "@laundry/store";
+import { getPhase, Phase } from "@laundry/utils";
 import { Draft } from "immer";
-import { games } from "libs/data/games";
+import { findGarment, games } from "@laundry/store";
+import { removeGarments } from "./removeGarments";
 
 export const eventHandler = (state: Draft<State>, action: StateAction) => {
   switch (action.type) {
@@ -24,34 +25,27 @@ export const eventHandler = (state: Draft<State>, action: StateAction) => {
     }
     case "WEAR_CLOTHING": {
       const { key, reuse } = action.payload;
-      if (state.wornClothing[key] !== undefined) {
-        const current = Number(state.wornClothing[key]);
-        state.clothing[key][current] = (state.clothing[key][current] ?? 0) + 1;
+      const garment = findGarment(key);
+
+      removeGarments(state, garment.slots);
+      for (const slot of garment.slots) {
+        state.wornClothing[slot] = { key, reuse };
       }
-      state.wornClothing[key] = reuse;
-      state.clothing[key][reuse] = (state.clothing[key][reuse] ?? 0) - 1;
+      state.closet[key][reuse] = (state.closet[key][reuse] ?? 0) - 1;
       break;
     }
     case "REMOVE_CLOTHING": {
-      const { key } = action.payload;
-      if (state.wornClothing[key] !== undefined) {
-        const current = Number(state.wornClothing[key]);
-        state.clothing[key][current] = (state.clothing[key][current] ?? 0) + 1;
-        state.wornClothing[key] = undefined;
-      }
+      const { slot } = action.payload;
+      removeGarments(state, [slot]);
       break;
     }
-    // case "BUY_UPGRADE": {
-    //   state.game = games.find((game) => game.key === action.payload.key)!;
-    //   break;
-    // }
   }
 };
 
 const getMessage = (state: Draft<State>, phase: Phase) => {
-  if (state.wornClothing.underpants === undefined && phase === "working") {
+  if (state.wornClothing.crotch === undefined && phase === "working") {
     return "I guess no one can tell I'm not wearing underpants, but this still feels wrong.";
-  } else if (state.wornClothing.sock === undefined && phase === "working") {
+  } else if (state.wornClothing.feet === undefined && phase === "working") {
     return "I really should have worn socks. My shoes are getting gross.";
   }
 };

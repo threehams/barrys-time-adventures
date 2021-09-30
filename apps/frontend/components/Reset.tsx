@@ -1,5 +1,5 @@
 import useStateMachine from "@cassiozen/usestatemachine";
-import { Button } from "@thing/ui";
+import { Button } from "@laundry/ui";
 import React from "react";
 import { useDispatch } from "./StateProvider";
 

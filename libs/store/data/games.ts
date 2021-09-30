@@ -1,4 +1,4 @@
-import { Game } from "@thing/store";
+import { Game } from "../Game";
 
 export const games: Game[] = [
   {

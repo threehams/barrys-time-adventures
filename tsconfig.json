@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
     "declaration": false,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
@@ -14,23 +13,17 @@
     "outDir": "./dist/out-tsc",
     "resolveJsonModule": true,
     "paths": {
-      "@thing/messages": ["./libs/messages/index.ts"],
-      "@thing/ui": ["./libs/ui/index.ts"],
-      "@thing/utils": ["./libs/utils/index.ts"],
-      "@thing/store": ["./libs/store/index.ts"],
-      "@thing/worker": ["./libs/worker/index.ts"],
-      "@thing/data": ["./libs/data/index.ts"]
+      "@laundry/messages": ["./libs/messages/index.ts"],
+      "@laundry/ui": ["./libs/ui/index.ts"],
+      "@laundry/utils": ["./libs/utils/index.ts"],
+      "@laundry/store": ["./libs/store/index.ts"],
+      "@laundry/worker": ["./libs/worker/index.ts"]
     },
-    "rootDir": ".",
     "skipLibCheck": true,
     "strict": true,
     "target": "es2015",
+    "types": ["cypress", "node", "@types/testing-library__cypress"],
     "typeRoots": ["./node_modules/@types"]
   },
-  "exclude": ["./node_modules", "./tmp", "./apps/frontend-e2e/**"],
-  "references": [
-    {
-      "path": "./apps/frontend-e2e"
-    }
-  ]
+  "exclude": ["./node_modules", "./tmp"]
 }

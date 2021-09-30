@@ -2,7 +2,7 @@ import {
   createContext,
   useContextSelector,
 } from "@fluentui/react-context-selector";
-import { StateAction, State } from "@thing/store";
+import { StateAction, State } from "@laundry/store";
 import { createContext as reactCreateContext, useContext } from "react";
 
 const StateContext = createContext<State>(undefined as any);

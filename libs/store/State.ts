@@ -1,13 +1,13 @@
 import { Game } from "./Game";
+import { ClothingSlot } from "./Garment";
 import { Job } from "./Job";
 import { UpgradeKey } from "./Upgrade";
 
 type ReuseCount = number;
 
-export type ClothingName = "shirt" | "pants" | "sock" | "underpants";
 export type Action = "idle" | "working" | "gaming" | "sleeping";
 export type WornClothing = {
-  [Clothing in ClothingName]: ReuseCount | undefined;
+  [Clothing in ClothingSlot]: { key: string; reuse: ReuseCount } | undefined;
 };
 
 export type State = {
@@ -18,8 +18,8 @@ export type State = {
   job: Job;
   game: Game;
   messages: ReadonlyArray<string>;
-  clothing: {
-    [Clothing in ClothingName]: {
+  closet: {
+    [clothingKey: string]: {
       [Reuse: /* reuseCount */ string]: number | undefined;
     };
   };

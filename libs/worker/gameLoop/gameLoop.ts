@@ -1,6 +1,7 @@
-import { State } from "@thing/store";
+import { State } from "@laundry/store";
 import { Draft } from "immer";
-import { getPhase } from "@thing/utils";
+import { getPhase } from "@laundry/utils";
+import { removeGarments } from "./removeGarments";
 
 export const gameLoop = (state: Draft<State>, delta: number) => {
   updateTime(state, delta);
@@ -17,7 +18,7 @@ const updateTime = (state: Draft<State>, delta: number) => {
 
     state.time += totalTime * SLEEP_MULTIPLIER;
     if (getPhase(state.time) !== "sleeping") {
-      removeClothing(state);
+      removeGarments(state, ["body", "crotch", "feet", "legs"]);
       state.messages.push("I need to pick out something to wear to work.");
       state.action = "idle";
     }
@@ -35,7 +36,7 @@ const updateTime = (state: Draft<State>, delta: number) => {
     // more compulsive games eat time faster
     state.time += totalTime * state.game.compulsion;
     if (getPhase(state.time) !== "gaming") {
-      removeClothing(state);
+      removeGarments(state, ["body", "crotch", "feet", "legs"]);
       state.messages.push("I should change for bed.");
       state.action = "idle";
     }
@@ -45,21 +46,10 @@ const updateTime = (state: Draft<State>, delta: number) => {
 const SLEEP_MULTIPLIER = 50;
 
 const dirtyClothing = (state: Draft<State>) => {
-  Object.keys(state.wornClothing).forEach((name) => {
-    const currentReuse = state.wornClothing[name];
+  Object.keys(state.wornClothing).forEach((slot) => {
+    const currentReuse = state.wornClothing[slot];
     if (currentReuse !== undefined) {
-      state.wornClothing[name] = currentReuse + 1;
-    }
-  });
-};
-
-const removeClothing = (state: Draft<State>) => {
-  Object.keys(state.wornClothing).forEach((name) => {
-    const currentReuse = state.wornClothing[name];
-    if (currentReuse !== undefined) {
-      state.clothing[name][currentReuse] =
-        (state.clothing[name][currentReuse] ?? 0) + 1;
-      state.wornClothing[name] = undefined;
+      currentReuse.reuse += currentReuse.reuse + 1;
     }
   });
 };

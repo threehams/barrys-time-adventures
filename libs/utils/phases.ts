@@ -1,4 +1,4 @@
-import { WornClothing } from "@thing/store";
+import { WornClothing } from "@laundry/store";
 
 const phases = ["sleeping", "working", "gaming"] as const;
 export type Phase = typeof phases[number];
@@ -23,7 +23,7 @@ export const nextPhase = (time: number): Phase => {
 
 export const readyForPhase = (phase: Phase, wornClothing: WornClothing) => {
   if (phase === "working") {
-    if (wornClothing.pants === undefined || wornClothing.shirt === undefined) {
+    if (wornClothing.legs === undefined || wornClothing.body === undefined) {
       return false;
     }
   }

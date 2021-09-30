@@ -1,4 +1,4 @@
-import { StateAction, State } from "@thing/store";
+import { StateAction, State } from "@laundry/store";
 import { useMemo, useCallback, useState } from "react";
 import { applyPatches, enablePatches } from "immer";
 import { Message } from "./types";

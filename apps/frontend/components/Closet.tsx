@@ -1,50 +1,71 @@
 import clsx from "clsx";
-import { useSelector } from "./StateProvider";
+import { useDispatch, useSelector } from "./StateProvider";
+import { Button } from "@laundry/ui";
+import React from "react";
+import { findGarment } from "@laundry/store";
 
 type Props = {
   className?: string;
 };
 export const Closet = ({ className }: Props) => {
-  const clothing = useSelector((state) => state.clothing);
+  const closet = useSelector((state) => state.closet);
+  const wornClothing = useSelector((state) => state.wornClothing);
+  const dispatch = useDispatch();
+
   return (
     <section className={clsx("mt-4", className)}>
-      <h2>Closet</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Clean</th>
-            <th>Dirty</th>
-            <th>Filthy</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Shirts</td>
-            <td>{clothing.shirt[0] ?? 0}</td>
-            <td>{clothing.shirt[1] ?? 0}</td>
-            <td>{clothing.shirt[2] ?? 0}</td>
-          </tr>
-          <tr>
-            <td>Pants</td>
-            <td>{clothing.pants[0] ?? 0}</td>
-            <td>{clothing.pants[1] ?? 0}</td>
-            <td>{clothing.pants[2] ?? 0}</td>
-          </tr>
-          <tr>
-            <td>Undergarments</td>
-            <td>{clothing.underpants[0] ?? 0}</td>
-            <td>{clothing.underpants[1] ?? 0}</td>
-            <td>{clothing.underpants[2] ?? 0}</td>
-          </tr>
-          <tr>
-            <td>Socks</td>
-            <td>{clothing.sock[0] ?? 0}</td>
-            <td>{clothing.sock[1] ?? 0}</td>
-            <td>{clothing.sock[2] ?? 0}</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2 className="sr-only">Closet</h2>
+      <div className="grid grid-cols-4 gap-1">
+        {Object.entries(closet).map(([key, reuseMap]) => {
+          const garment = findGarment(key);
+          const worn = wornClothing[garment.slots[0]];
+
+          return (
+            <React.Fragment key={key}>
+              <h2>{garment.name}</h2>
+              {range(0, 3).map((reuseNum) => {
+                const alreadyWorn =
+                  worn && worn.key === key && worn.reuse === reuseNum;
+                return (
+                  <Button
+                    aria-label={`Wear ${getReuseName(reuseNum)} ${
+                      garment.name
+                    }`}
+                    key={reuseNum}
+                    disabled={!reuseMap[reuseNum] || alreadyWorn}
+                    onClick={() => {
+                      if (reuseMap[reuseNum]) {
+                        dispatch({
+                          type: "WEAR_CLOTHING",
+                          payload: { key, reuse: reuseNum },
+                        });
+                      }
+                    }}
+                  >
+                    {getReuseName(reuseNum)} {reuseMap[reuseNum] ?? 0}
+                  </Button>
+                );
+              })}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </section>
   );
+};
+
+const range = (start: number, end: number) => {
+  return Array.from(Array(end).keys()).map((num) => num + start);
+};
+
+const getReuseName = (reuse: number | undefined) => {
+  if (reuse === undefined) {
+    return "no";
+  }
+  if (reuse === 0) {
+    return "clean";
+  } else if (reuse === 1) {
+    return "dirty ";
+  }
+  return "filthy ";
 };

@@ -1,7 +1,7 @@
-import { Button } from "@thing/ui";
+import { Button } from "@laundry/ui";
 import React from "react";
 import { useDispatch, useSelector } from "./StateProvider";
-import { getPhase, readyForPhase } from "@thing/utils";
+import { getPhase, readyForPhase } from "@laundry/utils";
 import { PaperDoll } from "./PaperDoll";
 
 type Props = {

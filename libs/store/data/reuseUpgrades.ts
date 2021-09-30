@@ -1,4 +1,4 @@
-import { Upgrade } from "@thing/store";
+import { Upgrade } from "@laundry/store";
 
 export const reuseUpgrades: Upgrade[] = [
   {

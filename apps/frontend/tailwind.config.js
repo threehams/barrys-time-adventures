@@ -7,7 +7,7 @@ module.exports = {
     "./components/**/*.{ts,tsx}",
     "../../libs/**/*.{ts,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class",
   theme: {
     colors: {
       black: "#000000",
@@ -24,7 +24,8 @@ module.exports = {
       5: "30px",
       6: "40px",
       7: "65px",
+      8: "90px",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

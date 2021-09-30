@@ -1,12 +1,9 @@
-import { StateAction, State } from "@thing/store";
+import { games, jobs, State, StateAction } from "@laundry/store";
 import { enablePatches, produceWithPatches } from "immer";
-import { games } from "libs/data/games";
-import { jobs } from "libs/data/jobs";
 import localForage from "localforage";
 import { eventHandler, gameLoop } from "./gameLoop";
 
 const VERSION = 1;
-
 const databaseName = "laundry_game";
 const savedGameKey = "saved_game";
 
@@ -22,11 +19,11 @@ const MORNING = 60 * 60 * 8 * 1000;
 
 const initialState: State = {
   apartmentSpace: 700,
-  clothing: {
-    pants: { 0: 7 },
-    shirt: { 0: 7 },
-    sock: { 0: 7 },
-    underpants: { 0: 7 },
+  closet: {
+    jeans: { 0: 7 },
+    tshirt: { 0: 7 },
+    socks: { 0: 7 },
+    briefs: { 0: 7 },
   },
   game: games[0],
   desperation: 0,
@@ -37,10 +34,10 @@ const initialState: State = {
   upgrades: {},
   action: "idle",
   wornClothing: {
-    pants: undefined,
-    shirt: undefined,
-    sock: undefined,
-    underpants: undefined,
+    legs: undefined,
+    body: undefined,
+    feet: undefined,
+    crotch: undefined,
   },
   messages: [],
 };

@@ -1,12 +1,12 @@
-import { ClothingName } from "./State";
+import { ClothingSlot } from "./Garment";
 
 type WearClothingAction = {
   type: "WEAR_CLOTHING";
-  payload: { key: ClothingName; reuse: number };
+  payload: { key: string; reuse: number };
 };
 type RemoveClothingAction = {
   type: "REMOVE_CLOTHING";
-  payload: { key: ClothingName };
+  payload: { slot: ClothingSlot };
 };
 type BuyUpgradeAction = { type: "BUY_UPGRADE"; payload: { key: string } };
 type BuyGameAction = { type: "BUY_GAME"; payload: { key: string } };
