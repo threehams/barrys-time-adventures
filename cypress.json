@@ -1,0 +1,12 @@
+{
+  "projectId": "64ugpg",
+  "baseUrl": "http://localhost:3000",
+  "fileServerFolder": ".",
+  "video": true,
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
+  "videosFolder": "./tmp/cypress/videos",
+  "screenshotsFolder": "./tmp/cypress/screenshots",
+  "chromeWebSecurity": false,
+  "videoUploadOnPasses": false
+}

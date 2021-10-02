@@ -12,9 +12,11 @@ export type WornClothing = {
 
 export type State = {
   time: number;
-  money: number;
-  shame: number;
-  desperation: number;
+  stats: {
+    money: number;
+    shame: number;
+    desperation: number;
+  };
   job: Job;
   game: Game;
   messages: ReadonlyArray<string>;
@@ -25,7 +27,7 @@ export type State = {
   };
   wornClothing: WornClothing;
   upgrades: {
-    [Key in UpgradeKey]: number;
+    [Key in UpgradeKey]: number | undefined;
   };
   apartmentSpace: number;
   action: Action;

@@ -1,8 +1,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "declaration": false,
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -25,5 +29,6 @@
     "types": ["cypress", "node", "@types/testing-library__cypress"],
     "typeRoots": ["./node_modules/@types"]
   },
-  "exclude": ["./node_modules", "./tmp"]
+  "exclude": ["./node_modules", "./tmp"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

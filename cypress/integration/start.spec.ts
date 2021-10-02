@@ -8,6 +8,7 @@ const savedGameKey = "saved_game";
 describe("new game", () => {
   it("completes a single day", () => {
     cy.visit("/");
+    cy.findByRole("button", { name: /Closet/i }).click();
     cy.findByRole("button", { name: /Wear clean jeans/i }).click();
     cy.findByRole("button", { name: /Wear clean t-shirt/i }).click();
     cy.findByRole("button", { name: /Wear clean socks/i }).click();
@@ -19,7 +20,26 @@ describe("new game", () => {
   });
 
   it("buys an upgrade", () => {
-    loadSave(initialState);
+    loadSave({
+      ...initialState,
+      stats: {
+        ...initialState.stats,
+        money: 160,
+      },
+      time: 86_400_000 * 5,
+    });
+    cy.visit("/");
+    cy.findByRole("button", { name: /Upgrades/i }).click();
+    cy.findByRole("button", { name: /Buy more clothes/i }).click();
+    cy.findByRole("button", { name: /Shop/i }).click();
+    cy.findByRole("button", { name: "Buy Dress ($40)" }).click();
+
+    cy.findByText(/You have \$120/);
+
+    cy.findByRole("button", { name: /Closet/i }).click();
+    cy.findByRole("button", { name: /Wear clean dress/i }).click();
+
+    cy.findAllByText(/Wearing: Clean Dress/);
   });
 });
 

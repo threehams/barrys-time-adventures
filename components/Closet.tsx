@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { useDispatch, useSelector } from "./StateProvider";
 import { Button } from "@laundry/ui";
 import React from "react";
@@ -13,7 +12,7 @@ export const Closet = ({ className }: Props) => {
   const dispatch = useDispatch();
 
   return (
-    <section className={clsx("mt-4", className)}>
+    <section className={className}>
       <h2 className="sr-only">Closet</h2>
       <div className="grid grid-cols-4 gap-1">
         {Object.entries(closet).map(([key, reuseMap]) => {

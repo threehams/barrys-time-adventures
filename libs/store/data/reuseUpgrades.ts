@@ -23,6 +23,7 @@ export const reuseUpgrades: Upgrade[] = [
       2: "No one can see my underpants, so do those even matter?",
     },
     requirements: {
+      time: 0,
       money: 0,
       desperation: 0,
       shame: 5,

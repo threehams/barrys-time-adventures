@@ -28,6 +28,7 @@ const updateTime = (state: Draft<State>, delta: number) => {
     state.time += totalTime * state.job.enjoyment;
     if (getPhase(state.time) !== "working") {
       dirtyClothing(state);
+      state.stats.money += state.job.dailyRate;
       state.action = "idle";
       state.messages.push("Work was exhausting. I should do something fun.");
     }

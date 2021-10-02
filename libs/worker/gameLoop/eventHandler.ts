@@ -1,4 +1,4 @@
-import { StateAction, State } from "@laundry/store";
+import { StateAction, State, findUpgrade } from "@laundry/store";
 import { getPhase, Phase } from "@laundry/utils";
 import { Draft } from "immer";
 import { findGarment, games } from "@laundry/store";
@@ -37,6 +37,32 @@ export const eventHandler = (state: Draft<State>, action: StateAction) => {
     case "REMOVE_CLOTHING": {
       const { slot } = action.payload;
       removeGarments(state, [slot]);
+      break;
+    }
+    case "BUY_UPGRADE": {
+      const { key } = action.payload;
+      const upgrade = findUpgrade(key);
+      if (
+        state.stats.money >= upgrade.costs.money &&
+        state.stats.desperation >= upgrade.costs.desperation &&
+        state.stats.shame >= upgrade.costs.shame &&
+        (state.upgrades[key] ?? 0) < upgrade.max
+      ) {
+        state.stats.money -= upgrade.costs.money;
+        state.stats.desperation -= upgrade.costs.desperation;
+        state.stats.shame -= upgrade.costs.shame;
+        state.upgrades[key] = (state.upgrades[key] ?? 0) + 1;
+      }
+      break;
+    }
+    case "BUY_CLOTHING": {
+      const { key } = action.payload;
+      const garment = findGarment(key);
+      if (state.stats.money >= garment.cost) {
+        state.stats.money -= garment.cost;
+        state.closet[key] ??= {};
+        state.closet[key][0] = (state.closet[key][0] ?? 0) + 1;
+      }
       break;
     }
   }

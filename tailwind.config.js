@@ -5,7 +5,7 @@ module.exports = {
   purge: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "../../libs/**/*.{ts,tsx}",
+    "./libs/**/*.{ts,tsx}",
   ],
   darkMode: "class",
   theme: {

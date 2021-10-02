@@ -1,6 +1,9 @@
 export type UpgradeKey = string;
 
+type UnlockKey = "buyClothes";
 export type UpgradeEffect = {
+  // Unlock a particular feature permanently
+  unlock?: UnlockKey;
   // Compress clothing better
   clothingVolume?: (num: number, level: number) => number;
   // Reuse clothing more times with less shame
@@ -23,6 +26,7 @@ export type Upgrade = {
   // Required for this upgrade to appear. Once that happens, it's
   // always visible
   requirements: {
+    time: number;
     money: number;
     shame: number;
     desperation: number;

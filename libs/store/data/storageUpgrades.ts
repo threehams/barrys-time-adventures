@@ -22,6 +22,7 @@ export const storageUpgrades: Upgrade[] = [
       2: "Maybe if I take out the racks?",
     },
     requirements: {
+      time: 0,
       desperation: 500,
       money: 0,
       shame: 0,
@@ -49,6 +50,7 @@ export const storageUpgrades: Upgrade[] = [
       2: "This one has wheels! This should make laundry a lot easier.",
     },
     requirements: {
+      time: 0,
       desperation: 0,
       money: 10,
       shame: 0,
