@@ -1,7 +1,6 @@
-import { Button } from "@laundry/ui";
+import { Tab, Tabs } from "@laundry/ui";
 import React, { useMemo, useState } from "react";
 import { Actions } from "./Actions";
-import { Closet } from "./Closet";
 import { Messages } from "./Messages";
 import { Reset } from "./Reset";
 import { useSelector } from "./StateProvider";
@@ -9,6 +8,10 @@ import { Status } from "./Status";
 import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
 import { Shop } from "./Shop";
+import { hoursToMilliseconds } from "date-fns";
+import { ClosetMode } from "./types/Mode";
+import clsx from "clsx";
+import { ClosetTest } from "./ClosetTest";
 
 type Panel = "window" | "closet" | "upgrades" | "shop";
 
@@ -25,40 +28,55 @@ export const Game = () => {
             <Actions className="mb-3" />
             <Reset />
           </main>
-          <aside className="w-[600px] self-center">
-            <Button
-              disabled={panel === "window"}
-              onClick={() => setPanel("window")}
-            >
-              Outside
-            </Button>
-            <Button
-              disabled={panel === "closet"}
-              onClick={() => setPanel("closet")}
-            >
-              Closet
-            </Button>
-            <Button
-              disabled={panel === "upgrades"}
-              onClick={() => setPanel("upgrades")}
-            >
-              Upgrades
-            </Button>
-            {canShop && (
-              <Button
-                disabled={panel === "shop"}
-                onClick={() => setPanel("shop")}
+          <aside className="w-[600px]">
+            <Tabs>
+              <Tab
+                active={panel === "window"}
+                onClick={() => setPanel("window")}
               >
-                Shop
-              </Button>
-            )}
-            <div className="relative px-8 pt-4 mb-4">
-              <Window />
-              <div className="absolute top-0 left-0 w-full h-full pt-4">
-                {panel === "closet" && <Closet />}
+                Look Outside
+              </Tab>
+              <Tab
+                active={panel === "closet"}
+                onClick={() => setPanel("closet")}
+              >
+                Closet
+              </Tab>
+              <Tab
+                active={panel === "upgrades"}
+                onClick={() => setPanel("upgrades")}
+              >
+                Upgrades
+              </Tab>
+              {canShop && (
+                <Tab active={panel === "shop"} onClick={() => setPanel("shop")}>
+                  Shop
+                </Tab>
+              )}
+            </Tabs>
+            <div className="grid">
+              <div
+                className={clsx(
+                  "p-4 col-start-1 row-start-1 relative z-10",
+                  panel !== "window" && "backdrop-blur-lg",
+                )}
+              >
+                {panel === "closet" && (
+                  // <Closet
+                  //   closetMode={closetMode}
+                  //   setClosetMode={setClosetMode}
+                  // />
+                  <ClosetTest />
+                )}
                 {panel === "upgrades" && <Upgrades />}
                 {panel === "shop" && <Shop />}
               </div>
+              <Window
+                className={clsx(
+                  "mx-auto mt-6 max-w-[400px] col-start-1 row-start-1",
+                  panel !== "window" && "opacity-20",
+                )}
+              />
             </div>
             <Messages />
           </aside>
@@ -68,7 +86,13 @@ export const Game = () => {
   }, [canShop, panel]);
 
   return (
-    <div className={time % 86_400_000 > 60 * 60 * 8 * 1000 ? "light" : "dark"}>
+    <div
+      className={
+        time % hoursToMilliseconds(24) > hoursToMilliseconds(8)
+          ? "light"
+          : "dark"
+      }
+    >
       {layout}
     </div>
   );

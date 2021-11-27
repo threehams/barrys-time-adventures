@@ -1,51 +1,73 @@
 import { useDispatch, useSelector } from "./StateProvider";
-import { Button } from "@laundry/ui";
+import { Button, Tab, Tabs } from "@laundry/ui";
 import React from "react";
-import { findGarment } from "@laundry/store";
+import { ClothingSlot, findGarment, findUnlock } from "@laundry/store";
+import { ClosetMode } from "./types/Mode";
+import clsx from "clsx";
 
 type Props = {
   className?: string;
+  closetMode: ClosetMode;
+  setClosetMode: (mode: ClosetMode) => void;
 };
-export const Closet = ({ className }: Props) => {
+export const Closet = ({
+  className,
+  closetMode: mode,
+  setClosetMode: setMode,
+}: Props) => {
   const closet = useSelector((state) => state.closet);
+  const autoUnlocked = useSelector(
+    (state) => !!state.upgrades[findUnlock("autoClothes").key],
+  );
   const wornClothing = useSelector((state) => state.wornClothing);
   const dispatch = useDispatch();
 
   return (
     <section className={className}>
       <h2 className="sr-only">Closet</h2>
-      <div className="grid grid-cols-4 gap-1">
+      {autoUnlocked && (
+        <Tabs>
+          <Tab onClick={() => setMode("wear")} active={mode === "wear"}>
+            Wear
+          </Tab>
+          <Tab onClick={() => setMode("plan")} active={mode === "plan"}>
+            Plan
+          </Tab>
+        </Tabs>
+      )}
+      <div
+        className="grid grid-rows-4 gap-1 overflow-y-auto auto-cols-[100px] grid-flow-col"
+        style={{ gridTemplateColumns: "repeat(100px)" }}
+      >
         {Object.entries(closet).map(([key, reuseMap]) => {
           const garment = findGarment(key);
           const worn = wornClothing[garment.slots[0]];
+          const found = Object.keys(reuseMap).find((reuse) => {
+            return !!reuseMap[reuse];
+          });
+          const firstReuse = found === undefined ? undefined : Number(found);
 
           return (
-            <React.Fragment key={key}>
-              <h2>{garment.name}</h2>
-              {range(0, 3).map((reuseNum) => {
-                const alreadyWorn =
-                  worn && worn.key === key && worn.reuse === reuseNum;
-                return (
-                  <Button
-                    aria-label={`Wear ${getReuseName(reuseNum)} ${
-                      garment.name
-                    }`}
-                    key={reuseNum}
-                    disabled={!reuseMap[reuseNum] || alreadyWorn}
-                    onClick={() => {
-                      if (reuseMap[reuseNum]) {
-                        dispatch({
-                          type: "WEAR_CLOTHING",
-                          payload: { key, reuse: reuseNum },
-                        });
-                      }
-                    }}
-                  >
-                    {getReuseName(reuseNum)} {reuseMap[reuseNum] ?? 0}
-                  </Button>
-                );
-              })}
-            </React.Fragment>
+            <Button
+              className={clsx(
+                "w-[100px] h-[100px]",
+                getSlotClass(garment.slots),
+              )}
+              aria-label={`Wear ${garment.name}`}
+              key={garment.key}
+              disabled={false}
+              onClick={() => {
+                if (firstReuse !== undefined) {
+                  dispatch({
+                    type: "WEAR_CLOTHING",
+                    payload: { key, reuse: firstReuse },
+                  });
+                }
+              }}
+            >
+              <span className="sr-only">Wear </span>
+              <span className="text-sm">{garment.name}</span>
+            </Button>
           );
         })}
       </div>
@@ -53,18 +75,23 @@ export const Closet = ({ className }: Props) => {
   );
 };
 
-const range = (start: number, end: number) => {
-  return Array.from(Array(end).keys()).map((num) => num + start);
+const getSlotClass = (slots: ClothingSlot[]) => {
+  if (slots.length === 1) {
+    return slotRows[slots[0]];
+  }
+  if (slots.length === 2 && slots[0] === "body" && slots[1] === "legs") {
+    return "col-start-1 row-start-[span_2]";
+  }
+  return "";
 };
 
-const getReuseName = (reuse: number | undefined) => {
-  if (reuse === undefined) {
-    return "no";
-  }
-  if (reuse === 0) {
-    return "clean";
-  } else if (reuse === 1) {
-    return "dirty ";
-  }
-  return "filthy ";
+const slotRows: { [Key in ClothingSlot]: string } = {
+  body: "row-start-1",
+  legs: "row-start-2",
+  crotch: "row-start-3",
+  feet: "row-start-4",
+};
+
+const slotSpans: { [key: number]: string | undefined } = {
+  2: "",
 };

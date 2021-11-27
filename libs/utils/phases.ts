@@ -1,15 +1,16 @@
 import { WornClothing } from "@laundry/store";
+import { hoursToMilliseconds } from "date-fns";
 
 const phases = ["sleeping", "working", "gaming"] as const;
 export type Phase = typeof phases[number];
 
 export const getPhase = (time: number) => {
-  const timeOfDay = time % 86_400_000;
-  if (timeOfDay < 60 * 60 * 8 * 1000) {
+  const timeOfDay = time % hoursToMilliseconds(24);
+  if (timeOfDay < hoursToMilliseconds(8)) {
     return "sleeping";
-  } else if (timeOfDay < 60 * 60 * 17 * 1000) {
+  } else if (timeOfDay < hoursToMilliseconds(17)) {
     return "working";
-  } else if (timeOfDay < 60 * 60 * 24 * 1000) {
+  } else if (timeOfDay < hoursToMilliseconds(24)) {
     return "gaming";
   }
   return "sleeping";

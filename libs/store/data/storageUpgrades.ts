@@ -11,12 +11,10 @@ export const storageUpgrades: Upgrade[] = [
       money: 0,
       shame: 0,
     },
-    effects: [
-      {
-        clothingVolume: (val) => val * 0.5,
-        type: "add",
-      },
-    ],
+    effect: {
+      clothingVolume: (val) => val * 0.5,
+      type: "add",
+    },
     flavorTexts: {
       1: "I don't really need to cook, I guess...",
       2: "Maybe if I take out the racks?",
@@ -39,12 +37,10 @@ export const storageUpgrades: Upgrade[] = [
       money: 30,
       shame: 0,
     },
-    effects: [
-      {
-        clothingVolume: (val, level) => val * Math.pow(0.75, level),
-        type: "add",
-      },
-    ],
+    effect: {
+      clothingVolume: (val, level) => val * Math.pow(0.75, level),
+      type: "add",
+    },
     flavorTexts: {
       1: "It's hamper! It's hamper! It's big, it's light, it's plastic.",
       2: "This one has wheels! This should make laundry a lot easier.",

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "./StateProvider";
 import React, { useMemo } from "react";
 import { upgrades } from "@laundry/store";
 import { Button } from "@laundry/ui";
+import clsx from "clsx";
 
 type Props = {
   className?: string;
@@ -21,16 +22,16 @@ export const Upgrades = ({ className }: Props) => {
   }, [stats.desperation, stats.money, stats.shame]);
 
   return (
-    <section className={className}>
+    <section className={clsx("flex flex-col gap-2", className)}>
       <h2 className="sr-only">Upgrades</h2>
       {availableUpgrades.map((upgrade) => {
-        const level = purchasedUpgrades[upgrade.key];
-        const flavorText = upgrade.flavorTexts[level ?? 0];
+        const level = purchasedUpgrades[upgrade.key] ?? 0;
+        const flavorText = upgrade.flavorTexts[level];
         return (
-          <div key={upgrade.key}>
+          <div className="grid grid-cols-[auto,1fr] gap-x-2" key={upgrade.key}>
             <Button
-              className="mr-2"
               disabled={level === upgrade.max}
+              aria-label={`Buy ${upgrade.name}`}
               onClick={() => {
                 dispatch({
                   type: "BUY_UPGRADE",
@@ -38,9 +39,10 @@ export const Upgrades = ({ className }: Props) => {
                 });
               }}
             >
-              {upgrade.name}
+              Buy ({level})
             </Button>
-            {flavorText && <span>{flavorText}</span>}
+            <div>{upgrade.name}</div>
+            {flavorText && <p className="col-start-2">{flavorText}</p>}
           </div>
         );
       })}

@@ -44,7 +44,7 @@ const updateTime = (state: Draft<State>, delta: number) => {
   }
 };
 
-const SLEEP_MULTIPLIER = 50;
+const SLEEP_MULTIPLIER = 20;
 
 const dirtyClothing = (state: Draft<State>) => {
   Object.keys(state.wornClothing).forEach((slot) => {

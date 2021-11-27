@@ -1,7 +1,8 @@
+import { hoursToMilliseconds } from "date-fns";
 import { games, jobs } from "./data";
 import { State } from "./State";
 
-const MORNING = 60 * 60 * 8 * 1000;
+const MORNING = hoursToMilliseconds(8);
 
 export const initialState: State = {
   apartmentSpace: 700,

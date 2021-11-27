@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import clsx from "clsx";
 
 type ButtonProps = {
@@ -6,7 +6,6 @@ type ButtonProps = {
   disabled?: boolean;
   onClick?: React.MouseEventHandler;
   className?: string;
-  style?: CSSProperties;
   variant?: "primary" | "danger";
 };
 export const Button = React.memo(

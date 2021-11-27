@@ -22,8 +22,15 @@ export const Shop = ({ className }: Props) => {
             key={garment.key}
             disabled={stats.money < garment.cost}
           >
-            {garment.name} (
-            {numbro(garment.cost).formatCurrency({ thousandSeparated: true })})
+            <span className="flex items-center justify-between">
+              <span className="sr-only">Buy </span>
+              <span>{garment.name}</span>
+              <span>
+                {numbro(garment.cost).formatCurrency({
+                  thousandSeparated: true,
+                })}
+              </span>
+            </span>
           </Button>
         );
       })}

@@ -3,6 +3,7 @@ import { getPhase, Phase } from "@laundry/utils";
 import { Draft } from "immer";
 import { findGarment, games } from "@laundry/store";
 import { removeGarments } from "./removeGarments";
+import { hoursToMilliseconds } from "date-fns";
 
 export const eventHandler = (state: Draft<State>, action: StateAction) => {
   switch (action.type) {
@@ -11,7 +12,7 @@ export const eventHandler = (state: Draft<State>, action: StateAction) => {
       if (state.action !== "idle") {
         return;
       }
-      const timeOfDay = state.time % 86_400_000;
+      const timeOfDay = state.time % hoursToMilliseconds(24);
       const phase = getPhase(timeOfDay);
       state.action = phase;
       const message = getMessage(state, phase);

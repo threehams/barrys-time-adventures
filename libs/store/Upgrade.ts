@@ -1,6 +1,6 @@
 export type UpgradeKey = string;
 
-type UnlockKey = "buyClothes";
+export type UnlockKey = "buyClothes" | "autoClothes";
 export type UpgradeEffect = {
   // Unlock a particular feature permanently
   unlock?: UnlockKey;
@@ -45,7 +45,7 @@ export type Upgrade = {
   // Precise key for the upgrade (not string)
   key: UpgradeKey;
   // Changes caused by this upgrade
-  effects: UpgradeEffect[];
+  effect: UpgradeEffect;
   // Message shown with each upgrade
   flavorTexts: {
     [level: number]: string | undefined;
