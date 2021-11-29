@@ -9,7 +9,6 @@ import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
 import { Shop } from "./Shop";
 import { hoursToMilliseconds } from "date-fns";
-import { ClosetMode } from "./types/Mode";
 import clsx from "clsx";
 import { ClosetTest } from "./ClosetTest";
 
