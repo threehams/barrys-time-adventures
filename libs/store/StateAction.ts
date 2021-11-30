@@ -6,7 +6,7 @@ type BuyClothingAction = {
 };
 type WearClothingAction = {
   type: "WEAR_CLOTHING";
-  payload: { key: string; reuse: number };
+  payload: { key: string };
 };
 type RemoveClothingAction = {
   type: "REMOVE_CLOTHING";

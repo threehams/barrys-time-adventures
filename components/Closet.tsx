@@ -19,7 +19,6 @@ export const Closet = ({
   const autoUnlocked = useSelector(
     (state) => !!state.upgrades[findUnlock("autoClothes").key],
   );
-  const wornClothing = useSelector((state) => state.wornClothing);
   const dispatch = useDispatch();
 
   return (
@@ -41,7 +40,6 @@ export const Closet = ({
       >
         {Object.entries(closet).map(([key, reuseMap]) => {
           const garment = findGarment(key);
-          const worn = wornClothing[garment.slots[0]];
           const found = Object.keys(reuseMap).find((reuse) => {
             return !!reuseMap[reuse];
           });
@@ -60,7 +58,7 @@ export const Closet = ({
                 if (firstReuse !== undefined) {
                   dispatch({
                     type: "WEAR_CLOTHING",
-                    payload: { key, reuse: firstReuse },
+                    payload: { key },
                   });
                 }
               }}
@@ -90,8 +88,4 @@ const slotRows: { [Key in ClothingSlot]: string } = {
   legs: "row-start-2",
   crotch: "row-start-3",
   feet: "row-start-4",
-};
-
-const slotSpans: { [key: number]: string | undefined } = {
-  2: "",
 };

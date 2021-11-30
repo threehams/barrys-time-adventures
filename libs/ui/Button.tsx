@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 
 type ButtonProps = {
+  active?: boolean;
   children: React.ReactNode;
   disabled?: boolean;
   onClick?: React.MouseEventHandler;
@@ -10,6 +11,7 @@ type ButtonProps = {
 };
 export const Button = React.memo(
   ({
+    active,
     children,
     className,
     disabled,
@@ -27,6 +29,7 @@ export const Button = React.memo(
         }}
         className={clsx(
           "border border-gray-700 border-solid cursor-pointer px-3 relative",
+          active && "bg-blue-700 text-white",
           variant === "danger" && "bg-red-900 text-white",
           disabled && "opacity-50",
           className,

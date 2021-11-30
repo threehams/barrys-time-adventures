@@ -1,4 +1,4 @@
-import { StateAction, State, findUpgrade } from "@laundry/store";
+import { StateAction, State, findUpgrade, Garment } from "@laundry/store";
 import { getPhase, Phase } from "@laundry/utils";
 import { Draft } from "immer";
 import { findGarment, games } from "@laundry/store";
@@ -25,10 +25,15 @@ export const eventHandler = (state: Draft<State>, action: StateAction) => {
       break;
     }
     case "WEAR_CLOTHING": {
-      const { key, reuse } = action.payload;
+      const { key } = action.payload;
       const garment = findGarment(key);
 
       removeGarments(state, garment.slots);
+
+      const reuse = findNextReuse(state, garment);
+      if (reuse === undefined) {
+        return;
+      }
       for (const slot of garment.slots) {
         state.wornClothing[slot] = { key, reuse };
       }
@@ -75,4 +80,18 @@ const getMessage = (state: Draft<State>, phase: Phase) => {
   } else if (state.wornClothing.feet === undefined && phase === "working") {
     return "I really should have worn socks. My shoes are getting gross.";
   }
+};
+
+const findNextReuse = (state: State, garment: Garment) => {
+  const reuse = state.closet[garment.key];
+  const reuseNumbers = Object.keys(reuse)
+    .map((num) => Number(num))
+    .sort();
+
+  for (const num of reuseNumbers) {
+    if (reuse[num]) {
+      return num;
+    }
+  }
+  return undefined;
 };
