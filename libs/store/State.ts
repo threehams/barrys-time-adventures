@@ -1,18 +1,10 @@
-import { ClothingSlot } from "./Garment";
 import { StateAction } from "./StateAction";
 import { UpgradeKey } from "./Upgrade";
 
-type ReuseCount = number;
-
-export type Action = "idle" | "working" | "gaming" | "sleeping";
-export type WornClothing = {
-  [Clothing in ClothingSlot]: { key: string; reuse: ReuseCount } | undefined;
-};
-export type PlannedClothing = {
-  [Clothing in ClothingSlot]: { key: string } | undefined;
-};
+export type Action = "preparing" | "idle" | "running";
 
 export type State = {
+  action: Action;
   time: number;
   things: number;
   messages: ReadonlyArray<string>;
@@ -27,4 +19,5 @@ export type State = {
     time: number;
     action: StateAction;
   }>;
+  multiplier: number;
 };

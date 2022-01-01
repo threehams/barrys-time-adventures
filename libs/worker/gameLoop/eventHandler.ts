@@ -15,7 +15,7 @@ export const eventHandler = (state: Draft<State>, action: StateAction) => {
         state.stats.desperation -= upgrade.costs.desperation;
         state.upgrades[key] = (state.upgrades[key] ?? 0) + 1;
         state.timeline.push({
-          time: new Date().valueOf(),
+          time: state.time,
           action,
         });
       }

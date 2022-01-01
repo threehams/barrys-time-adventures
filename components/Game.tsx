@@ -20,19 +20,20 @@ export const Game = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <div
-          className="grid mx-auto max-w-[1100px] grid-cols-[400px_100px_60px]"
+          className="grid py-4 mx-auto max-w-[1100px] grid-cols-[400px_1fr_60px]"
           style={{
             gridTemplateAreas: `
-            "status main day"
+            "status main window"
             "timeline timeline timeline"
+            "messages messages messages"
           `,
           }}
         >
-          <main className="[grid-area:status]">
+          <aside className="[grid-area:status]">
             <Status className="mb-3" />
             <Reset />
-          </main>
-          <aside>
+          </aside>
+          <main className="[grid-area:main]">
             <Tabs>
               <Tab
                 active={panel === "upgrades"}
@@ -47,14 +48,18 @@ export const Game = () => {
               )}
             </Tabs>
             <div className="grid">
-              <div className="relative z-10 col-start-1 row-start-1 p-4">
+              <div className="relative z-10 p-4">
                 {panel === "upgrades" && <Upgrades />}
               </div>
             </div>
-          </aside>
-          <Window className="mx-auto mt-6 max-w-[400px] col-start-1 row-start-1" />
-          <Messages />
-          <Timeline />
+          </main>
+          <Window className="[grid-area:window] " />
+          <div className="[grid-area:messages]">
+            <Messages />
+          </div>
+          <div className="[grid-area:timeline]">
+            <Timeline />
+          </div>
         </div>
       </div>
     );

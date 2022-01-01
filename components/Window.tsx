@@ -1,4 +1,4 @@
-import { CSSProperties } from ".pnpm/@types+react@17.0.14/node_modules/@types/react";
+import { CSSProperties } from "react";
 import clsx from "clsx";
 import lerp from "@sunify/lerp-color";
 import { hoursToMilliseconds } from "date-fns";

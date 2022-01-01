@@ -1,4 +1,3 @@
-import { WornClothing } from "@laundry/store";
 import { hoursToMilliseconds } from "date-fns";
 
 const phases = ["sleeping", "working", "gaming"] as const;
@@ -20,13 +19,4 @@ export const nextPhase = (time: number): Phase => {
   const phase = getPhase(time);
 
   return phases[phases.indexOf(phase) + 1] ?? phases[0];
-};
-
-export const readyForPhase = (phase: Phase, wornClothing: WornClothing) => {
-  if (phase === "working") {
-    if (wornClothing.legs === undefined || wornClothing.body === undefined) {
-      return false;
-    }
-  }
-  return true;
 };
