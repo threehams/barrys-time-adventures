@@ -16,7 +16,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: eslint
         run: npm run lint
