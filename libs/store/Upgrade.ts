@@ -10,8 +10,6 @@ export type UpgradeEffect = {
   reuse?: (num: number, level: number) => number;
   // Make time go faster / slower
   time?: (num: number, level: number) => number;
-  // Change rate of shame increase
-  shame?: (num: number, level: number) => number;
   // Change rate of desperation increase
   desperation?: (num: number, level: number) => number;
   // Change rate of money increase
@@ -28,14 +26,11 @@ export type Upgrade = {
   requirements: {
     time: number;
     money: number;
-    shame: number;
     desperation: number;
-    space: number;
   };
   // Required to buy this upgrade
   costs: {
     money: number;
-    shame: number;
     desperation: number;
   };
   // Readable name in-game

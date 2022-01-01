@@ -1,46 +1,39 @@
 import { Tab, Tabs } from "@laundry/ui";
+import { hoursToMilliseconds } from "date-fns";
 import React, { useMemo, useState } from "react";
-import { Actions } from "./Actions";
 import { Messages } from "./Messages";
 import { Reset } from "./Reset";
 import { useSelector } from "./StateProvider";
 import { Status } from "./Status";
+import { Timeline } from "./Timeline";
 import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
-import { Shop } from "./Shop";
-import { hoursToMilliseconds } from "date-fns";
-import clsx from "clsx";
-import { ClosetTest } from "./ClosetTest";
 
-type Panel = "window" | "closet" | "upgrades" | "shop";
+type Panel = "upgrades" | "shop";
 
 export const Game = () => {
   const time = useSelector((state) => state.time);
   const canShop = useSelector((state) => state.upgrades.buyClothes);
-  const [panel, setPanel] = useState<Panel>("window");
+  const [panel, setPanel] = useState<Panel>("upgrades");
+
   const layout = useMemo(() => {
     return (
       <div className="min-h-screen bg-gray-50">
-        <div className="flex flex-row flex-nowrap gap-7 mx-auto p-4 max-w-[1100px]">
-          <main className="flex-grow flex-shrink-0">
+        <div
+          className="grid mx-auto max-w-[1100px] grid-cols-[400px_100px_60px]"
+          style={{
+            gridTemplateAreas: `
+            "status main day"
+            "timeline timeline timeline"
+          `,
+          }}
+        >
+          <main className="[grid-area:status]">
             <Status className="mb-3" />
-            <Actions className="mb-3" />
             <Reset />
           </main>
-          <aside className="w-[600px]">
+          <aside>
             <Tabs>
-              <Tab
-                active={panel === "window"}
-                onClick={() => setPanel("window")}
-              >
-                Look Outside
-              </Tab>
-              <Tab
-                active={panel === "closet"}
-                onClick={() => setPanel("closet")}
-              >
-                Closet
-              </Tab>
               <Tab
                 active={panel === "upgrades"}
                 onClick={() => setPanel("upgrades")}
@@ -54,31 +47,14 @@ export const Game = () => {
               )}
             </Tabs>
             <div className="grid">
-              <div
-                className={clsx(
-                  "p-4 col-start-1 row-start-1 relative z-10",
-                  panel !== "window" && "backdrop-blur-lg",
-                )}
-              >
-                {panel === "closet" && (
-                  // <Closet
-                  //   closetMode={closetMode}
-                  //   setClosetMode={setClosetMode}
-                  // />
-                  <ClosetTest />
-                )}
+              <div className="relative z-10 col-start-1 row-start-1 p-4">
                 {panel === "upgrades" && <Upgrades />}
-                {panel === "shop" && <Shop />}
               </div>
-              <Window
-                className={clsx(
-                  "mx-auto mt-6 max-w-[400px] col-start-1 row-start-1",
-                  panel !== "window" && "opacity-20",
-                )}
-              />
             </div>
-            <Messages />
           </aside>
+          <Window className="mx-auto mt-6 max-w-[400px] col-start-1 row-start-1" />
+          <Messages />
+          <Timeline />
         </div>
       </div>
     );

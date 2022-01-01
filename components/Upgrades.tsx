@@ -8,18 +8,17 @@ type Props = {
   className?: string;
 };
 export const Upgrades = ({ className }: Props) => {
-  const stats = useSelector((state) => state.stats);
+  const stats = useSelector((state) => state.stats ?? {});
   const purchasedUpgrades = useSelector((state) => state.upgrades);
   const dispatch = useDispatch();
   const availableUpgrades = useMemo(() => {
     return upgrades.filter((upgrade) => {
       return (
         stats.desperation >= upgrade.costs.desperation &&
-        stats.money >= upgrade.costs.money &&
-        stats.shame >= upgrade.costs.shame
+        stats.money >= upgrade.costs.money
       );
     });
-  }, [stats.desperation, stats.money, stats.shame]);
+  }, [stats.desperation, stats.money]);
 
   return (
     <section className={clsx("flex flex-col gap-2", className)}>

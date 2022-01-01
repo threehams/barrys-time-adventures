@@ -7,23 +7,22 @@ type Props = {
 };
 export const Status = ({ className }: Props) => {
   const time = useSelector((state) => state.time);
-  const action = useSelector((state) => state.action);
-  const { money } = useSelector((state) => state.stats);
+  const things = useSelector((state) => state.things);
 
   const timeOfDay = format(
-    addMilliseconds(new Date(1980, 0, 1, 0, 0, 0), time),
-    "hh:mm bb",
+    addMilliseconds(new Date(1997, 6, 29, 8, 0, 0), time),
+    "MMMM d, yyyy hh:mm bb",
   );
 
   return (
     <div className={className}>
-      It is {timeOfDay}. You are {action}.{" "}
+      It is {timeOfDay}.
       <p>
-        You have $
-        {numbro(money).format({
+        You have{" "}
+        {numbro(things).format({
           thousandSeparated: true,
-        })}
-        .
+        })}{" "}
+        things.
       </p>
     </div>
   );
