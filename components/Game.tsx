@@ -35,39 +35,41 @@ export const Game = () => {
           `,
           }}
         >
-          {phase !== "preEvent" && (
-            <Tabs>
-              <Tab
-                active={panel === "actions"}
-                onClick={() => {
-                  setPanel("actions");
-                }}
-              >
-                Actions
-              </Tab>
-              <Tab
-                active={panel === "upgrades"}
-                onClick={() => {
-                  setPanel("upgrades");
-                }}
-              >
-                Upgrades
-              </Tab>
-            </Tabs>
-          )}
           <aside className="[grid-area:status]">
             <Status className="mb-3" />
             {!process.env.NEXT_DISABLE_CHEATS && <Cheats />}
             <Reset />
           </aside>
           <main className="[grid-area:main]">
-            <h2>Upgrades</h2>
-            {phase === "preEvent" && <Upgrades />}
-            {phase !== "preEvent" && (
+            {phase === "preEvent" && (
               <>
+                <h2>Upgrades</h2>
+                <Upgrades />
+              </>
+            )}
+            {phase !== "preEvent" && (
+              <div>
+                <Tabs className="mb-2">
+                  <Tab
+                    active={panel === "actions"}
+                    onClick={() => {
+                      setPanel("actions");
+                    }}
+                  >
+                    Actions
+                  </Tab>
+                  <Tab
+                    active={panel === "upgrades"}
+                    onClick={() => {
+                      setPanel("upgrades");
+                    }}
+                  >
+                    Upgrades
+                  </Tab>
+                </Tabs>
                 {panel === "upgrades" && <Upgrades />}
                 {panel === "actions" && <Actions />}
-              </>
+              </div>
             )}
           </main>
           <Window className="[grid-area:window] " />

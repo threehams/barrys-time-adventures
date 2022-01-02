@@ -1,6 +1,12 @@
 import { findUpgrade, StateAction } from "@laundry/store";
 import { useDispatch, useSelector } from "./StateProvider";
-import { format, hoursToMilliseconds, add, sub } from "date-fns";
+import {
+  format,
+  hoursToMilliseconds,
+  add,
+  sub,
+  hoursToSeconds,
+} from "date-fns";
 import { groupBy, range } from "lodash";
 import { Button } from "@laundry/ui";
 import { useState } from "react";
@@ -15,6 +21,9 @@ export const Timeline = () => {
   const preEvents = useSelector((state) => state.timeline);
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
   const phase = useSelector((state) => state.phase);
+  const currentDay = useSelector((state) =>
+    Math.floor(state.time / hoursToSeconds(24)),
+  );
   const [selectedDay, setSelectedDay] = useState<number | undefined>(undefined);
 
   const timedUpgrades = Object.entries(timedUpgradeMap)
@@ -50,14 +59,17 @@ export const Timeline = () => {
           const availablePermanent = !!timeline[day]?.find(
             (event) => event.type === "permanent",
           );
+          const muted =
+            (phase === "traveling" &&
+              selectedDay !== undefined &&
+              selectedDay <= day) ||
+            (phase === "preEvent" && day < currentDay);
           return (
             <button
               className={clsx(
-                "inline-grid border-2 border-gray-800 w-[32px] h-[32px] grid-cols-2 grid-rows-2 border-l-0 first-of-type:border-l-2",
-                phase === "traveling" &&
-                  selectedDay !== undefined &&
-                  day > selectedDay &&
-                  "border-opacity-20",
+                "inline-grid relative border-2 border-gray-800 w-[32px] h-[32px] grid-cols-2 grid-rows-2 -ml-[2px]",
+                muted && "border-opacity-20",
+                day === selectedDay && "shadow-[0_0_0_3px_red] z-10",
               )}
               style={{
                 gridTemplateAreas: `
