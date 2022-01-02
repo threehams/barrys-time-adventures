@@ -3,7 +3,8 @@ const appRootPath = require("app-root-path").toString();
 const { StatsWriterPlugin } = require("webpack-stats-plugin");
 
 module.exports = {
-  assetPrefix: "",
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
   async exportPathMap() {
     return {
       "/": { page: "/" },

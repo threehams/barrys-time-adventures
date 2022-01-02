@@ -34,6 +34,8 @@ jobs:
       - run: pnpm run export
 
       - name: Deploy
+        env:
+          NEXT_PUBLIC_BASE_PATH: /incremental-game-jam-2022/
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
