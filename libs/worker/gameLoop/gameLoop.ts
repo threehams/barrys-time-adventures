@@ -11,7 +11,7 @@ export const gameLoop = (state: Draft<State>, delta: number) => {
 };
 
 const updateTime = (state: Draft<State>, delta: number) => {
-  const totalTime = delta * 10000;
+  const totalTime = delta * (1000 * state.multiplier);
   if (state.time === THE_EVENT_TIME) {
     state.action = "idle";
     return;

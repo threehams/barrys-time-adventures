@@ -21,5 +21,7 @@ export const eventHandler = (state: Draft<State>, action: StateAction) => {
       }
       break;
     }
+    case "SET_MULTIPLIER":
+      state.multiplier = action.payload.multiplier;
   }
 };

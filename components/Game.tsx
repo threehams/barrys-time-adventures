@@ -1,6 +1,7 @@
 import { Tab, Tabs } from "@laundry/ui";
 import { hoursToMilliseconds } from "date-fns";
 import React, { useMemo, useState } from "react";
+import { Cheats } from "./Cheats";
 import { Messages } from "./Messages";
 import { Reset } from "./Reset";
 import { useSelector } from "./StateProvider";
@@ -31,6 +32,7 @@ export const Game = () => {
         >
           <aside className="[grid-area:status]">
             <Status className="mb-3" />
+            {!process.env.NEXT_DIASBLE_CHEATS && <Cheats />}
             <Reset />
           </aside>
           <main className="[grid-area:main]">
