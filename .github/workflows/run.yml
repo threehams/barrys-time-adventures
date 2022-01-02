@@ -39,7 +39,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /incremental-game-jam-2022
         run: pnpm run build
 
-      - name: Build for Export
+      - name: Export
         env:
           NEXT_PUBLIC_BASE_PATH: /incremental-game-jam-2022
         run: pnpm run export
