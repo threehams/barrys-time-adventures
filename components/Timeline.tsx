@@ -19,6 +19,7 @@ export const Timeline = () => {
 
   return (
     <div>
+      <h2>Timeline</h2>
       <ul>
         {range(0, 30).map((day) => {
           const availableEvents = timeline[day];
@@ -33,9 +34,7 @@ export const Timeline = () => {
               }}
               key={day}
               variant={availableEvents ? "primary" : "secondary"}
-            >
-              {day}
-            </Button>
+            ></Button>
           );
         })}
       </ul>

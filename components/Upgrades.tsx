@@ -9,27 +9,24 @@ type Props = {
 };
 export const Upgrades = ({ className }: Props) => {
   const stats = useSelector((state) => state.stats);
+  const phase = useSelector((state) => state.phase);
   const purchasedUpgrades = useSelector((state) => state.upgrades);
   const dispatch = useDispatch();
+
   const availableUpgrades = useMemo(() => {
     return upgrades.filter((upgrade) => {
-      if (
-        upgrade.requirements.desperation &&
-        upgrade.requirements.desperation(purchasedUpgrades[upgrade.key] ?? 0) >
-          stats.desperation
-      ) {
+      if (upgrade.phase !== phase) {
         return false;
       }
-      if (
-        upgrade.requirements.things &&
-        upgrade.requirements.things(purchasedUpgrades[upgrade.key] ?? 0) >
-          stats.things
-      ) {
+      if ((upgrade.requirements ?? 0) > stats.desperation) {
+        return false;
+      }
+      if ((upgrade.requirements.things ?? 0) > stats.things) {
         return false;
       }
       return true;
     });
-  }, [purchasedUpgrades, stats.desperation, stats.things]);
+  }, [phase, stats.desperation, stats.things]);
 
   return (
     <section className={clsx("flex flex-col gap-2", className)}>

@@ -1,9 +1,11 @@
 import React from "react";
 import clsx from "clsx";
 
+const NON_BREAK_SPACE = "\u00A0";
+
 type ButtonProps = {
   active?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   disabled?: boolean;
   onClick?: React.MouseEventHandler;
   className?: string;
@@ -28,7 +30,7 @@ export const Button = React.memo(
           }
         }}
         className={clsx(
-          "border border-gray-700 border-solid cursor-pointer px-3 relative",
+          "border border-gray-700 border-solid cursor-pointer px-2 relative",
           active && "bg-blue-700 text-white",
           variant === "primary" && "bg-blue-700 text-white",
           variant === "danger" && "bg-red-900 text-white",
@@ -37,7 +39,7 @@ export const Button = React.memo(
         )}
         {...rest}
       >
-        {children}
+        {children ?? NON_BREAK_SPACE}
       </button>
     );
   },

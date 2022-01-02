@@ -11,10 +11,17 @@ import { Window } from "./Window";
 
 export const Game = () => {
   const time = useSelector((state) => state.time);
+  const phase = useSelector((state) => state.phase);
+  const loops = useSelector((state) => state.loops);
 
   const layout = useMemo(() => {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="relative min-h-screen bg-gray-50">
+        {phase === "event" && (
+          <div className="absolute z-50 flex items-center justify-center min-w-full min-h-screen text-6xl bg-gray-900 text-gray-50">
+            JUDGEMENT DAY HAS COME
+          </div>
+        )}
         <div
           className="grid py-4 mx-auto max-w-[1100px] grid-cols-[400px_1fr_60px]"
           style={{
@@ -38,13 +45,15 @@ export const Game = () => {
           <div className="[grid-area:messages]">
             <Messages />
           </div>
-          <div className="[grid-area:timeline]">
-            <Timeline />
-          </div>
+          {loops > 0 && (
+            <div className="[grid-area:timeline]">
+              <Timeline />
+            </div>
+          )}
         </div>
       </div>
     );
-  }, []);
+  }, [loops, phase]);
 
   return (
     <div

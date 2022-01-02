@@ -3,6 +3,7 @@ import { Upgrade } from "../Upgrade";
 
 export const upgrades: Upgrade[] = [
   {
+    phase: "preEvent",
     key: "upgradeThings",
     name: "Make things faster",
     description: "",
@@ -21,10 +22,29 @@ export const upgrades: Upgrade[] = [
     flavorTexts: {
       1: "Set up something to make things faster.",
     },
-    requirements: {
-      desperation: undefined,
-      things: undefined,
+    requirements: {},
+  },
+  {
+    phase: "postEvent",
+    key: "postUpgradeThings",
+    name: "Improve thing construction",
+    description: "Use future tech to make things faster than ever before",
+    max: 10,
+    costs: {
+      savedTime: (level) => {
+        return level * 1;
+      },
     },
+    effect: {
+      type: "add",
+      things: (things, level) => {
+        return things * (level + 1);
+      },
+    },
+    flavorTexts: {
+      1: "Upgrade from the future!",
+    },
+    requirements: {},
   },
 ];
 

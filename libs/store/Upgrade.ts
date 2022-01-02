@@ -1,15 +1,11 @@
-export type UpgradeKey = string;
+import { Phase } from ".";
+
+export type UpgradeKey = "upgradeThings" | "postUpgradeThings";
 
 export type UnlockKey = "buyClothes" | "autoClothes";
 export type UpgradeEffect = {
   // Unlock a particular feature permanently
   unlock?: UnlockKey;
-  // Compress clothing better
-  clothingVolume?: (num: number, level: number) => number;
-  // Reuse clothing more times with less shame
-  reuse?: (num: number, level: number) => number;
-  // Make time go faster / slower
-  time?: (num: number, level: number) => number;
   // Change rate of desperation increase
   desperation?: (num: number, level: number) => number;
   // Change rate of things increase
@@ -19,18 +15,21 @@ export type UpgradeEffect = {
 };
 
 export type Upgrade = {
+  phase: Phase;
   // Max level of this upgrade
   max: number;
   // Required for this upgrade to appear. Once that happens, it's
   // always visible
   requirements: {
-    things?: (things: number) => number;
-    desperation?: (desperation: number) => number;
+    things?: number;
+    desperation?: number;
+    savedTime?: number;
   };
   // Required to buy this upgrade
   costs: {
     things?: (level: number) => number;
     desperation?: (level: number) => number;
+    savedTime?: (level: number) => number;
   };
   // Readable name in-game
   name: string;

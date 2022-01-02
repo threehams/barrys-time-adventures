@@ -1,30 +1,29 @@
 import { StateAction, State, findUpgrade } from "@laundry/store";
 import { Draft } from "immer";
 
-export const eventHandler = (state: Draft<State>, action: StateAction) => {
+export const eventHandler = (
+  state: Draft<State>,
+  action: StateAction,
+): Draft<State> | undefined => {
   switch (action.type) {
     case "BUY_UPGRADE": {
       const { key } = action.payload;
       const { stats, upgrades: purchasedUpgrades } = state;
       const currentLevel = purchasedUpgrades[key] ?? 0;
+      const nextLevel = currentLevel + 1;
+
       const upgrade = findUpgrade(key);
-      if (
-        upgrade.costs.desperation &&
-        upgrade.costs.desperation(currentLevel) > stats.desperation
-      ) {
-        return;
-      }
-      if (
-        upgrade.costs.things &&
-        upgrade.costs.things(currentLevel) > stats.things
-      ) {
-        return;
+      for (const costKey of Object.keys(upgrade.costs)) {
+        const checker = upgrade.costs[costKey];
+        if (checker && checker(nextLevel) > stats[costKey]) {
+          return;
+        }
       }
       if (currentLevel < upgrade.max) {
-        const newLevel = currentLevel + 1;
-        state.stats.things -= upgrade.costs.things?.(newLevel) ?? 0;
-        state.stats.desperation -= upgrade.costs.desperation?.(newLevel) ?? 0;
-        purchasedUpgrades[key] = currentLevel + 1;
+        for (const costKey of Object.keys(upgrade.costs)) {
+          state.stats[costKey] -= upgrade.costs[costKey]?.(nextLevel) ?? 0;
+        }
+        purchasedUpgrades[key] = nextLevel;
         state.timeline.push({
           time: state.time,
           action,

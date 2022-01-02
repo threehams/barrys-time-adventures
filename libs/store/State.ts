@@ -1,20 +1,21 @@
 import { StateAction } from "./StateAction";
 import { UpgradeKey } from "./Upgrade";
 
-export type Action = "preparing" | "idle" | "running";
-
+export type Phase = "preEvent" | "event" | "postEvent";
+export type PurchasedUpgrades = {
+  [Key in UpgradeKey]: number | undefined;
+};
 export type State = {
-  action: Action;
+  phase: Phase;
   time: number;
   messages: ReadonlyArray<string>;
   stats: {
     things: number;
     money: number;
     desperation: number;
+    savedTime: number;
   };
-  upgrades: {
-    [Key in UpgradeKey]: number | undefined;
-  };
+  upgrades: PurchasedUpgrades;
   timeline: ReadonlyArray<{
     time: number;
     action: StateAction;
@@ -22,5 +23,7 @@ export type State = {
   multiplier: number;
   timers: {
     things: number;
+    event: number;
   };
+  loops: number;
 };
