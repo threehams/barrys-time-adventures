@@ -1,0 +1,61 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "outDir": "./dist/out-tsc",
+    "resolveJsonModule": true,
+    "paths": {
+      "@laundry/messages": [
+        "./libs/messages/index.ts"
+      ],
+      "@laundry/ui": [
+        "./libs/ui/index.ts"
+      ],
+      "@laundry/utils": [
+        "./libs/utils/index.ts"
+      ],
+      "@laundry/store": [
+        "./libs/store/index.ts"
+      ],
+      "@laundry/worker": [
+        "./libs/worker/index.ts"
+      ]
+    },
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2015",
+    "types": [
+      "cypress",
+      "node",
+      "@types/testing-library__cypress"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "incremental": true
+  },
+  "exclude": [
+    "./node_modules",
+    "./tmp"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}
