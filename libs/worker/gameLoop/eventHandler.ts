@@ -5,15 +5,26 @@ export const eventHandler = (state: Draft<State>, action: StateAction) => {
   switch (action.type) {
     case "BUY_UPGRADE": {
       const { key } = action.payload;
+      const { stats, upgrades: purchasedUpgrades } = state;
+      const currentLevel = purchasedUpgrades[key] ?? 0;
       const upgrade = findUpgrade(key);
       if (
-        state.stats.money >= upgrade.costs.money &&
-        state.stats.desperation >= upgrade.costs.desperation &&
-        (state.upgrades[key] ?? 0) < upgrade.max
+        upgrade.costs.desperation &&
+        upgrade.costs.desperation(currentLevel) > stats.desperation
       ) {
-        state.stats.money -= upgrade.costs.money;
-        state.stats.desperation -= upgrade.costs.desperation;
-        state.upgrades[key] = (state.upgrades[key] ?? 0) + 1;
+        return;
+      }
+      if (
+        upgrade.costs.things &&
+        upgrade.costs.things(currentLevel) > stats.things
+      ) {
+        return;
+      }
+      if (currentLevel < upgrade.max) {
+        const newLevel = currentLevel + 1;
+        state.stats.things -= upgrade.costs.things?.(newLevel) ?? 0;
+        state.stats.desperation -= upgrade.costs.desperation?.(newLevel) ?? 0;
+        purchasedUpgrades[key] = currentLevel + 1;
         state.timeline.push({
           time: state.time,
           action,

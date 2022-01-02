@@ -5,7 +5,7 @@ export const Cheats = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      <h2>Multiplier</h2>
+      <h2>Cheats: Multiplier</h2>
       <Button
         onClick={() => {
           dispatch({

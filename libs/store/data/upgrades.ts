@@ -1,51 +1,29 @@
 import { UnlockKey, UpgradeKey } from "..";
 import { Upgrade } from "../Upgrade";
-import { hoursToMilliseconds } from "date-fns";
 
 export const upgrades: Upgrade[] = [
   {
-    key: "buyClothes",
-    name: "Buy more clothes",
-    description: "I really don't have enough clothes. I should buy some more.",
-    max: 1,
+    key: "upgradeThings",
+    name: "Make things faster",
+    description: "",
+    max: 100,
     costs: {
-      desperation: 0,
-      money: 0,
+      things: (level) => {
+        return level * 10;
+      },
     },
     effect: {
       type: "add",
-      unlock: "buyClothes",
+      things: (things, level) => {
+        return things * (level + 1);
+      },
     },
     flavorTexts: {
-      1: "I found a pretty good online store.",
+      1: "Set up something to make things faster.",
     },
     requirements: {
-      time: hoursToMilliseconds(24 * 5),
-      desperation: 0,
-      money: 0,
-    },
-  },
-  {
-    key: "autoClothes",
-    name: "Plan out clothing in advance",
-    description:
-      "I don't have that many clothes. I could just wear the same sort of thing each day.",
-    max: 1,
-    costs: {
-      desperation: 0,
-      money: 0,
-    },
-    effect: {
-      type: "add",
-      unlock: "autoClothes",
-    },
-    flavorTexts: {
-      1: "Done",
-    },
-    requirements: {
-      time: hoursToMilliseconds(24 * 5),
-      desperation: 0,
-      money: 0,
+      desperation: undefined,
+      things: undefined,
     },
   },
 ];

@@ -12,8 +12,8 @@ export type UpgradeEffect = {
   time?: (num: number, level: number) => number;
   // Change rate of desperation increase
   desperation?: (num: number, level: number) => number;
-  // Change rate of money increase
-  money?: (num: number, level: number) => number;
+  // Change rate of things increase
+  things?: (num: number, level: number) => number;
   // Is this additive or multiplicative with other upgrades?
   type: "add" | "multiply";
 };
@@ -24,14 +24,13 @@ export type Upgrade = {
   // Required for this upgrade to appear. Once that happens, it's
   // always visible
   requirements: {
-    time: number;
-    money: number;
-    desperation: number;
+    things?: (things: number) => number;
+    desperation?: (desperation: number) => number;
   };
   // Required to buy this upgrade
   costs: {
-    money: number;
-    desperation: number;
+    things?: (level: number) => number;
+    desperation?: (level: number) => number;
   };
   // Readable name in-game
   name: string;

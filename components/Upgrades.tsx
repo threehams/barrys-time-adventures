@@ -8,17 +8,28 @@ type Props = {
   className?: string;
 };
 export const Upgrades = ({ className }: Props) => {
-  const stats = useSelector((state) => state.stats ?? {});
+  const stats = useSelector((state) => state.stats);
   const purchasedUpgrades = useSelector((state) => state.upgrades);
   const dispatch = useDispatch();
   const availableUpgrades = useMemo(() => {
     return upgrades.filter((upgrade) => {
-      return (
-        stats.desperation >= upgrade.costs.desperation &&
-        stats.money >= upgrade.costs.money
-      );
+      if (
+        upgrade.requirements.desperation &&
+        upgrade.requirements.desperation(purchasedUpgrades[upgrade.key] ?? 0) >
+          stats.desperation
+      ) {
+        return false;
+      }
+      if (
+        upgrade.requirements.things &&
+        upgrade.requirements.things(purchasedUpgrades[upgrade.key] ?? 0) >
+          stats.things
+      ) {
+        return false;
+      }
+      return true;
     });
-  }, [stats.desperation, stats.money]);
+  }, [purchasedUpgrades, stats.desperation, stats.things]);
 
   return (
     <section className={clsx("flex flex-col gap-2", className)}>
@@ -38,7 +49,7 @@ export const Upgrades = ({ className }: Props) => {
                 });
               }}
             >
-              Buy ({level})
+              Buy {level > 0 && `(${level})`}
             </Button>
             <div>{upgrade.name}</div>
             {flavorText && <p className="col-start-2">{flavorText}</p>}

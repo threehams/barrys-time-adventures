@@ -1,6 +1,5 @@
-import { Tab, Tabs } from "@laundry/ui";
 import { hoursToMilliseconds } from "date-fns";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Cheats } from "./Cheats";
 import { Messages } from "./Messages";
 import { Reset } from "./Reset";
@@ -10,12 +9,8 @@ import { Timeline } from "./Timeline";
 import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
 
-type Panel = "upgrades" | "shop";
-
 export const Game = () => {
   const time = useSelector((state) => state.time);
-  const canShop = useSelector((state) => state.upgrades.buyClothes);
-  const [panel, setPanel] = useState<Panel>("upgrades");
 
   const layout = useMemo(() => {
     return (
@@ -36,24 +31,8 @@ export const Game = () => {
             <Reset />
           </aside>
           <main className="[grid-area:main]">
-            <Tabs>
-              <Tab
-                active={panel === "upgrades"}
-                onClick={() => setPanel("upgrades")}
-              >
-                Upgrades
-              </Tab>
-              {canShop && (
-                <Tab active={panel === "shop"} onClick={() => setPanel("shop")}>
-                  Shop
-                </Tab>
-              )}
-            </Tabs>
-            <div className="grid">
-              <div className="relative z-10 p-4">
-                {panel === "upgrades" && <Upgrades />}
-              </div>
-            </div>
+            <h2>Upgrades</h2>
+            <Upgrades />
           </main>
           <Window className="[grid-area:window] " />
           <div className="[grid-area:messages]">
@@ -65,7 +44,7 @@ export const Game = () => {
         </div>
       </div>
     );
-  }, [canShop, panel]);
+  }, []);
 
   return (
     <div

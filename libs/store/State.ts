@@ -6,9 +6,9 @@ export type Action = "preparing" | "idle" | "running";
 export type State = {
   action: Action;
   time: number;
-  things: number;
   messages: ReadonlyArray<string>;
   stats: {
+    things: number;
     money: number;
     desperation: number;
   };
@@ -20,4 +20,7 @@ export type State = {
     action: StateAction;
   }>;
   multiplier: number;
+  timers: {
+    things: number;
+  };
 };

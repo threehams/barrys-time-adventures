@@ -10,7 +10,7 @@ type Props = {
 };
 export const Status = ({ className }: Props) => {
   const time = useSelector((state) => state.time);
-  const things = useSelector((state) => state.things);
+  const things = useSelector((state) => state.stats.things);
 
   const timeOfDay = format(
     addMilliseconds(START_DATE, time),

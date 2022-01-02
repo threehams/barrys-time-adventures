@@ -33,7 +33,6 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": warnOnLocal,
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/prefer-function-type": "error",
-    "@typescript-eslint/restrict-plus-operands": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "mocha/no-exclusive-tests": "error",
     "no-sequences": "error",
