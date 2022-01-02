@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 export const Upgrades = ({ className }: Props) => {
-  const stats = useSelector((state) => state.stats);
+  const stats = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
   const purchasedUpgrades = useSelector((state) => state.upgrades);
   const dispatch = useDispatch();
@@ -18,15 +18,12 @@ export const Upgrades = ({ className }: Props) => {
       if (upgrade.phase !== phase) {
         return false;
       }
-      if ((upgrade.requirements ?? 0) > stats.desperation) {
-        return false;
-      }
       if ((upgrade.requirements.things ?? 0) > stats.things) {
         return false;
       }
       return true;
     });
-  }, [phase, stats.desperation, stats.things]);
+  }, [phase, stats.things]);
 
   return (
     <section className={clsx("flex flex-col gap-2", className)}>

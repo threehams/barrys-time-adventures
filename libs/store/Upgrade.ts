@@ -6,8 +6,6 @@ export type UnlockKey = "buyClothes" | "autoClothes";
 export type UpgradeEffect = {
   // Unlock a particular feature permanently
   unlock?: UnlockKey;
-  // Change rate of desperation increase
-  desperation?: (num: number, level: number) => number;
   // Change rate of things increase
   things?: (num: number, level: number) => number;
   // Is this additive or multiplicative with other upgrades?
@@ -22,13 +20,11 @@ export type Upgrade = {
   // always visible
   requirements: {
     things?: number;
-    desperation?: number;
     savedTime?: number;
   };
   // Required to buy this upgrade
   costs: {
     things?: (level: number) => number;
-    desperation?: (level: number) => number;
     savedTime?: (level: number) => number;
   };
   // Readable name in-game

@@ -5,7 +5,7 @@ beforeEach(() => {
   cy.clearLocalStorage();
   cy.wrap(null).then(() => {
     const VERSION = 1;
-    const databaseName = "laundry_game";
+    const databaseName = "reconciliation_game";
     const savedGameKey = "saved_game";
     localForage.config({
       version: VERSION,

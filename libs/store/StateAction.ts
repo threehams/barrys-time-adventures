@@ -6,5 +6,15 @@ type SetMultiplier = {
   type: "SET_MULTIPLIER";
   payload: { multiplier: number };
 };
+type TravelAction = {
+  type: "TRAVEL";
+  payload: {
+    day: number;
+  };
+};
 
-export type StateAction = BuyUpgradeAction | ResetGameAction | SetMultiplier;
+export type StateAction =
+  | BuyUpgradeAction
+  | ResetGameAction
+  | SetMultiplier
+  | TravelAction;

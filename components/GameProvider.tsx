@@ -15,6 +15,7 @@ export const GameProvider = () => {
   return (
     <StateProvider value={state}>
       <DispatchProvider value={dispatch}>{children}</DispatchProvider>
+      <pre>{JSON.stringify(state, null, 2)}</pre>
     </StateProvider>
   );
 };

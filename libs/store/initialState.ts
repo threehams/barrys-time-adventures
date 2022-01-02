@@ -1,19 +1,20 @@
-import { PurchasedUpgrades, State } from "./State";
+import { State } from "./State";
 
 export const initialState: State = {
   phase: "preEvent",
+  action: "",
   time: 0,
-  messages: [],
-  upgrades: {} as PurchasedUpgrades,
+  messages: ["The news has been weird lately. I feel like I should prepare."],
+  upgrades: {},
+  timedUpgrades: {},
   timeline: [],
-  stats: {
+  resources: {
     things: 0,
-    desperation: 0,
-    money: 0,
     savedTime: 1,
   },
   multiplier: 1,
   timers: {
+    action: 0,
     event: 0,
     things: 0,
   },

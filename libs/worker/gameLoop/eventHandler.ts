@@ -8,7 +8,7 @@ export const eventHandler = (
   switch (action.type) {
     case "BUY_UPGRADE": {
       const { key } = action.payload;
-      const { stats, upgrades: purchasedUpgrades } = state;
+      const { resources: stats, upgrades: purchasedUpgrades } = state;
       const currentLevel = purchasedUpgrades[key] ?? 0;
       const nextLevel = currentLevel + 1;
 
@@ -21,7 +21,7 @@ export const eventHandler = (
       }
       if (currentLevel < upgrade.max) {
         for (const costKey of Object.keys(upgrade.costs)) {
-          state.stats[costKey] -= upgrade.costs[costKey]?.(nextLevel) ?? 0;
+          state.resources[costKey] -= upgrade.costs[costKey]?.(nextLevel) ?? 0;
         }
         purchasedUpgrades[key] = nextLevel;
         state.timeline.push({

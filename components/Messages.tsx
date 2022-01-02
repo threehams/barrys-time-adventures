@@ -9,7 +9,7 @@ export const Messages = () => {
       {messages.map((message, index) => {
         return (
           <p
-            key={message}
+            key={index}
             className={clsx(
               index === messages.length - 2 && "text-gray-500",
               index === messages.length - 1 && "text-gray-900",
