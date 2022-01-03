@@ -12,6 +12,10 @@ export const initialState: State = {
     things: 0,
     savedTime: 1,
   },
+  stats: {
+    perception: 0,
+  },
+  actions: {},
   multiplier: 1,
   timers: {
     action: 0,

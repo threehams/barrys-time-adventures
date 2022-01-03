@@ -1,4 +1,4 @@
-import { findUpgrade, State } from "@laundry/store";
+import { findAction, findUpgrade, State } from "@laundry/store";
 import { sub } from "date-fns";
 import { Draft } from "immer";
 
@@ -22,7 +22,7 @@ export const updateGame: Updater = (state, delta) => {
   updateEvent(state, delta);
   updatePreResources(state, elapsedTime);
   updatePostResources(state, elapsedTime);
-  updateAction(state, elapsedTime);
+  updateExplore(state, elapsedTime);
 };
 
 const updateTime: Updater = (state, delta) => {
@@ -112,7 +112,7 @@ const updatePostResources: Updater = (state, delta) => {
   }
 };
 
-const updateAction: Updater = (state) => {
+const updateExplore: Updater = (state, delta) => {
   if (state.phase === "postEvent" && state.resources.things <= 0) {
     state.phase = "traveling";
     state.multiplier = 1;
@@ -125,5 +125,17 @@ const updateAction: Updater = (state) => {
       "With your supplies gone, the only thing left is to send help to your past. With luck, you'll survive.",
     );
   }
-  return;
+
+  if (!state.action) {
+    return;
+  }
+  const exploration = findAction(state.action);
+  const progress = (100 / exploration.time) * delta;
+  state.actions[state.action] = Math.min(
+    (state.actions[state.action] ?? 0) + progress,
+    100,
+  );
+  if (state.actions[state.action] === 100) {
+    state.action = undefined;
+  }
 };

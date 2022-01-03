@@ -13,12 +13,12 @@ export const gameActions: GameAction[] = [
     train: {
       perception: 1.5,
     },
-    time: 10000,
+    time: 10_000,
     requirements: {},
   },
   {
-    key: "startExplore",
-    name: "Explore the area",
+    key: "researchThings",
+    name: "Research time travel",
     description: "",
     message: "",
     drain: {
@@ -27,8 +27,10 @@ export const gameActions: GameAction[] = [
     train: {
       perception: 1.5,
     },
-    time: 10000,
-    requirements: {},
+    time: 10_000,
+    requirements: {
+      action: "startExplore",
+    },
   },
 ];
 

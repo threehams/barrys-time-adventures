@@ -1,7 +1,7 @@
 import { Tab, Tabs } from "@laundry/ui";
 import { hoursToMilliseconds } from "date-fns";
 import React, { useMemo, useState } from "react";
-import { Actions } from "./Actions";
+import { Exploration } from "./Exploration";
 import { Cheats } from "./Cheats";
 import { Messages } from "./Messages";
 import { Reset } from "./Reset";
@@ -68,7 +68,7 @@ export const Game = () => {
                   </Tab>
                 </Tabs>
                 {panel === "upgrades" && <Upgrades />}
-                {panel === "actions" && <Actions />}
+                {panel === "actions" && <Exploration />}
               </div>
             )}
           </main>

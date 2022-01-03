@@ -33,5 +33,17 @@ export const eventHandler = (
     }
     case "SET_MULTIPLIER":
       state.multiplier = action.payload.multiplier;
+      break;
+    case "EXPLORE":
+      if (state.phase !== "postEvent") {
+        return;
+      }
+      if (state.action === action.payload.location) {
+        state.action = undefined;
+        return;
+      }
+
+      state.action = action.payload.location;
+      break;
   }
 };

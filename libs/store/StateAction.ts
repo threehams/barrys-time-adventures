@@ -1,4 +1,4 @@
-import { UpgradeKey } from ".";
+import { ActionKey, UpgradeKey } from ".";
 
 type BuyUpgradeAction = { type: "BUY_UPGRADE"; payload: { key: UpgradeKey } };
 type ResetGameAction = { type: "RESET_GAME" };
@@ -12,9 +12,16 @@ type TravelAction = {
     day: number;
   };
 };
+type ExploreAction = {
+  type: "EXPLORE";
+  payload: {
+    location: ActionKey;
+  };
+};
 
 export type StateAction =
   | BuyUpgradeAction
   | ResetGameAction
   | SetMultiplier
-  | TravelAction;
+  | TravelAction
+  | ExploreAction;
