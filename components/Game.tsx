@@ -1,7 +1,7 @@
 import { Tab, Tabs } from "@laundry/ui";
 import { hoursToMilliseconds } from "date-fns";
 import React, { useMemo, useState } from "react";
-import { Exploration } from "./Exploration";
+import { Explorations } from "./Explorations";
 import { Cheats } from "./Cheats";
 import { Messages } from "./Messages";
 import { Reset } from "./Reset";
@@ -80,7 +80,7 @@ export const Game = () => {
                     setSelectedUpgrade={setSelectedUpgrade}
                   />
                 )}
-                {panel === "actions" && <Exploration />}
+                {panel === "actions" && <Explorations />}
               </div>
             )}
           </main>

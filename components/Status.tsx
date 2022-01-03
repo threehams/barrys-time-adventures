@@ -13,6 +13,7 @@ export const Status = ({ className }: Props) => {
   const time = useSelector((state) => state.time);
   const { things, savedTime } = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
+  const loops = useSelector((state) => state.loops);
 
   const startDate =
     phase === "postEvent" || phase === "traveling"

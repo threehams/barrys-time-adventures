@@ -1,7 +1,7 @@
-import { ActionKey, Resource, Stat } from ".";
+import { ExplorationKey, Resource, Stat } from ".";
 
-export type GameAction = {
-  key: ActionKey;
+export type Exploration = {
+  key: ExplorationKey;
   name: string;
   description: string;
   time: number;
@@ -12,7 +12,7 @@ export type GameAction = {
     [key in Stat]?: number;
   };
   requirements: {
-    action?: ActionKey;
+    action?: ExplorationKey;
   };
   message: string;
 };

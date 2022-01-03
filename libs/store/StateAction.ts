@@ -1,4 +1,4 @@
-import { ActionKey, UpgradeKey } from ".";
+import { ExplorationKey, UpgradeKey } from ".";
 
 type BuyUpgradeAction = { type: "BUY_UPGRADE"; payload: { key: UpgradeKey } };
 type BuyTimedUpgradeAction = {
@@ -24,7 +24,7 @@ type TravelAction = {
 type ExploreAction = {
   type: "EXPLORE";
   payload: {
-    location: ActionKey;
+    location: ExplorationKey;
   };
 };
 

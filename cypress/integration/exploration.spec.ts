@@ -29,10 +29,6 @@ describe("time travel", () => {
           draft.upgrades = {
             upgradeThings: { level: 1 },
           };
-          draft.explorations = {
-            researchThings: { progress: 100 },
-            startExplore: { progress: 100 },
-          };
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);
           draft.resources.things = 1000;
@@ -41,6 +37,5 @@ describe("time travel", () => {
       );
     });
     cy.visit("/");
-    cy.findByText("Upgrades").click();
   });
 });

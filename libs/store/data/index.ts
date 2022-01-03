@@ -1,2 +1,2 @@
-export * from "./gameActions";
+export * from "./explorations";
 export * from "./upgrades";

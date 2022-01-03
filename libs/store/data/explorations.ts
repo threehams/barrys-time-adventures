@@ -1,12 +1,13 @@
-import { ActionKey } from "..";
-import { GameAction } from "../GameAction";
+import { ExplorationKey } from "..";
+import { Exploration } from "../Exploration";
 
-export const gameActions: GameAction[] = [
+export const explorations: Exploration[] = [
   {
     key: "startExplore",
     name: "Explore the area",
-    description: "",
-    message: "",
+    description:
+      "Your home hasn't changed, but everything past 500 feet is a desert. Find your bearings.",
+    message: "You find some stuff.",
     drain: {
       things: 1.5,
     },
@@ -34,8 +35,8 @@ export const gameActions: GameAction[] = [
   },
 ];
 
-export const findAction = (key: ActionKey) => {
-  const found = gameActions.find((action) => action.key === key);
+export const findExploration = (key: ExplorationKey) => {
+  const found = explorations.find((action) => action.key === key);
   if (!found) {
     throw new Error(`Could not find an action with key: ${key}`);
   }

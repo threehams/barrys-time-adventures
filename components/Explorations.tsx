@@ -1,28 +1,28 @@
-import { gameActions } from "@laundry/store";
+import { explorations } from "@laundry/store";
 import { Button } from "@laundry/ui";
 import { useDispatch, useSelector } from "./StateProvider";
 
-export const Exploration = () => {
-  const currentAction = useSelector((state) => state.action);
+export const Explorations = () => {
+  const currentAction = useSelector((state) => state.exploration);
   const phase = useSelector((state) => state.phase);
-  const completedActions = useSelector((state) => state.actions);
+  const playerExplorations = useSelector((state) => state.explorations);
   const dispatch = useDispatch();
 
-  const availableActions = gameActions.filter((action) => {
-    if (completedActions[action.key] === 100) {
+  const availableActions = explorations.filter((action) => {
+    if (playerExplorations[action.key]?.progress === 100) {
       return false;
     }
     if (!action.requirements.action) {
       return true;
     }
-    return completedActions[action.requirements.action] === 100;
+    return playerExplorations[action.requirements.action]?.progress === 100;
   });
 
   return (
     <div>
       <ul>
         {availableActions.map((action) => {
-          const progress = completedActions[action.key];
+          const progress = playerExplorations[action.key]?.progress ?? 0;
           return (
             <li key={action.key}>
               <Button
@@ -40,9 +40,10 @@ export const Exploration = () => {
                 {action.key === currentAction ? "Stop" : "Go"}
               </Button>
               {action.name}
+              <p>{action.description}</p>
               <div
                 className="w-full h-1 origin-left bg-blue-700"
-                style={{ transform: `scaleX(${progress || 0}%)` }}
+                style={{ transform: `scaleX(${progress}%)` }}
               />
             </li>
           );

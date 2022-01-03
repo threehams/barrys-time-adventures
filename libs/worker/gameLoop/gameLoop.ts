@@ -1,4 +1,5 @@
-import { findAction, findUpgrade, State } from "@laundry/store";
+import { findExploration, findUpgrade, State } from "@laundry/store";
+import exp from "constants";
 import { sub } from "date-fns";
 import { Draft } from "immer";
 
@@ -22,6 +23,7 @@ export const updateGame: Updater = (state, delta) => {
   updateEvent(state, delta);
   updatePreResources(state, elapsedTime);
   updatePostResources(state, elapsedTime);
+  updatePostStats(state, elapsedTime);
   updateExplore(state, elapsedTime);
 };
 
@@ -38,7 +40,7 @@ const updateTime: Updater = (state, delta) => {
   if (state.phase !== "event" && state.phase !== "traveling") {
     if (
       state.phase === "preEvent" ||
-      (state.phase === "postEvent" && state.action)
+      (state.phase === "postEvent" && state.exploration)
     ) {
       state.time = state.time + delta;
     }
@@ -98,7 +100,7 @@ const updatePreResources: Updater = (state, delta) => {
 
 const updatePostResources: Updater = (state, delta) => {
   const { timers, phase } = state;
-  if (phase !== "postEvent" || !state.action) {
+  if (phase !== "postEvent" || !state.exploration) {
     return;
   }
 
@@ -127,6 +129,19 @@ const updatePostResources: Updater = (state, delta) => {
   }
 };
 
+const updatePostStats: Updater = (state, delta) => {
+  if (state.phase !== "postEvent" || !state.exploration) {
+    return;
+  }
+
+  const exploration = findExploration(state.exploration);
+  for (const [stat, rate] of Object.entries(exploration.train)) {
+    if (rate) {
+      state.stats[stat].current += (delta * rate) / 1000;
+    }
+  }
+};
+
 const updateExplore: Updater = (state, delta) => {
   if (state.phase === "postEvent" && state.resources.things <= 0) {
     state.phase = "traveling";
@@ -141,16 +156,20 @@ const updateExplore: Updater = (state, delta) => {
     );
   }
 
-  if (!state.action) {
+  if (!state.exploration) {
     return;
   }
-  const exploration = findAction(state.action);
+  const exploration = findExploration(state.exploration);
   const progress = (100 / exploration.time) * delta;
-  state.actions[state.action] = Math.min(
-    (state.actions[state.action] ?? 0) + progress,
+  state.explorations[state.exploration] ??= { progress: 0 };
+  state.explorations[state.exploration]!.progress = Math.min(
+    (state.explorations[state.exploration]!.progress ?? 0) + progress,
     100,
   );
-  if (state.actions[state.action] === 100) {
-    state.action = undefined;
+  if (state.explorations[state.exploration]!.progress === 100) {
+    state.exploration = undefined;
+    if (exploration.message) {
+      state.messages.push(exploration.message);
+    }
   }
 };

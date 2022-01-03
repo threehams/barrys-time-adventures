@@ -2,7 +2,7 @@ import { State } from "./State";
 
 export const initialState: State = {
   phase: "preEvent",
-  action: undefined,
+  exploration: undefined,
   time: 0,
   messages: ["The news has been weird lately. I feel like I should prepare."],
   upgrades: {},
@@ -13,9 +13,12 @@ export const initialState: State = {
     savedTime: 1,
   },
   stats: {
-    perception: 0,
+    perception: {
+      current: 0,
+      permanent: 0,
+    },
   },
-  actions: {},
+  explorations: {},
   multiplier: 1,
   timers: {
     action: 0,

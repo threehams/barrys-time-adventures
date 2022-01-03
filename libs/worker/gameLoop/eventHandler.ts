@@ -66,12 +66,12 @@ export const eventHandler = (
       if (state.phase !== "postEvent") {
         return;
       }
-      if (state.action === action.payload.location) {
-        state.action = undefined;
+      if (state.exploration === action.payload.location) {
+        state.exploration = undefined;
         return;
       }
 
-      state.action = action.payload.location;
+      state.exploration = action.payload.location;
       break;
   }
 };
