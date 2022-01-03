@@ -41,6 +41,8 @@ export type State = {
     food: number;
     event: number;
     action: number;
+    water: number;
+    money: number;
   };
   loops: number;
 };

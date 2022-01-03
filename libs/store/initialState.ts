@@ -31,6 +31,8 @@ export const initialState: State = {
     action: 0,
     event: 0,
     food: 0,
+    water: 0,
+    money: 0,
   },
   loops: 0,
 };
