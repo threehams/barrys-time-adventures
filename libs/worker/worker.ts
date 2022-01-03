@@ -39,6 +39,7 @@ const main = async () => {
         return initialState;
       }
       if (action.type === "TRAVEL") {
+        draft.actions = {};
         draft.resources.things = 0;
         const timeline = draft.timeline;
         draft.timeline = [];

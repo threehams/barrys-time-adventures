@@ -36,7 +36,12 @@ const updateTime: Updater = (state, delta) => {
   }
 
   if (state.phase !== "event" && state.phase !== "traveling") {
-    state.time = state.time + delta;
+    if (
+      state.phase === "preEvent" ||
+      (state.phase === "postEvent" && state.action)
+    ) {
+      state.time = state.time + delta;
+    }
   }
 };
 
@@ -64,26 +69,36 @@ const updatePreResources: Updater = (state, delta) => {
 
   if (counts) {
     const upgradedCounts = Object.entries(state.upgrades).reduce(
-      (acc, [key, level]) => {
+      (acc, [key, value]) => {
         const upgrade = findUpgrade(key);
-        if (upgrade.phase !== phase) {
-          return acc;
-        }
         if (upgrade.effect.things) {
-          return upgrade.effect.things(acc, level ?? 0);
+          return upgrade.effect.things(acc, value?.level ?? 0);
         }
         return counts;
       },
       counts,
     );
+    const timedUpgradedCounts = Object.entries(state.timedUpgrades).reduce(
+      (acc, [key, value]) => {
+        if (!value || state.time < value.time) {
+          return acc;
+        }
+        const upgrade = findUpgrade(key);
+        if (upgrade.effect.things) {
+          return upgrade.effect.things(acc, value?.level ?? 0);
+        }
+        return counts;
+      },
+      upgradedCounts,
+    );
     timers.things = timers.things % (1_000 / THINGS_MULTIPLIER);
-    state.resources.things += upgradedCounts;
+    state.resources.things += timedUpgradedCounts;
   }
 };
 
 const updatePostResources: Updater = (state, delta) => {
   const { timers, phase } = state;
-  if (phase !== "postEvent") {
+  if (phase !== "postEvent" || !state.action) {
     return;
   }
 
@@ -98,7 +113,7 @@ const updatePostResources: Updater = (state, delta) => {
           return acc;
         }
         if (upgrade.effect.things) {
-          return upgrade.effect.things(acc, level ?? 0);
+          return upgrade.effect.things(acc, level?.level ?? 0);
         }
         return counts;
       },

@@ -3,7 +3,7 @@ import { UpgradeKey } from "./Upgrade";
 
 export type Phase = "preEvent" | "event" | "postEvent" | "traveling" | "done";
 export type PurchasedUpgrades = {
-  [Key in UpgradeKey]?: number;
+  [Key in UpgradeKey]?: { level: number };
 };
 export type PurchasedTimedUpgrades = {
   [Key in UpgradeKey]?: { level: number; time: number };

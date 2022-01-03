@@ -38,7 +38,7 @@ export const Upgrades = ({
     <section className={clsx("flex flex-col gap-2", className)}>
       <h2 className="sr-only">Upgrades</h2>
       {availableUpgrades.map((upgrade) => {
-        const level = purchasedUpgrades[upgrade.key] ?? 0;
+        const level = purchasedUpgrades[upgrade.key]?.level ?? 0;
         const flavorText = upgrade.flavorTexts[level];
         return (
           <div className="grid grid-cols-[auto,1fr] gap-x-2" key={upgrade.key}>

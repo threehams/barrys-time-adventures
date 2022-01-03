@@ -18,7 +18,7 @@ describe("time travel", () => {
         savedGameKey,
         produce(initialState, (draft) => {
           draft.upgrades = {
-            upgradeThings: 2,
+            upgradeThings: { level: 2 },
           };
           draft.timeline.push({
             action: {

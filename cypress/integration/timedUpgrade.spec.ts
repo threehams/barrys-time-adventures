@@ -26,17 +26,8 @@ describe("time travel", () => {
             },
             time: hoursToSeconds(24),
           });
-          draft.timeline.push({
-            action: {
-              type: "BUY_UPGRADE",
-              payload: {
-                key: "upgradeThings",
-              },
-            },
-            time: hoursToSeconds(49),
-          });
           draft.upgrades = {
-            upgradeThings: 2,
+            upgradeThings: { level: 1 },
           };
           draft.actions = {
             researchThings: 100,

@@ -131,6 +131,7 @@ export const Timeline = ({
       {selectedDay !== undefined && (
         <DayDetail
           selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay}
           timeline={timeline}
           selectedUpgrade={selectedUpgrade}
           setSelectedUpgrade={setSelectedUpgrade}
@@ -148,6 +149,7 @@ type TimelineEvent = {
 
 type DayDetailProps = {
   selectedDay: number;
+  setSelectedDay: (day: number | undefined) => void;
   selectedUpgrade: Upgrade | undefined;
   setSelectedUpgrade: Dispatch<SetStateAction<UpgradeKey | undefined>>;
   timeline: {
@@ -156,6 +158,7 @@ type DayDetailProps = {
 };
 const DayDetail = ({
   selectedDay,
+  setSelectedDay,
   timeline,
   selectedUpgrade,
   setSelectedUpgrade,
@@ -226,6 +229,7 @@ const DayDetail = ({
         <Button
           variant="danger"
           onClick={() => {
+            setSelectedDay(undefined);
             dispatch({
               type: "TRAVEL",
               payload: {

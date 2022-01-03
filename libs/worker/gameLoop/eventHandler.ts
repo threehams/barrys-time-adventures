@@ -10,7 +10,7 @@ export const eventHandler = (
     case "BUY_UPGRADE": {
       const { key } = action.payload;
       const { resources, upgrades: purchasedUpgrades } = state;
-      const currentLevel = purchasedUpgrades[key] ?? 0;
+      const currentLevel = purchasedUpgrades[key]?.level ?? 0;
       const nextLevel = currentLevel + 1;
 
       const upgrade = findUpgrade(key);
@@ -25,7 +25,7 @@ export const eventHandler = (
           state.resources[costKey] -=
             upgrade.costs[costKey]?.(nextLevel, 0) ?? 0;
         }
-        purchasedUpgrades[key] = nextLevel;
+        purchasedUpgrades[key] = { level: nextLevel };
         state.timeline.push({
           time: state.time,
           action,
