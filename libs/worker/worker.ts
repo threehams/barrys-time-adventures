@@ -40,7 +40,13 @@ const main = async () => {
       }
       if (action.type === "TRAVEL") {
         draft.explorations = {};
-        draft.resources.food = 0;
+        draft.resources = {
+          savedTime: draft.resources.savedTime,
+          food: initialState.resources.food,
+          water: initialState.resources.water,
+          money: initialState.resources.money,
+        };
+
         const timeline = draft.timeline;
         draft.timeline = [];
         draft.time = 0;

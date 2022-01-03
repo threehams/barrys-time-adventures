@@ -29,8 +29,13 @@ export const updateGame: Updater = (state, delta) => {
 const updateTime: Updater = (state, delta) => {
   if (state.time === THE_EVENT_TIME && state.phase === "preEvent") {
     state.phase = "event";
-    state.timers.event = 0;
-    state.timers.food = 0;
+    state.timers = {
+      action: 0,
+      event: 0,
+      food: 0,
+      money: 0,
+      water: 0,
+    };
     state.multiplier = 1;
     state.messages.push("You wake up in a wasteland. Where... when are you?");
     return;
@@ -143,6 +148,8 @@ const updateExplore: Updater = (state, delta) => {
     state.phase = "traveling";
     state.multiplier = 1;
     state.timers = {
+      money: 0,
+      water: 0,
       event: 0,
       food: 0,
       action: 0,

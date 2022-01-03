@@ -1,4 +1,4 @@
-import { UnlockKey, UpgradeKey } from "..";
+import { UpgradeKey } from "..";
 import { Upgrade } from "../Upgrade";
 
 export const upgrades: Upgrade[] = [

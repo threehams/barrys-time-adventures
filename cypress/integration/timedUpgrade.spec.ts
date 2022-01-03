@@ -41,6 +41,6 @@ describe("time travel", () => {
       );
     });
     cy.visit("/");
-    cy.findByText("Upgrades").click();
+    cy.findByText("Time Travel").click();
   });
 });

@@ -2,7 +2,7 @@ import { ExplorationKey, Phase } from ".";
 
 export type UpgradeKey = "upgradeFood" | "postUpgradeFood";
 
-export type UnlockKey = "buyClothes" | "autoClothes";
+export type UnlockKey = undefined;
 export type UpgradeEffect = {
   // Unlock a particular feature permanently
   unlock?: UnlockKey;
