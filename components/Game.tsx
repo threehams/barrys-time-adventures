@@ -41,7 +41,7 @@ export const Game = () => {
         >
           <aside className="[grid-area:status]">
             <Status className="mb-3" />
-            {!process.env.NEXT_DISABLE_CHEATS && <Cheats />}
+            {!process.env.NEXT_PUBLIC_DISABLE_CHEATS && <Cheats />}
             <Reset />
           </aside>
           <main className="[grid-area:main]">

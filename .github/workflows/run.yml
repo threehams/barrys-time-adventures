@@ -6,7 +6,7 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     env:
-      NEXT_DISABLE_CHEATS: true
+      NEXT_PUBLIC_DISABLE_CHEATS: true
 
     steps:
       - uses: actions/checkout@v2
