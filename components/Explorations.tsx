@@ -1,5 +1,5 @@
 import { explorations } from "@laundry/store";
-import { Button } from "@laundry/ui";
+import { Button, Progress } from "@laundry/ui";
 import { useDispatch, useSelector } from "./StateProvider";
 
 export const Explorations = () => {
@@ -22,7 +22,9 @@ export const Explorations = () => {
     <div>
       <ul>
         {availableActions.map((action) => {
-          const progress = playerExplorations[action.key]?.progress ?? 0;
+          const currentProgress = playerExplorations[action.key]?.progress ?? 0;
+          const permanentProgress =
+            playerExplorations[action.key]?.progress ?? 0;
           return (
             <li key={action.key}>
               <Button
@@ -41,10 +43,8 @@ export const Explorations = () => {
               </Button>
               {action.name}
               <p>{action.description}</p>
-              <div
-                className="w-full h-1 origin-left bg-blue-700"
-                style={{ transform: `scaleX(${progress}%)` }}
-              />
+              <Progress progress={currentProgress} />
+              <Progress variant="primary" progress={permanentProgress} />
             </li>
           );
         })}

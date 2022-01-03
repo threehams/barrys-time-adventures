@@ -1,6 +1,7 @@
 import { useSelector } from "./StateProvider";
 import { addMilliseconds, format, sub } from "date-fns";
 import numbro from "numbro";
+import { Progress } from "@laundry/ui";
 
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0).valueOf();
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 }).valueOf();
@@ -14,6 +15,7 @@ export const Status = ({ className }: Props) => {
   const { things, savedTime } = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
   const loops = useSelector((state) => state.loops);
+  const stats = useSelector((state) => state.stats);
 
   const startDate =
     phase === "postEvent" || phase === "traveling"
@@ -27,16 +29,33 @@ export const Status = ({ className }: Props) => {
 
   return (
     <div className={className}>
-      It is {timeOfDay}.
-      <p>
-        You have{" "}
-        {numbro(things).format({
-          thousandSeparated: true,
-        })}{" "}
-        things.
-      </p>
-      {(phase === "postEvent" || phase === "traveling") && (
-        <p>You&apos;ve saved up {savedTime} time.</p>
+      <div>
+        It is {timeOfDay}.
+        <p>
+          You have{" "}
+          {numbro(things).format({
+            thousandSeparated: true,
+          })}{" "}
+          things.
+        </p>
+        {(phase === "postEvent" || phase === "traveling") && (
+          <p>You&apos;ve saved up {savedTime} time.</p>
+        )}
+      </div>
+      {!!(phase === "postEvent" || phase === "traveling" || loops > 0) && (
+        <div>
+          <h2>Stats</h2>
+          <ul>
+            {Object.entries(stats).map(([stat, value]) => {
+              return (
+                <li key={stat}>
+                  {stat}: {Math.floor(value.current)}
+                  <Progress progress={((value.current ?? 0) * 100) % 100} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
     </div>
   );

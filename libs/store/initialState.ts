@@ -14,7 +14,7 @@ export const initialState: State = {
   },
   stats: {
     perception: {
-      current: 0,
+      current: 1,
       permanent: 0,
     },
   },

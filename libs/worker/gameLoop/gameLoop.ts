@@ -1,5 +1,4 @@
 import { findExploration, findUpgrade, State } from "@laundry/store";
-import exp from "constants";
 import { sub } from "date-fns";
 import { Draft } from "immer";
 
@@ -137,7 +136,7 @@ const updatePostStats: Updater = (state, delta) => {
   const exploration = findExploration(state.exploration);
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
-      state.stats[stat].current += (delta * rate) / 1000;
+      state.stats[stat].current += (delta * rate) / 20000;
     }
   }
 };
