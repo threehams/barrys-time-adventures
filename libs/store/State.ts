@@ -8,15 +8,19 @@ export type PurchasedUpgrades = {
 export type PurchasedTimedUpgrades = {
   [Key in UpgradeKey]?: { level: number; time: number };
 };
-export type ActionKey = "";
+export type ActionKey = "startExplore";
+export type Stat = "perception";
+export type Resource = "things" | "savedTime";
 export type State = {
   phase: Phase;
-  action: ActionKey;
+  action: ActionKey | undefined;
   time: number;
   messages: ReadonlyArray<string>;
   resources: {
-    things: number;
-    savedTime: number;
+    [Key in Resource]: number;
+  };
+  stats: {
+    [Key in Stat]: number;
   };
   upgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;

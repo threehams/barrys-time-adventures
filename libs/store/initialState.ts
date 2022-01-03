@@ -2,7 +2,7 @@ import { State } from "./State";
 
 export const initialState: State = {
   phase: "preEvent",
-  action: "",
+  action: undefined,
   time: 0,
   messages: ["The news has been weird lately. I feel like I should prepare."],
   upgrades: {},

@@ -1,4 +1,4 @@
-import { Phase } from ".";
+import { ActionKey, Phase } from ".";
 
 export type UpgradeKey = "upgradeThings" | "postUpgradeThings";
 
@@ -21,6 +21,7 @@ export type Upgrade = {
   requirements: {
     things?: number;
     savedTime?: number;
+    action?: ActionKey;
   };
   // Required to buy this upgrade
   costs: {

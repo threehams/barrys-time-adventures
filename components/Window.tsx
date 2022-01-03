@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import clsx from "clsx";
 import lerp from "@sunify/lerp-color";
-import { hoursToMilliseconds } from "date-fns";
+import { hoursToSeconds } from "date-fns";
 import { useSelector } from "./StateProvider";
 
 type Props = {
@@ -24,7 +24,7 @@ type SunProps = {
 };
 const Sun = ({ className }: SunProps) => {
   const time = useSelector((state) => state.time);
-  const currentHour = (time % hoursToMilliseconds(24)) / hoursToMilliseconds(1);
+  const currentHour = (time % hoursToSeconds(24)) / hoursToSeconds(1);
   const progress = (currentHour - 6) / 6;
   const yTransform = -(progress * 120 - 60);
 
@@ -56,7 +56,7 @@ const Sky = ({ children, className }: SkyProps) => {
 };
 
 const findColors = (time: number) => {
-  const currentHour = (time % hoursToMilliseconds(24)) / hoursToMilliseconds(1);
+  const currentHour = (time % hoursToSeconds(24)) / hoursToSeconds(1);
 
   const found = SKY_COLORS.findIndex((color) => {
     return color.time > currentHour;
