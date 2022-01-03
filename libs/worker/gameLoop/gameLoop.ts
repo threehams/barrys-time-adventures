@@ -70,35 +70,40 @@ const updatePreResources: Updater = (state, delta) => {
     return;
   }
 
-  timers.food += delta;
-  const counts = Math.floor(timers.food / (1_000 / THINGS_MULTIPLIER));
+  const resources = [{ key: "food" }, { key: "water" }] as const;
+  for (const resource of resources) {
+    timers[resource.key] += delta;
+    const counts = Math.floor(
+      timers[resource.key] / (1_000 / THINGS_MULTIPLIER),
+    );
 
-  if (counts) {
-    const upgradedCounts = Object.entries(state.upgrades).reduce(
-      (acc, [key, value]) => {
-        const upgrade = findUpgrade(key);
-        if (upgrade.effect.food) {
-          return upgrade.effect.food(acc, value?.level ?? 0);
-        }
-        return counts;
-      },
-      counts,
-    );
-    const timedUpgradedCounts = Object.entries(state.timedUpgrades).reduce(
-      (acc, [key, value]) => {
-        if (!value || state.time < value.time) {
-          return acc;
-        }
-        const upgrade = findUpgrade(key);
-        if (upgrade.effect.food) {
-          return upgrade.effect.food(acc, value?.level ?? 0);
-        }
-        return counts;
-      },
-      upgradedCounts,
-    );
-    timers.food = timers.food % (1_000 / THINGS_MULTIPLIER);
-    state.resources.food += timedUpgradedCounts;
+    if (counts) {
+      const upgradedCounts = Object.entries(state.upgrades).reduce(
+        (acc, [key, value]) => {
+          const upgrade = findUpgrade(key);
+          if (upgrade.effect[resource.key]) {
+            return upgrade.effect[resource.key]!(acc, value?.level ?? 0);
+          }
+          return counts;
+        },
+        counts,
+      );
+      const timedUpgradedCounts = Object.entries(state.timedUpgrades).reduce(
+        (acc, [key, value]) => {
+          if (!value || state.time < value.time) {
+            return acc;
+          }
+          const upgrade = findUpgrade(key);
+          if (upgrade.effect[resource.key]) {
+            return upgrade.effect[resource.key]!(acc, value?.level ?? 0);
+          }
+          return counts;
+        },
+        upgradedCounts,
+      );
+      timers[resource.key] = timers[resource.key] % (1_000 / THINGS_MULTIPLIER);
+      state.resources[resource.key] += timedUpgradedCounts;
+    }
   }
 };
 

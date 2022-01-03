@@ -1,6 +1,6 @@
 import { ExplorationKey, Phase } from ".";
 
-export type UpgradeKey = "upgradeFood" | "postUpgradeFood";
+export type UpgradeKey = "upgradeFood" | "postUpgradeFood" | "rainwater";
 
 export type UnlockKey = undefined;
 export type UpgradeEffect = {

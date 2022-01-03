@@ -5,9 +5,9 @@ export const upgrades: Upgrade[] = [
   {
     phase: "preEvent",
     key: "upgradeFood",
-    name: "Make food faster",
-    description: "",
-    max: 100,
+    name: "Buy canning supplies",
+    description: "Buy",
+    max: 10,
     costs: {
       money: (level) => {
         return level * 10;
@@ -22,6 +22,26 @@ export const upgrades: Upgrade[] = [
     flavorTexts: {
       1: "Set up something to make food faster.",
     },
+    requirements: {},
+  },
+  {
+    phase: "preEvent",
+    key: "rainwater",
+    name: "Set up rainwater collection",
+    description: "Buy and set up barrels and tarps for rainwater collection.",
+    max: 10,
+    costs: {
+      money: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      water: (water, level) => {
+        return water * (level + 1);
+      },
+    },
+    flavorTexts: {},
     requirements: {},
   },
   {
