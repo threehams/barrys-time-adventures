@@ -8,6 +8,8 @@ export type UpgradeEffect = {
   unlock?: UnlockKey;
   // Change rate of food increase
   food?: (num: number, level: number) => number;
+  // Change rate of water increase
+  water?: (num: number, level: number) => number;
   // Is this additive or multiplicative with other upgrades?
   type: "add" | "multiply";
 };
@@ -19,12 +21,17 @@ export type Upgrade = {
   // Required for this upgrade to appear. Once that happens, it's
   // always visible
   requirements: {
+    money?: number;
+    water?: number;
     food?: number;
     savedTime?: number;
     action?: ExplorationKey;
+    upgrade?: UpgradeKey;
   };
   // Required to buy this upgrade
   costs: {
+    money?: (level: number, distance: number) => number;
+    water?: (level: number, distance: number) => number;
     food?: (level: number, distance: number) => number;
     savedTime?: (level: number, distance: number) => number;
   };

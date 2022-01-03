@@ -23,8 +23,7 @@ export const Explorations = () => {
       <ul>
         {availableActions.map((action) => {
           const currentProgress = playerExplorations[action.key]?.progress ?? 0;
-          const permanentProgress =
-            playerExplorations[action.key]?.progress ?? 0;
+
           return (
             <li key={action.key}>
               <Button
@@ -44,7 +43,6 @@ export const Explorations = () => {
               {action.name}
               <p>{action.description}</p>
               <Progress progress={currentProgress} />
-              <Progress variant="primary" progress={permanentProgress} />
             </li>
           );
         })}

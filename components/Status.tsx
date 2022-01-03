@@ -12,7 +12,7 @@ type Props = {
 };
 export const Status = ({ className }: Props) => {
   const time = useSelector((state) => state.time);
-  const { food, savedTime } = useSelector((state) => state.resources);
+  const resources = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
   const loops = useSelector((state) => state.loops);
   const stats = useSelector((state) => state.stats);
@@ -30,16 +30,30 @@ export const Status = ({ className }: Props) => {
   return (
     <div className={className}>
       <div>
-        It is {timeOfDay}.
-        <p>
-          You have{" "}
-          {numbro(food).format({
-            thousandSeparated: true,
-          })}{" "}
-          food.
-        </p>
+        It is {timeOfDay}.<h2>Inventory</h2>
+        <ul>
+          <li>
+            Rations:{" "}
+            {numbro(resources.food).format({
+              thousandSeparated: true,
+            })}
+          </li>
+          <li>
+            Money: $
+            {numbro(resources.money).format({
+              thousandSeparated: true,
+            })}
+          </li>
+          <li>
+            Water:{" "}
+            {numbro(resources.water).format({
+              thousandSeparated: true,
+            })}{" "}
+            gal.
+          </li>
+        </ul>
         {(phase === "postEvent" || phase === "traveling") && (
-          <p>You&apos;ve saved up {savedTime} time.</p>
+          <p>You&apos;ve saved up {resources.savedTime} time.</p>
         )}
       </div>
       {!!(phase === "postEvent" || phase === "traveling" || loops > 0) && (
@@ -51,6 +65,10 @@ export const Status = ({ className }: Props) => {
                 <li key={stat}>
                   {stat}: {Math.floor(value.current)}
                   <Progress progress={((value.current ?? 0) * 100) % 100} />
+                  <Progress
+                    variant="primary"
+                    progress={((value.permanent ?? 0) * 100) % 100}
+                  />
                 </li>
               );
             })}

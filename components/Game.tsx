@@ -12,12 +12,12 @@ import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
 import { UpgradeKey } from "@laundry/store";
 
-type Panel = "actions" | "upgrades";
+type Panel = "explorations" | "upgrades";
 
 export const Game = () => {
   const time = useSelector((state) => state.time);
   const phase = useSelector((state) => state.phase);
-  const [panel, setPanel] = useState<Panel>("actions");
+  const [panel, setPanel] = useState<Panel>("explorations");
   const [selectedUpgrade, setSelectedUpgrade] = useState<
     UpgradeKey | undefined
   >();
@@ -58,12 +58,12 @@ export const Game = () => {
               <div>
                 <Tabs className="mb-2">
                   <Tab
-                    active={panel === "actions"}
+                    active={panel === "explorations"}
                     onClick={() => {
-                      setPanel("actions");
+                      setPanel("explorations");
                     }}
                   >
-                    Actions
+                    Exploration
                   </Tab>
                   <Tab
                     active={panel === "upgrades"}
@@ -71,7 +71,7 @@ export const Game = () => {
                       setPanel("upgrades");
                     }}
                   >
-                    Upgrades
+                    Time Travel
                   </Tab>
                 </Tabs>
                 {panel === "upgrades" && (
@@ -80,7 +80,7 @@ export const Game = () => {
                     setSelectedUpgrade={setSelectedUpgrade}
                   />
                 )}
-                {panel === "actions" && <Explorations />}
+                {panel === "explorations" && <Explorations />}
               </div>
             )}
           </main>
