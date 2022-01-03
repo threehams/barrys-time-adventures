@@ -1,6 +1,5 @@
 import { gameActions } from "@laundry/store";
 import { Button } from "@laundry/ui";
-import clsx from "clsx";
 import { useDispatch, useSelector } from "./StateProvider";
 
 export const Exploration = () => {

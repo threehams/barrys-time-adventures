@@ -31,8 +31,8 @@ export const upgrades: Upgrade[] = [
     description: "Use future tech to make things faster than ever before",
     max: 10,
     costs: {
-      savedTime: (level) => {
-        return level * 1;
+      savedTime: (level, distance) => {
+        return level * 100 + distance * 10;
       },
     },
     effect: {

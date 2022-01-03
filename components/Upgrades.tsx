@@ -1,18 +1,23 @@
 import { useDispatch, useSelector } from "./StateProvider";
-import React, { useMemo, useState } from "react";
+import React, { Dispatch, SetStateAction, useMemo } from "react";
 import { UpgradeKey, upgrades } from "@laundry/store";
 import { Button } from "@laundry/ui";
 import clsx from "clsx";
 
 type Props = {
   className?: string;
+  selectedUpgrade: UpgradeKey | undefined;
+  setSelectedUpgrade: Dispatch<SetStateAction<UpgradeKey | undefined>>;
 };
-export const Upgrades = ({ className }: Props) => {
+export const Upgrades = ({
+  className,
+  selectedUpgrade,
+  setSelectedUpgrade,
+}: Props) => {
   const stats = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
   const purchasedUpgrades = useSelector((state) => state.upgrades);
   const dispatch = useDispatch();
-  const [selected, setSelected] = useState<UpgradeKey | undefined>();
 
   const availableUpgrades = useMemo(() => {
     return upgrades.filter((upgrade) => {
@@ -40,12 +45,13 @@ export const Upgrades = ({ className }: Props) => {
             <Button
               disabled={level === upgrade.max}
               aria-label={`Buy ${upgrade.name}`}
-              active={selected === upgrade.key}
+              active={selectedUpgrade === upgrade.key}
               onClick={() => {
                 if (upgrade.phase === "postEvent") {
-                  setSelected((current) =>
+                  setSelectedUpgrade((current) =>
                     current === upgrade.key ? undefined : upgrade.key,
                   );
+                  return;
                 }
                 dispatch({
                   type: "BUY_UPGRADE",

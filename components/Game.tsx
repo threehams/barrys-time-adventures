@@ -10,6 +10,7 @@ import { Status } from "./Status";
 import { Timeline } from "./Timeline";
 import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
+import { UpgradeKey } from "@laundry/store";
 
 type Panel = "actions" | "upgrades";
 
@@ -17,6 +18,9 @@ export const Game = () => {
   const time = useSelector((state) => state.time);
   const phase = useSelector((state) => state.phase);
   const [panel, setPanel] = useState<Panel>("actions");
+  const [selectedUpgrade, setSelectedUpgrade] = useState<
+    UpgradeKey | undefined
+  >();
 
   const layout = useMemo(() => {
     return (
@@ -44,7 +48,10 @@ export const Game = () => {
             {phase === "preEvent" && (
               <>
                 <h2>Upgrades</h2>
-                <Upgrades />
+                <Upgrades
+                  selectedUpgrade={selectedUpgrade}
+                  setSelectedUpgrade={setSelectedUpgrade}
+                />
               </>
             )}
             {phase !== "preEvent" && (
@@ -67,7 +74,12 @@ export const Game = () => {
                     Upgrades
                   </Tab>
                 </Tabs>
-                {panel === "upgrades" && <Upgrades />}
+                {panel === "upgrades" && (
+                  <Upgrades
+                    selectedUpgrade={selectedUpgrade}
+                    setSelectedUpgrade={setSelectedUpgrade}
+                  />
+                )}
                 {panel === "actions" && <Exploration />}
               </div>
             )}
@@ -78,12 +90,15 @@ export const Game = () => {
           </div>
 
           <div className="[grid-area:timeline]">
-            <Timeline />
+            <Timeline
+              selectedUpgradeKey={selectedUpgrade}
+              setSelectedUpgrade={setSelectedUpgrade}
+            />
           </div>
         </div>
       </div>
     );
-  }, [panel, phase]);
+  }, [panel, phase, selectedUpgrade]);
 
   return (
     <div

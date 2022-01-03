@@ -25,8 +25,8 @@ export type Upgrade = {
   };
   // Required to buy this upgrade
   costs: {
-    things?: (level: number) => number;
-    savedTime?: (level: number) => number;
+    things?: (level: number, distance: number) => number;
+    savedTime?: (level: number, distance: number) => number;
   };
   // Readable name in-game
   name: string;

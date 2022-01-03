@@ -1,4 +1,10 @@
-import { findUpgrade, StateAction } from "@laundry/store";
+import {
+  findUpgrade,
+  State,
+  StateAction,
+  Upgrade,
+  UpgradeKey,
+} from "@laundry/store";
 import { useDispatch, useSelector } from "./StateProvider";
 import {
   format,
@@ -9,7 +15,7 @@ import {
 } from "date-fns";
 import { groupBy, range } from "lodash";
 import { Button } from "@laundry/ui";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import clsx from "clsx";
 import { isNonNullable } from "@laundry/utils";
 
@@ -17,14 +23,25 @@ const ONE_DAY = hoursToMilliseconds(24) / 1000;
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0);
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 });
 
-export const Timeline = () => {
+type TimelineProps = {
+  selectedUpgradeKey: UpgradeKey | undefined;
+  setSelectedUpgrade: Dispatch<SetStateAction<UpgradeKey | undefined>>;
+};
+export const Timeline = ({
+  selectedUpgradeKey,
+  setSelectedUpgrade,
+}: TimelineProps) => {
   const preEvents = useSelector((state) => state.timeline);
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
   const phase = useSelector((state) => state.phase);
+  const resources = useSelector((state) => state.resources);
   const currentDay = useSelector((state) =>
     Math.floor(state.time / hoursToSeconds(24)),
   );
   const [selectedDay, setSelectedDay] = useState<number | undefined>(undefined);
+  const selectedUpgrade = selectedUpgradeKey
+    ? findUpgrade(selectedUpgradeKey)
+    : undefined;
 
   const timedUpgrades = Object.entries(timedUpgradeMap)
     .filter((entry) => isNonNullable(entry[1]))
@@ -33,7 +50,7 @@ export const Timeline = () => {
       return {
         type: "permanent",
         time: value!.time,
-        text: `Time upgrade: ${upgrade.name}`,
+        text: `Timed upgrade: ${upgrade.name}`,
       };
     });
   const events = preEvents.map((event): TimelineEvent => {
@@ -60,6 +77,13 @@ export const Timeline = () => {
             (event) => event.type === "permanent",
           );
           const muted =
+            (selectedUpgrade &&
+              !canAfford({
+                upgrade: selectedUpgrade,
+                resources,
+                currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
+                distance: 29 - day,
+              })) ||
             (phase === "traveling" &&
               selectedDay !== undefined &&
               selectedDay <= day) ||
@@ -105,7 +129,12 @@ export const Timeline = () => {
         })}
       </ul>
       {selectedDay !== undefined && (
-        <DayDetail selectedDay={selectedDay} timeline={timeline}></DayDetail>
+        <DayDetail
+          selectedDay={selectedDay}
+          timeline={timeline}
+          selectedUpgrade={selectedUpgrade}
+          setSelectedUpgrade={setSelectedUpgrade}
+        ></DayDetail>
       )}
     </div>
   );
@@ -119,11 +148,18 @@ type TimelineEvent = {
 
 type DayDetailProps = {
   selectedDay: number;
+  selectedUpgrade: Upgrade | undefined;
+  setSelectedUpgrade: Dispatch<SetStateAction<UpgradeKey | undefined>>;
   timeline: {
     [key: number]: TimelineEvent[];
   };
 };
-const DayDetail = ({ selectedDay, timeline }: DayDetailProps) => {
+const DayDetail = ({
+  selectedDay,
+  timeline,
+  selectedUpgrade,
+  setSelectedUpgrade,
+}: DayDetailProps) => {
   const events = timeline[selectedDay];
   const phase = useSelector((state) => state.phase);
   const dispatch = useDispatch();
@@ -174,6 +210,22 @@ const DayDetail = ({ selectedDay, timeline }: DayDetailProps) => {
           Restart Here
         </Button>
       )}
+      {selectedUpgrade && (
+        <Button
+          onClick={() => {
+            dispatch({
+              type: "BUY_TIMED_UPGRADE",
+              payload: {
+                key: selectedUpgrade.key,
+                day: selectedDay,
+              },
+            });
+            setSelectedUpgrade(undefined);
+          }}
+        >
+          Send Upgrade
+        </Button>
+      )}
     </div>
   );
 };
@@ -182,7 +234,31 @@ const formatAction = (action: StateAction) => {
   switch (action.type) {
     case "BUY_UPGRADE":
       return `Buy upgrade: ${findUpgrade(action.payload.key).name}`;
+    case "BUY_TIMED_UPGRADE":
+      return `Timed upgrade: ${findUpgrade(action.payload.key).name}`;
     default:
       throw new Error(`No text found for action: ${action.type}`);
   }
+};
+
+type CanAfford = {
+  upgrade: Upgrade;
+  resources: State["resources"];
+  currentLevel: number | undefined;
+  distance: number;
+};
+const canAfford = ({
+  upgrade,
+  resources,
+  currentLevel,
+  distance,
+}: CanAfford) => {
+  const nextLevel = (currentLevel ?? 0) + 1;
+  for (const costKey of Object.keys(upgrade.costs)) {
+    const checker = upgrade.costs[costKey];
+    if (checker && checker(nextLevel, distance) > resources[costKey]) {
+      return false;
+    }
+  }
+  return nextLevel <= upgrade.max;
 };
