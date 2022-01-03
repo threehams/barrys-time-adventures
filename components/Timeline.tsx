@@ -162,6 +162,8 @@ const DayDetail = ({
 }: DayDetailProps) => {
   const events = timeline[selectedDay];
   const phase = useSelector((state) => state.phase);
+  const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
+  const resources = useSelector((state) => state.resources);
   const dispatch = useDispatch();
 
   return (
@@ -195,21 +197,6 @@ const DayDetail = ({
           })}
         </ul>
       )}
-      {selectedDay !== undefined && phase !== "preEvent" && (
-        <Button
-          variant="danger"
-          onClick={() => {
-            dispatch({
-              type: "TRAVEL",
-              payload: {
-                day: selectedDay,
-              },
-            });
-          }}
-        >
-          Restart Here
-        </Button>
-      )}
       {selectedUpgrade && (
         <Button
           onClick={() => {
@@ -223,7 +210,31 @@ const DayDetail = ({
             setSelectedUpgrade(undefined);
           }}
         >
-          Send Upgrade
+          Send Upgrade (
+          {upgradeCost({
+            upgrade: selectedUpgrade,
+            resources,
+            currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
+            distance: 29 - selectedDay,
+          })
+            .map((resource) => `${resource.cost} ${resource.key}`)
+            .join(",")}
+          )
+        </Button>
+      )}
+      {selectedDay !== undefined && phase !== "preEvent" && (
+        <Button
+          variant="danger"
+          onClick={() => {
+            dispatch({
+              type: "TRAVEL",
+              payload: {
+                day: selectedDay,
+              },
+            });
+          }}
+        >
+          Restart Here
         </Button>
       )}
     </div>
@@ -261,4 +272,21 @@ const canAfford = ({
     }
   }
   return nextLevel <= upgrade.max;
+};
+
+type UpgradeCost = {
+  upgrade: Upgrade;
+  resources: State["resources"];
+  currentLevel: number | undefined;
+  distance: number;
+};
+const upgradeCost = ({ upgrade, currentLevel, distance }: UpgradeCost) => {
+  const nextLevel = (currentLevel ?? 0) + 1;
+
+  return Object.entries(upgrade.costs).map(([key, cost]) => {
+    if (!cost) {
+      return { key, cost: 0 };
+    }
+    return { key, cost: cost(nextLevel, distance) };
+  });
 };
