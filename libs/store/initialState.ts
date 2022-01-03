@@ -9,7 +9,7 @@ export const initialState: State = {
   timedUpgrades: {},
   timeline: [],
   resources: {
-    things: 0,
+    food: 0,
     savedTime: 1,
   },
   stats: {
@@ -23,7 +23,7 @@ export const initialState: State = {
   timers: {
     action: 0,
     event: 0,
-    things: 0,
+    food: 0,
   },
   loops: 0,
 };

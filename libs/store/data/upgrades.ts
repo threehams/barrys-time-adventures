@@ -4,31 +4,31 @@ import { Upgrade } from "../Upgrade";
 export const upgrades: Upgrade[] = [
   {
     phase: "preEvent",
-    key: "upgradeThings",
-    name: "Make things faster",
+    key: "upgradeFood",
+    name: "Make food faster",
     description: "",
     max: 100,
     costs: {
-      things: (level) => {
+      food: (level) => {
         return level * 10;
       },
     },
     effect: {
       type: "add",
-      things: (things, level) => {
-        return things * (level + 1);
+      food: (food, level) => {
+        return food * (level + 1);
       },
     },
     flavorTexts: {
-      1: "Set up something to make things faster.",
+      1: "Set up something to make food faster.",
     },
     requirements: {},
   },
   {
     phase: "postEvent",
-    key: "postUpgradeThings",
+    key: "postUpgradeFood",
     name: "Improve thing construction",
-    description: "Use future tech to make things faster than ever before",
+    description: "Use future tech to make food faster than ever before",
     max: 10,
     costs: {
       savedTime: (level, distance) => {
@@ -37,8 +37,8 @@ export const upgrades: Upgrade[] = [
     },
     effect: {
       type: "add",
-      things: (things, level) => {
-        return things * (level + 1);
+      food: (food, level) => {
+        return food * (level + 1);
       },
     },
     flavorTexts: {

@@ -10,14 +10,15 @@ export type PurchasedTimedUpgrades = {
 };
 export type ExplorationKey = "startExplore" | "researchThings";
 export type Stat = "perception";
-export type Resource = "things" | "savedTime";
+export type Resource = "food" | "savedTime";
 export type State = {
   phase: Phase;
   exploration: ExplorationKey | undefined;
   time: number;
   messages: ReadonlyArray<string>;
   resources: {
-    [Key in Resource]: number;
+    food: number;
+    savedTime: number;
   };
   stats: {
     [Key in Stat]: {
@@ -38,7 +39,7 @@ export type State = {
   }>;
   multiplier: number;
   timers: {
-    things: number;
+    food: number;
     event: number;
     action: number;
   };

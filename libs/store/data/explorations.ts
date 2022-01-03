@@ -9,7 +9,7 @@ export const explorations: Exploration[] = [
       "Your home hasn't changed, but everything past 500 feet is a desert. Find your bearings.",
     message: "You find some stuff.",
     drain: {
-      things: 1.5,
+      food: 1.5,
     },
     train: {
       perception: 1.5,
@@ -23,7 +23,7 @@ export const explorations: Exploration[] = [
     description: "",
     message: "",
     drain: {
-      things: 1.5,
+      food: 1.5,
     },
     train: {
       perception: 1.5,

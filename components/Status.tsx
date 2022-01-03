@@ -12,7 +12,7 @@ type Props = {
 };
 export const Status = ({ className }: Props) => {
   const time = useSelector((state) => state.time);
-  const { things, savedTime } = useSelector((state) => state.resources);
+  const { food, savedTime } = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
   const loops = useSelector((state) => state.loops);
   const stats = useSelector((state) => state.stats);
@@ -33,10 +33,10 @@ export const Status = ({ className }: Props) => {
         It is {timeOfDay}.
         <p>
           You have{" "}
-          {numbro(things).format({
+          {numbro(food).format({
             thousandSeparated: true,
           })}{" "}
-          things.
+          food.
         </p>
         {(phase === "postEvent" || phase === "traveling") && (
           <p>You&apos;ve saved up {savedTime} time.</p>

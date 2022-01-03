@@ -27,12 +27,12 @@ export const Upgrades = ({
       ) {
         return false;
       }
-      if ((upgrade.requirements.things ?? 0) > stats.things) {
+      if ((upgrade.requirements.food ?? 0) > stats.food) {
         return false;
       }
       return true;
     });
-  }, [phase, stats.things]);
+  }, [phase, stats.food]);
 
   return (
     <section className={clsx("flex flex-col gap-2", className)}>

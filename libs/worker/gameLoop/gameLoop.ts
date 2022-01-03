@@ -30,7 +30,7 @@ const updateTime: Updater = (state, delta) => {
   if (state.time === THE_EVENT_TIME && state.phase === "preEvent") {
     state.phase = "event";
     state.timers.event = 0;
-    state.timers.things = 0;
+    state.timers.food = 0;
     state.multiplier = 1;
     state.messages.push("You wake up in a wasteland. Where... when are you?");
     return;
@@ -65,15 +65,15 @@ const updatePreResources: Updater = (state, delta) => {
     return;
   }
 
-  timers.things += delta;
-  const counts = Math.floor(timers.things / (1_000 / THINGS_MULTIPLIER));
+  timers.food += delta;
+  const counts = Math.floor(timers.food / (1_000 / THINGS_MULTIPLIER));
 
   if (counts) {
     const upgradedCounts = Object.entries(state.upgrades).reduce(
       (acc, [key, value]) => {
         const upgrade = findUpgrade(key);
-        if (upgrade.effect.things) {
-          return upgrade.effect.things(acc, value?.level ?? 0);
+        if (upgrade.effect.food) {
+          return upgrade.effect.food(acc, value?.level ?? 0);
         }
         return counts;
       },
@@ -85,15 +85,15 @@ const updatePreResources: Updater = (state, delta) => {
           return acc;
         }
         const upgrade = findUpgrade(key);
-        if (upgrade.effect.things) {
-          return upgrade.effect.things(acc, value?.level ?? 0);
+        if (upgrade.effect.food) {
+          return upgrade.effect.food(acc, value?.level ?? 0);
         }
         return counts;
       },
       upgradedCounts,
     );
-    timers.things = timers.things % (1_000 / THINGS_MULTIPLIER);
-    state.resources.things += timedUpgradedCounts;
+    timers.food = timers.food % (1_000 / THINGS_MULTIPLIER);
+    state.resources.food += timedUpgradedCounts;
   }
 };
 
@@ -103,8 +103,8 @@ const updatePostResources: Updater = (state, delta) => {
     return;
   }
 
-  timers.things += delta;
-  const counts = Math.floor(timers.things / (1_000 / THINGS_MULTIPLIER));
+  timers.food += delta;
+  const counts = Math.floor(timers.food / (1_000 / THINGS_MULTIPLIER));
 
   if (counts) {
     const upgradedCounts = Object.entries(state.upgrades).reduce(
@@ -113,18 +113,15 @@ const updatePostResources: Updater = (state, delta) => {
         if (upgrade.phase !== phase) {
           return acc;
         }
-        if (upgrade.effect.things) {
-          return upgrade.effect.things(acc, level?.level ?? 0);
+        if (upgrade.effect.food) {
+          return upgrade.effect.food(acc, level?.level ?? 0);
         }
         return counts;
       },
       counts,
     );
-    timers.things = timers.things % (1_000 / THINGS_MULTIPLIER);
-    state.resources.things = Math.max(
-      state.resources.things - upgradedCounts,
-      0,
-    );
+    timers.food = timers.food % (1_000 / THINGS_MULTIPLIER);
+    state.resources.food = Math.max(state.resources.food - upgradedCounts, 0);
   }
 };
 
@@ -142,12 +139,12 @@ const updatePostStats: Updater = (state, delta) => {
 };
 
 const updateExplore: Updater = (state, delta) => {
-  if (state.phase === "postEvent" && state.resources.things <= 0) {
+  if (state.phase === "postEvent" && state.resources.food <= 0) {
     state.phase = "traveling";
     state.multiplier = 1;
     state.timers = {
       event: 0,
-      things: 0,
+      food: 0,
       action: 0,
     };
     state.messages.push(

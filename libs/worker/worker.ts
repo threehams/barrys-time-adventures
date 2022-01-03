@@ -40,7 +40,7 @@ const main = async () => {
       }
       if (action.type === "TRAVEL") {
         draft.explorations = {};
-        draft.resources.things = 0;
+        draft.resources.food = 0;
         const timeline = draft.timeline;
         draft.timeline = [];
         draft.time = 0;

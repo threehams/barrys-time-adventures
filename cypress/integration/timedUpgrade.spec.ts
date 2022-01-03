@@ -4,7 +4,7 @@ import { initialState } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 
 describe("time travel", () => {
-  it("calculates the correct things", () => {
+  it("sends an upgrade back in time", () => {
     cy.wrap(null).then(async () => {
       const VERSION = 1;
       const databaseName = "reconciliation_game";
@@ -21,13 +21,13 @@ describe("time travel", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "upgradeThings",
+                key: "upgradeFood",
               },
             },
             time: hoursToSeconds(24),
           });
           draft.upgrades = {
-            upgradeThings: { level: 1 },
+            upgradeFood: { level: 1 },
           };
           draft.explorations = {
             researchThings: { progress: 100 },
@@ -35,7 +35,7 @@ describe("time travel", () => {
           };
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);
-          draft.resources.things = 1000;
+          draft.resources.food = 1000;
           draft.resources.savedTime = 200;
         }),
       );

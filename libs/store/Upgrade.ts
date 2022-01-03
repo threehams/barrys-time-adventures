@@ -1,13 +1,13 @@
 import { ExplorationKey, Phase } from ".";
 
-export type UpgradeKey = "upgradeThings" | "postUpgradeThings";
+export type UpgradeKey = "upgradeFood" | "postUpgradeFood";
 
 export type UnlockKey = "buyClothes" | "autoClothes";
 export type UpgradeEffect = {
   // Unlock a particular feature permanently
   unlock?: UnlockKey;
-  // Change rate of things increase
-  things?: (num: number, level: number) => number;
+  // Change rate of food increase
+  food?: (num: number, level: number) => number;
   // Is this additive or multiplicative with other upgrades?
   type: "add" | "multiply";
 };
@@ -19,13 +19,13 @@ export type Upgrade = {
   // Required for this upgrade to appear. Once that happens, it's
   // always visible
   requirements: {
-    things?: number;
+    food?: number;
     savedTime?: number;
     action?: ExplorationKey;
   };
   // Required to buy this upgrade
   costs: {
-    things?: (level: number, distance: number) => number;
+    food?: (level: number, distance: number) => number;
     savedTime?: (level: number, distance: number) => number;
   };
   // Readable name in-game
