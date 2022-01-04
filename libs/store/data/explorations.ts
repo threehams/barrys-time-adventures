@@ -33,6 +33,22 @@ export const explorations: Exploration[] = [
       action: "startExplore",
     },
   },
+  {
+    key: "researchThings",
+    name: "Research time travel",
+    description: "",
+    message: "",
+    drain: {
+      food: 1.5,
+    },
+    train: {
+      perception: 1.5,
+    },
+    time: 10_000,
+    requirements: {
+      action: "startExplore",
+    },
+  },
 ];
 
 export const findExploration = (key: ExplorationKey) => {

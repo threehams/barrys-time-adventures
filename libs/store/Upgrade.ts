@@ -10,6 +10,8 @@ export type UpgradeEffect = {
   food?: (num: number, level: number) => number;
   // Change rate of water increase
   water?: (num: number, level: number) => number;
+  // Change rate of money increase
+  money?: (num: number, level: number) => number;
   // Is this additive or multiplicative with other upgrades?
   type: "add" | "multiply";
 };

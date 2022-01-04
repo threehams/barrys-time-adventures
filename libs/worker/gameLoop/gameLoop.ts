@@ -70,7 +70,11 @@ const updatePreResources: Updater = (state, delta) => {
     return;
   }
 
-  const resources = [{ key: "food" }, { key: "water" }] as const;
+  const resources = [
+    { key: "food" },
+    { key: "water" },
+    { key: "money" },
+  ] as const;
   for (const resource of resources) {
     timers[resource.key] += delta;
     const counts = Math.floor(
