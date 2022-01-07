@@ -33,15 +33,15 @@ export const Game = () => {
         )}
         <div
           className={clsx(
-            "px-4 grid py-4 mx-auto min-w-[1080px] max-w-[1680px] h-screen gap-3",
+            "px-4 grid py-4 mx-auto min-w-[1080px] max-w-[1680px] gap-3",
             "grid-rows-[1fr_auto]",
             "grid-cols-[400px_1fr_240px_auto]",
             "lg:grid-cols-[400px_1fr_240px_auto]",
           )}
           style={{
             gridTemplateAreas: `
-            "messages main status window"
             "timeline timeline timeline timeline"
+            "messages main status window"
           `,
           }}
         >
@@ -53,7 +53,7 @@ export const Game = () => {
           <main className="[grid-area:main]">
             {phase === "preEvent" && (
               <>
-                <h2>Upgrades</h2>
+                <h2 className="mb-2">Upgrades</h2>
                 <Upgrades
                   selectedUpgrade={selectedUpgrade}
                   setSelectedUpgrade={setSelectedUpgrade}

@@ -26,7 +26,7 @@ export type Upgrade = {
     food?: number;
     savedTime?: number;
     exploration?: ExplorationKey;
-    upgrade?: UpgradeKey;
+    upgrade?: { key: UpgradeKey; level: number };
   };
   // Required to buy this upgrade
   costs: {

@@ -98,7 +98,7 @@ export const Timeline = ({
             <button
               className={clsx(
                 "inline-grid relative border-2 border-gray-800 dark:border-gray-300 w-[32px] h-[32px] grid-cols-2 grid-rows-2 -ml-[2px]",
-                muted && "border-opacity-20",
+                muted && "border-opacity-20 dark:border-opacity-20",
                 day === selectedDay && "shadow-[0_0_0_3px_red] z-10",
               )}
               style={{
@@ -176,7 +176,7 @@ const DayDetail = ({
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className="relative">
       {events !== undefined && (
         <ul>
           {events.map((event) => {
@@ -247,6 +247,14 @@ const DayDetail = ({
           Restart Here
         </Button>
       )}
+      <Button
+        className="absolute top-[2px] right-[2px]"
+        onClick={() => {
+          setSelectedDay(undefined);
+        }}
+      >
+        X
+      </Button>
     </div>
   );
 };

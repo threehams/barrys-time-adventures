@@ -88,7 +88,7 @@ const updatePreResources: Updater = (state, delta) => {
           if (upgrade.effect[resource.key]) {
             return upgrade.effect[resource.key]!(acc, value?.level ?? 0);
           }
-          return counts;
+          return acc;
         },
         counts,
       );
@@ -101,7 +101,7 @@ const updatePreResources: Updater = (state, delta) => {
           if (upgrade.effect[resource.key]) {
             return upgrade.effect[resource.key]!(acc, value?.level ?? 0);
           }
-          return counts;
+          return acc;
         },
         upgradedCounts,
       );

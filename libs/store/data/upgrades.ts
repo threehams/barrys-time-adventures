@@ -65,7 +65,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      upgrade: "PF1",
+      upgrade: { key: "PF1", level: 1 },
     },
   },
   {
@@ -88,7 +88,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      upgrade: "PF1",
+      upgrade: { key: "PF1", level: 1 },
     },
   },
   {
@@ -97,7 +97,7 @@ export const upgrades: Upgrade[] = [
     name: "Plant some fast-growing crops",
     description:
       "Looks like I'll be eating a lot of radishes and green onions.",
-    max: 10,
+    max: 5,
     costs: {
       money: (level) => {
         return level * 10;
@@ -118,7 +118,7 @@ export const upgrades: Upgrade[] = [
     name: "Set up hydroponics",
     description:
       "I can get some plants to grow faster, and more variety would be nice.",
-    max: 10,
+    max: 5,
     costs: {
       money: (level) => {
         return level * 10;
@@ -132,7 +132,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      upgrade: "PF3",
+      upgrade: { key: "PF3", level: 1 },
     },
   },
   {
@@ -174,7 +174,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      upgrade: "PW1",
+      upgrade: { key: "PW1", level: 1 },
     },
   },
   {
@@ -217,7 +217,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      upgrade: "PW4",
+      upgrade: { key: "PW4", level: 1 },
     },
   },
   {
@@ -260,7 +260,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      upgrade: "PW5",
+      upgrade: { key: "PW5", level: 1 },
     },
   },
   {
@@ -271,7 +271,7 @@ export const upgrades: Upgrade[] = [
       "I should set up a Letsy account and pawn off some of my junk.",
     max: 5,
     costs: {
-      money: (level) => {
+      junk: (level) => {
         return level * 10;
       },
     },
@@ -303,7 +303,51 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      upgrade: "PM1",
+      upgrade: { key: "PM1", level: 1 },
+    },
+  },
+  {
+    phase: "preEvent",
+    key: "PM3",
+    name: "Sell some scrap art",
+    description:
+      "I've got a shed full of scrap metal I could weld together into art.",
+    max: 5,
+    costs: {
+      junk: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      money: (money, level) => {
+        return money * (level + 1);
+      },
+    },
+    flavorTexts: {},
+    requirements: {},
+  },
+  {
+    phase: "preEvent",
+    key: "PM4",
+    name: "Sell some scrap art",
+    description:
+      "There's a market for industrial furniture. Might as well make some, for people who believe the world's just fine.",
+    max: 5,
+    costs: {
+      junk: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      money: (money, level) => {
+        return money * (level + 1);
+      },
+    },
+    flavorTexts: {},
+    requirements: {
+      upgrade: { key: "PM3", level: 1 },
     },
   },
   {
@@ -311,7 +355,7 @@ export const upgrades: Upgrade[] = [
     key: "TW1",
     name: "Condensate Capture",
     description: "Pluck water out of the air instead of relying on rainfall.",
-    max: 10,
+    max: 5,
     costs: {
       savedTime: (level, distance) => {
         return level * 100 + distance * 10;
@@ -409,11 +453,13 @@ export const canShowUpgrade = ({
   ) {
     return false;
   }
+  const requiredUpgrade = upgrade.requirements.upgrade;
   if (
-    upgrade.requirements.upgrade &&
+    requiredUpgrade &&
     !(
-      purchasedUpgrades[upgrade.requirements.upgrade]?.level ||
-      timedUpgrades[upgrade.requirements.upgrade]?.level
+      (purchasedUpgrades[requiredUpgrade.key]?.level ?? 0) >=
+        requiredUpgrade.level ||
+      (timedUpgrades[requiredUpgrade.key]?.level ?? 0) >= requiredUpgrade.level
     )
   ) {
     return false;

@@ -30,7 +30,7 @@ export const Button = React.memo(
           }
         }}
         className={clsx(
-          "border border-gray-700 border-solid cursor-pointer px-2 relative",
+          "border border-gray-700 border-solid cursor-pointer px-2",
           active && "bg-blue-700 text-white",
           variant === "primary" && "bg-blue-700 text-white",
           variant === "danger" && "bg-red-900 text-white",
