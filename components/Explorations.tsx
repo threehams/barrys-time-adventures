@@ -27,7 +27,7 @@ export const Explorations = () => {
           return (
             <li
               key={action.key}
-              className="flex flex-wrap gap-2 p-2 mb-2 border rounded-sm"
+              className="flex flex-wrap gap-2 p-2 mb-2 border rounded-md"
             >
               <Button
                 disabled={phase === "traveling"}

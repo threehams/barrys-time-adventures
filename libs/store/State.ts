@@ -1,6 +1,7 @@
 import { ExplorationKey } from "./data/explorations";
 import { UpgradeKey } from "./data/upgrades";
 import { Resources } from "./Resources";
+import { Skills } from "./Skills";
 import { StateAction } from "./StateAction";
 
 export type Phase = "preEvent" | "event" | "postEvent" | "traveling" | "done";
@@ -17,24 +18,13 @@ export type PlayerExplorations = {
 };
 type Severity = "note" | "alert";
 export type Message = { text: string; severity: Severity };
-export type Stat =
-  | "perception"
-  | "endurance"
-  | "patience"
-  | "tech"
-  | "strength";
 export type State = {
   phase: Phase;
   exploration: ExplorationKey | undefined;
   time: number;
   messages: ReadonlyArray<string>;
   resources: Resources;
-  stats: {
-    [Key in Stat]: {
-      current: number;
-      permanent: number;
-    };
-  };
+  skills: Skills;
   explorations: PlayerExplorations;
   upgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;

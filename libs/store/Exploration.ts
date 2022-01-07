@@ -1,4 +1,4 @@
-import { ExplorationKey, Stat } from ".";
+import { ExplorationKey, Skill } from ".";
 import { Resource } from "./Resources";
 
 export type Exploration = {
@@ -10,7 +10,7 @@ export type Exploration = {
     [key in Resource]?: number;
   };
   train: {
-    [key in Stat]?: number;
+    [key in Skill]?: number;
   };
   requirements: {
     action?: ExplorationKey;

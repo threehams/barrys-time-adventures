@@ -11,6 +11,7 @@ import { Timeline } from "./Timeline";
 import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
 import { UpgradeKey } from "@laundry/store";
+import clsx from "clsx";
 
 type Panel = "explorations" | "upgrades";
 
@@ -24,14 +25,19 @@ export const Game = () => {
 
   const layout = useMemo(() => {
     return (
-      <div className="relative min-h-screen bg-gray-50">
+      <div className="relative min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
         {phase === "event" && (
           <div className="absolute z-50 flex items-center justify-center min-w-full min-h-screen text-6xl bg-gray-900 text-gray-50">
             LET&apos;S DO THE TIME WARP
           </div>
         )}
         <div
-          className="grid py-4 mx-auto max-w-[1100px] grid-cols-[300px_1fr_1fr_60px] gap-3"
+          className={clsx(
+            "px-4 grid py-4 mx-auto min-w-[1080px] max-w-[1680px] h-screen gap-3",
+            "grid-rows-[1fr_auto]",
+            "grid-cols-[400px_1fr_240px_auto]",
+            "lg:grid-cols-[400px_1fr_240px_auto]",
+          )}
           style={{
             gridTemplateAreas: `
             "messages main status window"
@@ -85,7 +91,7 @@ export const Game = () => {
             )}
           </main>
           <Window className="[grid-area:window] " />
-          <div className="[grid-area:messages]">
+          <div className="[grid-area:messages]  p-4 text-gray-300 border rounded-md">
             <Messages />
           </div>
 

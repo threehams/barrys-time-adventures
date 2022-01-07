@@ -148,7 +148,7 @@ const updatePostStats: Updater = (state, delta) => {
   const exploration = findExploration(state.exploration);
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
-      state.stats[stat].current += (delta * rate) / 20000;
+      state.skills[stat].current += (delta * rate) / 20000;
     }
   }
 };

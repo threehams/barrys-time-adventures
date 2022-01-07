@@ -10,7 +10,10 @@ type Props = {
 export const Window = ({ className }: Props) => {
   return (
     <div
-      className={clsx("w-[80px] relative h-[400px] overflow-hidden", className)}
+      className={clsx(
+        "w-[80px] relative h-full overflow-hidden rounded-md",
+        className,
+      )}
     >
       <Sky className="absolute top-0 left-0 w-full h-full" />
       <Sun className="absolute top-0 left-0 w-full h-full" />

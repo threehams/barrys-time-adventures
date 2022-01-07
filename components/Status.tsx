@@ -1,7 +1,7 @@
 import { useSelector } from "./StateProvider";
 import { addMilliseconds, format, sub } from "date-fns";
-import numbro from "numbro";
 import { Progress } from "@laundry/ui";
+import { findResource, findSkill } from "@laundry/store";
 
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0).valueOf();
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 }).valueOf();
@@ -15,7 +15,7 @@ export const Status = ({ className }: Props) => {
   const resources = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
   const loops = useSelector((state) => state.loops);
-  const stats = useSelector((state) => state.stats);
+  const skills = useSelector((state) => state.skills);
 
   const startDate =
     phase === "postEvent" || phase === "traveling"
@@ -29,41 +29,35 @@ export const Status = ({ className }: Props) => {
 
   return (
     <div className={className}>
-      <div>
-        It is {timeOfDay}.<h2>Inventory</h2>
+      <div className="mb-2">
+        <div className="mb-2">It is {timeOfDay}.</div>
+        <h2 className="font-bold">Inventory</h2>
         <ul>
-          <li>
-            Rations:{" "}
-            {numbro(resources.food).format({
-              thousandSeparated: true,
-            })}
-          </li>
-          <li>
-            Money: $
-            {numbro(resources.money).format({
-              thousandSeparated: true,
-            })}
-          </li>
-          <li>
-            Water:{" "}
-            {numbro(resources.water).format({
-              thousandSeparated: true,
-            })}{" "}
-            gal.
-          </li>
+          {(["food", "water", "money", "junk", "savedTime"] as const).map(
+            (key) => {
+              const resource = findResource(key);
+              return (
+                <li key={key} className="flex justify-between">
+                  <span>{resource.name}</span>
+                  <span>{resource.format(resources[key])}</span>
+                </li>
+              );
+            },
+          )}
         </ul>
-        {(phase === "postEvent" || phase === "traveling") && (
-          <p>You&apos;ve saved up {resources.savedTime} time.</p>
-        )}
       </div>
       {!!(phase === "postEvent" || phase === "traveling" || loops > 0) && (
         <div>
-          <h2>Stats</h2>
+          <h2 className="font-bold">Skills</h2>
           <ul>
-            {Object.entries(stats).map(([stat, value]) => {
+            {Object.entries(skills).map(([skill, value]) => {
               return (
-                <li key={stat}>
-                  {stat}: {Math.floor(value.current)}
+                <li key={skill}>
+                  <div className="flex justify-between">
+                    <span>{findSkill(skill).name}</span>
+                    <span>{Math.floor(value.current)}</span>
+                  </div>
+
                   <Progress progress={((value.current ?? 0) * 100) % 100} />
                   <Progress
                     variant="primary"

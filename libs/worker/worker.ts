@@ -45,6 +45,7 @@ const main = async () => {
           food: initialState.resources.food,
           water: initialState.resources.water,
           money: initialState.resources.money,
+          junk: initialState.resources.junk,
         };
 
         const timeline = draft.timeline;

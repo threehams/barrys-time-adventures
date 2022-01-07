@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from "./StateProvider";
 import React, { Dispatch, SetStateAction, useMemo } from "react";
-import { canShowUpgrade, UpgradeKey, upgrades } from "@laundry/store";
+import {
+  canPurchaseUpgrade,
+  canShowUpgrade,
+  UpgradeKey,
+  upgrades,
+} from "@laundry/store";
 import { Button } from "@laundry/ui";
 import clsx from "clsx";
 
@@ -26,25 +31,17 @@ export const Upgrades = ({
       if (
         !canShowUpgrade({
           upgrade,
-          distance: 0,
           phase,
           playerExplorations,
           purchasedUpgrades,
           timedUpgrades: timedUpgradeMap,
-          resources,
         })
       ) {
         return false;
       }
       return true;
     });
-  }, [
-    phase,
-    playerExplorations,
-    purchasedUpgrades,
-    resources,
-    timedUpgradeMap,
-  ]);
+  }, [phase, playerExplorations, purchasedUpgrades, timedUpgradeMap]);
 
   return (
     <section className={clsx("flex flex-col gap-2", className)}>
@@ -58,7 +55,17 @@ export const Upgrades = ({
             key={upgrade.key}
           >
             <Button
-              disabled={level === upgrade.max}
+              disabled={
+                !canPurchaseUpgrade({
+                  upgrade,
+                  phase,
+                  playerExplorations,
+                  purchasedUpgrades,
+                  timedUpgrades: timedUpgradeMap,
+                  distance: 0,
+                  resources,
+                })
+              }
               aria-label={`Buy ${upgrade.name}`}
               active={selectedUpgrade === upgrade.key}
               onClick={() => {
@@ -77,7 +84,9 @@ export const Upgrades = ({
               Buy {level > 0 && `(${level})`}
             </Button>
             <div>{upgrade.name}</div>
-            {level !== upgrade.max && <div>{upgrade.description}</div>}
+            {level !== upgrade.max && (
+              <div className="">{upgrade.description}</div>
+            )}
             {flavorText && <p className="col-start-2">{flavorText}</p>}
           </div>
         );

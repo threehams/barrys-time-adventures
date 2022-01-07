@@ -33,6 +33,7 @@ export type Upgrade = {
     money?: (level: number, distance: number) => number;
     water?: (level: number, distance: number) => number;
     food?: (level: number, distance: number) => number;
+    junk?: (level: number, distance: number) => number;
     savedTime?: (level: number, distance: number) => number;
   };
   // Readable name in-game

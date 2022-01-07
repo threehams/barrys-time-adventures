@@ -1,6 +1,7 @@
 import { State } from "./State";
 
 const STARTING_MONEY = 1000;
+const STARTING_JUNK = 1000;
 
 export const initialState: State = {
   phase: "preEvent",
@@ -17,9 +18,10 @@ export const initialState: State = {
     money: STARTING_MONEY,
     water: 0,
     food: 0,
+    junk: STARTING_JUNK,
     savedTime: 1,
   },
-  stats: {
+  skills: {
     perception: {
       current: 1,
       permanent: 0,
