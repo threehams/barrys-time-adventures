@@ -1,4 +1,5 @@
 import {
+  Phase,
   PlayerExplorations,
   PurchasedTimedUpgrades,
   PurchasedUpgrades,
@@ -141,23 +142,39 @@ export const findUpgrade = (key: UpgradeKey) => {
 };
 
 type CanPurchaseUpgrade = {
+  phase: Phase;
   upgrade: Upgrade;
   resources: Resources;
-  currentLevel: number | undefined;
   distance: number;
   purchasedUpgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;
   playerExplorations: PlayerExplorations;
 };
 export const canPurchaseUpgrade = ({
+  phase,
   upgrade,
   resources,
-  currentLevel,
   distance,
   purchasedUpgrades,
   timedUpgrades,
   playerExplorations,
 }: CanPurchaseUpgrade) => {
+  const currentLevel =
+    purchasedUpgrades[upgrade.key]?.level ?? timedUpgrades[upgrade.key]?.level;
+  if (
+    !canShowUpgrade({
+      phase,
+      upgrade,
+      resources,
+      distance,
+      purchasedUpgrades,
+      timedUpgrades,
+      playerExplorations,
+    })
+  ) {
+    return false;
+  }
+
   const nextLevel = (currentLevel ?? 0) + 1;
   for (const costKey of Object.keys(upgrade.costs)) {
     const checker = upgrade.costs[costKey];
@@ -170,12 +187,54 @@ export const canPurchaseUpgrade = ({
 };
 
 type CanShowUpgrade = {
+  phase: Phase;
+  upgrade: Upgrade;
+  resources: Resources;
+  distance: number;
   purchasedUpgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;
   playerExplorations: PlayerExplorations;
 };
-const canShowUpgrade = ({}: CanShowUpgrade) => {
-  return false;
+export const canShowUpgrade = ({
+  phase,
+  upgrade,
+  resources,
+  distance,
+  purchasedUpgrades,
+  timedUpgrades,
+  playerExplorations,
+}: CanShowUpgrade) => {
+  const currentLevel =
+    purchasedUpgrades[upgrade.key]?.level ?? timedUpgrades[upgrade.key]?.level;
+  if (
+    upgrade.phase !== phase &&
+    !(upgrade.phase === "postEvent" && phase === "traveling")
+  ) {
+    return false;
+  }
+  const nextLevel = (currentLevel ?? 0) + 1;
+  for (const costKey of Object.keys(upgrade.costs)) {
+    const checker = upgrade.costs[costKey];
+    if (checker && checker(nextLevel, distance) > resources[costKey]) {
+      return false;
+    }
+  }
+  if (
+    upgrade.requirements.exploration &&
+    playerExplorations[upgrade.requirements.exploration]?.progress !== 100
+  ) {
+    return false;
+  }
+  if (
+    upgrade.requirements.upgrade &&
+    !(
+      purchasedUpgrades[upgrade.requirements.upgrade]?.level ||
+      timedUpgrades[upgrade.requirements.upgrade]?.level
+    )
+  ) {
+    return false;
+  }
+  return true;
 };
 
 type UpgradeCost = {

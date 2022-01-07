@@ -15,6 +15,8 @@ export type PlayerExplorations = {
     progress: number;
   };
 };
+type Severity = "note" | "alert";
+export type Message = { text: string; severity: Severity };
 export type Stat =
   | "perception"
   | "endurance"

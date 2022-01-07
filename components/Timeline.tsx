@@ -34,6 +34,8 @@ export const Timeline = ({
 }: TimelineProps) => {
   const preEvents = useSelector((state) => state.timeline);
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
+  const purchasedUpgrades = useSelector((state) => state.upgrades);
+  const playerExplorations = useSelector((state) => state.explorations);
   const phase = useSelector((state) => state.phase);
   const resources = useSelector((state) => state.resources);
   const currentDay = useSelector((state) =>
@@ -80,10 +82,13 @@ export const Timeline = ({
           const muted =
             (selectedUpgrade &&
               !canPurchaseUpgrade({
+                phase,
                 upgrade: selectedUpgrade,
                 resources,
-                currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
                 distance: 29 - day,
+                purchasedUpgrades,
+                timedUpgrades: timedUpgradeMap,
+                playerExplorations,
               })) ||
             (phase === "traveling" &&
               selectedDay !== undefined &&

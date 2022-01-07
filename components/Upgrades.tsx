@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "./StateProvider";
 import React, { Dispatch, SetStateAction, useMemo } from "react";
-import { UpgradeKey, upgrades } from "@laundry/store";
+import { canShowUpgrade, UpgradeKey, upgrades } from "@laundry/store";
 import { Button } from "@laundry/ui";
 import clsx from "clsx";
 
@@ -14,25 +14,37 @@ export const Upgrades = ({
   selectedUpgrade,
   setSelectedUpgrade,
 }: Props) => {
-  const stats = useSelector((state) => state.resources);
+  const resources = useSelector((state) => state.resources);
   const phase = useSelector((state) => state.phase);
   const purchasedUpgrades = useSelector((state) => state.upgrades);
+  const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
+  const playerExplorations = useSelector((state) => state.explorations);
   const dispatch = useDispatch();
 
   const availableUpgrades = useMemo(() => {
     return upgrades.filter((upgrade) => {
       if (
-        upgrade.phase !== phase &&
-        !(upgrade.phase === "postEvent" && phase === "traveling")
+        !canShowUpgrade({
+          upgrade,
+          distance: 0,
+          phase,
+          playerExplorations,
+          purchasedUpgrades,
+          timedUpgrades: timedUpgradeMap,
+          resources,
+        })
       ) {
-        return false;
-      }
-      if ((upgrade.requirements.food ?? 0) > stats.food) {
         return false;
       }
       return true;
     });
-  }, [phase, stats.food]);
+  }, [
+    phase,
+    playerExplorations,
+    purchasedUpgrades,
+    resources,
+    timedUpgradeMap,
+  ]);
 
   return (
     <section className={clsx("flex flex-col gap-2", className)}>
