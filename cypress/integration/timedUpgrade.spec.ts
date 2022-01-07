@@ -21,17 +21,18 @@ describe("time travel", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "upgradeFood",
+                key: "PF1",
               },
             },
             time: hoursToSeconds(24),
           });
           draft.upgrades = {
-            upgradeFood: { level: 1 },
+            PF1: { level: 1 },
           };
           draft.explorations = {
-            researchThings: { progress: 100 },
-            startExplore: { progress: 100 },
+            E1: { progress: 100 },
+            T1: { progress: 100 },
+            T2: { progress: 100 },
           };
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);

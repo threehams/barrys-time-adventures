@@ -2,11 +2,13 @@ import React from "react";
 import { useWorker } from "@laundry/worker";
 import { DispatchProvider, StateProvider } from "./StateProvider";
 import { Game } from "./Game";
+import { useRouter } from "next/router";
 
 const children = <Game />;
 
 export const GameProvider = () => {
   const { state, dispatch } = useWorker();
+  const router = useRouter();
 
   if (!state) {
     return (
@@ -19,7 +21,10 @@ export const GameProvider = () => {
   return (
     <StateProvider value={state}>
       <DispatchProvider value={dispatch}>{children}</DispatchProvider>
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      {!process.env.NEXT_PUBLIC_DISABLE_CHEATS &&
+        router.query.debug !== undefined && (
+          <pre>{JSON.stringify(state, null, 2)}</pre>
+        )}
     </StateProvider>
   );
 };

@@ -1,8 +1,9 @@
 import {
+  canPurchaseUpgrade,
   findUpgrade,
-  State,
   StateAction,
   Upgrade,
+  upgradeCost,
   UpgradeKey,
 } from "@laundry/store";
 import { useDispatch, useSelector } from "./StateProvider";
@@ -78,7 +79,7 @@ export const Timeline = ({
           );
           const muted =
             (selectedUpgrade &&
-              !canAfford({
+              !canPurchaseUpgrade({
                 upgrade: selectedUpgrade,
                 resources,
                 currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
@@ -254,43 +255,4 @@ const formatAction = (action: StateAction) => {
     default:
       throw new Error(`No text found for action: ${action.type}`);
   }
-};
-
-type CanAfford = {
-  upgrade: Upgrade;
-  resources: State["resources"];
-  currentLevel: number | undefined;
-  distance: number;
-};
-const canAfford = ({
-  upgrade,
-  resources,
-  currentLevel,
-  distance,
-}: CanAfford) => {
-  const nextLevel = (currentLevel ?? 0) + 1;
-  for (const costKey of Object.keys(upgrade.costs)) {
-    const checker = upgrade.costs[costKey];
-    if (checker && checker(nextLevel, distance) > resources[costKey]) {
-      return false;
-    }
-  }
-  return nextLevel <= upgrade.max;
-};
-
-type UpgradeCost = {
-  upgrade: Upgrade;
-  resources: State["resources"];
-  currentLevel: number | undefined;
-  distance: number;
-};
-const upgradeCost = ({ upgrade, currentLevel, distance }: UpgradeCost) => {
-  const nextLevel = (currentLevel ?? 0) + 1;
-
-  return Object.entries(upgrade.costs).map(([key, cost]) => {
-    if (!cost) {
-      return { key, cost: 0 };
-    }
-    return { key, cost: cost(nextLevel, distance) };
-  });
 };

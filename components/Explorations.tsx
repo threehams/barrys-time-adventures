@@ -25,9 +25,11 @@ export const Explorations = () => {
           const currentProgress = playerExplorations[action.key]?.progress ?? 0;
 
           return (
-            <li key={action.key}>
+            <li
+              key={action.key}
+              className="flex flex-wrap gap-2 p-2 mb-2 border rounded-sm"
+            >
               <Button
-                className="mb-1 mr-1"
                 disabled={phase === "traveling"}
                 onClick={() => {
                   dispatch({

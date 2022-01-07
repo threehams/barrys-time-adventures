@@ -1,6 +1,4 @@
-import { ExplorationKey, Phase } from ".";
-
-export type UpgradeKey = "upgradeFood" | "postUpgradeFood" | "rainwater";
+import { ExplorationKey, Phase, UpgradeKey } from ".";
 
 export type UnlockKey = undefined;
 export type UpgradeEffect = {
@@ -27,7 +25,7 @@ export type Upgrade = {
     water?: number;
     food?: number;
     savedTime?: number;
-    action?: ExplorationKey;
+    exploration?: ExplorationKey;
     upgrade?: UpgradeKey;
   };
   // Required to buy this upgrade

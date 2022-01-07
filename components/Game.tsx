@@ -34,7 +34,7 @@ export const Game = () => {
           className="grid py-4 mx-auto max-w-[1100px] grid-cols-[300px_1fr_1fr_60px] gap-3"
           style={{
             gridTemplateAreas: `
-            "status main messages window"
+            "messages main status window"
             "timeline timeline timeline timeline"
           `,
           }}

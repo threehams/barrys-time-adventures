@@ -41,7 +41,10 @@ export const Upgrades = ({
         const level = purchasedUpgrades[upgrade.key]?.level ?? 0;
         const flavorText = upgrade.flavorTexts[level];
         return (
-          <div className="grid grid-cols-[auto,1fr] gap-x-2" key={upgrade.key}>
+          <div
+            className="flex flex-wrap p-2 border rounded-sm gap-x-2"
+            key={upgrade.key}
+          >
             <Button
               disabled={level === upgrade.max}
               aria-label={`Buy ${upgrade.name}`}
@@ -62,6 +65,7 @@ export const Upgrades = ({
               Buy {level > 0 && `(${level})`}
             </Button>
             <div>{upgrade.name}</div>
+            {level !== upgrade.max && <div>{upgrade.description}</div>}
             {flavorText && <p className="col-start-2">{flavorText}</p>}
           </div>
         );

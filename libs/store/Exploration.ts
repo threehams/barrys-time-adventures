@@ -1,4 +1,5 @@
-import { ExplorationKey, Resource, Stat } from ".";
+import { ExplorationKey, Stat } from ".";
+import { Resource } from "./Resources";
 
 export type Exploration = {
   key: ExplorationKey;

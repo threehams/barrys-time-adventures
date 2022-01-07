@@ -17,18 +17,6 @@ describe("time travel", () => {
       await localForage.setItem(
         savedGameKey,
         produce(initialState, (draft) => {
-          draft.timeline.push({
-            action: {
-              type: "BUY_UPGRADE",
-              payload: {
-                key: "upgradeFood",
-              },
-            },
-            time: hoursToSeconds(24),
-          });
-          draft.upgrades = {
-            upgradeFood: { level: 1 },
-          };
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);
           draft.resources.food = 1000;

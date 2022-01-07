@@ -1,5 +1,7 @@
+import { ExplorationKey } from "./data/explorations";
+import { UpgradeKey } from "./data/upgrades";
+import { Resources } from "./Resources";
 import { StateAction } from "./StateAction";
-import { UpgradeKey } from "./Upgrade";
 
 export type Phase = "preEvent" | "event" | "postEvent" | "traveling" | "done";
 export type PurchasedUpgrades = {
@@ -8,28 +10,30 @@ export type PurchasedUpgrades = {
 export type PurchasedTimedUpgrades = {
   [Key in UpgradeKey]?: { level: number; time: number };
 };
-export type ExplorationKey = "startExplore" | "researchThings";
-export type Stat = "perception";
-export type Resource = "food" | "savedTime" | "money" | "water";
+export type PlayerExplorations = {
+  [Key in ExplorationKey]?: {
+    progress: number;
+  };
+};
+export type Stat =
+  | "perception"
+  | "endurance"
+  | "patience"
+  | "tech"
+  | "strength";
 export type State = {
   phase: Phase;
   exploration: ExplorationKey | undefined;
   time: number;
   messages: ReadonlyArray<string>;
-  resources: {
-    [Key in Resource]: number;
-  };
+  resources: Resources;
   stats: {
     [Key in Stat]: {
       current: number;
       permanent: number;
     };
   };
-  explorations: {
-    [Key in ExplorationKey]?: {
-      progress: number;
-    };
-  };
+  explorations: PlayerExplorations;
   upgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;
   timeline: ReadonlyArray<{

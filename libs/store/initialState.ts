@@ -24,6 +24,22 @@ export const initialState: State = {
       current: 1,
       permanent: 0,
     },
+    endurance: {
+      current: 1,
+      permanent: 0,
+    },
+    patience: {
+      current: 1,
+      permanent: 0,
+    },
+    strength: {
+      current: 1,
+      permanent: 0,
+    },
+    tech: {
+      current: 1,
+      permanent: 0,
+    },
   },
   explorations: {},
   multiplier: 1,

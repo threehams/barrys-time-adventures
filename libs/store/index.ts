@@ -1,3 +1,4 @@
+export * from "./Resources";
 export * from "./StateAction";
 export * from "./State";
 export * from "./Upgrade";

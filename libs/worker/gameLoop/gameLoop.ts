@@ -62,7 +62,7 @@ const updateEvent: Updater = (state, delta) => {
   }
 };
 
-const THINGS_MULTIPLIER = 1;
+const RESOURCE_MULTIPLIER = 0.05;
 
 const updatePreResources: Updater = (state, delta) => {
   const { timers, phase } = state;
@@ -78,7 +78,7 @@ const updatePreResources: Updater = (state, delta) => {
   for (const resource of resources) {
     timers[resource.key] += delta;
     const counts = Math.floor(
-      timers[resource.key] / (1_000 / THINGS_MULTIPLIER),
+      timers[resource.key] / (1_000 / RESOURCE_MULTIPLIER),
     );
 
     if (counts) {
@@ -105,7 +105,8 @@ const updatePreResources: Updater = (state, delta) => {
         },
         upgradedCounts,
       );
-      timers[resource.key] = timers[resource.key] % (1_000 / THINGS_MULTIPLIER);
+      timers[resource.key] =
+        timers[resource.key] % (1_000 / RESOURCE_MULTIPLIER);
       state.resources[resource.key] += timedUpgradedCounts;
     }
   }
@@ -118,7 +119,7 @@ const updatePostResources: Updater = (state, delta) => {
   }
 
   timers.food += delta;
-  const counts = Math.floor(timers.food / (1_000 / THINGS_MULTIPLIER));
+  const counts = Math.floor(timers.food / (1_000 / RESOURCE_MULTIPLIER));
 
   if (counts) {
     const upgradedCounts = Object.entries(state.upgrades).reduce(
@@ -134,7 +135,7 @@ const updatePostResources: Updater = (state, delta) => {
       },
       counts,
     );
-    timers.food = timers.food % (1_000 / THINGS_MULTIPLIER);
+    timers.food = timers.food % (1_000 / RESOURCE_MULTIPLIER);
     state.resources.food = Math.max(state.resources.food - upgradedCounts, 0);
   }
 };

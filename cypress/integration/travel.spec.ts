@@ -18,13 +18,13 @@ describe("time travel", () => {
         savedGameKey,
         produce(initialState, (draft) => {
           draft.upgrades = {
-            upgradeFood: { level: 2 },
+            PF1: { level: 2 },
           };
           draft.timeline.push({
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "upgradeFood",
+                key: "PF1",
               },
             },
             time: hoursToSeconds(24),
@@ -33,13 +33,13 @@ describe("time travel", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "upgradeFood",
+                key: "PF1",
               },
             },
             time: hoursToSeconds(49),
           });
           draft.timedUpgrades = {
-            postUpgradeFood: {
+            TW1: {
               level: 1,
               time: hoursToSeconds(50),
             },
