@@ -11,17 +11,17 @@ export type SourceKey =
   | "rainfall"
   | "stream"
   | "well"
-  | "betsy"
+  | "letsy"
   | "crafts";
 
-export const sources: { key: SourceKey; resource: Resource }[] = [
-  { key: "betsy", resource: "money" },
-  { key: "crafts", resource: "money" },
-  { key: "well", resource: "water" },
-  { key: "stream", resource: "water" },
-  { key: "rainfall", resource: "water" },
-  { key: "preserves", resource: "food" },
-  { key: "plants", resource: "food" },
+export const sources: { key: SourceKey; name: string; resource: Resource }[] = [
+  { key: "letsy", name: "Letsy", resource: "money" },
+  { key: "crafts", name: "Crafts", resource: "money" },
+  { key: "well", name: "Well Water", resource: "water" },
+  { key: "stream", name: "Filtered Water", resource: "water" },
+  { key: "rainfall", name: "Rainfall", resource: "water" },
+  { key: "preserves", name: "Preserves", resource: "food" },
+  { key: "plants", name: "Plants", resource: "food" },
 ];
 
 export const findSource = (key: SourceKey) => {

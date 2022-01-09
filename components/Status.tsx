@@ -1,7 +1,7 @@
 import { useSelector } from "./StateProvider";
 import { addMilliseconds, format, sub } from "date-fns";
 import { Progress } from "@laundry/ui";
-import { findResource, findSkill } from "@laundry/store";
+import { findResource, findSkill, sources } from "@laundry/store";
 
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0).valueOf();
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 }).valueOf();
@@ -37,9 +37,26 @@ export const Status = ({ className }: Props) => {
             (key) => {
               const resource = findResource(key);
               return (
-                <li key={key} className="flex justify-between">
-                  <span>{resource.name}</span>
-                  <span>{resource.format(resources[key])}</span>
+                <li key={key}>
+                  <div className="flex justify-between">
+                    <span>{resource.name}</span>
+                    <span>{resource.format(resources[key])}</span>
+                  </div>
+
+                  <ul className="ml-2">
+                    {sources
+                      .filter((source) => source.resource === key)
+                      .map((source) => {
+                        return (
+                          <li key={key}>
+                            <div className="flex justify-between">
+                              <span>{source.name}</span>
+                              <span></span>
+                            </div>
+                          </li>
+                        );
+                      })}
+                  </ul>
                 </li>
               );
             },

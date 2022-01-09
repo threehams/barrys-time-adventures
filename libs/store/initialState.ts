@@ -19,7 +19,15 @@ export const initialState: State = {
   },
   timedUpgrades: {
     EW1: {
-      time: hoursToSeconds(24 * 15),
+      time: hoursToSeconds(15 * 24),
+      level: 1,
+    },
+    EW2: {
+      time: hoursToSeconds(21 * 24),
+      level: 1,
+    },
+    EM1: {
+      time: hoursToSeconds(11 * 24),
       level: 1,
     },
   },
@@ -58,7 +66,7 @@ export const initialState: State = {
   timers: {
     action: 0,
     event: 0,
-    betsy: 0,
+    letsy: 0,
     crafts: 0,
     shopping: 0,
     plants: 0,

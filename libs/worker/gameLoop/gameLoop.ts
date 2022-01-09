@@ -184,7 +184,7 @@ const updatePostStats: Updater = (state, delta) => {
   const exploration = findExploration(state.exploration);
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
-      state.skills[stat].current += (delta * rate) / 20000;
+      state.skills[stat].current += (delta * rate) / 200000;
     }
   }
 };
@@ -194,10 +194,11 @@ const updateExplore: Updater = (state, delta) => {
 
   if (state.phase === "postEvent" && state.resources.food <= 0) {
     state.phase = "traveling";
+    state.exploration = undefined;
     state.multiplier = 1;
     state.timers = { ...initialState.timers };
     state.messages.push(
-      "With your supplies gone, the only thing left is to send help to your past. With luck, you'll survive.",
+      "My supplies are gone. I should go help out Past Barry so I can be better prepared.",
     );
   }
 
@@ -205,7 +206,17 @@ const updateExplore: Updater = (state, delta) => {
     return;
   }
   const exploration = findExploration(state.exploration);
-  const progress = (100 / exploration.time) * time;
+  const totalSkills = Object.entries(exploration.train).reduce(
+    (acc, [key, multiplier]) => {
+      if (!multiplier) {
+        return acc;
+      }
+      return state.skills[key].current * multiplier;
+    },
+    0,
+  );
+
+  const progress = (100 / exploration.time) * (time * Math.log(totalSkills));
   state.explorations[state.exploration] ??= { progress: 0 };
   state.explorations[state.exploration]!.progress = Math.min(
     (state.explorations[state.exploration]!.progress ?? 0) + progress,

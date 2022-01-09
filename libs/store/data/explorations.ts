@@ -28,13 +28,13 @@ export const explorations: Exploration[] = [
       "Something is really messed up with the area around here. Space is warped.",
     drain: {
       food: 1,
-      water: 5,
+      water: 2,
     },
     train: {
       perception: 1,
       endurance: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {},
   },
   {
@@ -48,7 +48,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       patience: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E1",
     },
@@ -66,7 +66,7 @@ export const explorations: Exploration[] = [
     train: {
       patience: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "T1",
     },
@@ -83,7 +83,7 @@ export const explorations: Exploration[] = [
     train: {
       endurance: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "T2",
     },
@@ -101,7 +101,7 @@ export const explorations: Exploration[] = [
     train: {
       perception: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E2",
     },
@@ -118,7 +118,7 @@ export const explorations: Exploration[] = [
     train: {
       endurance: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "T3",
     },
@@ -137,7 +137,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       endurance: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E3",
     },
@@ -156,7 +156,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       tech: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E4",
     },
@@ -174,7 +174,7 @@ export const explorations: Exploration[] = [
       strength: 2,
       tech: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "F1",
     },
@@ -192,7 +192,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       endurance: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "F2",
     },
@@ -211,7 +211,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       endurance: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E3",
     },
@@ -230,7 +230,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       endurance: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E3",
     },
@@ -248,7 +248,7 @@ export const explorations: Exploration[] = [
     train: {
       strength: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E6",
     },
@@ -266,7 +266,7 @@ export const explorations: Exploration[] = [
     train: {
       patience: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "S1",
     },

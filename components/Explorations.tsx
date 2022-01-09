@@ -55,7 +55,9 @@ export const Explorations = () => {
               <p>{exploration.description}</p>
               <div>
                 <p>{formatSkills(exploration.train)}</p>
-                <p>{formatDrain(exploration.drain)}</p>
+                {formatDrain(exploration.drain) && (
+                  <p>{formatDrain(exploration.drain)}</p>
+                )}
               </div>
               <Progress progress={currentProgress} />
             </li>
@@ -77,7 +79,7 @@ const formatSkills = (drain: Exploration["train"]) => {
     .filter(isNonNullable)
     .join(", ");
 
-  return `Drains: ${drained}`;
+  return `Skills: ${drained}`;
 };
 
 const formatDrain = (drain: Exploration["drain"]) => {
@@ -92,5 +94,8 @@ const formatDrain = (drain: Exploration["drain"]) => {
     .filter(isNonNullable)
     .join(", ");
 
+  if (!drained) {
+    return "";
+  }
   return `Drains: ${drained}`;
 };

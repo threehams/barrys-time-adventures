@@ -73,7 +73,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "x2 preserved food per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PF1", level: 1 },
+      upgrade: { key: "PF1", level: 3 },
     },
     source: "preserves",
   },
@@ -99,7 +99,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "x0.9 time required for preserved food per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PF1", level: 1 },
+      upgrade: { key: "PF1", level: 5 },
     },
     source: "preserves",
   },
@@ -149,7 +149,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "x0.9 plant growing time per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PF3", level: 1 },
+      upgrade: { key: "PF3", level: 3 },
     },
     source: "plants",
   },
@@ -197,7 +197,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "x0.9 rainwater time per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PW1", level: 1 },
+      upgrade: { key: "PW1", level: 3 },
     },
     source: "rainfall",
   },
@@ -246,7 +246,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "*0.9 filtered water time per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PW4", level: 1 },
+      upgrade: { key: "PW4", level: 3 },
     },
     source: "stream",
   },
@@ -295,7 +295,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "x2 well water per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PW5", level: 1 },
+      upgrade: { key: "PW5", level: 3 },
     },
     source: "well",
   },
@@ -305,7 +305,7 @@ export const upgrades: Upgrade[] = [
     type: "purchased",
     name: "Sell your stuff",
     description:
-      "I should set up a Betsy account and pawn off some of my junk.",
+      "I should set up a Letsy account and pawn off some of my junk.",
     max: 5,
     costs: {
       junk: (level) => {
@@ -321,13 +321,13 @@ export const upgrades: Upgrade[] = [
     effectDescription: "+$1 per level",
     flavorTexts: {},
     requirements: {},
-    source: "betsy",
+    source: "letsy",
   },
   {
     phase: "preEvent",
     key: "PM2",
     type: "purchased",
-    name: "Advertise your Betsy store",
+    name: "Advertise your Letsy store",
     description: "Maybe I can get rid of these vintage Neil Breen DVDs.",
     max: 5,
     costs: {
@@ -344,9 +344,9 @@ export const upgrades: Upgrade[] = [
     effectDescription: "x0.9 sale time per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PM1", level: 1 },
+      upgrade: { key: "PM1", level: 3 },
     },
-    source: "betsy",
+    source: "letsy",
   },
   {
     phase: "preEvent",
@@ -394,7 +394,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "x2 sale value per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PM3", level: 1 },
+      upgrade: { key: "PM3", level: 3 },
     },
     source: "crafts",
   },
@@ -473,7 +473,7 @@ export const upgrades: Upgrade[] = [
     phase: "preEvent",
     key: "EM1",
     type: "event",
-    name: "Betsy downtime",
+    name: "Letsy downtime",
     description:
       "Letsy just had an outage, and it's been flaky ever since. My income there has dropped in half.",
     max: 2,
@@ -560,8 +560,9 @@ export const canShowUpgrade = ({
   playerExplorations,
 }: CanShowUpgrade) => {
   if (
-    upgrade.phase !== phase &&
-    !(upgrade.phase === "postEvent" && phase === "traveling")
+    upgrade.type === "event" ||
+    (upgrade.phase !== phase &&
+      !(upgrade.phase === "postEvent" && phase === "traveling"))
   ) {
     return false;
   }
