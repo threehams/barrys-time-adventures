@@ -1,9 +1,15 @@
-import { explorations } from "@laundry/store";
+import {
+  Exploration,
+  explorations,
+  findResource,
+  findSkill,
+} from "@laundry/store";
 import { Button, Progress } from "@laundry/ui";
+import { isNonNullable } from "@laundry/utils";
 import { useDispatch, useSelector } from "./StateProvider";
 
 export const Explorations = () => {
-  const currentAction = useSelector((state) => state.exploration);
+  const currentExploration = useSelector((state) => state.exploration);
   const phase = useSelector((state) => state.phase);
   const playerExplorations = useSelector((state) => state.explorations);
   const dispatch = useDispatch();
@@ -21,29 +27,36 @@ export const Explorations = () => {
   return (
     <div>
       <ul>
-        {availableActions.map((action) => {
-          const currentProgress = playerExplorations[action.key]?.progress ?? 0;
+        {availableActions.map((exploration) => {
+          const currentProgress =
+            playerExplorations[exploration.key]?.progress ?? 0;
 
           return (
             <li
-              key={action.key}
-              className="flex flex-wrap gap-2 p-2 mb-2 border rounded-md"
+              key={exploration.key}
+              className="flex flex-col gap-2 p-2 mb-2 border rounded-md"
             >
-              <Button
-                disabled={phase === "traveling"}
-                onClick={() => {
-                  dispatch({
-                    type: "EXPLORE",
-                    payload: {
-                      location: action.key,
-                    },
-                  });
-                }}
-              >
-                {action.key === currentAction ? "Stop" : "Go"}
-              </Button>
-              {action.name}
-              <p>{action.description}</p>
+              <div className="flex flex-row gap-2">
+                <Button
+                  disabled={phase === "traveling"}
+                  onClick={() => {
+                    dispatch({
+                      type: "EXPLORE",
+                      payload: {
+                        location: exploration.key,
+                      },
+                    });
+                  }}
+                >
+                  {exploration.key === currentExploration ? "Stop" : "Go"}
+                </Button>
+                {exploration.name}
+              </div>
+              <p>{exploration.description}</p>
+              <div>
+                <p>{formatSkills(exploration.train)}</p>
+                <p>{formatDrain(exploration.drain)}</p>
+              </div>
               <Progress progress={currentProgress} />
             </li>
           );
@@ -51,4 +64,33 @@ export const Explorations = () => {
       </ul>
     </div>
   );
+};
+
+const formatSkills = (drain: Exploration["train"]) => {
+  const drained = Object.entries(drain)
+    .map(([key, value]) => {
+      if (!value) {
+        return null;
+      }
+      return findSkill(key).name;
+    })
+    .filter(isNonNullable)
+    .join(", ");
+
+  return `Drains: ${drained}`;
+};
+
+const formatDrain = (drain: Exploration["drain"]) => {
+  const drained = Object.entries(drain)
+    .map(([key, value]) => {
+      if (!value) {
+        return null;
+      }
+      const resource = findResource(key);
+      return `${resource.name} ${value}x`;
+    })
+    .filter(isNonNullable)
+    .join(", ");
+
+  return `Drains: ${drained}`;
 };

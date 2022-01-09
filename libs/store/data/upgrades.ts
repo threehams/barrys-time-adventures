@@ -24,7 +24,10 @@ export type UpgradeKey =
   | "PM2"
   | "PM3"
   | "PM4"
-  | "TW1";
+  | "TW1"
+  | "EW1"
+  | "EW2"
+  | "EM1";
 export const upgrades: Upgrade[] = [
   {
     phase: "preEvent",
@@ -409,17 +412,84 @@ export const upgrades: Upgrade[] = [
     },
     effect: {
       type: "multiply",
-      food: (level) => {
-        return level + 2;
+      water: (level) => {
+        return level + 1;
       },
     },
     effectDescription: "x2 rainwater, can collect without rainfall",
-    flavorTexts: {
-      1: "Upgrade from the future!",
-    },
+    flavorTexts: {},
     requirements: {
       exploration: "E3",
     },
+    source: "rainfall",
+  },
+  {
+    phase: "preEvent",
+    key: "EW1",
+    type: "event",
+    name: "Rainfall stops",
+    description:
+      "The rain has stopped, so I'm not getting any water that way. I hope it starts up again soon.",
+    max: 2,
+    costs: {},
+    effect: {
+      type: "multiply",
+      water: (level) => {
+        return level - 1;
+      },
+    },
+    effectDescription: "",
+    flavorTexts: {
+      1: "The rain has stopped, so I'm not getting any water that way. I hope it starts up again soon.",
+      2: "The rain has stopped. Luckily, not a problem for the condensate collector. Thanks, Future Barry!",
+    },
+    requirements: {},
+    source: "rainfall",
+  },
+  {
+    phase: "preEvent",
+    key: "EW2",
+    type: "event",
+    name: "Stream contaminated",
+    description:
+      "The stream's started to smell like paint. I'm not sure what happened, but I'm not going to trust it now.",
+    max: 2,
+    costs: {},
+    effect: {
+      type: "multiply",
+      water: (level) => {
+        return level - 1;
+      },
+    },
+    effectDescription: "",
+    flavorTexts: {
+      1: "The stream's started to smell like paint. I'm not sure what happened, but I'm not going to trust it now.",
+      2: "The stream's started to smell like paint, but that's not a problem for this filter. Nice thinking, Future Barry!",
+    },
+    requirements: {},
+    source: "rainfall",
+  },
+  {
+    phase: "preEvent",
+    key: "EM1",
+    type: "event",
+    name: "Betsy downtime",
+    description:
+      "Letsy just had an outage, and it's been flaky ever since. My income there has dropped in half.",
+    max: 2,
+    costs: {},
+    effect: {
+      type: "multiply",
+      water: (level) => {
+        return level - 1;
+      },
+    },
+    effectDescription: "",
+    flavorTexts: {
+      1: "Letsy just had an outage, and it's been flaky ever since. My income there has dropped in half.",
+      2: "",
+    },
+    requirements: {},
     source: "rainfall",
   },
 ];

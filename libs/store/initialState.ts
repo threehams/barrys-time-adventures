@@ -1,3 +1,4 @@
+import { hoursToSeconds } from "date-fns";
 import { State } from "./State";
 
 const STARTING_MONEY = 1000;
@@ -16,7 +17,12 @@ export const initialState: State = {
     PW1: { level: 1 },
     PM1: { level: 1 },
   },
-  timedUpgrades: {},
+  timedUpgrades: {
+    EW1: {
+      time: hoursToSeconds(24 * 15),
+      level: 1,
+    },
+  },
   timeline: [],
   resources: {
     money: STARTING_MONEY,

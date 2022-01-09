@@ -26,7 +26,7 @@ export const updateGame: Updater = (state, delta) => {
       THE_EVENT_TIME - state.time,
     );
   } else {
-    elapsedTime = delta * state.multiplier;
+    elapsedTime = delta * state.multiplier * 25;
   }
   updateTime(state, elapsedTime);
   updateEvent(state, delta);
@@ -41,7 +41,7 @@ const updateTime: Updater = (state, delta) => {
     state.phase = "event";
     state.timers = { ...initialState.timers };
     state.multiplier = 1;
-    state.messages = ["You wake up in a wasteland. Where... when are you?"];
+    state.messages = ["That was strange. Where am I?"];
     return;
   }
 
@@ -88,7 +88,7 @@ const updatePreResources: Updater = (state, delta) => {
     })
     .concat(
       Object.entries(state.timedUpgrades).map(([key, value]) => {
-        if (!value || value.time < state.time) {
+        if (!value || value.time > state.time) {
           return null;
         }
         return { key, level: value.level, upgrade: findUpgrade(key) };

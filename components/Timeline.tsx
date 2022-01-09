@@ -51,9 +51,11 @@ export const Timeline = ({
     .map(([key, value]): TimelineEvent => {
       const upgrade = findUpgrade(key);
       return {
-        type: "permanent",
+        type: upgrade.type === "purchased" ? "permanent" : "event",
         time: value!.time,
-        text: `Timed upgrade: ${upgrade.name}`,
+        text: `${upgrade.type === "purchased" ? "Timed upgrade" : "Event"}: ${
+          upgrade.name
+        }`,
       };
     });
   const events = preEvents.map((event): TimelineEvent => {
@@ -78,6 +80,9 @@ export const Timeline = ({
           );
           const availablePermanent = !!timeline[day]?.find(
             (event) => event.type === "permanent",
+          );
+          const availableEvent = !!timeline[day]?.find(
+            (event) => event.type === "event",
           );
           const muted =
             (selectedUpgrade &&
@@ -104,7 +109,7 @@ export const Timeline = ({
               style={{
                 gridTemplateAreas: `
                 "upgrade permanent"
-                ". ."
+                "event ."
               `,
               }}
               onClick={() => {
@@ -130,6 +135,9 @@ export const Timeline = ({
               {availablePermanent && (
                 <div className="[grid-area:permanent] aspect-[1/1] bg-green-500"></div>
               )}
+              {availableEvent && (
+                <div className="[grid-area:event] aspect-[1/1] bg-red-500"></div>
+              )}
             </button>
           );
         })}
@@ -148,7 +156,7 @@ export const Timeline = ({
 };
 
 type TimelineEvent = {
-  type: "upgrade" | "permanent";
+  type: "upgrade" | "permanent" | "event";
   time: number;
   text: string;
 };
@@ -246,7 +254,11 @@ const DayDetail = ({
                 <div
                   className={clsx(
                     "w-[14px] h-[14px] inline-block mr-1",
-                    event.type === "upgrade" ? "bg-blue-700" : "bg-green-500",
+                    event.type === "upgrade"
+                      ? "bg-blue-700"
+                      : event.type === "event"
+                      ? "bg-red-500"
+                      : "bg-green-500",
                   )}
                 />
                 <span
@@ -275,8 +287,13 @@ const formatAction = (action: StateAction) => {
   switch (action.type) {
     case "BUY_UPGRADE":
       return `Buy upgrade: ${findUpgrade(action.payload.key).name}`;
-    case "BUY_TIMED_UPGRADE":
-      return `Timed upgrade: ${findUpgrade(action.payload.key).name}`;
+    case "BUY_TIMED_UPGRADE": {
+      const upgrade = findUpgrade(action.payload.key);
+      if (upgrade.type === "purchased") {
+        return `Timed upgrade: ${upgrade.name}`;
+      }
+      return `Event: ${upgrade.name}`;
+    }
     default:
       throw new Error(`No text found for action: ${action.type}`);
   }

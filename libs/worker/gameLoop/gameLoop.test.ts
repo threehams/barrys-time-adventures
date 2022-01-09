@@ -73,5 +73,33 @@ describe("gameLoop", () => {
       expect(nextState.timers.preserves).toEqual(1_000);
       expect(nextState.resources.food).toEqual(4);
     });
+
+    it("applies timed upgrades", () => {
+      const state: State = {
+        ...initialState,
+        upgrades: {
+          ...initialState.upgrades,
+          PW1: {
+            level: 2,
+          },
+        },
+        timedUpgrades: {
+          TW1: {
+            level: 1,
+            time: 40_000,
+          },
+        },
+      };
+      const nextState = produce(state, (draft) => {
+        updateGame(draft, 20_000);
+      });
+      expect(nextState.timers.rainfall).toEqual(0);
+      expect(nextState.resources.water).toEqual(2);
+      const nextState2 = produce(nextState, (draft) => {
+        updateGame(draft, 20_000);
+      });
+      expect(nextState2.timers.rainfall).toEqual(0);
+      expect(nextState2.resources.water).toEqual(6);
+    });
   });
 });

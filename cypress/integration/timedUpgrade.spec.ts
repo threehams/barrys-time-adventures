@@ -33,6 +33,9 @@ describe("time travel", () => {
             E1: { progress: 100 },
             T1: { progress: 100 },
             T2: { progress: 100 },
+            E2: { progress: 100 },
+            T3: { progress: 100 },
+            E3: { progress: 100 },
           };
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);
@@ -42,6 +45,7 @@ describe("time travel", () => {
       );
     });
     cy.visit("/");
-    cy.findByText("Time Travel").click();
+    cy.findByText("Send Upgrades").click();
+    cy.findByRole("button", { name: /Buy Condensate Capture/ }).click();
   });
 });

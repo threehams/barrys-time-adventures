@@ -77,7 +77,7 @@ export const Game = () => {
                       setPanel("upgrades");
                     }}
                   >
-                    Time Travel
+                    Send Upgrades
                   </Tab>
                 </Tabs>
                 {panel === "upgrades" && (
