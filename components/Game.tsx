@@ -12,6 +12,8 @@ import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
 import { UpgradeKey } from "@laundry/store";
 import clsx from "clsx";
+import { Glitch } from "./Glitch";
+import { Ending } from "./Ending";
 
 type Panel = "explorations" | "upgrades";
 
@@ -26,11 +28,8 @@ export const Game = () => {
   const layout = useMemo(() => {
     return (
       <div className="relative min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
-        {phase === "event" && (
-          <div className="absolute z-50 flex items-center justify-center min-w-full min-h-screen text-6xl bg-gray-900 text-gray-50">
-            LET&apos;S DO THE TIME WARP
-          </div>
-        )}
+        {phase === "event" && <Glitch />}
+        {phase === "done" && <Ending />}
         <div
           className={clsx(
             "px-4 grid py-4 mx-auto min-w-[1080px] max-w-[1680px] gap-3",

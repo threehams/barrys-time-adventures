@@ -1,9 +1,6 @@
 import { ExplorationKey, Phase, SourceKey, UpgradeKey } from ".";
 
-export type UnlockKey = undefined;
 export type UpgradeEffect = {
-  // Unlock a particular feature permanently
-  unlock?: UnlockKey;
   food?: (level: number) => number;
   water?: (level: number) => number;
   money?: (level: number) => number;

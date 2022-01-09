@@ -9,8 +9,11 @@ export const initialState: State = {
   exploration: undefined,
   time: 0,
   messages: [
-    "The news has been weird lately. I feel like I should prepare.",
-    "My fridge has nothing but condiments.",
+    {
+      priority: "info",
+      text: "The news has been weird lately. I feel like I should prepare.",
+    },
+    { priority: "info", text: "My fridge has nothing but condiments." },
   ],
   upgrades: {
     PF1: { level: 1 },
@@ -81,4 +84,5 @@ export const initialState: State = {
     water: 0,
   },
   loops: 0,
+  unlocks: {},
 };

@@ -1,4 +1,5 @@
 import { ExplorationKey } from "./data/explorations";
+import { UnlockKey } from "./data/unlocks";
 import { UpgradeKey } from "./data/upgrades";
 import { Resource, Resources, SourceKey } from "./Resources";
 import { Skills } from "./Skills";
@@ -16,13 +17,17 @@ export type PlayerExplorations = {
     progress: number;
   };
 };
-type Severity = "note" | "alert";
-export type Message = { text: string; severity: Severity };
+export type Unlocks = {
+  [Key in UnlockKey]?: boolean;
+};
+export type MessageLevel = "info" | "alert";
+export type Message = { text: string; priority: MessageLevel };
 export type State = {
+  unlocks: Unlocks;
   phase: Phase;
   exploration: ExplorationKey | undefined;
   time: number;
-  messages: ReadonlyArray<string>;
+  messages: ReadonlyArray<Message>;
   resources: Resources;
   skills: Skills;
   explorations: PlayerExplorations;

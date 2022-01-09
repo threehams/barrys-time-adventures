@@ -43,7 +43,10 @@ export const explorations: Exploration[] = [
     description:
       "These warped spaces seem random, but maybe if I watch them for long enough, they'll start to make sense.",
     message: 'I\'m calling these "time holes" until I think of a better name.',
-    drain: {},
+    drain: {
+      food: 1,
+      water: 1,
+    },
     train: {
       perception: 2,
       patience: 2,
@@ -58,10 +61,10 @@ export const explorations: Exploration[] = [
     name: "Watch smaller time holes",
     description:
       "I'm not ready to jump into a time hole, but watching from a distance couldn't hurt, right?",
-    message: `Hey! I saw another Barry in one of the holes and called out, and he seemed to notice. It looks like I could influence the past, at least with very short messages. Maybe I'll start with "more water." Unlocked: You can change decisions you made in the past. Click a day on the timeline, then "Restart Here."`,
+    message: `Hey! I saw another Barry in one of the holes and called out, and he seemed to notice. It looks like I could influence the past, at least with very short messages. Maybe I'll start with "more water."`,
     drain: {
-      food: 2,
-      water: 2,
+      food: 1,
+      water: 1,
     },
     train: {
       patience: 2,
@@ -93,7 +96,7 @@ export const explorations: Exploration[] = [
     name: "Figure out lost time",
     description:
       "Time passes more slowly when I'm closer to a time hole, which makes the rest of the world move faster. I could find out how close I can get, and tell Past Barry about this.",
-    message: `For now, I could get time to pass about twice as fast. That'll be better than watching radishes grow.`,
+    message: `For now, I could safely get time to pass about twice as fast. That'll be better than watching radishes grow.`,
     drain: {
       food: 2,
       water: 2,
@@ -258,7 +261,7 @@ export const explorations: Exploration[] = [
     name: "Convince yourself",
     description:
       "Hey! I saw myself from just a day a ago! This time hole seems to fight me a lot less. Maybe I could just jump through?",
-    message: `After a lot of arguing with Past Barry, we agreed to swap places when the time comes. I have no idea what'll happen to him, but that sounds like Future Barry problems, not mine. Unlocked: Restart after the timeskip, but keep some of your stats and knowledge. This may have consequences.`,
+    message: `After a lot of arguing with Past Barry, we agreed to swap places when the time comes. I have no idea what'll happen to him, but that sounds like Future Barry problems, not mine.`,
     drain: {
       food: 2,
       water: 2,

@@ -58,39 +58,40 @@ export const Status = ({ className }: Props) => {
                     <span>{resource.format(resources[key])}</span>
                   </div>
 
-                  <ul className="ml-2">
-                    {sources
-                      .filter((source) => source.resource === key)
-                      .map((source) => {
-                        const oneDay = hoursToSeconds(24);
-                        if (!upgradesBySource[source.key]) {
-                          return null;
-                        }
-                        return (
-                          <li key={source.key}>
-                            <div className="flex justify-between">
-                              <span>{source.name}</span>
-                              <span>
-                                {resource.format(
-                                  Math.floor(
-                                    getSourceAmount(
-                                      upgradesBySource[source.key],
-                                      source,
-                                    ) *
-                                      (oneDay /
-                                        getSourceTime(
-                                          upgradesBySource[source.key],
-                                          source,
-                                        )),
-                                  ),
-                                )}
-                                /day
-                              </span>
-                            </div>
-                          </li>
-                        );
-                      })}
-                  </ul>
+                  {phase === "preEvent" && (
+                    <ul className="ml-2">
+                      {sources
+                        .filter((source) => source.resource === key)
+                        .map((source) => {
+                          const oneDay = hoursToSeconds(24);
+                          if (!upgradesBySource[source.key]) {
+                            return null;
+                          }
+                          const perDay =
+                            getSourceAmount(
+                              upgradesBySource[source.key],
+                              source,
+                            ) *
+                            (oneDay /
+                              getSourceTime(
+                                upgradesBySource[source.key],
+                                source,
+                              ));
+
+                          return (
+                            <li key={source.key}>
+                              <div className="flex justify-between">
+                                <span>{source.name}</span>
+                                <span>
+                                  {resource.format(Math.floor(perDay))}
+                                  /day
+                                </span>
+                              </div>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  )}
                 </li>
               );
             },

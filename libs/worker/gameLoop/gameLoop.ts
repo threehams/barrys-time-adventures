@@ -48,7 +48,7 @@ const updateMessages: Updater = (state, delta) => {
     if (value.time < state.time && value.time > state.time - delta) {
       const text = upgrade.flavorTexts[value.level];
       if (text) {
-        state.messages.push(text);
+        state.messages.push({ priority: "alert", text });
       }
     }
   }
@@ -59,7 +59,9 @@ const updateTime: Updater = (state, delta) => {
     state.phase = "event";
     state.timers = { ...initialState.timers };
     state.multiplier = 1;
-    state.messages = ["That was strange. Where am I?"];
+    state.messages = [
+      { priority: "info", text: "That was strange. Where am I?" },
+    ];
     return;
   }
 
@@ -166,9 +168,10 @@ const updateExplore: Updater = (state, delta) => {
     state.exploration = undefined;
     state.multiplier = 1;
     state.timers = { ...initialState.timers };
-    state.messages.push(
-      "My supplies are gone. I should go help out Past Barry so I can be better prepared.",
-    );
+    state.messages.push({
+      priority: "alert",
+      text: "My supplies are gone. I should go help out Past Barry so I can be better prepared.",
+    });
   }
 
   if (!state.exploration) {
@@ -194,7 +197,7 @@ const updateExplore: Updater = (state, delta) => {
   if (state.explorations[state.exploration]!.progress === 100) {
     state.exploration = undefined;
     if (exploration.message) {
-      state.messages.push(exploration.message);
+      state.messages.push({ priority: "info", text: exploration.message });
     }
   }
 };
