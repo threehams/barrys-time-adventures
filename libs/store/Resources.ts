@@ -14,7 +14,8 @@ export type SourceKey =
   | "letsy"
   | "crafts";
 
-export const sources: { key: SourceKey; name: string; resource: Resource }[] = [
+export type Source = { key: SourceKey; name: string; resource: Resource };
+export const sources: Source[] = [
   { key: "letsy", name: "Letsy", resource: "money" },
   { key: "crafts", name: "Crafts", resource: "money" },
   { key: "well", name: "Well Water", resource: "water" },

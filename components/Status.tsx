@@ -1,7 +1,15 @@
 import { useSelector } from "./StateProvider";
-import { addMilliseconds, format, sub } from "date-fns";
+import { addMilliseconds, format, hoursToSeconds, sub } from "date-fns";
 import { Progress } from "@laundry/ui";
-import { findResource, findSkill, sources } from "@laundry/store";
+import {
+  findResource,
+  findSkill,
+  getAllUpgrades,
+  getSourceAmount,
+  getSourceTime,
+  sources,
+} from "@laundry/store";
+import { groupBy } from "lodash";
 
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0).valueOf();
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 }).valueOf();
@@ -16,6 +24,13 @@ export const Status = ({ className }: Props) => {
   const phase = useSelector((state) => state.phase);
   const loops = useSelector((state) => state.loops);
   const skills = useSelector((state) => state.skills);
+  const upgrades = useSelector((state) => state.upgrades);
+  const timedUpgrades = useSelector((state) => state.timedUpgrades);
+  const allUpgrades = getAllUpgrades({ upgrades, time, timedUpgrades });
+  const upgradesBySource = groupBy(
+    allUpgrades,
+    (value) => value.upgrade.source,
+  );
 
   const startDate =
     phase === "postEvent" || phase === "traveling"
@@ -47,11 +62,30 @@ export const Status = ({ className }: Props) => {
                     {sources
                       .filter((source) => source.resource === key)
                       .map((source) => {
+                        const oneDay = hoursToSeconds(24);
+                        if (!upgradesBySource[source.key]) {
+                          return null;
+                        }
                         return (
-                          <li key={key}>
+                          <li key={source.key}>
                             <div className="flex justify-between">
                               <span>{source.name}</span>
-                              <span></span>
+                              <span>
+                                {resource.format(
+                                  Math.floor(
+                                    getSourceAmount(
+                                      upgradesBySource[source.key],
+                                      source,
+                                    ) *
+                                      (oneDay /
+                                        getSourceTime(
+                                          upgradesBySource[source.key],
+                                          source,
+                                        )),
+                                  ),
+                                )}
+                                /day
+                              </span>
                             </div>
                           </li>
                         );

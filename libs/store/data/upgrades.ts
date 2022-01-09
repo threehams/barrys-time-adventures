@@ -467,7 +467,7 @@ export const upgrades: Upgrade[] = [
       2: "The stream's started to smell like paint, but that's not a problem for this filter. Nice thinking, Future Barry!",
     },
     requirements: {},
-    source: "rainfall",
+    source: "stream",
   },
   {
     phase: "preEvent",
@@ -480,8 +480,8 @@ export const upgrades: Upgrade[] = [
     costs: {},
     effect: {
       type: "multiply",
-      water: (level) => {
-        return level - 1;
+      money: (level) => {
+        return level === 1 ? 0.5 : 1;
       },
     },
     effectDescription: "",
@@ -490,7 +490,7 @@ export const upgrades: Upgrade[] = [
       2: "",
     },
     requirements: {},
-    source: "rainfall",
+    source: "letsy",
   },
 ];
 

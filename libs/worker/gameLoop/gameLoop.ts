@@ -1,11 +1,13 @@
 import {
   findExploration,
   findUpgrade,
+  getAllUpgrades,
+  getSourceAmount,
+  getSourceTime,
   initialState,
   sources,
   State,
 } from "@laundry/store";
-import { isNonNullable } from "@laundry/utils";
 import { sub } from "date-fns";
 import { Draft } from "immer";
 import { groupBy } from "lodash";
@@ -13,7 +15,6 @@ import { groupBy } from "lodash";
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0);
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 });
 const THE_EVENT_TIME = (THE_EVENT_DATE.valueOf() - START_DATE.valueOf()) / 1000;
-const RESOURCE_GAIN_BASE_TIME = 20_000;
 const RESOURCE_DRAIN_BASE_TIME = 1_000;
 
 type Updater = (state: Draft<State>, delta: number) => Draft<State> | void;
@@ -34,6 +35,23 @@ export const updateGame: Updater = (state, delta) => {
   updatePostResources(state, elapsedTime);
   updatePostStats(state, elapsedTime);
   updateExplore(state, elapsedTime);
+  updateMessages(state, elapsedTime);
+};
+
+const updateMessages: Updater = (state, delta) => {
+  for (const [key, value] of Object.entries(state.timedUpgrades)) {
+    const upgrade = findUpgrade(key);
+    if (!value || upgrade.type !== "event") {
+      continue;
+    }
+
+    if (value.time < state.time && value.time > state.time - delta) {
+      const text = upgrade.flavorTexts[value.level];
+      if (text) {
+        state.messages.push(text);
+      }
+    }
+  }
 };
 
 const updateTime: Updater = (state, delta) => {
@@ -72,41 +90,7 @@ const updatePreResources: Updater = (state, delta) => {
     return;
   }
 
-  // filter timed upgrades by current time, and convert to same format
-  // group all upgrades by source
-  // filter by whether the source is active
-  // and sort by add, then multiply
-  // add all add upgrades together
-  // multiply by each multiply upgrade
-
-  const allUpgrades = Object.entries(state.upgrades)
-    .map(([key, value]) => {
-      if (!value) {
-        return null;
-      }
-      return { key, level: value.level, upgrade: findUpgrade(key) };
-    })
-    .concat(
-      Object.entries(state.timedUpgrades).map(([key, value]) => {
-        if (!value || value.time > state.time) {
-          return null;
-        }
-        return { key, level: value.level, upgrade: findUpgrade(key) };
-      }),
-    )
-    .filter(isNonNullable)
-    .sort((a, b) => {
-      const typeA = a.upgrade.effect.type;
-      const typeB = b.upgrade.effect.type;
-      if (typeA === typeB) {
-        return 0;
-      }
-      if (typeA === "add" && typeB === "multiply") {
-        return -1;
-      }
-      return 1;
-    });
-
+  const allUpgrades = getAllUpgrades(state);
   const upgradesBySource = groupBy(
     allUpgrades,
     (value) => value.upgrade.source,
@@ -119,31 +103,16 @@ const updatePreResources: Updater = (state, delta) => {
     }
 
     timers[source.key] += delta;
-    const time = sourceUpgrades.reduce((acc, value) => {
-      const func = value.upgrade.effect[source.resource];
-      if (func && value.upgrade.effect.type === "time") {
-        return Math.floor(acc * func(value.level));
-      }
-      return acc;
-    }, RESOURCE_GAIN_BASE_TIME);
+    const time = getSourceTime(sourceUpgrades, source);
 
     // apply upgrades to time
     const counts = Math.floor(timers[source.key] / time);
 
     if (counts) {
-      const upgradedCounts = sourceUpgrades.reduce((acc, value) => {
-        const upgrade = value.upgrade;
-        const effect = upgrade.effect[source.resource];
-        if (effect && upgrade.effect.type === "add") {
-          return acc + effect(value.level);
-        } else if (effect && upgrade.effect.type === "multiply") {
-          return acc * effect(value.level);
-        }
-        return acc;
-      }, 0);
+      const perCount = getSourceAmount(sourceUpgrades, source);
 
       timers[source.key] = timers[source.key] % time;
-      state.resources[source.resource] += counts * upgradedCounts;
+      state.resources[source.resource] += counts * perCount;
     }
   }
 };
