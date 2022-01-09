@@ -1,5 +1,4 @@
-import { findUpgrade, initialState, State, StateAction } from "@laundry/store";
-import { hoursToSeconds } from "date-fns";
+import { initialState, State, StateAction } from "@laundry/store";
 import { enablePatches, produceWithPatches } from "immer";
 import localForage from "localforage";
 import { eventHandler, updateGame } from "./gameLoop";
@@ -37,43 +36,6 @@ const main = async () => {
       if (action.type === "RESET_GAME") {
         localForage.removeItem(savedGameKey);
         return initialState;
-      }
-      if (action.type === "TRAVEL") {
-        draft.explorations = {};
-        draft.resources = {
-          savedTime: draft.resources.savedTime,
-          food: initialState.resources.food,
-          water: initialState.resources.water,
-          money: initialState.resources.money,
-          junk: initialState.resources.junk,
-        };
-
-        const timeline = draft.timeline;
-        draft.timeline = [];
-        draft.time = 0;
-        draft.phase = "preEvent";
-        draft.upgrades = Object.fromEntries(
-          Object.entries(draft.upgrades)
-            .filter(([key]) => {
-              return findUpgrade(key).phase !== "preEvent";
-            })
-            .map(([key, level]) => {
-              return [key, level] as const;
-            }),
-        );
-        let last = 0;
-        for (const event of timeline) {
-          if (
-            Math.floor(event.time / hoursToSeconds(24)) >= action.payload.day
-          ) {
-            break;
-          }
-          updateGame(draft, event.time - last);
-          eventHandler(draft, event.action);
-          last = event.time - last;
-        }
-        updateGame(draft, hoursToSeconds(24) * action.payload.day - last);
-        return;
       }
       return eventHandler(draft, action);
     });

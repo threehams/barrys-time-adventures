@@ -1,6 +1,7 @@
-import { StateAction, State, findUpgrade } from "@laundry/store";
+import { StateAction, State, findUpgrade, initialState } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 import { Draft } from "immer";
+import { updateGame } from "./gameLoop";
 
 export const eventHandler = (
   state: Draft<State>,
@@ -73,5 +74,47 @@ export const eventHandler = (
 
       state.exploration = action.payload.location;
       break;
+    case "TRAVEL": {
+      if (action.type === "TRAVEL") {
+        state.explorations = {};
+        state.resources = {
+          savedTime: state.resources.savedTime,
+          food: initialState.resources.food,
+          water: initialState.resources.water,
+          money: initialState.resources.money,
+          junk: initialState.resources.junk,
+        };
+
+        const timeline = state.timeline;
+        state.timeline = [];
+        state.time = 0;
+        state.phase = "preEvent";
+        state.upgrades = {
+          ...initialState.upgrades,
+          ...Object.fromEntries(
+            Object.entries(state.upgrades)
+              .filter(([key]) => {
+                return findUpgrade(key).phase !== "preEvent";
+              })
+              .map(([key, level]) => {
+                return [key, level] as const;
+              }),
+          ),
+        };
+        let last = 0;
+        for (const event of timeline) {
+          if (
+            Math.floor(event.time / hoursToSeconds(24)) >= action.payload.day
+          ) {
+            break;
+          }
+          updateGame(state, event.time - last);
+          eventHandler(state, event.action);
+          last = event.time;
+        }
+        updateGame(state, hoursToSeconds(24) * action.payload.day - last);
+        return;
+      }
+    }
   }
 };

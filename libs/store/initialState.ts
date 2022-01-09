@@ -11,7 +11,11 @@ export const initialState: State = {
     "The news has been weird lately. I feel like I should prepare.",
     "My fridge has nothing but condiments.",
   ],
-  upgrades: {},
+  upgrades: {
+    PF1: { level: 1 },
+    PW1: { level: 1 },
+    PM1: { level: 1 },
+  },
   timedUpgrades: {},
   timeline: [],
   resources: {
@@ -48,9 +52,19 @@ export const initialState: State = {
   timers: {
     action: 0,
     event: 0,
+    betsy: 0,
+    crafts: 0,
+    shopping: 0,
+    plants: 0,
+    preserves: 0,
+    rainfall: 0,
+    stream: 0,
+    well: 0,
     food: 0,
-    water: 0,
+    junk: 0,
     money: 0,
+    savedTime: 0,
+    water: 0,
   },
   loops: 0,
 };

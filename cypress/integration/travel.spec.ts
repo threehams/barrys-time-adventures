@@ -38,6 +38,24 @@ describe("time travel", () => {
             },
             time: hoursToSeconds(49),
           });
+          draft.timeline.push({
+            action: {
+              type: "BUY_UPGRADE",
+              payload: {
+                key: "PF1",
+              },
+            },
+            time: 1300087,
+          });
+          draft.timeline.push({
+            action: {
+              type: "BUY_UPGRADE",
+              payload: {
+                key: "PF1",
+              },
+            },
+            time: 1300271,
+          });
           draft.timedUpgrades = {
             TW1: {
               level: 1,

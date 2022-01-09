@@ -1,6 +1,6 @@
 import { ExplorationKey } from "./data/explorations";
 import { UpgradeKey } from "./data/upgrades";
-import { Resources } from "./Resources";
+import { Resource, Resources, SourceKey } from "./Resources";
 import { Skills } from "./Skills";
 import { StateAction } from "./StateAction";
 
@@ -34,11 +34,7 @@ export type State = {
   }>;
   multiplier: number;
   timers: {
-    food: number;
-    event: number;
-    action: number;
-    water: number;
-    money: number;
+    [Key in SourceKey | "event" | "action" | Resource]: number;
   };
   loops: number;
 };

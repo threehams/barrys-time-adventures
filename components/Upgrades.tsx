@@ -45,7 +45,7 @@ export const Upgrades = ({
   }, [phase, playerExplorations, purchasedUpgrades, timedUpgradeMap]);
 
   return (
-    <section className={clsx("flex flex-col gap-2", className)}>
+    <ul className={clsx("flex flex-col gap-2", className)}>
       {availableUpgrades.map((upgrade) => {
         const level = purchasedUpgrades[upgrade.key]?.level ?? 0;
         const flavorText = upgrade.flavorTexts[level];
@@ -61,47 +61,57 @@ export const Upgrades = ({
           .join(", ");
 
         return (
-          <div
-            className="flex flex-wrap p-2 border rounded-sm gap-x-2"
+          <li
+            className={clsx(
+              "flex flex-col p-2 border rounded-sm gap-x-2",
+              upgrade.requirements.upgrade && "ml-2",
+            )}
             key={upgrade.key}
           >
-            <Button
-              disabled={
-                !canPurchaseUpgrade({
-                  upgrade,
-                  phase,
-                  playerExplorations,
-                  purchasedUpgrades,
-                  timedUpgrades: timedUpgradeMap,
-                  distance: 0,
-                  resources,
-                })
-              }
-              aria-label={`Buy ${upgrade.name}`}
-              active={selectedUpgrade === upgrade.key}
-              onClick={() => {
-                if (upgrade.phase === "postEvent") {
-                  setSelectedUpgrade((current) =>
-                    current === upgrade.key ? undefined : upgrade.key,
-                  );
-                  return;
+            <div className="flex flex-row gap-2">
+              <Button
+                disabled={
+                  !canPurchaseUpgrade({
+                    upgrade,
+                    phase,
+                    playerExplorations,
+                    purchasedUpgrades,
+                    timedUpgrades: timedUpgradeMap,
+                    distance: 0,
+                    resources,
+                  })
                 }
-                dispatch({
-                  type: "BUY_UPGRADE",
-                  payload: { key: upgrade.key },
-                });
-              }}
-            >
-              Buy {level > 0 && `(${level})`}
-            </Button>
-            <div>
-              {upgrade.name} {level !== upgrade.max && `(${costs})`}
+                aria-label={`Buy ${upgrade.name}`}
+                active={selectedUpgrade === upgrade.key}
+                onClick={() => {
+                  if (upgrade.phase === "postEvent") {
+                    setSelectedUpgrade((current) =>
+                      current === upgrade.key ? undefined : upgrade.key,
+                    );
+                    return;
+                  }
+                  dispatch({
+                    type: "BUY_UPGRADE",
+                    payload: { key: upgrade.key },
+                  });
+                }}
+              >
+                Buy {level > 0 && `(${level !== upgrade.max ? level : "MAX"})`}
+              </Button>
+              <div>
+                {upgrade.name} {level !== upgrade.max && `(${costs})`}
+              </div>
             </div>
-            {level !== upgrade.max && <p>{upgrade.description}</p>}
+            {level !== upgrade.max && (
+              <>
+                <p>{upgrade.effectDescription}</p>
+                <p>{upgrade.description}</p>
+              </>
+            )}
             {flavorText && <p className="col-start-2">{flavorText}</p>}
-          </div>
+          </li>
         );
       })}
-    </section>
+    </ul>
   );
 };

@@ -176,9 +176,70 @@ const DayDetail = ({
   const dispatch = useDispatch();
 
   return (
-    <div className="relative">
+    <div
+      className="relative grid grid-cols-[1fr_50px]"
+      style={{
+        gridTemplateAreas: `
+      "restart close"
+      "events events"
+    `,
+      }}
+    >
+      <Button
+        className="[grid-area:close]"
+        onClick={() => {
+          setSelectedDay(undefined);
+        }}
+      >
+        X
+      </Button>
+      {selectedUpgrade && (
+        <div className="[grid-area:restart]">
+          <Button
+            onClick={() => {
+              dispatch({
+                type: "BUY_TIMED_UPGRADE",
+                payload: {
+                  key: selectedUpgrade.key,
+                  day: selectedDay,
+                },
+              });
+              setSelectedUpgrade(undefined);
+            }}
+          >
+            Send Upgrade (
+            {upgradeCost({
+              upgrade: selectedUpgrade,
+              resources,
+              currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
+              distance: 29 - selectedDay,
+            })
+              .map((resource) => `${resource.cost} ${resource.key}`)
+              .join(",")}
+            )
+          </Button>
+        </div>
+      )}
+      {selectedDay !== undefined && phase !== "preEvent" && !selectedUpgrade && (
+        <div className="[grid-area:restart]">
+          <Button
+            variant="danger"
+            onClick={() => {
+              setSelectedDay(undefined);
+              dispatch({
+                type: "TRAVEL",
+                payload: {
+                  day: selectedDay,
+                },
+              });
+            }}
+          >
+            Restart Here
+          </Button>
+        </div>
+      )}
       {events !== undefined && (
-        <ul>
+        <ul className="[grid-area:events]">
           {events.map((event) => {
             return (
               <li key={event.time} className="flex items-center">
@@ -206,55 +267,6 @@ const DayDetail = ({
           })}
         </ul>
       )}
-      {selectedUpgrade && (
-        <Button
-          onClick={() => {
-            dispatch({
-              type: "BUY_TIMED_UPGRADE",
-              payload: {
-                key: selectedUpgrade.key,
-                day: selectedDay,
-              },
-            });
-            setSelectedUpgrade(undefined);
-          }}
-        >
-          Send Upgrade (
-          {upgradeCost({
-            upgrade: selectedUpgrade,
-            resources,
-            currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
-            distance: 29 - selectedDay,
-          })
-            .map((resource) => `${resource.cost} ${resource.key}`)
-            .join(",")}
-          )
-        </Button>
-      )}
-      {selectedDay !== undefined && phase !== "preEvent" && (
-        <Button
-          variant="danger"
-          onClick={() => {
-            setSelectedDay(undefined);
-            dispatch({
-              type: "TRAVEL",
-              payload: {
-                day: selectedDay,
-              },
-            });
-          }}
-        >
-          Restart Here
-        </Button>
-      )}
-      <Button
-        className="absolute top-[2px] right-[2px]"
-        onClick={() => {
-          setSelectedDay(undefined);
-        }}
-      >
-        X
-      </Button>
     </div>
   );
 };

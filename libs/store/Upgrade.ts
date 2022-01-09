@@ -1,17 +1,16 @@
-import { ExplorationKey, Phase, UpgradeKey } from ".";
+import { ExplorationKey, Phase, SourceKey, UpgradeKey } from ".";
 
 export type UnlockKey = undefined;
 export type UpgradeEffect = {
   // Unlock a particular feature permanently
   unlock?: UnlockKey;
-  // Change rate of food increase
-  food?: (num: number, level: number) => number;
-  // Change rate of water increase
-  water?: (num: number, level: number) => number;
-  // Change rate of money increase
-  money?: (num: number, level: number) => number;
+  food?: (level: number) => number;
+  water?: (level: number) => number;
+  money?: (level: number) => number;
+  junk?: (level: number) => number;
+  savedTime?: (level: number) => number;
   // Is this additive or multiplicative with other upgrades?
-  type: "add" | "multiply";
+  type: "add" | "multiply" | "time";
 };
 
 export type Upgrade = {
@@ -28,6 +27,7 @@ export type Upgrade = {
     exploration?: ExplorationKey;
     upgrade?: { key: UpgradeKey; level: number };
   };
+  type: "purchased" | "event";
   // Required to buy this upgrade
   costs: {
     money?: (level: number, distance: number) => number;
@@ -40,6 +40,10 @@ export type Upgrade = {
   name: string;
   // Flavor text for all levels
   description: string;
+  // String representation of the effect this upgrade has
+  effectDescription: string;
+  // Source
+  source: SourceKey;
   // Precise key for the upgrade (not string)
   key: UpgradeKey;
   // Changes caused by this upgrade
