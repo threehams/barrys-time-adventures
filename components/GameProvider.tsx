@@ -33,7 +33,7 @@ export const GameProvider = () => {
   );
 };
 
-const ErrorReset = ({ error }) => {
+const ErrorReset = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-1 text-center">
       Game crashes, likely an out-of-date save game. Save game migration is not
