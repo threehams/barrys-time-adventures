@@ -20,7 +20,9 @@ describe("exploration", () => {
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);
           draft.resources.food = 50_000;
-          draft.resources.water = 50_000;
+          draft.resources.water = 12_500;
+          draft.resources.money = 4_500;
+          draft.resources.junk = 2_700;
         }),
       );
     });

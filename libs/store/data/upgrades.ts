@@ -14,6 +14,8 @@ export type UpgradeKey =
   | "PF4"
   | "PF5"
   | "PF6"
+  | "PJ1"
+  | "PJ2"
   | "PW1"
   | "PW2"
   | "PW3"
@@ -24,6 +26,7 @@ export type UpgradeKey =
   | "PM2"
   | "PM3"
   | "PM4"
+  | "PM5"
   | "TW1"
   | "EW1"
   | "EW2"
@@ -49,7 +52,9 @@ export const upgrades: Upgrade[] = [
     },
     effectDescription: "+1 preserved food per level",
     flavorTexts: {},
-    requirements: {},
+    requirements: {
+      money: 100,
+    },
     source: "preserves",
   },
   {
@@ -124,7 +129,9 @@ export const upgrades: Upgrade[] = [
     },
     effectDescription: "+1 plant food per level",
     flavorTexts: {},
-    requirements: {},
+    requirements: {
+      food: 100,
+    },
     source: "plants",
   },
   {
@@ -173,7 +180,9 @@ export const upgrades: Upgrade[] = [
     },
     effectDescription: "+1 rainwater per level",
     flavorTexts: {},
-    requirements: {},
+    requirements: {
+      money: 300,
+    },
     source: "rainfall",
   },
   {
@@ -221,7 +230,9 @@ export const upgrades: Upgrade[] = [
     },
     effectDescription: "+1 filtered water per level",
     flavorTexts: {},
-    requirements: {},
+    requirements: {
+      water: 100,
+    },
     source: "stream",
   },
   {
@@ -246,7 +257,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "*0.8 filtered water time per level",
     flavorTexts: {},
     requirements: {
-      upgrade: { key: "PW4", level: 3 },
+      upgrade: { key: "PW3", level: 3 },
     },
     source: "stream",
   },
@@ -271,7 +282,9 @@ export const upgrades: Upgrade[] = [
     },
     effectDescription: "+1 well water per level",
     flavorTexts: {},
-    requirements: {},
+    requirements: {
+      water: 300,
+    },
     source: "well",
   },
   {
@@ -305,7 +318,7 @@ export const upgrades: Upgrade[] = [
     type: "purchased",
     name: "Sell your stuff",
     description:
-      "I should set up a Letsy account and pawn off some of my junk.",
+      "I should set up a Letsy account and pawn off some of my junk for steady income.",
     max: 5,
     costs: {
       junk: (level) => {
@@ -318,7 +331,7 @@ export const upgrades: Upgrade[] = [
         return level + 1;
       },
     },
-    effectDescription: "+$1 per level",
+    effectDescription: "+$1 sales per level",
     flavorTexts: {},
     requirements: {},
     source: "letsy",
@@ -350,6 +363,32 @@ export const upgrades: Upgrade[] = [
   },
   {
     phase: "preEvent",
+    key: "PM5",
+    type: "purchased",
+    name: "Set up multiple accounts",
+    description:
+      "It's against their Terms of Service, but they probably won't notice.",
+    max: 5,
+    costs: {
+      money: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "multiply",
+      money: (level) => {
+        return level + 1;
+      },
+    },
+    effectDescription: "x2 sales per level",
+    flavorTexts: {},
+    requirements: {
+      upgrade: { key: "PM1", level: 5 },
+    },
+    source: "letsy",
+  },
+  {
+    phase: "preEvent",
     key: "PM3",
     type: "purchased",
     name: "Sell some scrap art",
@@ -369,7 +408,9 @@ export const upgrades: Upgrade[] = [
     },
     effectDescription: "+1 crafts sale per level",
     flavorTexts: {},
-    requirements: {},
+    requirements: {
+      money: 200,
+    },
     source: "crafts",
   },
   {
@@ -406,7 +447,7 @@ export const upgrades: Upgrade[] = [
     description: "Pluck water out of the air instead of relying on rainfall.",
     max: 5,
     costs: {
-      savedTime: (level, distance) => {
+      food: (level, distance) => {
         return level * 100 + distance * 10;
       },
     },
@@ -492,6 +533,58 @@ export const upgrades: Upgrade[] = [
     requirements: {},
     source: "letsy",
   },
+  {
+    phase: "preEvent",
+    key: "PJ1",
+    type: "purchased",
+    name: "Set up scrap delivery",
+    description:
+      "There's a local scrapyard I could pay for regular deliveries.",
+    max: 5,
+    costs: {
+      money: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      junk: (level) => {
+        return level;
+      },
+    },
+    effectDescription: "+1 scrap metal per level",
+    flavorTexts: {},
+    requirements: {
+      money: 50,
+    },
+    source: "scrap",
+  },
+  {
+    phase: "preEvent",
+    key: "PJ2",
+    type: "purchased",
+    name: "Improve scrap quality",
+    description:
+      "Pay the scrapyard a bit more for less rust and more usable pieces.",
+    max: 5,
+    costs: {
+      money: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      junk: (level) => {
+        return level;
+      },
+    },
+    effectDescription: "+1 scrap metal per level",
+    flavorTexts: {},
+    requirements: {
+      money: 100,
+    },
+    source: "scrap",
+  },
 ];
 
 export const findUpgrade = (key: UpgradeKey) => {
@@ -506,6 +599,7 @@ type CanPurchaseUpgrade = {
   phase: Phase;
   upgrade: Upgrade;
   resources: Resources;
+  maxResources: Resources;
   distance: number;
   purchasedUpgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;
@@ -515,6 +609,7 @@ export const canPurchaseUpgrade = ({
   phase,
   upgrade,
   resources,
+  maxResources,
   distance,
   purchasedUpgrades,
   timedUpgrades,
@@ -529,6 +624,8 @@ export const canPurchaseUpgrade = ({
       purchasedUpgrades,
       timedUpgrades,
       playerExplorations,
+      resources,
+      maxResources,
     })
   ) {
     return false;
@@ -551,6 +648,8 @@ type CanShowUpgrade = {
   purchasedUpgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;
   playerExplorations: PlayerExplorations;
+  resources: Resources;
+  maxResources: Resources;
 };
 export const canShowUpgrade = ({
   phase,
@@ -558,6 +657,7 @@ export const canShowUpgrade = ({
   purchasedUpgrades,
   timedUpgrades,
   playerExplorations,
+  maxResources,
 }: CanShowUpgrade) => {
   if (
     upgrade.type === "event" ||
@@ -565,6 +665,17 @@ export const canShowUpgrade = ({
       !(upgrade.phase === "postEvent" && phase === "traveling"))
   ) {
     return false;
+  }
+  if (purchasedUpgrades[upgrade.key]?.level) {
+    return true;
+  }
+  for (const [key, amount] of Object.entries(upgrade.requirements)) {
+    if (
+      (key === "food" || key === "water" || key === "money") &&
+      maxResources[key] < (amount as number)
+    ) {
+      return false;
+    }
   }
   if (
     upgrade.requirements.exploration &&

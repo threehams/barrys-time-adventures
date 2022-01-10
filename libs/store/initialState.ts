@@ -1,8 +1,7 @@
 import { hoursToSeconds } from "date-fns";
 import { State } from "./State";
 
-const STARTING_MONEY = 1000;
-const STARTING_JUNK = 1000;
+const STARTING_JUNK = 100;
 
 export const initialState: State = {
   phase: "preEvent",
@@ -15,11 +14,7 @@ export const initialState: State = {
     },
     { priority: "info", text: "My fridge has nothing but condiments." },
   ],
-  upgrades: {
-    PF1: { level: 1 },
-    PW1: { level: 1 },
-    PM1: { level: 1 },
-  },
+  upgrades: {},
   timedUpgrades: {
     EW1: {
       time: hoursToSeconds(15 * 24),
@@ -36,11 +31,18 @@ export const initialState: State = {
   },
   timeline: [],
   resources: {
-    money: STARTING_MONEY,
+    money: 0,
     water: 0,
     food: 0,
     junk: STARTING_JUNK,
-    savedTime: 1,
+    power: 0,
+  },
+  maxResources: {
+    money: 0,
+    water: 0,
+    food: 0,
+    junk: STARTING_JUNK,
+    power: 0,
   },
   skills: {
     perception: {
@@ -65,8 +67,9 @@ export const initialState: State = {
     },
   },
   explorations: {},
-  multiplier: 1,
+  multiplier: 2,
   timers: {
+    scrap: 0,
     action: 0,
     event: 0,
     letsy: 0,
@@ -80,7 +83,7 @@ export const initialState: State = {
     food: 0,
     junk: 0,
     money: 0,
-    savedTime: 0,
+    power: 0,
     water: 0,
   },
   loops: 0,

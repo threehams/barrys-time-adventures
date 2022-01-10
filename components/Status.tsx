@@ -40,7 +40,7 @@ export const Status = ({ className }: Props) => {
 
   const timeOfDay = format(
     addMilliseconds(startDate, time * 1000),
-    "MMMM d, yyyy hh:mm bb",
+    "MMMM d, yyyy HH:mm",
   );
 
   return (
@@ -49,54 +49,52 @@ export const Status = ({ className }: Props) => {
         <div className="mb-2">It is {timeOfDay}.</div>
         <h2 className="font-bold">Inventory</h2>
         <ul>
-          {(["food", "water", "money", "junk", "savedTime"] as const).map(
-            (key) => {
-              const resource = findResource(key);
-              return (
-                <li key={key}>
-                  <div className="flex justify-between">
-                    <span>{resource.name}</span>
-                    <span>{resource.format(resources[key])}</span>
-                  </div>
+          {(["food", "water", "money", "junk", "power"] as const).map((key) => {
+            const resource = findResource(key);
+            return (
+              <li key={key}>
+                <div className="flex justify-between">
+                  <span>{resource.name}</span>
+                  <span>{resource.format(resources[key])}</span>
+                </div>
 
-                  {phase === "preEvent" && (
-                    <ul className="ml-2">
-                      {sources
-                        .filter((source) => source.resource === key)
-                        .map((source) => {
-                          const oneDay = hoursToSeconds(24);
-                          if (!upgradesBySource[source.key]) {
-                            return null;
-                          }
-                          const perDay =
-                            getSourceAmount(
+                {phase === "preEvent" && (
+                  <ul className="ml-2">
+                    {sources
+                      .filter((source) => source.resource === key)
+                      .map((source) => {
+                        const oneDay = hoursToSeconds(24);
+                        if (!upgradesBySource[source.key]) {
+                          return null;
+                        }
+                        const perDay =
+                          getSourceAmount(
+                            upgradesBySource[source.key],
+                            source,
+                          ) *
+                          (oneDay /
+                            getSourceTime(
                               upgradesBySource[source.key],
                               source,
-                            ) *
-                            (oneDay /
-                              getSourceTime(
-                                upgradesBySource[source.key],
-                                source,
-                              ));
+                            ));
 
-                          return (
-                            <li key={source.key}>
-                              <div className="flex justify-between">
-                                <span>{source.name}</span>
-                                <span>
-                                  {resource.format(Math.floor(perDay))}
-                                  /day
-                                </span>
-                              </div>
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  )}
-                </li>
-              );
-            },
-          )}
+                        return (
+                          <li key={source.key}>
+                            <div className="flex justify-between">
+                              <span>{source.name}</span>
+                              <span>
+                                {resource.format(Math.floor(perDay))}
+                                /day
+                              </span>
+                            </div>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
       {!!(phase === "postEvent" || phase === "traveling" || loops > 0) && (

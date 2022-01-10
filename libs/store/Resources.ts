@@ -1,6 +1,6 @@
 import numbro from "numbro";
 
-export type Resource = "food" | "savedTime" | "money" | "water" | "junk";
+export type Resource = "food" | "power" | "money" | "water" | "junk";
 export type Resources = {
   [Key in Resource]: number;
 };
@@ -12,7 +12,8 @@ export type SourceKey =
   | "stream"
   | "well"
   | "letsy"
-  | "crafts";
+  | "crafts"
+  | "scrap";
 
 export type Source = { key: SourceKey; name: string; resource: Resource };
 export const sources: Source[] = [
@@ -23,6 +24,7 @@ export const sources: Source[] = [
   { key: "rainfall", name: "Rainfall", resource: "water" },
   { key: "preserves", name: "Preserves", resource: "food" },
   { key: "plants", name: "Plants", resource: "food" },
+  { key: "scrap", name: "Scrap", resource: "junk" },
 ];
 
 export const findSource = (key: SourceKey) => {
@@ -37,6 +39,7 @@ const resources: {
   key: Resource;
   name: string;
   format: (value: number) => string;
+  formatWithType: (value: number) => string;
 }[] = [
   {
     key: "food",
@@ -45,6 +48,10 @@ const resources: {
       numbro(value).format({
         thousandSeparated: true,
       }),
+    formatWithType: (value) =>
+      `${numbro(value).format({
+        thousandSeparated: true,
+      })} rations`,
   },
   {
     key: "water",
@@ -52,12 +59,20 @@ const resources: {
     format: (value) =>
       `${numbro(value).format({
         thousandSeparated: true,
-      })} gal`,
+      })} liters`,
+    formatWithType: (value) =>
+      `${numbro(value).format({
+        thousandSeparated: true,
+      })} liters water`,
   },
   {
     key: "money",
     name: "Money",
     format: (value) =>
+      `$${numbro(value).format({
+        thousandSeparated: true,
+      })}`,
+    formatWithType: (value) =>
       `$${numbro(value).format({
         thousandSeparated: true,
       })}`,
@@ -69,14 +84,22 @@ const resources: {
       `${numbro(value).format({
         thousandSeparated: true,
       })} lb`,
+    formatWithType: (value) =>
+      `${numbro(value).format({
+        thousandSeparated: true,
+      })} lb junk`,
   },
   {
-    key: "savedTime",
+    key: "power",
     name: "Saved Time",
     format: (value) =>
-      numbro(value).format({
+      `${numbro(value).format({
         thousandSeparated: true,
-      }),
+      })} AH`,
+    formatWithType: (value) =>
+      `${numbro(value).format({
+        thousandSeparated: true,
+      })} AH`,
   },
 ];
 

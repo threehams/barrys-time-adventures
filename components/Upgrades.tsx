@@ -21,6 +21,7 @@ export const Upgrades = ({
   setSelectedUpgrade,
 }: Props) => {
   const resources = useSelector((state) => state.resources);
+  const maxResources = useSelector((state) => state.maxResources);
   const phase = useSelector((state) => state.phase);
   const purchasedUpgrades = useSelector((state) => state.upgrades);
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
@@ -36,13 +37,22 @@ export const Upgrades = ({
           playerExplorations,
           purchasedUpgrades,
           timedUpgrades: timedUpgradeMap,
+          resources,
+          maxResources,
         })
       ) {
         return false;
       }
       return true;
     });
-  }, [phase, playerExplorations, purchasedUpgrades, timedUpgradeMap]);
+  }, [
+    maxResources,
+    phase,
+    playerExplorations,
+    purchasedUpgrades,
+    resources,
+    timedUpgradeMap,
+  ]);
 
   return (
     <ul className={clsx("flex flex-col gap-2", className)}>
@@ -55,7 +65,7 @@ export const Upgrades = ({
               return null;
             }
             const resource = findResource(key);
-            return resource.format(calc(level + 1, 0));
+            return resource.formatWithType(calc(level + 1, 0));
           })
           .filter(Boolean)
           .join(", ");
@@ -79,6 +89,7 @@ export const Upgrades = ({
                     timedUpgrades: timedUpgradeMap,
                     distance: 0,
                     resources,
+                    maxResources,
                   })
                 }
                 aria-label={`Buy ${upgrade.name}`}

@@ -78,11 +78,10 @@ export const eventHandler = (
       if (action.type === "TRAVEL") {
         state.explorations = {};
         state.resources = {
-          savedTime: state.resources.savedTime,
-          food: initialState.resources.food,
-          water: initialState.resources.water,
-          money: initialState.resources.money,
-          junk: initialState.resources.junk,
+          ...initialState.resources,
+        };
+        state.maxResources = {
+          ...initialState.maxResources,
         };
 
         const timeline = state.timeline;

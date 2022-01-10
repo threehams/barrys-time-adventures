@@ -6,7 +6,7 @@ export type UpgradeEffect = {
   water?: (level: number) => number;
   money?: (level: number) => number;
   junk?: (level: number) => number;
-  savedTime?: (level: number) => number;
+  power?: (level: number) => number;
   // Is this additive or multiplicative with other upgrades?
   type: "add" | "multiply" | "time";
 };
@@ -21,7 +21,7 @@ export type Upgrade = {
     money?: number;
     water?: number;
     food?: number;
-    savedTime?: number;
+    power?: number;
     exploration?: ExplorationKey;
     upgrade?: { key: UpgradeKey; level: number };
   };
@@ -32,7 +32,7 @@ export type Upgrade = {
     water?: (level: number, distance: number) => number;
     food?: (level: number, distance: number) => number;
     junk?: (level: number, distance: number) => number;
-    savedTime?: (level: number, distance: number) => number;
+    power?: (level: number, distance: number) => number;
   };
   // Readable name in-game
   name: string;

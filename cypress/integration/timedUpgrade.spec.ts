@@ -40,7 +40,7 @@ describe("future", () => {
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);
           draft.resources.food = 1000;
-          draft.resources.savedTime = 200;
+          draft.resources.power = 100;
         }),
       );
     });

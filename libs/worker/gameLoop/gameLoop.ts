@@ -16,7 +16,7 @@ import { groupBy } from "lodash";
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0);
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 });
 const THE_EVENT_TIME = (THE_EVENT_DATE.valueOf() - START_DATE.valueOf()) / 1000;
-const RESOURCE_DRAIN_BASE_TIME = 1_000;
+const RESOURCE_DRAIN_BASE_TIME = 5_000;
 
 type Updater = (state: Draft<State>, delta: number) => Draft<State> | void;
 
@@ -37,6 +37,16 @@ export const updateGame: Updater = (state, delta) => {
   updatePostStats(state, elapsedTime);
   updateExplore(state, elapsedTime);
   updateMessages(state, elapsedTime);
+  updateMaxResources(state, elapsedTime);
+};
+
+const updateMaxResources: Updater = (state) => {
+  for (const resource of Object.keys(state.resources)) {
+    state.maxResources[resource] = Math.max(
+      state.maxResources[resource],
+      state.resources[resource],
+    );
+  }
 };
 
 const updateMessages: Updater = (state, delta) => {
@@ -161,7 +171,7 @@ const updatePostStats: Updater = (state, delta) => {
   const exploration = findExploration(state.exploration);
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
-      state.skills[stat].current += (delta * rate) / 200000;
+      state.skills[stat].current += (delta * rate) / 400000;
     }
   }
 };
@@ -203,12 +213,12 @@ const updateExplore: Updater = (state, delta) => {
   if (state.explorations[state.exploration]!.progress === 100) {
     const unlock = findUnlockFor({ exploration: exploration.key });
     state.exploration = undefined;
-    if (exploration.message) {
-      state.messages.push({ priority: "info", text: exploration.message });
-    }
     if (unlock) {
       state.unlocks[unlock.key] = true;
       state.messages.push(unlock.message);
+    }
+    if (exploration.message) {
+      state.messages.push({ priority: "info", text: exploration.message });
     }
   }
 };

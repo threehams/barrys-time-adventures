@@ -29,6 +29,7 @@ export type State = {
   time: number;
   messages: ReadonlyArray<Message>;
   resources: Resources;
+  maxResources: Resources;
   skills: Skills;
   explorations: PlayerExplorations;
   upgrades: PurchasedUpgrades;

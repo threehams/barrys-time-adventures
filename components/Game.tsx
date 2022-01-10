@@ -90,8 +90,8 @@ export const Game = () => {
               </div>
             )}
           </main>
-          <Window className="[grid-area:window] " />
-          <div className="[grid-area:messages] p-4 text-gray-300 border rounded-md">
+          <Window className="[grid-area:window]" />
+          <div className="[grid-area:messages]">
             <Messages />
           </div>
 

@@ -38,6 +38,7 @@ export const Timeline = ({
   const playerExplorations = useSelector((state) => state.explorations);
   const phase = useSelector((state) => state.phase);
   const resources = useSelector((state) => state.resources);
+  const maxResources = useSelector((state) => state.maxResources);
   const currentDay = useSelector((state) =>
     Math.floor(state.time / hoursToSeconds(24)),
   );
@@ -90,6 +91,7 @@ export const Timeline = ({
                 phase,
                 upgrade: selectedUpgrade,
                 resources,
+                maxResources,
                 distance: 29 - day,
                 purchasedUpgrades,
                 timedUpgrades: timedUpgradeMap,
