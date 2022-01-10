@@ -3,7 +3,7 @@ import { enablePatches, produceWithPatches } from "immer";
 import localForage from "localforage";
 import { eventHandler, updateGame } from "./gameLoop";
 
-const VERSION = 1;
+const VERSION = 2;
 const databaseName = "reconciliation_game";
 const savedGameKey = "saved_game";
 
