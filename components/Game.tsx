@@ -10,7 +10,7 @@ import { Status } from "./Status";
 import { Timeline } from "./Timeline";
 import { Upgrades } from "./Upgrades";
 import { Window } from "./Window";
-import { UpgradeKey } from "@laundry/store";
+import { Phase, UpgradeKey } from "@laundry/store";
 import clsx from "clsx";
 import { Glitch } from "./Glitch";
 import { Ending } from "./Ending";
@@ -24,15 +24,16 @@ export const Game = () => {
   const [selectedUpgrade, setSelectedUpgrade] = useState<
     UpgradeKey | undefined
   >();
+  const unlocks = useSelector((state) => state.unlocks);
 
   const layout = useMemo(() => {
     return (
-      <div className="relative min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
+      <div className={clsx("relative min-h-screen", backgroundFor(phase))}>
         {phase === "event" && <Glitch />}
         {phase === "done" && <Ending />}
         <div
           className={clsx(
-            "px-4 grid py-4 mx-auto min-w-[1080px] max-w-[1680px] gap-3",
+            "px-4 grid py-2 mx-auto min-w-[1080px] max-w-[1680px] gap-3",
             "grid-rows-[1fr_auto]",
             "grid-cols-[400px_1fr_240px_auto]",
             "lg:grid-cols-[400px_1fr_240px_auto]",
@@ -90,20 +91,22 @@ export const Game = () => {
             )}
           </main>
           <Window className="[grid-area:window] " />
-          <div className="[grid-area:messages]  p-4 text-gray-300 border rounded-md">
+          <div className="[grid-area:messages] p-4 text-gray-300 border rounded-md">
             <Messages />
           </div>
 
-          <div className="[grid-area:timeline]">
-            <Timeline
-              selectedUpgradeKey={selectedUpgrade}
-              setSelectedUpgrade={setSelectedUpgrade}
-            />
-          </div>
+          {unlocks.pastRestart && (
+            <div className="[grid-area:timeline]">
+              <Timeline
+                selectedUpgradeKey={selectedUpgrade}
+                setSelectedUpgrade={setSelectedUpgrade}
+              />
+            </div>
+          )}
         </div>
       </div>
     );
-  }, [panel, phase, selectedUpgrade]);
+  }, [panel, phase, selectedUpgrade, unlocks.pastRestart]);
 
   return (
     <div
@@ -116,4 +119,11 @@ export const Game = () => {
       {layout}
     </div>
   );
+};
+
+const backgroundFor = (phase: Phase) => {
+  if (phase === "preEvent") {
+    return "bg-gray-50 dark:bg-gray-900 dark:text-gray-100";
+  }
+  return "bg-stone-50 dark:bg-stone-900 dark:text-stone-100";
 };

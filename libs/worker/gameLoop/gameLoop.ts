@@ -1,5 +1,6 @@
 import {
   findExploration,
+  findUnlockFor,
   findUpgrade,
   getAllUpgrades,
   getSourceAmount,
@@ -129,21 +130,26 @@ const updatePostResources: Updater = (state, delta) => {
   const counts = Math.floor(timers.food / RESOURCE_DRAIN_BASE_TIME);
 
   if (counts) {
-    const upgradedCounts = Object.entries(state.upgrades).reduce(
-      (acc, [key, level]) => {
-        const upgrade = findUpgrade(key);
-        if (upgrade.phase !== phase) {
-          return acc;
-        }
-        if (upgrade.effect.food) {
-          return upgrade.effect.food(level?.level ?? 0);
-        }
-        return counts;
-      },
-      counts,
-    );
-    timers.food = timers.food % RESOURCE_DRAIN_BASE_TIME;
-    state.resources.food = Math.max(state.resources.food - upgradedCounts, 0);
+    for (const resource of ["food", "water"] as const) {
+      const upgradedCounts = Object.entries(state.upgrades).reduce(
+        (acc, [key, level]) => {
+          const upgrade = findUpgrade(key);
+          if (upgrade.phase !== phase) {
+            return acc;
+          }
+          if (upgrade.effect[resource]) {
+            return upgrade.effect[resource]!(level?.level ?? 0);
+          }
+          return counts;
+        },
+        counts,
+      );
+      timers[resource] = timers[resource] % RESOURCE_DRAIN_BASE_TIME;
+      state.resources[resource] = Math.max(
+        state.resources[resource] - upgradedCounts,
+        0,
+      );
+    }
   }
 };
 
@@ -195,9 +201,14 @@ const updateExplore: Updater = (state, delta) => {
     100,
   );
   if (state.explorations[state.exploration]!.progress === 100) {
+    const unlock = findUnlockFor({ exploration: exploration.key });
     state.exploration = undefined;
     if (exploration.message) {
       state.messages.push({ priority: "info", text: exploration.message });
+    }
+    if (unlock) {
+      state.unlocks[unlock.key] = true;
+      state.messages.push(unlock.message);
     }
   }
 };

@@ -4,7 +4,7 @@ import { initialState } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 
 describe("time travel", () => {
-  it("travels to a pre-event time", () => {
+  it("travels to the past", () => {
     cy.wrap(null).then(async () => {
       const VERSION = 1;
       const databaseName = "reconciliation_game";

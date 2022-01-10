@@ -34,7 +34,7 @@ export const explorations: Exploration[] = [
       perception: 1,
       endurance: 2,
     },
-    time: 1_000_000,
+    time: 400_000,
     requirements: {},
   },
   {
@@ -51,7 +51,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       patience: 2,
     },
-    time: 1_000_000,
+    time: 400_000,
     requirements: {
       action: "E1",
     },
@@ -69,7 +69,7 @@ export const explorations: Exploration[] = [
     train: {
       patience: 2,
     },
-    time: 1_000_000,
+    time: 400_000,
     requirements: {
       action: "T1",
     },

@@ -3,8 +3,8 @@ import produce from "immer";
 import { initialState } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 
-describe("time travel", () => {
-  it("calculates the correct food", () => {
+describe("exploration", () => {
+  it("completes the first three explorations", () => {
     cy.wrap(null).then(async () => {
       const VERSION = 1;
       const databaseName = "reconciliation_game";
@@ -19,8 +19,8 @@ describe("time travel", () => {
         produce(initialState, (draft) => {
           draft.phase = "postEvent";
           draft.time = hoursToSeconds(24 * 32);
-          draft.resources.food = 1000;
-          draft.resources.savedTime = 200;
+          draft.resources.food = 50_000;
+          draft.resources.water = 50_000;
         }),
       );
     });

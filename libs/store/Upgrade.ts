@@ -1,6 +1,7 @@
-import { ExplorationKey, Phase, SourceKey, UpgradeKey } from ".";
+import { ExplorationKey, Phase, SourceKey, UnlockKey, UpgradeKey } from ".";
 
 export type UpgradeEffect = {
+  unlock?: UnlockKey;
   food?: (level: number) => number;
   water?: (level: number) => number;
   money?: (level: number) => number;

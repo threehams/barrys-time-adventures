@@ -93,10 +93,10 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "time",
       food: (level) => {
-        return 0.9 ** level;
+        return 0.8 ** level;
       },
     },
-    effectDescription: "x0.9 time required for preserved food per level",
+    effectDescription: "x0.8 time required for preserved food per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PF1", level: 5 },
@@ -143,10 +143,10 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "time",
       food: (level) => {
-        return 0.9 ** level;
+        return 0.8 ** level;
       },
     },
-    effectDescription: "x0.9 plant growing time per level",
+    effectDescription: "x0.8 plant growing time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PF3", level: 3 },
@@ -191,10 +191,10 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "time",
       water: (level) => {
-        return 0.9 ** level;
+        return 0.8 ** level;
       },
     },
-    effectDescription: "x0.9 rainwater time per level",
+    effectDescription: "x0.8 rainwater time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PW1", level: 3 },
@@ -240,10 +240,10 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "time",
       water: (level) => {
-        return 0.9 ** level;
+        return 0.8 ** level;
       },
     },
-    effectDescription: "*0.9 filtered water time per level",
+    effectDescription: "*0.8 filtered water time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PW4", level: 3 },
@@ -338,10 +338,10 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "time",
       money: (level) => {
-        return 0.9 ** level;
+        return 0.8 ** level;
       },
     },
-    effectDescription: "x0.9 sale time per level",
+    effectDescription: "x0.8 sale time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PM1", level: 3 },

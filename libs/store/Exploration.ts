@@ -1,4 +1,4 @@
-import { ExplorationKey, Skill } from ".";
+import { ExplorationKey, Skill, UnlockKey } from ".";
 import { Resource } from "./Resources";
 
 export type Exploration = {
@@ -15,5 +15,6 @@ export type Exploration = {
   requirements: {
     action?: ExplorationKey;
   };
+  unlock?: UnlockKey;
   message: string;
 };

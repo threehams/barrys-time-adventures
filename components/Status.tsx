@@ -26,6 +26,7 @@ export const Status = ({ className }: Props) => {
   const skills = useSelector((state) => state.skills);
   const upgrades = useSelector((state) => state.upgrades);
   const timedUpgrades = useSelector((state) => state.timedUpgrades);
+  const unlocks = useSelector((state) => state.unlocks);
   const allUpgrades = getAllUpgrades({ upgrades, time, timedUpgrades });
   const upgradesBySource = groupBy(
     allUpgrades,
@@ -111,10 +112,12 @@ export const Status = ({ className }: Props) => {
                   </div>
 
                   <Progress progress={((value.current ?? 0) * 100) % 100} />
-                  <Progress
-                    variant="primary"
-                    progress={((value.permanent ?? 0) * 100) % 100}
-                  />
+                  {unlocks.loop && (
+                    <Progress
+                      variant="primary"
+                      progress={((value.permanent ?? 0) * 100) % 100}
+                    />
+                  )}
                 </li>
               );
             })}

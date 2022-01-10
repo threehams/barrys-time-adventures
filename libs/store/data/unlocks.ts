@@ -51,3 +51,20 @@ export const findUnlock = (key: UnlockKey) => {
   }
   return found;
 };
+
+export const findUnlockFor = (thing: {
+  upgrade?: UpgradeKey;
+  exploration?: ExplorationKey;
+}): Unlock | undefined => {
+  for (const unlock of unlocks) {
+    if (
+      thing.exploration &&
+      unlock.requirements.exploration === thing.exploration
+    ) {
+      return unlock;
+    }
+    if (thing.upgrade && unlock.requirements.upgrade === thing.upgrade) {
+      return unlock;
+    }
+  }
+};

@@ -70,7 +70,7 @@ describe("gameLoop", () => {
       const nextState = produce(state, (draft) => {
         updateGame(draft, 19_000);
       });
-      expect(nextState.timers.preserves).toEqual(1_000);
+      expect(nextState.timers.preserves).toEqual(3_000);
       expect(nextState.resources.food).toEqual(4);
     });
 

@@ -3,7 +3,7 @@ import produce from "immer";
 import { initialState } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 
-describe("time travel", () => {
+describe("future", () => {
   it("sends an upgrade back in time", () => {
     cy.wrap(null).then(async () => {
       const VERSION = 1;
