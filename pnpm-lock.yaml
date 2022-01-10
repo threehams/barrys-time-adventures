@@ -47,6 +47,7 @@ specifiers:
   prettier: ^2.5.1
   react: 17.0.2
   react-dom: 17.0.2
+  react-error-boundary: ^3.1.4
   start-server-and-test: ^1.14.0
   tailwindcss: ^3.0.11
   tslib: ^2.3.1
@@ -68,6 +69,7 @@ dependencies:
   numbro: 2.3.6
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-error-boundary: 3.1.4_react@17.0.2
   tslib: 2.3.1
 
 devDependencies:
@@ -553,7 +555,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.7
-    dev: true
 
   /@babel/template/7.14.5:
     resolution: {integrity: sha512-6Z3Po85sfxRGachLULUhOmvAaOo7xCvqGQtxINai2mEGPFm6pQ4z5QInFnUrRpfoSV60BnjyF5F3c+15fxFV1g==}
@@ -5802,6 +5803,16 @@ packages:
       object-assign: 4.1.1
       react: 17.0.2
       scheduler: 0.20.2
+    dev: false
+
+  /react-error-boundary/3.1.4_react@17.0.2:
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.16.3
+      react: 17.0.2
     dev: false
 
   /react-is/16.13.1:
