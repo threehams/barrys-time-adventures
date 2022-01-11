@@ -40,7 +40,7 @@ export const Status = ({ className }: Props) => {
 
   const timeOfDay = format(
     addMilliseconds(startDate, time * 1000),
-    "MMMM d, yyyy HH:mm",
+    "MMMM d, yyyy HH'h'",
   );
 
   return (

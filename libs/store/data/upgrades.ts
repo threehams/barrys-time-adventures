@@ -447,7 +447,7 @@ export const upgrades: Upgrade[] = [
     description: "Pluck water out of the air instead of relying on rainfall.",
     max: 5,
     costs: {
-      food: (level, distance) => {
+      power: (level, distance) => {
         return level * 100 + distance * 10;
       },
     },

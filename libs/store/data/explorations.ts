@@ -8,6 +8,7 @@ export type ExplorationKey =
   | "T3"
   | "E3"
   | "E4"
+  | "E7"
   | "C1"
   | "C2"
   | "F1"
@@ -16,7 +17,9 @@ export type ExplorationKey =
   | "E5"
   | "E6"
   | "S1"
-  | "T4";
+  | "S2"
+  | "T4"
+  | "G1";
 
 export const explorations: Exploration[] = [
   {
@@ -112,16 +115,18 @@ export const explorations: Exploration[] = [
   {
     key: "E3",
     name: "Explore outside home",
-    description: "Guess it's time to head into what's left of town.",
-    message: ``,
+    description:
+      "Guess it's time to head into what's left of town. This could be a very long trip.",
+    message: `[something about this taking a while]`,
     drain: {
       food: 2,
       water: 2,
     },
+    timeMultiplier: 10,
     train: {
       endurance: 2,
     },
-    time: 1_000_000,
+    time: 10_000_000,
     requirements: {
       action: "T3",
     },
@@ -202,9 +207,9 @@ export const explorations: Exploration[] = [
   },
   {
     key: "E5",
-    name: "Explore machine shop",
+    name: "Explore power plant",
     description:
-      "I found the ruins of what looks like an old machine shop. Maybe I can find something to help out Past Barry.",
+      "I found the ruins of what looks like a power plant. Maybe I can find something to help out Past Barry.",
     message: ``,
     drain: {
       food: 2,
@@ -217,6 +222,63 @@ export const explorations: Exploration[] = [
     time: 1_000_000,
     requirements: {
       action: "E3",
+    },
+  },
+  {
+    key: "S2",
+    name: "Pry open the door",
+    description:
+      "The building's in surprisingly good condition... meaning I'll need to break in.",
+    message: ``,
+    drain: {
+      food: 2,
+      water: 2,
+    },
+    train: {
+      strength: 2,
+    },
+    time: 1_000_000,
+    requirements: {
+      action: "E5",
+    },
+  },
+  {
+    key: "E7",
+    name: "Search for a usable generator",
+    description:
+      "Most of the plant doesn't look functional, but maybe I can find something usable.",
+    message: `Found a "Mr Fusion" in pretty good condition. Guess I should feed it?`,
+    drain: {
+      food: 2,
+      water: 2,
+    },
+    train: {
+      perception: 2,
+    },
+    time: 1_000_000,
+    requirements: {
+      action: "S2",
+    },
+  },
+  {
+    key: "G1",
+    name: "Generate power",
+    description:
+      "I can generate power by feeding this thing my resources. I'll start with any junk or money I have, since I don't think there's much use for those here.",
+    message: `Mr. Fusion just coughed up the last of what I gave it and let off some smoke. I think it's generated its last.`,
+    drain: {
+      food: 2,
+      water: 2,
+    },
+    train: {
+      patience: 2,
+    },
+    time: 10_000_000,
+    requirements: {
+      action: "E7",
+    },
+    generates: {
+      power: 2,
     },
   },
   {

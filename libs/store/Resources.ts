@@ -45,11 +45,11 @@ const resources: {
     key: "food",
     name: "Rations",
     format: (value) =>
-      numbro(value).format({
+      numbro(Math.floor(value)).format({
         thousandSeparated: true,
       }),
     formatWithType: (value) =>
-      `${numbro(value).format({
+      `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
       })} rations`,
   },
@@ -57,11 +57,11 @@ const resources: {
     key: "water",
     name: "Water",
     format: (value) =>
-      `${numbro(value).format({
+      `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
       })} liters`,
     formatWithType: (value) =>
-      `${numbro(value).format({
+      `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
       })} liters water`,
   },
@@ -69,37 +69,41 @@ const resources: {
     key: "money",
     name: "Money",
     format: (value) =>
-      `$${numbro(value).format({
+      numbro(value).formatCurrency({
         thousandSeparated: true,
-      })}`,
+        currencySymbol: "$",
+        mantissa: 2,
+      }),
     formatWithType: (value) =>
-      `$${numbro(value).format({
+      numbro(value).formatCurrency({
         thousandSeparated: true,
-      })}`,
+        currencySymbol: "$",
+        mantissa: 2,
+      }),
   },
   {
     key: "junk",
     name: "Junk",
     format: (value) =>
-      `${numbro(value).format({
+      `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
       })} lb`,
     formatWithType: (value) =>
-      `${numbro(value).format({
+      `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
       })} lb junk`,
   },
   {
     key: "power",
-    name: "Saved Time",
+    name: "Power",
     format: (value) =>
-      `${numbro(value).format({
+      `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
-      })} AH`,
+      })} Ah`,
     formatWithType: (value) =>
-      `${numbro(value).format({
+      `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
-      })} AH`,
+      })} Ah`,
   },
 ];
 

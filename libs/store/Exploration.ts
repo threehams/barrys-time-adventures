@@ -9,6 +9,7 @@ export type Exploration = {
   drain: {
     [key in Resource]?: number;
   };
+  timeMultiplier?: number;
   train: {
     [key in Skill]?: number;
   };
@@ -16,5 +17,8 @@ export type Exploration = {
     action?: ExplorationKey;
   };
   unlock?: UnlockKey;
+  generates?: {
+    power?: number;
+  };
   message: string;
 };

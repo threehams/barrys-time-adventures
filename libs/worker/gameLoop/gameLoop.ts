@@ -16,7 +16,7 @@ import { groupBy } from "lodash";
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0);
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 });
 const THE_EVENT_TIME = (THE_EVENT_DATE.valueOf() - START_DATE.valueOf()) / 1000;
-const RESOURCE_DRAIN_BASE_TIME = 5_000;
+const RESOURCE_DRAIN_BASE_TIME = 1_000;
 
 type Updater = (state: Draft<State>, delta: number) => Draft<State> | void;
 
@@ -28,7 +28,12 @@ export const updateGame: Updater = (state, delta) => {
       THE_EVENT_TIME - state.time,
     );
   } else {
-    elapsedTime = delta * state.multiplier * 25;
+    let explorationMultiplier = 1;
+    if (state.exploration) {
+      const exploration = findExploration(state.exploration);
+      explorationMultiplier = exploration.timeMultiplier || 1;
+    }
+    elapsedTime = delta * state.multiplier * explorationMultiplier * 15;
   }
   updateTime(state, elapsedTime);
   updateEvent(state, delta);
@@ -177,16 +182,18 @@ const updatePostStats: Updater = (state, delta) => {
 };
 
 const updateExplore: Updater = (state, delta) => {
-  const time = delta;
-
-  if (state.phase === "postEvent" && state.resources.food <= 0) {
+  if (
+    state.phase === "postEvent" &&
+    (state.resources.food <= 0 || state.resources.water <= 0)
+  ) {
     state.phase = "traveling";
     state.exploration = undefined;
     state.multiplier = 1;
     state.timers = { ...initialState.timers };
+    const resource = state.resources.food <= 0 ? "food" : "water";
     state.messages.push({
       priority: "alert",
-      text: "My supplies are gone. I should go help out Past Barry so I can be better prepared.",
+      text: `I'm out of ${resource}. I should go help out Past Barry so I can be better prepared.`,
     });
   }
 
@@ -204,12 +211,33 @@ const updateExplore: Updater = (state, delta) => {
     0,
   );
 
-  const progress = (100 / exploration.time) * (time * Math.log(totalSkills));
+  const totalTime = delta * Math.log(totalSkills);
+  const progress = (100 / exploration.time) * totalTime;
   state.explorations[state.exploration] ??= { progress: 0 };
   state.explorations[state.exploration]!.progress = Math.min(
     (state.explorations[state.exploration]!.progress ?? 0) + progress,
     100,
   );
+
+  if (exploration.generates) {
+    if (exploration.generates.power) {
+      const power = (totalTime * exploration.generates.power) / 1000;
+      state.resources.power += power;
+      let resourceCost = power * 10;
+      const resources = (["food", "water"] as ["food", "water"]).sort(
+        (a, b) => {
+          return state.resources[b] - state.resources[a];
+        },
+      );
+      for (const resource of ["money", "junk", ...resources] as const) {
+        const available = state.resources[resource];
+        const toDeduct = Math.min(available, resourceCost);
+        state.resources[resource] = state.resources[resource] - toDeduct;
+        resourceCost -= toDeduct;
+      }
+    }
+  }
+
   if (state.explorations[state.exploration]!.progress === 100) {
     const unlock = findUnlockFor({ exploration: exploration.key });
     state.exploration = undefined;
