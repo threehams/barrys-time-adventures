@@ -162,6 +162,57 @@ export const upgrades: Upgrade[] = [
   },
   {
     phase: "preEvent",
+    key: "PW5",
+    type: "purchased",
+    name: "Drill a deeper well",
+    description:
+      "My well's not going to collect enough water right now. I should get someone to drill deeper.",
+    max: 5,
+    costs: {
+      money: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      water: (level) => {
+        return level + 1;
+      },
+    },
+    effectDescription: "+1 well water per level",
+    flavorTexts: {},
+    requirements: {
+      money: 100,
+    },
+    source: "well",
+  },
+  {
+    phase: "preEvent",
+    key: "PW6",
+    type: "purchased",
+    name: "Overcharge well",
+    description: "",
+    max: 5,
+    costs: {
+      money: (level) => {
+        return level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      water: (level) => {
+        return level + 2;
+      },
+    },
+    effectDescription: "x2 well water per level",
+    flavorTexts: {},
+    requirements: {
+      upgrade: { key: "PW5", level: 3 },
+    },
+    source: "well",
+  },
+  {
+    phase: "preEvent",
     key: "PW1",
     type: "purchased",
     name: "Set up rainwater collection",
@@ -181,7 +232,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "+1 rainwater per level",
     flavorTexts: {},
     requirements: {
-      money: 300,
+      water: 100,
     },
     source: "rainfall",
   },
@@ -231,7 +282,7 @@ export const upgrades: Upgrade[] = [
     effectDescription: "+1 filtered water per level",
     flavorTexts: {},
     requirements: {
-      water: 100,
+      water: 200,
     },
     source: "stream",
   },
@@ -260,57 +311,6 @@ export const upgrades: Upgrade[] = [
       upgrade: { key: "PW3", level: 3 },
     },
     source: "stream",
-  },
-  {
-    phase: "preEvent",
-    key: "PW5",
-    type: "purchased",
-    name: "Drill a deeper well",
-    description:
-      "My well's not going to collect enough water right now. I should get someone to drill deeper.",
-    max: 5,
-    costs: {
-      money: (level) => {
-        return level * 10;
-      },
-    },
-    effect: {
-      type: "add",
-      water: (level) => {
-        return level + 1;
-      },
-    },
-    effectDescription: "+1 well water per level",
-    flavorTexts: {},
-    requirements: {
-      water: 300,
-    },
-    source: "well",
-  },
-  {
-    phase: "preEvent",
-    key: "PW6",
-    type: "purchased",
-    name: "Overcharge well",
-    description: "",
-    max: 5,
-    costs: {
-      money: (level) => {
-        return level * 10;
-      },
-    },
-    effect: {
-      type: "add",
-      water: (level) => {
-        return level + 2;
-      },
-    },
-    effectDescription: "x2 well water per level",
-    flavorTexts: {},
-    requirements: {
-      upgrade: { key: "PW5", level: 3 },
-    },
-    source: "well",
   },
   {
     phase: "preEvent",

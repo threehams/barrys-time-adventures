@@ -67,7 +67,7 @@ export const initialState: State = {
     },
   },
   explorations: {},
-  multiplier: 2,
+  multiplier: 1,
   timers: {
     scrap: 0,
     action: 0,

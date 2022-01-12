@@ -27,6 +27,9 @@ type ExploreAction = {
     location: ExplorationKey;
   };
 };
+type LoopAction = {
+  type: "LOOP";
+};
 
 export type StateAction =
   | BuyUpgradeAction
@@ -34,4 +37,5 @@ export type StateAction =
   | ResetGameAction
   | SetMultiplier
   | TravelAction
-  | ExploreAction;
+  | ExploreAction
+  | LoopAction;

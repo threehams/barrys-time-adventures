@@ -75,45 +75,56 @@ export const eventHandler = (
       state.exploration = action.payload.location;
       break;
     case "TRAVEL": {
-      if (action.type === "TRAVEL") {
-        state.explorations = {};
-        state.resources = {
-          ...initialState.resources,
-        };
-        state.maxResources = {
-          ...initialState.maxResources,
-        };
-
-        const timeline = state.timeline;
-        state.timeline = [];
-        state.time = 0;
-        state.phase = "preEvent";
-        state.upgrades = {
-          ...initialState.upgrades,
-          ...Object.fromEntries(
-            Object.entries(state.upgrades)
-              .filter(([key]) => {
-                return findUpgrade(key).phase !== "preEvent";
-              })
-              .map(([key, level]) => {
-                return [key, level] as const;
-              }),
-          ),
-        };
-        let last = 0;
-        for (const event of timeline) {
-          if (
-            Math.floor(event.time / hoursToSeconds(24)) >= action.payload.day
-          ) {
-            break;
-          }
-          updateGame(state, event.time - last);
-          eventHandler(state, event.action);
-          last = event.time;
-        }
-        updateGame(state, hoursToSeconds(24) * action.payload.day - last);
+      travel(state, action.payload.day);
+      state.skills = {
+        ...initialState.skills,
+      };
+      break;
+    }
+    case "LOOP":
+      if (state.phase !== "traveling") {
         return;
       }
-    }
+      travel(state, 29);
+      state.phase = "postEvent";
   }
+};
+
+const travel = (state: Draft<State>, day: number) => {
+  state.exploration = undefined;
+  state.explorations = {};
+  state.resources = {
+    ...initialState.resources,
+  };
+  state.maxResources = {
+    ...initialState.maxResources,
+  };
+  state.time = 0;
+  state.phase = "preEvent";
+  state.upgrades = {
+    ...initialState.upgrades,
+    ...Object.fromEntries(
+      Object.entries(state.upgrades)
+        .filter(([key]) => {
+          return findUpgrade(key).phase !== "preEvent";
+        })
+        .map(([key, level]) => {
+          return [key, level] as const;
+        }),
+    ),
+  };
+  // get the current timeline before resetting it
+  const timeline = state.timeline;
+  state.timeline = [];
+
+  let last = 0;
+  for (const event of timeline) {
+    if (Math.floor(event.time / hoursToSeconds(24)) >= day) {
+      break;
+    }
+    updateGame(state, event.time - last);
+    eventHandler(state, event.action);
+    last = event.time;
+  }
+  updateGame(state, hoursToSeconds(24) * day - last);
 };

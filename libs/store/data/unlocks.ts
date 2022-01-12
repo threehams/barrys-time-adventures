@@ -35,7 +35,7 @@ export const unlocks: Unlock[] = [
   {
     key: "loop",
     requirements: {
-      exploration: "S1",
+      exploration: "T4",
     },
     message: {
       priority: "alert",

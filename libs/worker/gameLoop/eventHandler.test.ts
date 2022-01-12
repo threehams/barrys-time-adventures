@@ -8,8 +8,9 @@ describe("eventHandler", () => {
   describe("TRAVEL", () => {
     it("replays the game up to the specified day", () => {
       const state = produce(initialState, (draft) => {
+        draft.phase = "traveling";
         draft.upgrades = {
-          PF1: { level: 2 },
+          PM1: { level: 2 },
         };
         draft.timeline = [
           {
@@ -17,7 +18,7 @@ describe("eventHandler", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "PF1",
+                key: "PM1",
               },
             },
           },
@@ -26,7 +27,7 @@ describe("eventHandler", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "PF1",
+                key: "PM1",
               },
             },
           },
@@ -40,8 +41,7 @@ describe("eventHandler", () => {
       });
       expect(state.time).toEqual(hoursToSeconds(24));
       expect(state.upgrades).toEqual({
-        ...initialState.upgrades,
-        PF1: { level: 3 },
+        PM1: { level: 2 },
       });
       expect(state.timeline).toEqual([
         {
@@ -49,7 +49,7 @@ describe("eventHandler", () => {
           action: {
             type: "BUY_UPGRADE",
             payload: {
-              key: "PF1",
+              key: "PM1",
             },
           },
         },
@@ -58,7 +58,7 @@ describe("eventHandler", () => {
           action: {
             type: "BUY_UPGRADE",
             payload: {
-              key: "PF1",
+              key: "PM1",
             },
           },
         },
@@ -68,7 +68,7 @@ describe("eventHandler", () => {
     it("resets upgrades on and after the specified day", () => {
       const state = produce(initialState, (draft) => {
         draft.upgrades = {
-          PF1: { level: 2 },
+          PM1: { level: 2 },
         };
         draft.timeline = [
           {
@@ -76,7 +76,7 @@ describe("eventHandler", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "PF1",
+                key: "PM1",
               },
             },
           },
@@ -85,7 +85,7 @@ describe("eventHandler", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "PF1",
+                key: "PM1",
               },
             },
           },
@@ -100,7 +100,7 @@ describe("eventHandler", () => {
       expect(state.time).toEqual(hoursToSeconds(24));
       expect(state.upgrades).toEqual({
         ...initialState.upgrades,
-        PF1: { level: 2 },
+        PM1: { level: 1 },
       });
       expect(state.timeline).toEqual([
         {
@@ -108,7 +108,7 @@ describe("eventHandler", () => {
           action: {
             type: "BUY_UPGRADE",
             payload: {
-              key: "PF1",
+              key: "PM1",
             },
           },
         },

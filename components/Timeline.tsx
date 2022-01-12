@@ -32,7 +32,9 @@ export const Timeline = ({
   selectedUpgradeKey,
   setSelectedUpgrade,
 }: TimelineProps) => {
+  const dispatch = useDispatch();
   const preEvents = useSelector((state) => state.timeline);
+  const unlocks = useSelector((state) => state.unlocks);
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
   const purchasedUpgrades = useSelector((state) => state.upgrades);
   const playerExplorations = useSelector((state) => state.explorations);
@@ -72,8 +74,20 @@ export const Timeline = ({
   );
 
   return (
-    <div>
-      <h2>Timeline</h2>
+    <div className="inline-block">
+      <div className="flex items-center justify-between">
+        <h2>Timeline</h2>
+        {unlocks.loop && phase === "traveling" && (
+          <Button
+            variant="danger"
+            onClick={() => {
+              dispatch({ type: "LOOP" });
+            }}
+          >
+            Loop
+          </Button>
+        )}
+      </div>
       <ul className="flex flex-nowrap">
         {range(0, 30).map((day) => {
           const availableUpgrades = !!timeline[day]?.find(

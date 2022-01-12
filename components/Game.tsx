@@ -14,6 +14,7 @@ import { Phase, UpgradeKey } from "@laundry/store";
 import clsx from "clsx";
 import { Glitch } from "./Glitch";
 import { Ending } from "./Ending";
+import { Speedup } from "./Speedup";
 
 type Panel = "explorations" | "upgrades";
 
@@ -47,6 +48,7 @@ export const Game = () => {
         >
           <aside className="[grid-area:status]">
             {!process.env.NEXT_PUBLIC_DISABLE_CHEATS && <Cheats />}
+            <Speedup />
             <Status className="mb-3" />
             <Reset />
           </aside>
