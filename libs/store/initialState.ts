@@ -12,8 +12,8 @@ export const initialState: State = {
     {
       priority: "info",
       text: "The news has been weird lately. I feel like I should prepare.",
+      time: 0,
     },
-    { priority: "info", text: "My fridge has nothing but condiments." },
   ],
   upgrades: {},
   timedUpgrades: {
@@ -32,6 +32,7 @@ export const initialState: State = {
   },
   timeline: [],
   resources: {
+    barry: 0,
     money: 0,
     water: 0,
     food: 0,
@@ -39,6 +40,7 @@ export const initialState: State = {
     power: 0,
   },
   maxResources: {
+    barry: 0,
     money: 0,
     water: 0,
     food: 0,
@@ -70,6 +72,8 @@ export const initialState: State = {
   explorations: {},
   multiplier: 2,
   timers: {
+    copies: 0,
+    barry: 0,
     autoPurchase: 0,
     scrap: 0,
     action: 0,

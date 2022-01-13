@@ -1,4 +1,4 @@
-import { ExplorationKey, Phase, SourceKey, UnlockKey, UpgradeKey } from ".";
+import { ExplorationKey, Phase, SourceKey, UpgradeKey } from ".";
 
 export type UpgradeEffect = {
   food?: (level: number) => number;
@@ -6,6 +6,7 @@ export type UpgradeEffect = {
   money?: (level: number) => number;
   junk?: (level: number) => number;
   power?: (level: number) => number;
+  barry?: (level: number) => number;
   // Is this additive or multiplicative with other upgrades?
   type: "add" | "multiply" | "time";
 };
@@ -27,6 +28,7 @@ export type Upgrade = {
   type: "purchased" | "event";
   // Required to buy this upgrade
   costs: {
+    barry?: (level: number, distance: number) => number;
     money?: (level: number, distance: number) => number;
     water?: (level: number, distance: number) => number;
     food?: (level: number, distance: number) => number;

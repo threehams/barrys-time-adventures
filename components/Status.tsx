@@ -4,6 +4,7 @@ import { Progress } from "@laundry/ui";
 import {
   findResource,
   findSkill,
+  findSource,
   getAllUpgrades,
   getSourceAmount,
   getSourceTime,
@@ -23,7 +24,6 @@ export const Status = ({ className }: Props) => {
   const resources = useSelector((state) => state.resources);
   const maxResources = useSelector((state) => state.maxResources);
   const phase = useSelector((state) => state.phase);
-  const loops = useSelector((state) => state.loops);
   const skills = useSelector((state) => state.skills);
   const upgrades = useSelector((state) => state.upgrades);
   const timedUpgrades = useSelector((state) => state.timedUpgrades);
@@ -44,6 +44,10 @@ export const Status = ({ className }: Props) => {
     addMilliseconds(startDate, time * 1000),
     "MMMM d, yyyy HH'h'",
   );
+  let phaseResources =
+    phase === "expand" || phase === "collapse"
+      ? (["barry"] as const)
+      : (["junk", "money", "food", "water", "power"] as const);
 
   return (
     <div className={className}>
@@ -51,7 +55,7 @@ export const Status = ({ className }: Props) => {
         <div className="mb-2">It is {timeOfDay}.</div>
         <h2 className="mb-1 font-bold">Inventory</h2>
         <ul className="space-y-2">
-          {(["junk", "money", "food", "water", "power"] as const).map((key) => {
+          {phaseResources.map((key) => {
             if (maxResources[key] === 0) {
               return null;
             }
@@ -62,6 +66,18 @@ export const Status = ({ className }: Props) => {
                   <span>{resource.name}</span>
                   <span>{resource.format(resources[key])}</span>
                 </div>
+                {(phase === "expand" || phase === "collapse") && (
+                  <Progress
+                    progress={
+                      (timers.copies /
+                        getSourceTime(
+                          upgradesBySource?.copies ?? [],
+                          findSource("copies"),
+                        )) *
+                      100
+                    }
+                  />
+                )}
 
                 {phase === "preEvent" && (
                   <ul>
@@ -108,7 +124,7 @@ export const Status = ({ className }: Props) => {
           })}
         </ul>
       </div>
-      {!!(phase === "postEvent" || phase === "traveling" || loops > 0) && (
+      {!!(phase === "postEvent" || phase === "traveling") && (
         <div>
           <h2 className="font-bold">Skills</h2>
           <ul>

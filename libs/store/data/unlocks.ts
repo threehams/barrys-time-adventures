@@ -6,7 +6,9 @@ export type UnlockKey =
   | "loop"
   | "pastSpeed2x"
   | "autoPurchase"
-  | "timelineEvents";
+  | "convergence"
+  | "timelineEvents"
+  | "autoPurchaseExpand";
 export type Unlock = {
   key: UnlockKey;
   requirements: {
@@ -65,6 +67,26 @@ export const unlocks: Unlock[] = [
     message: {
       priority: "alert",
       text: "Unlocked: Negative effects now appear on the timeline.",
+    },
+  },
+  {
+    key: "convergence",
+    requirements: {
+      exploration: "T6",
+    },
+    message: {
+      priority: "alert",
+      text: "Unlocked: All Barrys are in one place. Barry wants to repopulate the Earth.",
+    },
+  },
+  {
+    key: "autoPurchaseExpand",
+    requirements: {
+      upgrade: "BU4",
+    },
+    message: {
+      priority: "alert",
+      text: "Unlocked: Manager Barry will deal with creating more Barrys. I'll just direct him.",
     },
   },
 ];

@@ -35,7 +35,11 @@ export type UpgradeKey =
   | "EW1"
   | "EW2"
   | "EM1"
-  | "EF1";
+  | "EF1"
+  | "BU1"
+  | "BU2"
+  | "BU3"
+  | "BU4";
 export const upgrades: Upgrade[] = [
   {
     phase: "preEvent",
@@ -689,6 +693,105 @@ export const upgrades: Upgrade[] = [
       postMessage:
         "Future Barry's food compressor's letting me stretch whatever jars and lids I can get.",
     },
+  },
+  // expand upgrades
+  {
+    phase: "expand",
+    key: "BU1",
+    type: "purchased",
+    name: "Create more Barrys",
+    description: "Throw Barrys into time holes to create more Barrys.",
+    max: 100,
+    costs: {
+      barry: (level) => level * 5,
+    },
+    effect: {
+      type: "add",
+      barry: (level) => {
+        return level * 5;
+      },
+    },
+    flavorTexts: {},
+    requirements: {},
+    source: "copies",
+  },
+  {
+    phase: "expand",
+    key: "BU2",
+    type: "purchased",
+    name: "Fracture time",
+    description:
+      "Force time holes into other time holes to create more time holes. More time holes means more Barrys!",
+    max: 100,
+    costs: {
+      barry: (level) => level * 100,
+    },
+    effect: {
+      type: "multiply",
+      barry: (level) => {
+        return level * 5;
+      },
+    },
+    flavorTexts: {},
+    requirements: {
+      upgrade: {
+        key: "BU1",
+        level: 10,
+      },
+    },
+    source: "copies",
+  },
+  {
+    phase: "expand",
+    key: "BU3",
+    type: "purchased",
+    name: "Hire Barrys",
+    description: "Hire Barrys to shove Barrys into time holes.",
+    max: 10,
+    costs: {
+      barry: (level) => {
+        return Math.pow(level, 3.5) + level * 10;
+      },
+    },
+    effect: {
+      type: "time",
+      barry: (level) => {
+        return 0.7 ** level;
+      },
+    },
+    flavorTexts: {},
+    requirements: {
+      upgrade: {
+        key: "BU1",
+        level: 10,
+      },
+    },
+    source: "copies",
+  },
+  {
+    phase: "expand",
+    key: "BU4",
+    type: "purchased",
+    name: "Hire a Director Barry",
+    description: "Hire a Director Barry to deal with all these other Barrys.",
+    max: 1,
+    costs: {
+      barry: (level) => {
+        return Math.pow(level, 3.5) + level * 10;
+      },
+    },
+    effect: {
+      type: "add",
+      barry: () => 0,
+    },
+    flavorTexts: {},
+    requirements: {
+      upgrade: {
+        key: "BU2",
+        level: 20,
+      },
+    },
+    source: "copies",
   },
 ];
 

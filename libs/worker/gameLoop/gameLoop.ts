@@ -14,6 +14,7 @@ import {
 } from "@laundry/store";
 import { sub } from "date-fns";
 import { Draft } from "immer";
+import { news } from "libs/store/data/news";
 import { groupBy } from "lodash";
 
 const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0);
@@ -31,6 +32,8 @@ export const updateGame: Updater = (state, delta) => {
       delta * state.multiplier,
       THE_EVENT_TIME - state.time,
     );
+  } else if (state.phase === "expand" || state.phase === "collapse") {
+    elapsedTime = Math.min(delta * state.multiplier);
   } else {
     let explorationMultiplier = 1;
     if (state.exploration) {
@@ -51,7 +54,13 @@ export const updateGame: Updater = (state, delta) => {
 };
 
 const updateAutoPurchase: Updater = (state, delta) => {
-  if (state.phase !== "preEvent" || !state.unlocks.autoPurchase) {
+  if (state.phase === "preEvent" && !state.unlocks.autoPurchase) {
+    return;
+  }
+  if (
+    (state.phase === "expand" || state.phase === "collapse") &&
+    !state.unlocks.autoPurchaseExpand
+  ) {
     return;
   }
 
@@ -59,7 +68,7 @@ const updateAutoPurchase: Updater = (state, delta) => {
   if (state.timers.autoPurchase > AUTO_PURCHASE_TIME) {
     const allUpgrades = upgrades.filter((upgrade) => {
       return (
-        upgrade.phase === "preEvent" &&
+        upgrade.phase === state.phase &&
         state.autoUpgrade[upgrade.source] &&
         canShowUpgrade({
           upgrade,
@@ -94,15 +103,17 @@ const updateAutoPurchase: Updater = (state, delta) => {
             upgrade.costs[costKey]?.(nextLevel, 0) ?? 0;
         }
         state.upgrades[upgrade.key] = { level: nextLevel };
-        state.timeline.push({
-          time: state.time,
-          action: {
-            type: "BUY_UPGRADE",
-            payload: {
-              key: upgrade.key,
+        if (state.phase === "preEvent") {
+          state.timeline.push({
+            time: state.time,
+            action: {
+              type: "BUY_UPGRADE",
+              payload: {
+                key: upgrade.key,
+              },
             },
-          },
-        });
+          });
+        }
       }
     }
   }
@@ -127,8 +138,22 @@ const updateMessages: Updater = (state, delta) => {
     if (value.time < state.time && value.time > state.time - delta) {
       const text = upgrade.flavorTexts[value.level];
       if (text) {
-        state.messages.push({ priority: "alert", text });
+        state.messages.push({ priority: "alert", text, time: state.time });
       }
+    }
+  }
+
+  for (const newsMessage of news) {
+    const timePassed =
+      newsMessage.time &&
+      newsMessage.time < state.time &&
+      newsMessage.time > state.time - delta;
+    if (timePassed) {
+      state.messages.push({
+        priority: "news",
+        text: newsMessage.text,
+        time: state.time,
+      });
     }
   }
 };
@@ -139,7 +164,11 @@ const updateTime: Updater = (state, delta) => {
     state.timers = { ...initialState.timers };
     state.multiplier = 1;
     state.messages = [
-      { priority: "info", text: "That was strange. Where am I?" },
+      {
+        priority: "info",
+        text: "That was strange. Where am I?",
+        time: state.time,
+      },
     ];
     return;
   }
@@ -149,6 +178,10 @@ const updateTime: Updater = (state, delta) => {
       state.phase === "preEvent" ||
       (state.phase === "postEvent" && state.exploration)
     ) {
+      state.time = state.time + delta;
+    }
+
+    if (state.phase === "expand" || state.phase === "collapse") {
       state.time = state.time + delta;
     }
   }
@@ -167,7 +200,7 @@ const updateEvent: Updater = (state, delta) => {
 
 const updatePreResources: Updater = (state, delta) => {
   const { timers, phase } = state;
-  if (phase !== "preEvent") {
+  if (!(phase === "preEvent" || phase === "expand" || phase === "collapse")) {
     return;
   }
 
@@ -193,7 +226,13 @@ const updatePreResources: Updater = (state, delta) => {
       const perCount = getSourceAmount(sourceUpgrades, source);
 
       timers[source.key] = timers[source.key] % time;
-      state.resources[source.resource] += counts * perCount;
+      state.resources[source.resource] += Math.floor(counts * perCount);
+      if (
+        state.resources[source.resource] === null ||
+        state.resources[source.resource] === Infinity
+      ) {
+        debugger;
+      }
     }
   }
 };
@@ -256,6 +295,7 @@ const updateExplore: Updater = (state, delta) => {
     const resource = state.resources.food <= 0 ? "food" : "water";
     state.messages.push({
       priority: "alert",
+      time: state.time,
       text: `I'm out of ${resource}. I should go help out Past Barry so I can be better prepared.`,
     });
   }
@@ -306,10 +346,14 @@ const updateExplore: Updater = (state, delta) => {
     state.exploration = undefined;
     if (unlock && !state.unlocks[unlock.key]) {
       state.unlocks[unlock.key] = true;
-      state.messages.push(unlock.message);
+      state.messages.push({ ...unlock.message, time: state.time });
     }
     if (exploration.message) {
-      state.messages.push({ priority: "info", text: exploration.message });
+      state.messages.push({
+        priority: "info",
+        text: exploration.message,
+        time: state.time,
+      });
     }
   }
 };

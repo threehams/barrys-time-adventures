@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import { useSelector } from "./StateProvider";
+import { EffectText } from "./EffectText";
+import { MessageLevel } from "@laundry/store";
 
 export const Messages = () => {
   const messages = useSelector((state) => state.messages)
@@ -11,7 +13,7 @@ export const Messages = () => {
       {messages.map((message, index) => {
         return (
           <p
-            key={index}
+            key={message.text}
             className={clsx("relative", textColor(message.priority, index))}
           >
             <span
@@ -19,10 +21,12 @@ export const Messages = () => {
                 "absolute top-[0] bottom-[0] left-[0] w-1",
                 message.priority === "alert"
                   ? "bg-red-500"
+                  : message.priority === "news"
+                  ? "bg-blue-500"
                   : " bg-gray-300 dark:bg-gray-600",
               )}
             ></span>
-            <span className="block pl-3">{message.text}</span>
+            <EffectText className="block pl-3">{message.text}</EffectText>
           </p>
         );
       })}
@@ -30,9 +34,9 @@ export const Messages = () => {
   );
 };
 
-const textColor = (priority: "info" | "alert", index: number) => {
-  if (priority === "info") {
-    return index > 0 && "text-gray-700 dark:text-gray-400";
+const textColor = (priority: MessageLevel, index: number) => {
+  if (priority === "alert") {
+    return index > 0 ? "text-red-700" : "text-red-500";
   }
-  return index > 0 ? "text-red-700" : "text-red-500";
+  return index > 0 && "text-gray-700 dark:text-gray-400";
 };

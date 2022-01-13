@@ -1,4 +1,10 @@
-import { StateAction, State, findUpgrade, initialState } from "@laundry/store";
+import {
+  StateAction,
+  State,
+  findUpgrade,
+  initialState,
+  findUnlockFor,
+} from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 import { Draft } from "immer";
 import { updateGame } from "./gameLoop";
@@ -23,10 +29,15 @@ export const eventHandler = (
       }
       if (currentLevel < upgrade.max) {
         for (const costKey of Object.keys(upgrade.costs)) {
-          state.resources[costKey] -=
-            upgrade.costs[costKey]?.(nextLevel, 0) ?? 0;
+          state.resources[costKey] -= Math.floor(
+            upgrade.costs[costKey]?.(nextLevel, 0) ?? 0,
+          );
         }
         purchasedUpgrades[key] = { level: nextLevel };
+        const unlock = findUnlockFor({ upgrade: action.payload.key });
+        if (unlock) {
+          state.unlocks[unlock.key] = true;
+        }
         state.timeline.push({
           time: state.time,
           action,

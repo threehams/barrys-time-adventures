@@ -1,6 +1,6 @@
 import numbro from "numbro";
 
-export type Resource = "food" | "power" | "money" | "water" | "junk";
+export type Resource = "food" | "power" | "money" | "water" | "junk" | "barry";
 export type Resources = {
   [Key in Resource]: number;
 };
@@ -13,7 +13,8 @@ export type SourceKey =
   | "well"
   | "letsy"
   | "crafts"
-  | "scrap";
+  | "scrap"
+  | "copies";
 
 export type Source = { key: SourceKey; name: string; resource: Resource };
 export const sources: Source[] = [
@@ -25,6 +26,7 @@ export const sources: Source[] = [
   { key: "preserves", name: "Preserves", resource: "food" },
   { key: "plants", name: "Plants", resource: "food" },
   { key: "scrap", name: "Scrap", resource: "junk" },
+  { key: "copies", name: "Barrys", resource: "barry" },
 ];
 
 export const findSource = (key: SourceKey) => {
@@ -104,6 +106,18 @@ const resources: {
       `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
       })} Ah`,
+  },
+  {
+    key: "barry",
+    name: "Barrys",
+    format: (value) =>
+      `${numbro(Math.floor(value)).format({
+        thousandSeparated: true,
+      })}`,
+    formatWithType: (value) =>
+      `${numbro(Math.floor(value)).format({
+        thousandSeparated: true,
+      })}`,
   },
 ];
 

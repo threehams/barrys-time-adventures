@@ -79,7 +79,9 @@ export const Upgrades = ({
         return (
           <li key={value.source.key}>
             <div className="flex items-center gap-2 mb-1">
-              {unlocks.autoPurchase && phase === "preEvent" && (
+              {((unlocks.autoPurchase && phase === "preEvent") ||
+                (unlocks.autoPurchaseExpand &&
+                  (phase === "expand" || phase === "collapse"))) && (
                 <Button
                   active={autoUpgrade[value.source.key]}
                   onClick={() => {

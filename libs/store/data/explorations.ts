@@ -12,6 +12,7 @@ export type ExplorationKey =
   | "E6"
   | "E7"
   | "E8"
+  | "E9"
   | "C1"
   | "C2"
   | "F1"
@@ -21,6 +22,7 @@ export type ExplorationKey =
   | "S2"
   | "T4"
   | "T5"
+  | "T6"
   | "G1";
 
 export const explorations: Exploration[] = [
@@ -373,6 +375,43 @@ export const explorations: Exploration[] = [
     },
     timeMultiplier: 50,
     time: 200_000_000,
+    requirements: {
+      action: "E3",
+    },
+  },
+  {
+    key: "E9",
+    name: "Travel to next city",
+    description: "Things are bad here, but are they this bad everywhere?",
+    message: `Things are this bad everywhere. I didn't meet anyone.`,
+    drain: {
+      food: 20,
+      water: 20,
+    },
+    train: {
+      endurance: 2,
+    },
+    timeMultiplier: 500,
+    time: 2_000_000_000,
+    requirements: {
+      action: "E3",
+    },
+  },
+  {
+    key: "T6",
+    name: "Converge timelines",
+    description:
+      "I can't leave my other selves trapped. We need to wait until we're all visible, then jump at the same time. This could take a very long time.",
+    message: "",
+    drain: {
+      food: 20,
+      water: 20,
+    },
+    train: {
+      patience: 2,
+    },
+    timeMultiplier: 100,
+    time: 2_000_000_000,
     requirements: {
       action: "E3",
     },

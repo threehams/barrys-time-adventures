@@ -53,7 +53,9 @@ export const Game = () => {
             <Reset />
           </aside>
           <main className="[grid-area:main] py-2">
-            {phase === "preEvent" && (
+            {(phase === "preEvent" ||
+              phase === "expand" ||
+              phase === "collapse") && (
               <>
                 <h2 className="mb-2">Upgrades</h2>
                 <Upgrades
@@ -62,7 +64,7 @@ export const Game = () => {
                 />
               </>
             )}
-            {phase !== "preEvent" && (
+            {(phase === "postEvent" || phase === "traveling") && (
               <div>
                 <Tabs className="mb-2">
                   <Tab
