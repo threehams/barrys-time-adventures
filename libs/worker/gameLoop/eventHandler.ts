@@ -86,6 +86,7 @@ export const eventHandler = (
         return;
       }
       travel(state, 29);
+      state.loops += 1;
       state.phase = "postEvent";
       break;
     case "TOGGLE_AUTO_PURCHASE": {
@@ -120,6 +121,7 @@ const travel = (state: Draft<State>, day: number) => {
         }),
     ),
   };
+  state.messages = [...initialState.messages];
   // get the current timeline before resetting it
   const timeline = state.timeline;
   state.timeline = [];

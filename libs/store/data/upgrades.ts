@@ -29,9 +29,13 @@ export type UpgradeKey =
   | "PM4"
   | "PM5"
   | "TW1"
+  | "TW2"
+  | "TF1"
+  | "TM1"
   | "EW1"
   | "EW2"
-  | "EM1";
+  | "EM1"
+  | "EF1";
 export const upgrades: Upgrade[] = [
   {
     phase: "preEvent",
@@ -52,7 +56,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "",
     flavorTexts: {},
     requirements: {},
     source: "letsy",
@@ -75,7 +78,6 @@ export const upgrades: Upgrade[] = [
         return Math.pow(0.75, Math.log2(level) + 1);
       },
     },
-    effectDescription: "",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PM1", level: 3 },
@@ -101,7 +103,6 @@ export const upgrades: Upgrade[] = [
         return level * 1.1 + 1;
       },
     },
-    effectDescription: "x2 sales per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PM1", level: 5 },
@@ -127,7 +128,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "+1 crafts sale per level",
     flavorTexts: {},
     requirements: {
       money: 200,
@@ -153,7 +153,6 @@ export const upgrades: Upgrade[] = [
         return level * 1.25 + 1;
       },
     },
-    effectDescription: "x2 sale value per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PM3", level: 3 },
@@ -179,7 +178,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "+1 scrap metal per level",
     flavorTexts: {},
     requirements: {
       money: 20,
@@ -205,7 +203,6 @@ export const upgrades: Upgrade[] = [
         return 1.25 ** level;
       },
     },
-    effectDescription: "x1.25 scrap metal per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PJ1", level: 5 },
@@ -230,7 +227,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "+1 preserved food per level",
     flavorTexts: {},
     requirements: {
       money: 200,
@@ -252,10 +248,9 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       food: (level) => {
-        return 1.2 ** level;
+        return 1.1 ** level;
       },
     },
-    effectDescription: "x2 preserved food per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PF1", level: 3 },
@@ -281,7 +276,6 @@ export const upgrades: Upgrade[] = [
         return Math.pow(0.85, Math.log2(level) + 1);
       },
     },
-    effectDescription: "x0.8 time required for preserved food per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PF1", level: 5 },
@@ -307,7 +301,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "+1 plant food per level",
     flavorTexts: {},
     requirements: {
       food: 100,
@@ -333,7 +326,6 @@ export const upgrades: Upgrade[] = [
         return Math.pow(0.8, Math.log2(level) + 1);
       },
     },
-    effectDescription: "x0.8 plant growing time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PF3", level: 3 },
@@ -353,12 +345,11 @@ export const upgrades: Upgrade[] = [
       },
     },
     effect: {
-      type: "time",
+      type: "multiply",
       food: (level) => {
-        return level * 1.15;
+        return 1.15 ** level;
       },
     },
-    effectDescription: "x0.8 plant growing time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PF4", level: 5 },
@@ -384,7 +375,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "+1 well water per level",
     flavorTexts: {},
     requirements: {
       money: 200,
@@ -409,7 +399,6 @@ export const upgrades: Upgrade[] = [
         return 1.05 ** level;
       },
     },
-    effectDescription: "x1.1 well water per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PW5", level: 5 },
@@ -434,7 +423,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "+1 rainwater per level",
     flavorTexts: {},
     requirements: {
       water: 100,
@@ -459,7 +447,6 @@ export const upgrades: Upgrade[] = [
         return Math.pow(0.75, Math.log2(level) + 1);
       },
     },
-    effectDescription: "x0.8 rainwater time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PW1", level: 3 },
@@ -484,7 +471,6 @@ export const upgrades: Upgrade[] = [
         return level * 5;
       },
     },
-    effectDescription: "+1 filtered water per level",
     flavorTexts: {},
     requirements: {
       water: 200,
@@ -510,7 +496,6 @@ export const upgrades: Upgrade[] = [
         return Math.pow(0.7, Math.log2(level) + 1);
       },
     },
-    effectDescription: "*0.8 filtered water time per level",
     flavorTexts: {},
     requirements: {
       upgrade: { key: "PW3", level: 3 },
@@ -532,15 +517,64 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       water: (level) => {
-        return level * 1.25 + 1;
+        return 1.25 ** level;
       },
     },
-    effectDescription: "x2 rainwater, can collect without rainfall",
     flavorTexts: {},
     requirements: {
       exploration: "E3",
     },
     source: "rainfall",
+  },
+  {
+    phase: "postEvent",
+    key: "TW2",
+    type: "purchased",
+    name: "Carbon Nanotube Filter",
+    description:
+      "This thing could filter anything out of anything. Past Barry could have used this for that contamination problem.",
+    max: 50,
+    costs: {
+      power: (level, distance) => {
+        return Math.pow(level, 3.5) + distance * 10;
+      },
+    },
+    effect: {
+      type: "multiply",
+      water: (level) => {
+        return 1.25 ** level;
+      },
+    },
+    flavorTexts: {},
+    requirements: {
+      exploration: "E3",
+    },
+    source: "rainfall",
+  },
+  {
+    phase: "postEvent",
+    key: "TF1",
+    type: "purchased",
+    name: "Food Compression",
+    description:
+      "Cram more food into a single jar. Canning supply shortages won't affect Past Barry!",
+    max: 5,
+    costs: {
+      power: (level, distance) => {
+        return Math.pow(level, 3.5) + distance * 10;
+      },
+    },
+    effect: {
+      type: "multiply",
+      food: (level) => {
+        return 1.5 ** level;
+      },
+    },
+    flavorTexts: {},
+    requirements: {
+      exploration: "E3",
+    },
+    source: "preserves",
   },
   {
     phase: "preEvent",
@@ -557,13 +591,19 @@ export const upgrades: Upgrade[] = [
         return level - 1;
       },
     },
-    effectDescription: "",
     flavorTexts: {
       1: "The rain has stopped, so I'm not getting any water that way. I hope it starts up again soon.",
       2: "The rain has stopped. Luckily, not a problem for the condensate collector. Thanks, Future Barry!",
     },
     requirements: {},
     source: "rainfall",
+    negated: {
+      upgrade: "TW1",
+      message:
+        "The rain has stopped. Luckily, not a problem for the condensate collector. Thanks, Future Barry!",
+      postMessage:
+        "Hey, I just got a condensate collector from Future Barry! No rainfall is no longer a problem.",
+    },
   },
   {
     phase: "preEvent",
@@ -580,13 +620,18 @@ export const upgrades: Upgrade[] = [
         return level - 1;
       },
     },
-    effectDescription: "",
     flavorTexts: {
       1: "The stream's started to smell like paint. I'm not sure what happened, but I'm not going to trust it now.",
-      2: "The stream's started to smell like paint, but that's not a problem for this filter. Nice thinking, Future Barry!",
     },
     requirements: {},
     source: "stream",
+    negated: {
+      upgrade: "TW2",
+      message:
+        "The stream's started to smell like paint, but that's not a problem for this filter. Nice thinking, Future Barry!",
+      postMessage:
+        "I just got a new filter from Future Barry which should be able to deal with the paint pollution.",
+    },
   },
   {
     phase: "preEvent",
@@ -603,13 +648,47 @@ export const upgrades: Upgrade[] = [
         return level === 1 ? 0.5 : 1;
       },
     },
-    effectDescription: "",
     flavorTexts: {
       1: "Letsy just had an outage, and it's been flaky ever since. My income there has dropped in half.",
-      2: "",
+      2: "Letsy's going through an outage, but Future Barry taught me how to mirror their site. I don't know what's going on, but sales are better than ever!",
     },
     requirements: {},
     source: "letsy",
+    negated: {
+      upgrade: "TM1",
+      message:
+        "Letsy's going through an outage, but my site mirror's still going. I don't know what's going on, but thanks, Future Barry!",
+      postMessage:
+        "Future Barry taught me how to mirror Letsy's site. I don't know what's going on, but sales are better than ever!",
+    },
+  },
+  {
+    phase: "preEvent",
+    key: "EF1",
+    type: "event",
+    name: "Jar shortage",
+    description:
+      "I'm having a tough time getting enough jars and lids. I can preserve maybe half as much food right now.",
+    max: 2,
+    costs: {},
+    effect: {
+      type: "multiply",
+      food: (level) => {
+        return level === 1 ? 0.5 : 1;
+      },
+    },
+    flavorTexts: {
+      1: "I'm having a tough time getting enough jars and lids. I can preserve maybe half as much food right now.",
+    },
+    requirements: {},
+    source: "preserves",
+    negated: {
+      upgrade: "TF1",
+      message:
+        "There's a shortage on jars and lids, but Future Barry's food compression's working great!",
+      postMessage:
+        "Future Barry's food compressor's letting me stretch whatever jars and lids I can get.",
+    },
   },
 ];
 

@@ -8,17 +8,19 @@ export type ExplorationKey =
   | "T3"
   | "E3"
   | "E4"
+  | "E5"
+  | "E6"
   | "E7"
+  | "E8"
   | "C1"
   | "C2"
   | "F1"
   | "F2"
   | "F3"
-  | "E5"
-  | "E6"
   | "S1"
   | "S2"
   | "T4"
+  | "T5"
   | "G1";
 
 export const explorations: Exploration[] = [
@@ -155,7 +157,7 @@ export const explorations: Exploration[] = [
     name: "Look for parts",
     description:
       "Someone took this thing apart. I'm going to need some M8 bolts and a socket to match.",
-    message: ``,
+    message: `It's reassembled, but still won't start. Maybe there's a troubleshooting guide around here.`,
     drain: {
       food: 2,
       water: 2,
@@ -172,15 +174,16 @@ export const explorations: Exploration[] = [
   {
     key: "F2",
     name: "Look for instructions",
-    description: "",
-    message: ``,
+    description:
+      "There's got to be an instruction manual around here somewhere.",
+    message: `Hours later, I gave up, and finally found it taped to the bottom of the generator. Someone's laughing right now.`,
     drain: {
       food: 2,
       water: 2,
     },
     train: {
-      strength: 2,
-      tech: 2,
+      perception: 2,
+      endurance: 4,
     },
     time: 1_000_000,
     requirements: {
@@ -190,19 +193,38 @@ export const explorations: Exploration[] = [
   {
     key: "F3",
     name: "Fix the generator",
-    description: "",
-    message: ``,
+    description: "This is going to be a lot of trial and error.",
+    message: `It's running! The lights are on. Time to see what else powered up. There isn't much that'll run off this.`,
     drain: {
       food: 2,
       water: 2,
     },
     train: {
-      perception: 2,
-      endurance: 2,
+      tech: 2,
+      patience: 2,
     },
     time: 1_000_000,
     requirements: {
       action: "F2",
+    },
+  },
+  {
+    key: "T5",
+    name: "Figure out computer",
+    description:
+      "A computer booted up, but there's no keyboard, mouse, touchscreen... anything? I feel really dumb right now.",
+    message: `Turns out it's like focusing on one of those Magic Eye images - just defocus, and the computer takes over. I bet I can use this technique to shove much more information into Past Barry's head.`,
+    drain: {
+      food: 2,
+      water: 2,
+    },
+    train: {
+      tech: 2,
+      endurance: 2,
+    },
+    time: 1_000_000,
+    requirements: {
+      action: "F3",
     },
   },
   {
@@ -267,13 +289,13 @@ export const explorations: Exploration[] = [
       "I can generate power by feeding this thing my resources. I'll start with any junk or money I have, since I don't think there's much use for those here.",
     message: `Mr. Fusion just coughed up the last of what I gave it and let off some smoke. I think it's generated its last.`,
     drain: {
-      food: 2,
-      water: 2,
+      food: 1,
+      water: 1,
     },
     train: {
       patience: 2,
     },
-    time: 10_000_000,
+    time: 1_000_000,
     requirements: {
       action: "E7",
     },
@@ -286,7 +308,7 @@ export const explorations: Exploration[] = [
     name: "Explore big time holes",
     description:
       "There are a bunch of bigger time holes near a fasion district. I might be able to send larger items through these - maybe even travel?",
-    message: ``,
+    message: `There's a really interesting time hole up the stairs, but I'll have to move some wreckage out of the way to get to it.`,
     drain: {
       food: 2,
       water: 2,
@@ -304,14 +326,14 @@ export const explorations: Exploration[] = [
     key: "S1",
     name: "Move wreckage",
     description:
-      "There's a really interesting time hole up the stairs, but I'll have to move some wreckage out of the way to get to it.",
-    message: ``,
+      "Get to the big time hole by moving heavy things. Here we go, Strong Barry.",
+    message: `I'm exhausted and never want to lift heavy things again, but I can get to the time hole now.`,
     drain: {
-      food: 2,
-      water: 2,
+      food: 3,
+      water: 4,
     },
     train: {
-      strength: 2,
+      strength: 3,
     },
     time: 1_000_000,
     requirements: {
@@ -322,7 +344,7 @@ export const explorations: Exploration[] = [
     key: "T4",
     name: "Convince yourself",
     description:
-      "Hey! I saw myself from just a day a ago! This time hole seems to fight me a lot less. Maybe I could just jump through?",
+      "Hey! I saw myself from just a day a ago! This time hole seems to fight me a lot less. I think I could have a conversation with myself.",
     message: `After a lot of arguing with Past Barry, we agreed to swap places when the time comes. I have no idea what'll happen to him, but that sounds like Future Barry problems, not mine.`,
     drain: {
       food: 2,
@@ -334,6 +356,25 @@ export const explorations: Exploration[] = [
     time: 1_000_000,
     requirements: {
       action: "S1",
+    },
+  },
+  {
+    key: "E8",
+    name: "Keep moving",
+    description:
+      "Head out to the light industrial zone. This may be a long walk. If I have anything to do here first, I should do it.",
+    message: `Rough trip, but I'm finally glad I lived near a tech hub. Lots of places to explore here.`,
+    drain: {
+      food: 10,
+      water: 10,
+    },
+    train: {
+      endurance: 2,
+    },
+    timeMultiplier: 50,
+    time: 200_000_000,
+    requirements: {
+      action: "E3",
     },
   },
 ];

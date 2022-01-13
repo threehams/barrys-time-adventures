@@ -304,7 +304,7 @@ const updateExplore: Updater = (state, delta) => {
   if (state.explorations[state.exploration]!.progress === 100) {
     const unlock = findUnlockFor({ exploration: exploration.key });
     state.exploration = undefined;
-    if (unlock) {
+    if (unlock && !state.unlocks[unlock.key]) {
       state.unlocks[unlock.key] = true;
       state.messages.push(unlock.message);
     }

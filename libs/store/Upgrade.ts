@@ -1,7 +1,6 @@
 import { ExplorationKey, Phase, SourceKey, UnlockKey, UpgradeKey } from ".";
 
 export type UpgradeEffect = {
-  unlock?: UnlockKey;
   food?: (level: number) => number;
   water?: (level: number) => number;
   money?: (level: number) => number;
@@ -38,8 +37,6 @@ export type Upgrade = {
   name: string;
   // Flavor text for all levels
   description: string;
-  // String representation of the effect this upgrade has
-  effectDescription: string;
   // Source
   source: SourceKey;
   // Precise key for the upgrade (not string)
@@ -49,5 +46,12 @@ export type Upgrade = {
   // Message shown with each upgrade
   flavorTexts: {
     [level: number]: string | undefined;
+  };
+  negated?: {
+    upgrade: UpgradeKey;
+    // message when this event is negated the moment it starts
+    message: string;
+    // message when this event is negated later
+    postMessage: string;
   };
 };

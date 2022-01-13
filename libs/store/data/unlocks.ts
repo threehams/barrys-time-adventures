@@ -1,7 +1,12 @@
 import { ExplorationKey, UpgradeKey } from ".";
 import { Message } from "..";
 
-export type UnlockKey = "pastRestart" | "loop" | "pastSpeed2x" | "autoPurchase";
+export type UnlockKey =
+  | "pastRestart"
+  | "loop"
+  | "pastSpeed2x"
+  | "autoPurchase"
+  | "timelineEvents";
 export type Unlock = {
   key: UnlockKey;
   requirements: {
@@ -19,7 +24,7 @@ export const unlocks: Unlock[] = [
     },
     message: {
       priority: "alert",
-      text: 'Unlock: You can change decisions you made in the past. Click a day on the timeline, then "Restart Here."',
+      text: 'Unlocked: You can change decisions you made in the past. Click a day on the timeline, then "Restart Here."',
     },
   },
   {
@@ -29,7 +34,7 @@ export const unlocks: Unlock[] = [
     },
     message: {
       priority: "alert",
-      text: "Speed up time for Past Barry up to 2X.",
+      text: "Unlocked: Speed up time for Past Barry up to 2X.",
     },
   },
   {
@@ -39,7 +44,7 @@ export const unlocks: Unlock[] = [
     },
     message: {
       priority: "alert",
-      text: "Unlock: Restart after the timeskip, but keep some of your stats and knowledge. This may have consequences.",
+      text: "Unlocked: Restart after the timeskip, but keep some of your stats and knowledge. This may have consequences.",
     },
   },
   {
@@ -49,7 +54,17 @@ export const unlocks: Unlock[] = [
     },
     message: {
       priority: "alert",
-      text: "Unlock: Automatically purchase upgrades in the past!",
+      text: "Unlocked: Automatically purchase upgrades in the past! Click 'Auto' to enable for each source.",
+    },
+  },
+  {
+    key: "timelineEvents",
+    requirements: {
+      exploration: "T5",
+    },
+    message: {
+      priority: "alert",
+      text: "Unlocked: Negative effects now appear on the timeline.",
     },
   },
 ];

@@ -51,6 +51,12 @@ export const Timeline = ({
 
   const timedUpgrades = Object.entries(timedUpgradeMap)
     .filter((entry) => isNonNullable(entry[1]))
+    .filter((entry) => {
+      if (!unlocks.timelineEvents && findUpgrade(entry[0]).type === "event") {
+        return false;
+      }
+      return true;
+    })
     .map(([key, value]): TimelineEvent => {
       const upgrade = findUpgrade(key);
       return {
@@ -161,6 +167,7 @@ export const Timeline = ({
       </ul>
       {selectedDay !== undefined && (
         <DayDetail
+          key={selectedDay}
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
           timeline={timeline}
@@ -199,10 +206,11 @@ const DayDetail = ({
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
   const resources = useSelector((state) => state.resources);
   const dispatch = useDispatch();
+  const [confirm, setConfirm] = useState(false);
 
   return (
     <div
-      className="relative grid grid-cols-[1fr_50px]"
+      className="relative grid grid-cols-[1fr_50px] border p-2 border-t-0 rounded-b-md"
       style={{
         gridTemplateAreas: `
       "restart close"
@@ -246,10 +254,16 @@ const DayDetail = ({
         </div>
       )}
       {selectedDay !== undefined && phase !== "preEvent" && !selectedUpgrade && (
-        <div className="[grid-area:restart]">
+        <div className="[grid-area:restart] mb-1">
           <Button
+            className="mr-2"
             variant="danger"
             onClick={() => {
+              if (!confirm) {
+                setConfirm(true);
+                return;
+              }
+              setConfirm(false);
               setSelectedDay(undefined);
               dispatch({
                 type: "TRAVEL",
@@ -259,15 +273,25 @@ const DayDetail = ({
               });
             }}
           >
-            Restart Here
+            {confirm ? "Confirm" : "Restart Here"}
           </Button>
+          {confirm && (
+            <span>
+              This will reset your exploration progress, resources (including
+              power), and anything you&apos;ve done on the selected day and
+              after. You will keep all unlocks and Timed Upgrades.
+            </span>
+          )}
         </div>
       )}
       {events !== undefined && (
         <ul className="[grid-area:events]">
           {events.map((event) => {
             return (
-              <li key={event.time} className="flex items-center">
+              <li
+                key={`${event.text}${event.time}`}
+                className="flex items-center"
+              >
                 <div
                   className={clsx(
                     "w-[14px] h-[14px] inline-block mr-1",

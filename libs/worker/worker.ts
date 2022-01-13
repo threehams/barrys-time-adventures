@@ -59,7 +59,8 @@ const main = async () => {
     if (previous === undefined) {
       previous = time;
     }
-    const delta = time - previous;
+    // limit offline progress to 1 minute so people don't get stuck
+    const delta = Math.min(time - previous, 60_000);
     const [nextState, patches] = produceWithPatches(state, (draft) => {
       updateGame(draft, delta);
     });

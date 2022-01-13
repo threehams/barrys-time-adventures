@@ -4,7 +4,9 @@ import {
   canPurchaseUpgrade,
   canShowUpgrade,
   findResource,
+  Resource,
   sources,
+  Upgrade,
   UpgradeKey,
   upgrades,
 } from "@laundry/store";
@@ -67,14 +69,17 @@ export const Upgrades = ({
     <ul className={clsx("flex flex-col gap-2", className)}>
       {sourceUpgrades.map((value) => {
         const resourceGroup = findResource(value.source.resource);
+        if (
+          !value.available.length &&
+          !(unlocks.autoPurchase && phase === "preEvent")
+        ) {
+          return null;
+        }
 
         return (
           <li key={value.source.key}>
-            <div className="flex">
-              <h2 className="mb-1">
-                {resourceGroup.name}: {value.source.name}
-              </h2>
-              {unlocks.autoPurchase && (
+            <div className="flex items-center gap-2 mb-1">
+              {unlocks.autoPurchase && phase === "preEvent" && (
                 <Button
                   active={autoUpgrade[value.source.key]}
                   onClick={() => {
@@ -89,6 +94,9 @@ export const Upgrades = ({
                   Auto
                 </Button>
               )}
+              <h2>
+                {resourceGroup.name}: {value.source.name}
+              </h2>
             </div>
 
             <ul className={clsx("flex flex-col gap-2", className)}>
@@ -150,7 +158,7 @@ export const Upgrades = ({
                     </div>
                     {level !== upgrade.max && (
                       <>
-                        <p>{upgrade.effectDescription}</p>
+                        <p>{upgradeEffect(upgrade, level)}</p>
                         <p>{upgrade.description}</p>
                       </>
                     )}
@@ -164,4 +172,24 @@ export const Upgrades = ({
       })}
     </ul>
   );
+};
+
+const upgradeEffect = (upgrade: Upgrade, currentLevel: number) => {
+  if (currentLevel + 1 > upgrade.max) {
+    return "";
+  }
+  const [resourceKey, resourceFunc] = Object.entries(upgrade.effect).find(
+    ([key, func]) => {
+      return key !== "type" && !!func;
+    },
+  )! as [Resource, (level: number) => number];
+  const resource = findResource(resourceKey);
+  const diff = resourceFunc(currentLevel + 1) - resourceFunc(currentLevel);
+  if (upgrade.effect.type === "add") {
+    return `+${Math.floor(diff)} ${resource.name} gain`;
+  } else if (upgrade.effect.type === "multiply") {
+    return `+${diff.toFixed(2)}x ${resource.name} gain`;
+  } else {
+    return `+${Math.abs(diff).toFixed(2)}x ${resource.name} speed`;
+  }
 };

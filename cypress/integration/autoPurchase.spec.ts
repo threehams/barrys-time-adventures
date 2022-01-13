@@ -1,7 +1,6 @@
 import localForage from "localforage";
 import produce from "immer";
 import { initialState } from "@laundry/store";
-import { hoursToSeconds } from "date-fns";
 
 describe("new game", () => {
   it("starts up without issues", () => {
