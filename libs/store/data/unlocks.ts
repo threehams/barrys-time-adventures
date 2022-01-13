@@ -1,7 +1,7 @@
 import { ExplorationKey, UpgradeKey } from ".";
 import { Message } from "..";
 
-export type UnlockKey = "pastRestart" | "loop" | "pastSpeed2x";
+export type UnlockKey = "pastRestart" | "loop" | "pastSpeed2x" | "autoPurchase";
 export type Unlock = {
   key: UnlockKey;
   requirements: {
@@ -40,6 +40,16 @@ export const unlocks: Unlock[] = [
     message: {
       priority: "alert",
       text: "Unlock: Restart after the timeskip, but keep some of your stats and knowledge. This may have consequences.",
+    },
+  },
+  {
+    key: "autoPurchase",
+    requirements: {
+      exploration: "T4",
+    },
+    message: {
+      priority: "alert",
+      text: "Unlock: Automatically purchase upgrades in the past!",
     },
   },
 ];

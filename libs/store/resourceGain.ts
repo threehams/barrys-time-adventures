@@ -2,7 +2,7 @@ import { isNonNullable } from "@laundry/utils";
 import { findUpgrade, Source, Upgrade, UpgradeKey } from ".";
 import { State } from "./State";
 
-const RESOURCE_GAIN_BASE_TIME = 5_000;
+const RESOURCE_GAIN_BASE_TIME = 10_000;
 
 type ListUpgrade = {
   key: UpgradeKey;

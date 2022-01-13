@@ -1,5 +1,5 @@
 import { initialState, State, StateAction } from "@laundry/store";
-import { enablePatches, produceWithPatches } from "immer";
+import produce, { enablePatches, produceWithPatches } from "immer";
 import localForage from "localforage";
 import { eventHandler, updateGame } from "./gameLoop";
 
@@ -17,9 +17,15 @@ enablePatches();
 const worker = self as unknown as Worker;
 
 const main = async () => {
-  const getSavedGame = async () => {
+  const getSavedGame = async (): Promise<State> => {
     const savedGame = (await localForage.getItem(savedGameKey)) as State;
-    return savedGame ?? initialState;
+    if (!savedGame) {
+      return initialState;
+    }
+    return produce(savedGame, (draft) => {
+      draft.timers.autoPurchase ??= 0;
+      draft.autoUpgrade ??= {};
+    });
   };
 
   let state = await getSavedGame();

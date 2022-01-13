@@ -21,6 +21,7 @@ type Props = {
 export const Status = ({ className }: Props) => {
   const time = useSelector((state) => state.time);
   const resources = useSelector((state) => state.resources);
+  const maxResources = useSelector((state) => state.maxResources);
   const phase = useSelector((state) => state.phase);
   const loops = useSelector((state) => state.loops);
   const skills = useSelector((state) => state.skills);
@@ -28,6 +29,7 @@ export const Status = ({ className }: Props) => {
   const timedUpgrades = useSelector((state) => state.timedUpgrades);
   const unlocks = useSelector((state) => state.unlocks);
   const allUpgrades = getAllUpgrades({ upgrades, time, timedUpgrades });
+  const timers = useSelector((state) => state.timers);
   const upgradesBySource = groupBy(
     allUpgrades,
     (value) => value.upgrade.source,
@@ -47,19 +49,22 @@ export const Status = ({ className }: Props) => {
     <div className={className}>
       <div className="mb-2">
         <div className="mb-2">It is {timeOfDay}.</div>
-        <h2 className="font-bold">Inventory</h2>
-        <ul>
-          {(["food", "water", "money", "junk", "power"] as const).map((key) => {
+        <h2 className="mb-1 font-bold">Inventory</h2>
+        <ul className="space-y-2">
+          {(["junk", "money", "food", "water", "power"] as const).map((key) => {
+            if (maxResources[key] === 0) {
+              return null;
+            }
             const resource = findResource(key);
             return (
-              <li key={key}>
-                <div className="flex justify-between">
+              <li key={key} className="p-2 border rounded-md">
+                <div className="flex justify-between mb-1 font-semibold">
                   <span>{resource.name}</span>
                   <span>{resource.format(resources[key])}</span>
                 </div>
 
                 {phase === "preEvent" && (
-                  <ul className="ml-2">
+                  <ul>
                     {sources
                       .filter((source) => source.resource === key)
                       .map((source) => {
@@ -67,16 +72,15 @@ export const Status = ({ className }: Props) => {
                         if (!upgradesBySource[source.key]) {
                           return null;
                         }
-                        const perDay =
-                          getSourceAmount(
-                            upgradesBySource[source.key],
-                            source,
-                          ) *
-                          (oneDay /
-                            getSourceTime(
-                              upgradesBySource[source.key],
-                              source,
-                            ));
+                        const sourceAmount = getSourceAmount(
+                          upgradesBySource[source.key],
+                          source,
+                        );
+                        const sourceTime = getSourceTime(
+                          upgradesBySource[source.key],
+                          source,
+                        );
+                        const perDay = sourceAmount * (oneDay / sourceTime);
 
                         return (
                           <li key={source.key}>
@@ -87,6 +91,13 @@ export const Status = ({ className }: Props) => {
                                 /day
                               </span>
                             </div>
+                            <Progress
+                              progress={
+                                sourceAmount === 0
+                                  ? 0
+                                  : (timers[source.key] / sourceTime) * 100
+                              }
+                            />
                           </li>
                         );
                       })}

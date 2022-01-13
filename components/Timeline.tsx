@@ -75,7 +75,7 @@ export const Timeline = ({
 
   return (
     <div className="inline-block">
-      <div className="flex items-center justify-between">
+      <div className="relative flex items-center justify-between">
         <h2>Timeline</h2>
         {unlocks.loop && phase === "traveling" && (
           <Button
@@ -88,6 +88,7 @@ export const Timeline = ({
           </Button>
         )}
       </div>
+      {phase !== "preEvent" && <div>You Are Here</div>}
       <ul className="flex flex-nowrap">
         {range(0, 30).map((day) => {
           const availableUpgrades = !!timeline[day]?.find(

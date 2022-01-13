@@ -1,9 +1,10 @@
 import { hoursToSeconds } from "date-fns";
 import { State } from "./State";
 
-const STARTING_JUNK = 100;
+const STARTING_JUNK = 200;
 
 export const initialState: State = {
+  replay: false,
   phase: "preEvent",
   exploration: undefined,
   time: 0,
@@ -17,15 +18,15 @@ export const initialState: State = {
   upgrades: {},
   timedUpgrades: {
     EW1: {
-      time: hoursToSeconds(15 * 24),
+      time: hoursToSeconds(7 * 24),
       level: 1,
     },
     EW2: {
-      time: hoursToSeconds(21 * 24),
+      time: hoursToSeconds(9 * 24),
       level: 1,
     },
     EM1: {
-      time: hoursToSeconds(11 * 24),
+      time: hoursToSeconds(14 * 24),
       level: 1,
     },
   },
@@ -67,8 +68,9 @@ export const initialState: State = {
     },
   },
   explorations: {},
-  multiplier: 1,
+  multiplier: 2,
   timers: {
+    autoPurchase: 0,
     scrap: 0,
     action: 0,
     event: 0,
@@ -88,4 +90,5 @@ export const initialState: State = {
   },
   loops: 0,
   unlocks: {},
+  autoUpgrade: {},
 };

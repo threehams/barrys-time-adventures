@@ -23,6 +23,7 @@ export type Unlocks = {
 export type MessageLevel = "info" | "alert";
 export type Message = { text: string; priority: MessageLevel };
 export type State = {
+  replay: boolean;
   unlocks: Unlocks;
   phase: Phase;
   exploration: ExplorationKey | undefined;
@@ -40,7 +41,10 @@ export type State = {
   }>;
   multiplier: number;
   timers: {
-    [Key in SourceKey | "event" | "action" | Resource]: number;
+    [Key in SourceKey | "event" | "action" | Resource | "autoPurchase"]: number;
   };
   loops: number;
+  autoUpgrade: {
+    [Key in SourceKey]?: boolean;
+  };
 };

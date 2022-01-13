@@ -34,25 +34,25 @@ export const Game = () => {
         {phase === "done" && <Ending />}
         <div
           className={clsx(
-            "px-4 grid py-2 mx-auto min-w-[1080px] max-w-[1680px] gap-3",
-            "grid-rows-[1fr_auto]",
+            "px-4 grid mx-auto min-w-[1080px] max-w-[1680px] gap-3 items-start",
+            "grid-rows-[auto_1fr]",
             "grid-cols-[400px_1fr_240px_auto]",
             "lg:grid-cols-[400px_1fr_240px_auto]",
           )}
           style={{
             gridTemplateAreas: `
-            "timeline timeline timeline timeline"
+            "timeline timeline timeline window"
             "messages main status window"
           `,
           }}
         >
-          <aside className="[grid-area:status]">
+          <aside className="[grid-area:status] sticky top-[0px] py-2">
             {!process.env.NEXT_PUBLIC_DISABLE_CHEATS && <Cheats />}
             <Speedup />
             <Status className="mb-3" />
             <Reset />
           </aside>
-          <main className="[grid-area:main]">
+          <main className="[grid-area:main] py-2">
             {phase === "preEvent" && (
               <>
                 <h2 className="mb-2">Upgrades</h2>
@@ -92,8 +92,8 @@ export const Game = () => {
               </div>
             )}
           </main>
-          <Window className="[grid-area:window]" />
-          <div className="[grid-area:messages]">
+          <Window className="[grid-area:window] my-2 h-[calc(100vh-40px)] self-stretch" />
+          <div className="[grid-area:messages] sticky top-[0px] py-2">
             <Messages />
           </div>
 

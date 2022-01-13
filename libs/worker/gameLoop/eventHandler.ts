@@ -87,10 +87,17 @@ export const eventHandler = (
       }
       travel(state, 29);
       state.phase = "postEvent";
+      break;
+    case "TOGGLE_AUTO_PURCHASE": {
+      state.autoUpgrade[action.payload.key] =
+        !state.autoUpgrade[action.payload.key];
+    }
   }
 };
 
 const travel = (state: Draft<State>, day: number) => {
+  state.replay = true;
+  state.multiplier = 1;
   state.exploration = undefined;
   state.explorations = {};
   state.resources = {
@@ -127,4 +134,5 @@ const travel = (state: Draft<State>, day: number) => {
     last = event.time;
   }
   updateGame(state, hoursToSeconds(24) * day - last);
+  state.replay = false;
 };

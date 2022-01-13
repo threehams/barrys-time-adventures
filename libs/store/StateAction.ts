@@ -1,4 +1,4 @@
-import { ExplorationKey, UpgradeKey } from ".";
+import { ExplorationKey, SourceKey, UpgradeKey } from ".";
 
 type BuyUpgradeAction = { type: "BUY_UPGRADE"; payload: { key: UpgradeKey } };
 type BuyTimedUpgradeAction = {
@@ -30,6 +30,12 @@ type ExploreAction = {
 type LoopAction = {
   type: "LOOP";
 };
+type ToggleAutoPurchaseAction = {
+  type: "TOGGLE_AUTO_PURCHASE";
+  payload: {
+    key: SourceKey;
+  };
+};
 
 export type StateAction =
   | BuyUpgradeAction
@@ -38,4 +44,5 @@ export type StateAction =
   | SetMultiplier
   | TravelAction
   | ExploreAction
-  | LoopAction;
+  | LoopAction
+  | ToggleAutoPurchaseAction;

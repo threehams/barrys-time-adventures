@@ -1,4 +1,6 @@
 import {
+  canPurchaseUpgrade,
+  canShowUpgrade,
   findExploration,
   findUnlockFor,
   findUpgrade,
@@ -8,6 +10,7 @@ import {
   initialState,
   sources,
   State,
+  upgrades,
 } from "@laundry/store";
 import { sub } from "date-fns";
 import { Draft } from "immer";
@@ -17,6 +20,7 @@ const THE_EVENT_DATE = new Date(1997, 7, 29, 2, 14, 0);
 const START_DATE = sub(THE_EVENT_DATE, { days: 30 });
 const THE_EVENT_TIME = (THE_EVENT_DATE.valueOf() - START_DATE.valueOf()) / 1000;
 const RESOURCE_DRAIN_BASE_TIME = 1_000;
+export const AUTO_PURCHASE_TIME = 10_000;
 
 type Updater = (state: Draft<State>, delta: number) => Draft<State> | void;
 
@@ -35,6 +39,7 @@ export const updateGame: Updater = (state, delta) => {
     }
     elapsedTime = delta * state.multiplier * explorationMultiplier * 15;
   }
+  updateAutoPurchase(state, elapsedTime);
   updateTime(state, elapsedTime);
   updateEvent(state, delta);
   updatePreResources(state, elapsedTime);
@@ -43,6 +48,64 @@ export const updateGame: Updater = (state, delta) => {
   updateExplore(state, elapsedTime);
   updateMessages(state, elapsedTime);
   updateMaxResources(state, elapsedTime);
+};
+
+const updateAutoPurchase: Updater = (state, delta) => {
+  if (state.phase !== "preEvent" || !state.unlocks.autoPurchase) {
+    return;
+  }
+
+  state.timers.autoPurchase += delta;
+  if (state.timers.autoPurchase > AUTO_PURCHASE_TIME) {
+    const allUpgrades = upgrades.filter((upgrade) => {
+      return (
+        upgrade.phase === "preEvent" &&
+        state.autoUpgrade[upgrade.source] &&
+        canShowUpgrade({
+          upgrade,
+          maxResources: state.maxResources,
+          phase: state.phase,
+          playerExplorations: state.explorations,
+          purchasedUpgrades: state.upgrades,
+          resources: state.resources,
+          timedUpgrades: state.timedUpgrades,
+        })
+      );
+    });
+
+    for (const upgrade of allUpgrades) {
+      if (
+        canPurchaseUpgrade({
+          distance: 0,
+          maxResources: state.maxResources,
+          phase: state.phase,
+          playerExplorations: state.explorations,
+          purchasedUpgrades: state.upgrades,
+          resources: state.resources,
+          timedUpgrades: state.timedUpgrades,
+          upgrade,
+        })
+      ) {
+        const currentLevel = state.upgrades[upgrade.key]?.level ?? 0;
+        const nextLevel = currentLevel + 1;
+
+        for (const costKey of Object.keys(upgrade.costs)) {
+          state.resources[costKey] -=
+            upgrade.costs[costKey]?.(nextLevel, 0) ?? 0;
+        }
+        state.upgrades[upgrade.key] = { level: nextLevel };
+        state.timeline.push({
+          time: state.time,
+          action: {
+            type: "BUY_UPGRADE",
+            payload: {
+              key: upgrade.key,
+            },
+          },
+        });
+      }
+    }
+  }
 };
 
 const updateMaxResources: Updater = (state) => {
@@ -57,7 +120,7 @@ const updateMaxResources: Updater = (state) => {
 const updateMessages: Updater = (state, delta) => {
   for (const [key, value] of Object.entries(state.timedUpgrades)) {
     const upgrade = findUpgrade(key);
-    if (!value || upgrade.type !== "event") {
+    if (!value || upgrade.type !== "event" || state.replay) {
       continue;
     }
 

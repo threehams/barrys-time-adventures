@@ -1,9 +1,10 @@
-import { UnlockKey } from "@laundry/store";
+import { initialState, UnlockKey } from "@laundry/store";
 import { Button } from "@laundry/ui";
 import { useDispatch, useSelector } from "./StateProvider";
 
 export const Speedup = () => {
   const unlocks = useSelector((state) => state.unlocks);
+  const phase = useSelector((state) => state.phase);
   const dispatch = useDispatch();
 
   const multipliers = Object.entries(unlocks)
@@ -14,7 +15,7 @@ export const Speedup = () => {
       return speeds[key] as number;
     });
 
-  if (!multipliers.length) {
+  if (!multipliers.length || phase !== "preEvent") {
     return null;
   }
 
@@ -34,18 +35,21 @@ export const Speedup = () => {
           1X
         </Button>
         {multipliers.map((multiplier) => {
-          <Button
-            onClick={() => {
-              dispatch({
-                type: "SET_MULTIPLIER",
-                payload: {
-                  multiplier,
-                },
-              });
-            }}
-          >
-            X{multiplier}
-          </Button>;
+          return (
+            <Button
+              key={multiplier}
+              onClick={() => {
+                dispatch({
+                  type: "SET_MULTIPLIER",
+                  payload: {
+                    multiplier: multiplier * initialState.multiplier,
+                  },
+                });
+              }}
+            >
+              X{multiplier}
+            </Button>
+          );
         })}
       </li>
     </ul>

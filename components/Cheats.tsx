@@ -1,12 +1,13 @@
 import { Button } from "@laundry/ui";
-import { useDispatch } from "./StateProvider";
+import { useDispatch, useSelector } from "./StateProvider";
 
 export const Cheats = () => {
   const dispatch = useDispatch();
+  const phase = useSelector((state) => state.phase);
   return (
     <div>
       <h2>Cheats: Multiplier</h2>
-      {[1, 10, 100, 5000].map((multiplier) => {
+      {[0, 1, 10, 100, 5000].map((multiplier) => {
         return (
           <Button
             key={multiplier}
@@ -14,7 +15,7 @@ export const Cheats = () => {
               dispatch({
                 type: "SET_MULTIPLIER",
                 payload: {
-                  multiplier,
+                  multiplier: multiplier * (phase === "preEvent" ? 2 : 1),
                 },
               });
             }}

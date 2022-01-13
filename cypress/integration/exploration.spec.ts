@@ -4,8 +4,8 @@ import { initialState } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 
 describe("exploration", () => {
-  it("completes the first three explorations", () => {
-    cy.wrap(null).then(async () => {
+  it.only("completes the first three explorations", () => {
+    cy.fixture("exploration").then(async (data) => {
       const VERSION = 1;
       const databaseName = "reconciliation_game";
       const savedGameKey = "saved_game";
@@ -14,17 +14,7 @@ describe("exploration", () => {
         name: databaseName,
         storeName: databaseName,
       });
-      await localForage.setItem(
-        savedGameKey,
-        produce(initialState, (draft) => {
-          draft.phase = "postEvent";
-          draft.time = hoursToSeconds(24 * 32);
-          draft.resources.food = 50_000;
-          draft.resources.water = 12_500;
-          draft.resources.money = 4_500;
-          draft.resources.junk = 2_700;
-        }),
-      );
+      await localForage.setItem(savedGameKey, data);
     });
     cy.visit("/");
   });
