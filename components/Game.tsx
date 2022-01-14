@@ -26,10 +26,12 @@ export const Game = () => {
   const unlocks = useSelector((state) => state.unlocks);
 
   const layout = useMemo(() => {
+    if (phase === "done") {
+      return <Ending />;
+    }
     return (
       <div className={clsx("relative min-h-screen", backgroundFor(phase))}>
         {phase === "event" && <Glitch />}
-        {phase === "done" && <Ending />}
         {selectedUpgrade && (
           <div className="fixed z-10 w-screen h-screen bg-gray-900 opacity-70"></div>
         )}
