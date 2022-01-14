@@ -532,6 +532,31 @@ export const upgrades: Upgrade[] = [
   },
   {
     phase: "postEvent",
+    key: "TM1",
+    type: "purchased",
+    name: "Mirror Letsy",
+    description:
+      "Mirror the entire Letsy site, but only make my shop accessible.",
+    max: 50,
+    costs: {
+      power: (level, distance) => {
+        return Math.pow(level, 3.5) + distance * 10;
+      },
+    },
+    effect: {
+      type: "multiply",
+      money: (level) => {
+        return 1.25 ** level;
+      },
+    },
+    flavorTexts: {},
+    requirements: {
+      exploration: "E3",
+    },
+    source: "letsy",
+  },
+  {
+    phase: "postEvent",
     key: "TW2",
     type: "purchased",
     name: "Carbon Nanotube Filter",
@@ -576,7 +601,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      exploration: "E3",
+      exploration: "F5",
     },
     source: "preserves",
   },
@@ -597,7 +622,6 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {
       1: "The rain has stopped, so I'm not getting any water that way. I hope it starts up again soon.",
-      2: "The rain has stopped. Luckily, not a problem for the condensate collector. Thanks, Future Barry!",
     },
     requirements: {},
     source: "rainfall",
@@ -616,7 +640,7 @@ export const upgrades: Upgrade[] = [
     name: "Stream contaminated",
     description:
       "The stream's started to smell like paint. I'm not sure what happened, but I'm not going to trust it now.",
-    max: 2,
+    max: 50,
     costs: {},
     effect: {
       type: "multiply",
@@ -673,7 +697,7 @@ export const upgrades: Upgrade[] = [
     name: "Jar shortage",
     description:
       "I'm having a tough time getting enough jars and lids. I can preserve maybe half as much food right now.",
-    max: 2,
+    max: 50,
     costs: {},
     effect: {
       type: "multiply",

@@ -2,10 +2,7 @@ import { Exploration } from "../Exploration";
 
 export type ExplorationKey =
   | "E1"
-  | "T1"
-  | "T2"
   | "E2"
-  | "T3"
   | "E3"
   | "E4"
   | "E5"
@@ -13,13 +10,22 @@ export type ExplorationKey =
   | "E7"
   | "E8"
   | "E9"
+  | "E10"
+  | "E11"
+  | "E12"
   | "C1"
   | "C2"
   | "F1"
   | "F2"
   | "F3"
+  | "F4"
+  | "F5"
   | "S1"
   | "S2"
+  | "S3"
+  | "T1"
+  | "T2"
+  | "T3"
   | "T4"
   | "T5"
   | "T6"
@@ -32,7 +38,7 @@ export const explorations: Exploration[] = [
     description:
       "My home hasn't changed, but everything past 500 feet is shrouded in dust.",
     message:
-      "Something is really messed up with the area around here. Space is warped.",
+      "Something is really messed up with the area around here. Looks like desert haze, but... I can see other places in it?",
     drain: {
       food: 1,
       water: 2,
@@ -46,10 +52,10 @@ export const explorations: Exploration[] = [
   },
   {
     key: "T1",
-    name: "Watch warped spaces",
+    name: "Watch haze",
     description:
-      "These warped spaces seem random, but maybe if I watch them for long enough, they'll start to make sense.",
-    message: 'I\'m calling these "time holes" until I think of a better name.',
+      "These hazy areas seem random, but maybe if I watch them for long enough, they'll start to make sense.",
+    message: `I\'m definitely looking at different time periods through these. Some of these go back thousands of years. I\'m calling these "time holes" until I think of a better name.`,
     drain: {
       food: 1,
       water: 1,
@@ -203,7 +209,7 @@ export const explorations: Exploration[] = [
     },
     train: {
       tech: 2,
-      patience: 2,
+      patience: 1,
     },
     time: 1_000_000,
     requirements: {
@@ -222,11 +228,30 @@ export const explorations: Exploration[] = [
     },
     train: {
       tech: 2,
-      endurance: 2,
+      patience: 1,
     },
     time: 1_000_000,
     requirements: {
       action: "F3",
+    },
+  },
+  {
+    key: "F5",
+    name: "Find more useful information",
+    description:
+      "Now that I can communicate with Past Barry, I should see what else is on here.",
+    message: `Here we go. I found a method of compressing food into smaller containers. That should help out with preservation.`,
+    drain: {
+      food: 2,
+      water: 2,
+    },
+    train: {
+      tech: 2,
+      endurance: 2,
+    },
+    time: 1_000_000,
+    requirements: {
+      action: "T5",
     },
   },
   {
@@ -297,7 +322,7 @@ export const explorations: Exploration[] = [
     train: {
       patience: 2,
     },
-    time: 1_000_000,
+    time: 10_000_000,
     requirements: {
       action: "E7",
     },
@@ -309,8 +334,8 @@ export const explorations: Exploration[] = [
     key: "E6",
     name: "Explore big time holes",
     description:
-      "There are a bunch of bigger time holes near a fasion district. I might be able to send larger items through these - maybe even travel?",
-    message: `There's a really interesting time hole up the stairs, but I'll have to move some wreckage out of the way to get to it.`,
+      "There are a bunch of bigger time holes near a sewage treatment plant (which thankfully hasn't run for a long time). I might be able to send larger items through these - maybe even travel?",
+    message: `There's a really interesting time hole up some stairs, but I'll have to move some wreckage out of the way to get to it.`,
     drain: {
       food: 2,
       water: 2,
@@ -347,7 +372,7 @@ export const explorations: Exploration[] = [
     name: "Convince yourself",
     description:
       "Hey! I saw myself from just a day a ago! This time hole seems to fight me a lot less. I think I could have a conversation with myself.",
-    message: `After a lot of arguing with Past Barry, we agreed to swap places when the time comes. I have no idea what'll happen to him, but that sounds like Future Barry problems, not mine.`,
+    message: `After a lot of arguing with Past Barry, we agreed to jump in and swap places when the time comes. I have no idea what'll happen to him, but that sounds like Future Barry problems, not mine.`,
     drain: {
       food: 2,
       water: 2,
@@ -358,6 +383,24 @@ export const explorations: Exploration[] = [
     time: 1_000_000,
     requirements: {
       action: "S1",
+    },
+  },
+  {
+    key: "E12",
+    name: "Search around for anything else",
+    description:
+      "This is a treatment plant. There should be something useful here for, you know, water.",
+    message: `Here we go! One unused carbon nanotube filter. This would have been really useful back in the day. With enough power, I should be able to send this back to Past Barry.`,
+    drain: {
+      food: 2,
+      water: 2,
+    },
+    train: {
+      patience: 2,
+    },
+    time: 1_000_000,
+    requirements: {
+      action: "T4",
     },
   },
   {
@@ -381,7 +424,64 @@ export const explorations: Exploration[] = [
   },
   {
     key: "E9",
-    name: "Travel to next city",
+    name: "Explore factory",
+    description: "A factory! Factory HAS to mean automation, right?",
+    message: ``,
+    drain: {
+      food: 10,
+      water: 10,
+    },
+    train: {
+      endurance: 2,
+    },
+    timeMultiplier: 50,
+    time: 200_000_000,
+    requirements: {
+      action: "E8",
+    },
+  },
+  {
+    key: "S3",
+    name: "Climb to second floor",
+    description:
+      "There's a room that looks intact on the second floor, but I'll have to pile things up to reach it.",
+    message: `There's a whole stockpile of smartphone-looking things, and nearly every battery on every one of these is dead. Maybe one of them is still alive.`,
+    drain: {
+      food: 5,
+      water: 5,
+    },
+    train: {
+      strength: 2,
+    },
+    timeMultiplier: 50,
+    time: 200_000_000,
+    requirements: {
+      action: "E9",
+    },
+  },
+  {
+    key: "F4",
+    name: "Find a working smartphone thing",
+    description:
+      "One of thigns things has to still have a working battery. Hope I don't have anything else to do today.",
+    message: `Found one! This is way beyond a smartphone - it could purchase just about anything in the world in one tap. Future people were even more into buying stuff than we were. I'll send one of these to Past Barry right away.`,
+    drain: {
+      food: 3,
+      water: 5,
+    },
+    train: {
+      patience: 2,
+      tech: 2,
+    },
+    timeMultiplier: 50,
+    time: 200_000_000,
+    requirements: {
+      action: "S3",
+    },
+  },
+  {
+    key: "E10",
+    name: "Explore arcology",
     description: "Things are bad here, but are they this bad everywhere?",
     message: `Things are this bad everywhere. I didn't meet anyone.`,
     drain: {
@@ -394,7 +494,44 @@ export const explorations: Exploration[] = [
     timeMultiplier: 500,
     time: 2_000_000_000,
     requirements: {
-      action: "E3",
+      action: "E8",
+    },
+  },
+  {
+    key: "E10",
+    name: "Explore [other place]",
+    description: "Things are bad here, but are they this bad everywhere?",
+    message: `Things are this bad everywhere. I didn't meet anyone.`,
+    drain: {
+      food: 20,
+      water: 20,
+    },
+    train: {
+      endurance: 2,
+    },
+    timeMultiplier: 500,
+    time: 2_000_000_000,
+    requirements: {
+      action: "E8",
+    },
+  },
+  {
+    key: "E11",
+    name: "Travel to next city",
+    description:
+      "Things are bad here, but are they this bad everywhere? This will be the longest trip so far.",
+    message: `Things are this bad everywhere. I didn't meet anyone.`,
+    drain: {
+      food: 20,
+      water: 20,
+    },
+    train: {
+      endurance: 2,
+    },
+    timeMultiplier: 500,
+    time: 2_000_000_000,
+    requirements: {
+      action: "E8",
     },
   },
   {
@@ -413,7 +550,7 @@ export const explorations: Exploration[] = [
     timeMultiplier: 100,
     time: 2_000_000_000,
     requirements: {
-      action: "E3",
+      action: "E11",
     },
   },
 ];

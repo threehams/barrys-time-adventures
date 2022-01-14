@@ -18,15 +18,15 @@ export const initialState: State = {
   upgrades: {},
   timedUpgrades: {
     EW1: {
-      time: hoursToSeconds(7 * 24),
+      time: hoursToSeconds(12 * 24),
       level: 1,
     },
     EW2: {
-      time: hoursToSeconds(9 * 24),
+      time: hoursToSeconds(17 * 24),
       level: 1,
     },
     EM1: {
-      time: hoursToSeconds(14 * 24),
+      time: hoursToSeconds(9 * 24),
       level: 1,
     },
   },

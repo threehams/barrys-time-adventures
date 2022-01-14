@@ -54,6 +54,14 @@ export const updateGame: Updater = (state, delta) => {
 };
 
 const updateAutoPurchase: Updater = (state, delta) => {
+  if (
+    state.phase !== "preEvent" &&
+    state.phase !== "expand" &&
+    state.phase !== "collapse"
+  ) {
+    return;
+  }
+
   if (state.phase === "preEvent" && !state.unlocks.autoPurchase) {
     return;
   }
@@ -136,7 +144,17 @@ const updateMessages: Updater = (state, delta) => {
     }
 
     if (value.time < state.time && value.time > state.time - delta) {
-      const text = upgrade.flavorTexts[value.level];
+      let text = upgrade.description;
+      if (upgrade.negated) {
+        const negation = upgrade.negated.upgrade;
+        if (
+          state.upgrades[negation]?.level ||
+          state.timedUpgrades[negation]?.level
+        ) {
+          text = upgrade.negated.message;
+        }
+      }
+
       if (text) {
         state.messages.push({ priority: "alert", text, time: state.time });
       }
@@ -162,7 +180,7 @@ const updateTime: Updater = (state, delta) => {
   if (state.time === THE_EVENT_TIME && state.phase === "preEvent") {
     state.phase = "event";
     state.timers = { ...initialState.timers };
-    state.multiplier = 1;
+    state.multiplier = 2;
     state.messages = [
       {
         priority: "info",

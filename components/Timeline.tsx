@@ -276,11 +276,18 @@ const DayDetail = ({
             {confirm ? "Confirm" : "Restart Here"}
           </Button>
           {confirm && (
-            <span>
-              This will reset your exploration progress, resources (including
-              power), and anything you&apos;ve done on the selected day and
-              after. You will keep all unlocks and Timed Upgrades.
-            </span>
+            <div>
+              <span>
+                This will reset your exploration progress, resources (including
+                power), and anything you&apos;ve done on the selected day and
+                after. You will keep all unlocks and Timed Upgrades.
+              </span>
+              {phase === "postEvent" && (
+                <span className="block mt-1">
+                  You may want to explore more before restarting.
+                </span>
+              )}
+            </div>
           )}
         </div>
       )}

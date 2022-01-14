@@ -27,6 +27,13 @@ export const getAllUpgrades = ({
         if (!value || value.time > time) {
           return null;
         }
+        const upgrade = findUpgrade(key);
+        if (upgrade.negated) {
+          const { upgrade: negation } = upgrade.negated;
+          if (upgrades[negation]?.level || timedUpgrades[negation]?.level) {
+            return null;
+          }
+        }
         return { key, level: value.level, upgrade: findUpgrade(key) };
       }),
     )
