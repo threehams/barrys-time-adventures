@@ -8,6 +8,19 @@ type BuyTimedUpgradeAction = {
     day: number;
   };
 };
+type MoveTimedUpgradeAction = {
+  type: "MOVE_TIMED_UPGRADE";
+  payload: {
+    key: UpgradeKey;
+    day: number;
+  };
+};
+type UpgradeTimedUpgradeAction = {
+  type: "UPGRADE_TIMED_UPGRADE";
+  payload: {
+    key: UpgradeKey;
+  };
+};
 type ResetGameAction = { type: "RESET_GAME" };
 type SetMultiplier = {
   type: "SET_MULTIPLIER";
@@ -49,6 +62,8 @@ type SetAutoMaxLevelAction = {
 export type StateAction =
   | BuyUpgradeAction
   | BuyTimedUpgradeAction
+  | MoveTimedUpgradeAction
+  | UpgradeTimedUpgradeAction
   | ResetGameAction
   | SetMultiplier
   | TravelAction

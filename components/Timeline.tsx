@@ -114,7 +114,7 @@ export const Timeline = ({
                 upgrade: selectedUpgrade,
                 resources,
                 maxResources,
-                distance: 29 - day,
+                distance: 30 - day,
                 purchasedUpgrades,
                 timedUpgrades: timedUpgradeMap,
                 playerExplorations,
@@ -247,7 +247,7 @@ const DayDetail = ({
               upgrade: selectedUpgrade,
               resources,
               currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
-              distance: 29 - selectedDay,
+              distance: 30 - selectedDay,
             })
               .map((resource) =>
                 findResource(resource.key).formatWithType(resource.cost),

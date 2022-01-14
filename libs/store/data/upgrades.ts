@@ -836,6 +836,7 @@ type CanPurchaseUpgrade = {
   purchasedUpgrades: PurchasedUpgrades;
   timedUpgrades: PurchasedTimedUpgrades;
   playerExplorations: PlayerExplorations;
+  level?: number;
 };
 export const canPurchaseUpgrade = ({
   phase,
@@ -846,6 +847,7 @@ export const canPurchaseUpgrade = ({
   purchasedUpgrades,
   timedUpgrades,
   playerExplorations,
+  level,
 }: CanPurchaseUpgrade) => {
   const currentLevel =
     purchasedUpgrades[upgrade.key]?.level ?? timedUpgrades[upgrade.key]?.level;
@@ -863,7 +865,7 @@ export const canPurchaseUpgrade = ({
     return false;
   }
 
-  const nextLevel = (currentLevel ?? 0) + 1;
+  const nextLevel = level ?? (currentLevel ?? 0) + 1;
   for (const costKey of Object.keys(upgrade.costs)) {
     const checker = upgrade.costs[costKey];
     if (checker && checker(nextLevel, distance) > resources[costKey]) {

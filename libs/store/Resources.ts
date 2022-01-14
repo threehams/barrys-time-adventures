@@ -101,11 +101,11 @@ const resources: {
     format: (value) =>
       `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
-      })} Ah`,
+      })} amp hours`,
     formatWithType: (value) =>
       `${numbro(Math.floor(value)).format({
         thousandSeparated: true,
-      })} Ah`,
+      })} amp hours`,
   },
   {
     key: "barry",

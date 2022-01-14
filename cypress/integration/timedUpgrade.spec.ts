@@ -26,6 +26,9 @@ describe("future", () => {
             },
             time: hoursToSeconds(24),
           });
+          draft.unlocks = {
+            pastRestart: true,
+          };
           draft.upgrades = {
             PF1: { level: 1 },
           };

@@ -126,16 +126,10 @@ export const Upgrades = ({
                   .filter(Boolean)
                   .join(", ");
 
-                let buyText;
-                if (phase === "postEvent" && level > 0) {
-                  buyText = "Move Upgrade";
-                } else {
-                  buyText = `Buy ${
-                    level > 0
-                      ? `(${level === upgrade.max ? "MAX" : level})`
-                      : ""
-                  }`;
-                }
+                const currentDay = Math.floor(
+                  (timedUpgradeMap[upgrade.key]?.time ?? 0) /
+                    hoursToSeconds(24),
+                );
 
                 return (
                   <li
@@ -143,41 +137,11 @@ export const Upgrades = ({
                     key={upgrade.key}
                   >
                     <div className="flex flex-row gap-2">
-                      <Button
-                        className={clsx(
-                          selectedUpgrade === upgrade.key && "z-20",
-                        )}
-                        disabled={
-                          !canPurchaseUpgrade({
-                            upgrade,
-                            phase,
-                            playerExplorations,
-                            purchasedUpgrades,
-                            timedUpgrades: timedUpgradeMap,
-                            distance: 0,
-                            resources,
-                            maxResources,
-                          })
-                        }
-                        aria-label={`Buy ${upgrade.name}`}
-                        active={selectedUpgrade === upgrade.key}
-                        onClick={() => {
-                          if (upgrade.phase === "postEvent") {
-                            setSelectedUpgrade((current) =>
-                              current === upgrade.key ? undefined : upgrade.key,
-                            );
-                            return;
-                          }
-                          dispatch({
-                            type: "BUY_UPGRADE",
-                            payload: { key: upgrade.key },
-                          });
-                        }}
-                      >
-                        {buyText}
-                      </Button>
-                      {upgrade.phase === "postEvent" && level > 0 && (
+                      {upgrade.phase === "preEvent" && (
                         <Button
+                          className={clsx(
+                            selectedUpgrade === upgrade.key && "z-20",
+                          )}
                           disabled={
                             !canPurchaseUpgrade({
                               upgrade,
@@ -185,29 +149,117 @@ export const Upgrades = ({
                               playerExplorations,
                               purchasedUpgrades,
                               timedUpgrades: timedUpgradeMap,
-                              distance: Math.floor(
-                                (timedUpgradeMap[upgrade.key]?.time ?? 0) /
-                                  hoursToSeconds(24),
-                              ),
+                              distance: 0,
                               resources,
                               maxResources,
                             })
                           }
+                          aria-label={`Buy ${upgrade.name}`}
+                          active={selectedUpgrade === upgrade.key}
                           onClick={() => {
                             dispatch({
-                              type: "BUY_TIMED_UPGRADE",
-                              payload: {
-                                key: upgrade.key,
-                                day: Math.floor(
-                                  timedUpgradeMap[upgrade.key]?.time ??
-                                    0 / hoursToSeconds(24),
-                                ),
-                              },
+                              type: "BUY_UPGRADE",
+                              payload: { key: upgrade.key },
                             });
                           }}
                         >
-                          Upgrade
+                          Buy{" "}
+                          {level > 0
+                            ? `(${level === upgrade.max ? "MAX" : level})`
+                            : ""}
                         </Button>
+                      )}
+                      {upgrade.phase === "postEvent" && level === 0 && (
+                        <Button
+                          className={clsx(
+                            selectedUpgrade === upgrade.key && "z-20",
+                          )}
+                          disabled={
+                            !canPurchaseUpgrade({
+                              upgrade,
+                              phase,
+                              playerExplorations,
+                              purchasedUpgrades,
+                              timedUpgrades: timedUpgradeMap,
+                              distance: 0,
+                              resources,
+                              maxResources,
+                            })
+                          }
+                          active={selectedUpgrade === upgrade.key}
+                          onClick={() => {
+                            setSelectedUpgrade((current) =>
+                              current === upgrade.key ? undefined : upgrade.key,
+                            );
+                            return;
+                          }}
+                        >
+                          Buy
+                        </Button>
+                      )}
+                      {upgrade.phase === "postEvent" && level > 0 && (
+                        <>
+                          <Button
+                            className={clsx(
+                              selectedUpgrade === upgrade.key && "z-20",
+                            )}
+                            disabled={
+                              !canPurchaseUpgrade({
+                                upgrade,
+                                phase,
+                                playerExplorations,
+                                purchasedUpgrades,
+                                timedUpgrades: timedUpgradeMap,
+                                distance: currentDay - 1,
+                                resources,
+                                maxResources,
+                                level,
+                              })
+                            }
+                            active={selectedUpgrade === upgrade.key}
+                            onClick={() => {
+                              setSelectedUpgrade((current) =>
+                                current === upgrade.key
+                                  ? undefined
+                                  : upgrade.key,
+                              );
+                              return;
+                            }}
+                          >
+                            Move Upgrade
+                          </Button>
+                          <Button
+                            disabled={
+                              !canPurchaseUpgrade({
+                                upgrade,
+                                phase,
+                                playerExplorations,
+                                purchasedUpgrades,
+                                timedUpgrades: timedUpgradeMap,
+                                distance: Math.floor(
+                                  (timedUpgradeMap[upgrade.key]?.time ?? 0) /
+                                    hoursToSeconds(24),
+                                ),
+                                resources,
+                                maxResources,
+                              })
+                            }
+                            onClick={() => {
+                              dispatch({
+                                type: "BUY_TIMED_UPGRADE",
+                                payload: {
+                                  key: upgrade.key,
+                                  day: Math.floor(
+                                    timedUpgradeMap[upgrade.key]?.time ??
+                                      0 / hoursToSeconds(24),
+                                  ),
+                                },
+                              });
+                            }}
+                          >
+                            Buy Level
+                          </Button>
+                        </>
                       )}
                       <div>
                         {upgrade.name} {level !== upgrade.max && `(${costs})`}

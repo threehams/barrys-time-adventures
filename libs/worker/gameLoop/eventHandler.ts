@@ -47,9 +47,12 @@ export const eventHandler = (
     }
     case "BUY_TIMED_UPGRADE": {
       const { key, day } = action.payload;
-      const distance = 29 - day;
       const { resources, timedUpgrades: purchasedUpgrades } = state;
       const currentLevel = purchasedUpgrades[key]?.level ?? 0;
+      if (currentLevel > 0) {
+        return;
+      }
+      const distance = Math.floor(30 - day);
       const nextLevel = currentLevel + 1;
 
       const upgrade = findUpgrade(key);
@@ -59,16 +62,18 @@ export const eventHandler = (
           return;
         }
       }
-      if (currentLevel < upgrade.max) {
-        for (const costKey of Object.keys(upgrade.costs)) {
-          state.resources[costKey] -=
-            upgrade.costs[costKey]?.(nextLevel, distance) ?? 0;
-        }
-        purchasedUpgrades[key] = {
-          level: nextLevel,
-          time: hoursToSeconds(24 * day),
-        };
+      for (const costKey of Object.keys(upgrade.costs)) {
+        state.resources[costKey] -=
+          upgrade.costs[costKey]?.(nextLevel, distance) ?? 0;
       }
+      purchasedUpgrades[key] = {
+        level: nextLevel,
+        time: hoursToSeconds(24 * day),
+      };
+      break;
+    }
+    case "MOVE_TIMED_UPGRADE": {
+      const { key, day } = action.payload;
       break;
     }
     case "SET_MULTIPLIER":
