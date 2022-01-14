@@ -78,13 +78,15 @@ export const Upgrades = ({
         ) {
           return null;
         }
+        const autoEnabled =
+          (unlocks.autoPurchase && phase === "preEvent") ||
+          (unlocks.autoPurchaseExpand &&
+            (phase === "expand" || phase === "collapse"));
 
         return (
           <li key={value.source.key}>
             <div className="flex items-center gap-2 mb-1">
-              {((unlocks.autoPurchase && phase === "preEvent") ||
-                (unlocks.autoPurchaseExpand &&
-                  (phase === "expand" || phase === "collapse"))) && (
+              {autoEnabled && (
                 <Button
                   active={autoUpgrade[value.source.key]}
                   onClick={() => {
@@ -164,29 +166,32 @@ export const Upgrades = ({
                     </div>
                     {level !== upgrade.max && (
                       <>
-                        <label>
-                          Max Level{" "}
-                          <input
-                            className="mt-1 dark:text-gray-900"
-                            size={5}
-                            value={maxLevels[upgrade.key] ?? ""}
-                            onChange={(event) => {
-                              setMaxLevels({
-                                ...maxLevels,
-                                [upgrade.key]: event.target.value,
-                              });
-                            }}
-                            onBlur={() => {
-                              dispatch({
-                                type: "SET_AUTO_MAX_LEVEL",
-                                payload: {
-                                  key: upgrade.key,
-                                  maxLevel: maxLevels[upgrade.key] || undefined,
-                                },
-                              });
-                            }}
-                          />
-                        </label>{" "}
+                        {autoEnabled && (
+                          <label>
+                            Max Auto Level{" "}
+                            <input
+                              className="mt-1 dark:text-gray-900"
+                              size={5}
+                              value={maxLevels[upgrade.key] ?? ""}
+                              onChange={(event) => {
+                                setMaxLevels({
+                                  ...maxLevels,
+                                  [upgrade.key]: event.target.value,
+                                });
+                              }}
+                              onBlur={() => {
+                                dispatch({
+                                  type: "SET_AUTO_MAX_LEVEL",
+                                  payload: {
+                                    key: upgrade.key,
+                                    maxLevel:
+                                      maxLevels[upgrade.key] || undefined,
+                                  },
+                                });
+                              }}
+                            />
+                          </label>
+                        )}{" "}
                         <p>{upgradeEffect(upgrade, level)}</p>
                         <p>{upgrade.description}</p>
                       </>
