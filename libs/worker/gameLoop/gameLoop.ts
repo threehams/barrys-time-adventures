@@ -329,7 +329,7 @@ const updatePostStats: Updater = (state, delta) => {
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
       state.skills[stat].current += (delta * rate) / 400000;
-      state.skills[stat].permanent += (delta * rate) / (400000 * 8);
+      state.skills[stat].permanent += (delta * rate) / (400000 * 4);
     }
   }
 };
@@ -366,7 +366,7 @@ const updateExplore: Updater = (state, delta) => {
     0,
   );
 
-  const totalTime = delta * Math.log(totalSkills);
+  const totalTime = delta * totalSkills * 0.25;
   const progress = (100 / exploration.time) * totalTime;
   state.explorations[state.exploration] ??= { progress: 0 };
   state.explorations[state.exploration]!.progress = Math.min(

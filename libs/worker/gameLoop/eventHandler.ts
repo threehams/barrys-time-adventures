@@ -137,8 +137,9 @@ const travel = (state: Draft<State>, day: number) => {
     ),
   };
   // If you've never unlocked loop, permanent gains get reset
-  if (!state.unlocks.loop) {
-    for (const key of Object.keys(state.skills)) {
+  for (const key of Object.keys(state.skills)) {
+    state.skills[key].current = 0;
+    if (!state.unlocks.loop) {
       state.skills[key].permanent = 0;
     }
   }
