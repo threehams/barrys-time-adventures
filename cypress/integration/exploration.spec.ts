@@ -4,7 +4,7 @@ import { initialState } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 
 describe("exploration", () => {
-  it.only("completes the first three explorations", () => {
+  it("completes the first three explorations", () => {
     cy.fixture("exploration").then(async (data) => {
       const VERSION = 1;
       const databaseName = "reconciliation_game";
