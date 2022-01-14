@@ -4,6 +4,7 @@ import {
   findUpgrade,
   initialState,
   findUnlockFor,
+  UpgradeKey,
 } from "@laundry/store";
 import { hoursToSeconds } from "date-fns";
 import { Draft } from "immer";
@@ -47,33 +48,43 @@ export const eventHandler = (
     }
     case "BUY_TIMED_UPGRADE": {
       const { key, day } = action.payload;
-      const { resources, timedUpgrades: purchasedUpgrades } = state;
-      const currentLevel = purchasedUpgrades[key]?.level ?? 0;
+      const currentLevel = state.timedUpgrades[key]?.level ?? 0;
       if (currentLevel > 0) {
         return;
       }
-      const distance = Math.floor(30 - day);
       const nextLevel = currentLevel + 1;
-
-      const upgrade = findUpgrade(key);
-      for (const costKey of Object.keys(upgrade.costs)) {
-        const checker = upgrade.costs[costKey];
-        if (checker && checker(nextLevel, distance) > resources[costKey]) {
-          return;
-        }
-      }
-      for (const costKey of Object.keys(upgrade.costs)) {
-        state.resources[costKey] -=
-          upgrade.costs[costKey]?.(nextLevel, distance) ?? 0;
-      }
-      purchasedUpgrades[key] = {
-        level: nextLevel,
-        time: hoursToSeconds(24 * day),
-      };
+      buyTimedUpgrade({ state, level: nextLevel, day, key });
       break;
     }
     case "MOVE_TIMED_UPGRADE": {
       const { key, day } = action.payload;
+      const currentUpgrade = state.timedUpgrades[key];
+      if (!currentUpgrade) {
+        return;
+      }
+      buyTimedUpgrade({
+        state,
+        level: currentUpgrade.level,
+        day,
+        key,
+      });
+
+      break;
+    }
+    case "UPGRADE_TIMED_UPGRADE": {
+      const { key } = action.payload;
+      const currentUpgrade = state.timedUpgrades[key];
+      if (!currentUpgrade) {
+        return;
+      }
+      const currentDay = Math.floor(currentUpgrade.time / hoursToSeconds(24));
+      buyTimedUpgrade({
+        state,
+        level: currentUpgrade.level + 1,
+        day: currentDay,
+        key,
+      });
+
       break;
     }
     case "SET_MULTIPLIER":
@@ -114,6 +125,49 @@ export const eventHandler = (
       break;
     }
   }
+};
+
+const buyTimedUpgrade = ({
+  state,
+  key,
+  day,
+  level,
+}: {
+  state: Draft<State>;
+  key: UpgradeKey;
+  day: number;
+  level: number;
+}) => {
+  const distance = Math.floor(30 - day);
+
+  const upgrade = findUpgrade(key);
+  for (const costKey of Object.keys(upgrade.costs)) {
+    const checker = upgrade.costs[costKey];
+    if (checker) {
+      console.log(
+        "cost for level",
+        level,
+        "and distance",
+        distance,
+        Math.floor(checker(level, distance)),
+      );
+    }
+    if (
+      checker &&
+      Math.floor(checker(level, distance)) > state.resources[costKey]
+    ) {
+      return;
+    }
+  }
+  for (const costKey of Object.keys(upgrade.costs)) {
+    state.resources[costKey] -= Math.floor(
+      upgrade.costs[costKey]?.(level, distance) ?? 0,
+    );
+  }
+  state.timedUpgrades[key] = {
+    level,
+    time: hoursToSeconds(24 * day),
+  };
 };
 
 const travel = (state: Draft<State>, day: number) => {

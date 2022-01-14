@@ -65,7 +65,7 @@ export const Timeline = ({
         time: value!.time,
         text: `${upgrade.type === "purchased" ? "Timed upgrade" : "Event"}: ${
           upgrade.name
-        }`,
+        } (${timedUpgradeMap[upgrade.key]?.level ?? 1})`,
       };
     });
   const events = preEvents.map((event): TimelineEvent => {
@@ -232,13 +232,23 @@ const DayDetail = ({
           <Button
             active
             onClick={() => {
-              dispatch({
-                type: "BUY_TIMED_UPGRADE",
-                payload: {
-                  key: selectedUpgrade.key,
-                  day: selectedDay,
-                },
-              });
+              if (timedUpgradeMap[selectedUpgrade.key]?.level) {
+                dispatch({
+                  type: "MOVE_TIMED_UPGRADE",
+                  payload: {
+                    key: selectedUpgrade.key,
+                    day: selectedDay,
+                  },
+                });
+              } else {
+                dispatch({
+                  type: "BUY_TIMED_UPGRADE",
+                  payload: {
+                    key: selectedUpgrade.key,
+                    day: selectedDay,
+                  },
+                });
+              }
               setSelectedUpgrade(undefined);
             }}
           >
@@ -247,6 +257,9 @@ const DayDetail = ({
               upgrade: selectedUpgrade,
               resources,
               currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
+              level: timedUpgradeMap[selectedUpgrade.key]?.level
+                ? timedUpgradeMap[selectedUpgrade.key]?.level
+                : undefined,
               distance: 30 - selectedDay,
             })
               .map((resource) =>

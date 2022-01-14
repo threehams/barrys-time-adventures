@@ -936,13 +936,15 @@ type UpgradeCost = {
   resources: Resources;
   currentLevel: number | undefined;
   distance: number;
+  level?: number;
 };
 export const upgradeCost = ({
   upgrade,
   currentLevel,
   distance,
+  level,
 }: UpgradeCost) => {
-  const nextLevel = (currentLevel ?? 0) + 1;
+  const nextLevel = level ?? (currentLevel ?? 0) + 1;
 
   return Object.entries(upgrade.costs).map(([key, cost]) => {
     if (!cost) {

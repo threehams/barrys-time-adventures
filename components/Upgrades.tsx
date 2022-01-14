@@ -114,6 +114,10 @@ export const Upgrades = ({
                   purchasedUpgrades[upgrade.key]?.level ??
                   timedUpgradeMap[upgrade.key]?.level ??
                   0;
+                const distance =
+                  upgrade.phase === "postEvent"
+                    ? timedUpgradeMap[upgrade.key]?.level ?? 1
+                    : 0;
                 const flavorText = upgrade.flavorTexts[level];
                 const costs = Object.entries(upgrade.costs)
                   .map(([key, calc]) => {
@@ -121,15 +125,17 @@ export const Upgrades = ({
                       return null;
                     }
                     const resource = findResource(key);
-                    return resource.formatWithType(calc(level + 1, 0));
+                    return resource.formatWithType(calc(level + 1, distance));
                   })
                   .filter(Boolean)
                   .join(", ");
 
-                const currentDay = Math.floor(
-                  (timedUpgradeMap[upgrade.key]?.time ?? 0) /
-                    hoursToSeconds(24),
-                );
+                const currentDistance =
+                  30 -
+                  Math.floor(
+                    (timedUpgradeMap[upgrade.key]?.time ?? 0) /
+                      hoursToSeconds(24),
+                  );
 
                 return (
                   <li
@@ -210,7 +216,7 @@ export const Upgrades = ({
                                 playerExplorations,
                                 purchasedUpgrades,
                                 timedUpgrades: timedUpgradeMap,
-                                distance: currentDay - 1,
+                                distance: currentDistance + 1,
                                 resources,
                                 maxResources,
                                 level,
@@ -236,23 +242,16 @@ export const Upgrades = ({
                                 playerExplorations,
                                 purchasedUpgrades,
                                 timedUpgrades: timedUpgradeMap,
-                                distance: Math.floor(
-                                  (timedUpgradeMap[upgrade.key]?.time ?? 0) /
-                                    hoursToSeconds(24),
-                                ),
+                                distance: currentDistance,
                                 resources,
                                 maxResources,
                               })
                             }
                             onClick={() => {
                               dispatch({
-                                type: "BUY_TIMED_UPGRADE",
+                                type: "UPGRADE_TIMED_UPGRADE",
                                 payload: {
                                   key: upgrade.key,
-                                  day: Math.floor(
-                                    timedUpgradeMap[upgrade.key]?.time ??
-                                      0 / hoursToSeconds(24),
-                                  ),
                                 },
                               });
                             }}
