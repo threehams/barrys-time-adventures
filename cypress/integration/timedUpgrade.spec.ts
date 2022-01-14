@@ -21,7 +21,7 @@ describe("future", () => {
             action: {
               type: "BUY_UPGRADE",
               payload: {
-                key: "PF1",
+                key: "PM1",
               },
             },
             time: hoursToSeconds(24),
@@ -30,7 +30,7 @@ describe("future", () => {
             pastRestart: true,
           };
           draft.upgrades = {
-            PF1: { level: 1 },
+            PM1: { level: 1 },
           };
           draft.explorations = {
             E1: { progress: 100 },
@@ -49,6 +49,6 @@ describe("future", () => {
     });
     cy.visit("/");
     cy.findByText("Send Upgrades").click();
-    cy.findByRole("button", { name: /Buy Condensate Capture/ }).click();
+    cy.findByRole("button", { name: /Buy/ }).click();
   });
 });
