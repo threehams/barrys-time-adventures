@@ -30,10 +30,19 @@ type ExploreAction = {
 type LoopAction = {
   type: "LOOP";
 };
-type ToggleAutoPurchaseAction = {
-  type: "TOGGLE_AUTO_PURCHASE";
+type SetAutoPurchaseAction = {
+  type: "SET_AUTO_PURCHASE";
   payload: {
     key: SourceKey;
+    enabled: boolean;
+  };
+};
+
+type SetAutoMaxLevelAction = {
+  type: "SET_AUTO_MAX_LEVEL";
+  payload: {
+    key: UpgradeKey;
+    maxLevel: number | undefined;
   };
 };
 
@@ -45,4 +54,5 @@ export type StateAction =
   | TravelAction
   | ExploreAction
   | LoopAction
-  | ToggleAutoPurchaseAction;
+  | SetAutoPurchaseAction
+  | SetAutoMaxLevelAction;

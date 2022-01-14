@@ -95,4 +95,5 @@ export const initialState: State = {
   loops: 0,
   unlocks: {},
   autoUpgrade: {},
+  autoUpgradeLevels: {},
 };

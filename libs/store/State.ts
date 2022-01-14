@@ -60,4 +60,7 @@ export type State = {
   autoUpgrade: {
     [Key in SourceKey]?: boolean;
   };
+  autoUpgradeLevels: {
+    [Key in UpgradeKey]?: number;
+  };
 };

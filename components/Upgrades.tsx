@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "./StateProvider";
-import React, { Dispatch, SetStateAction, useMemo } from "react";
+import React, { Dispatch, SetStateAction, useMemo, useState } from "react";
 import {
   canPurchaseUpgrade,
   canShowUpgrade,
@@ -32,6 +32,9 @@ export const Upgrades = ({
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
   const playerExplorations = useSelector((state) => state.explorations);
   const dispatch = useDispatch();
+  const [maxLevels, setMaxLevels] = useState<{ [Key in UpgradeKey]?: number }>(
+    {},
+  );
 
   const sourceUpgrades = useMemo(() => {
     return sources.map((source) => {
@@ -86,9 +89,10 @@ export const Upgrades = ({
                   active={autoUpgrade[value.source.key]}
                   onClick={() => {
                     dispatch({
-                      type: "TOGGLE_AUTO_PURCHASE",
+                      type: "SET_AUTO_PURCHASE",
                       payload: {
                         key: value.source.key,
+                        enabled: !autoUpgrade[value.source.key],
                       },
                     });
                   }}
@@ -160,6 +164,29 @@ export const Upgrades = ({
                     </div>
                     {level !== upgrade.max && (
                       <>
+                        <label>
+                          Max Level{" "}
+                          <input
+                            className="mt-1 dark:text-gray-900"
+                            size={5}
+                            value={maxLevels[upgrade.key] ?? ""}
+                            onChange={(event) => {
+                              setMaxLevels({
+                                ...maxLevels,
+                                [upgrade.key]: event.target.value,
+                              });
+                            }}
+                            onBlur={() => {
+                              dispatch({
+                                type: "SET_AUTO_MAX_LEVEL",
+                                payload: {
+                                  key: upgrade.key,
+                                  maxLevel: maxLevels[upgrade.key] || undefined,
+                                },
+                              });
+                            }}
+                          />
+                        </label>{" "}
                         <p>{upgradeEffect(upgrade, level)}</p>
                         <p>{upgrade.description}</p>
                       </>

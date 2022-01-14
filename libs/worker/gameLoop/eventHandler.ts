@@ -100,9 +100,13 @@ export const eventHandler = (
       state.loops += 1;
       state.phase = "postEvent";
       break;
-    case "TOGGLE_AUTO_PURCHASE": {
-      state.autoUpgrade[action.payload.key] =
-        !state.autoUpgrade[action.payload.key];
+    case "SET_AUTO_PURCHASE": {
+      state.autoUpgrade[action.payload.key] = action.payload.enabled;
+      break;
+    }
+    case "SET_AUTO_MAX_LEVEL": {
+      state.autoUpgradeLevels[action.payload.key] = action.payload.maxLevel;
+      break;
     }
   }
 };

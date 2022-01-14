@@ -101,7 +101,9 @@ const updateAutoPurchase: Updater = (state, delta) => {
           resources: state.resources,
           timedUpgrades: state.timedUpgrades,
           upgrade,
-        })
+        }) &&
+        (state.upgrades[upgrade.key]?.level ?? 0) <
+          (state.autoUpgradeLevels[upgrade.key] ?? Infinity)
       ) {
         const currentLevel = state.upgrades[upgrade.key]?.level ?? 0;
         const nextLevel = currentLevel + 1;
