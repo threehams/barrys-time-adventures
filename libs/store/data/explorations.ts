@@ -44,7 +44,7 @@ export const explorations: Exploration[] = [
       water: 2,
     },
     train: {
-      perception: 1,
+      perception: 1.1,
       endurance: 2,
     },
     time: 800_000,
@@ -61,8 +61,8 @@ export const explorations: Exploration[] = [
       water: 1,
     },
     train: {
-      perception: 2,
-      patience: 2,
+      perception: 2.2,
+      patience: 2.1,
     },
     time: 1_600_000,
     requirements: {
@@ -80,7 +80,7 @@ export const explorations: Exploration[] = [
       water: 1,
     },
     train: {
-      patience: 2,
+      patience: 2.4,
     },
     time: 1_600_000,
     requirements: {
@@ -97,7 +97,7 @@ export const explorations: Exploration[] = [
       water: 2,
     },
     train: {
-      endurance: 2,
+      endurance: 2.5,
     },
     time: 1_000_000,
     requirements: {
@@ -115,7 +115,7 @@ export const explorations: Exploration[] = [
       water: 2,
     },
     train: {
-      perception: 2,
+      perception: 1.9,
     },
     time: 1_000_000,
     requirements: {
@@ -134,7 +134,7 @@ export const explorations: Exploration[] = [
     },
     timeMultiplier: 10,
     train: {
-      endurance: 2,
+      endurance: 3,
     },
     time: 10_000_000,
     requirements: {
@@ -152,8 +152,8 @@ export const explorations: Exploration[] = [
       water: 2,
     },
     train: {
-      perception: 2,
-      endurance: 2,
+      perception: 2.1,
+      endurance: 1.7,
     },
     time: 1_000_000,
     requirements: {
@@ -171,8 +171,8 @@ export const explorations: Exploration[] = [
       water: 2,
     },
     train: {
-      perception: 2,
-      tech: 2,
+      perception: 1.5,
+      tech: 3,
     },
     time: 1_000_000,
     requirements: {
@@ -190,8 +190,8 @@ export const explorations: Exploration[] = [
       water: 2,
     },
     train: {
-      perception: 2,
-      endurance: 4,
+      perception: 3.3,
+      endurance: 2.1,
     },
     time: 1_000_000,
     requirements: {
@@ -416,7 +416,7 @@ export const explorations: Exploration[] = [
     train: {
       endurance: 2,
     },
-    timeMultiplier: 50,
+    timeMultiplier: 20,
     time: 200_000_000,
     requirements: {
       action: "E3",
@@ -434,7 +434,7 @@ export const explorations: Exploration[] = [
     train: {
       endurance: 2,
     },
-    timeMultiplier: 50,
+    timeMultiplier: 20,
     time: 200_000_000,
     requirements: {
       action: "E8",
@@ -453,7 +453,7 @@ export const explorations: Exploration[] = [
     train: {
       strength: 2,
     },
-    timeMultiplier: 50,
+    timeMultiplier: 20,
     time: 200_000_000,
     requirements: {
       action: "E9",
@@ -473,7 +473,7 @@ export const explorations: Exploration[] = [
       patience: 2,
       tech: 2,
     },
-    timeMultiplier: 50,
+    timeMultiplier: 20,
     time: 200_000_000,
     requirements: {
       action: "S3",
@@ -491,7 +491,7 @@ export const explorations: Exploration[] = [
     train: {
       endurance: 2,
     },
-    timeMultiplier: 500,
+    timeMultiplier: 20,
     time: 2_000_000_000,
     requirements: {
       action: "E8",
@@ -509,7 +509,7 @@ export const explorations: Exploration[] = [
     train: {
       endurance: 2,
     },
-    timeMultiplier: 500,
+    timeMultiplier: 20,
     time: 2_000_000_000,
     requirements: {
       action: "E8",
@@ -528,7 +528,7 @@ export const explorations: Exploration[] = [
     train: {
       endurance: 2,
     },
-    timeMultiplier: 500,
+    timeMultiplier: 20,
     time: 2_000_000_000,
     requirements: {
       action: "E8",
@@ -547,7 +547,7 @@ export const explorations: Exploration[] = [
     train: {
       patience: 2,
     },
-    timeMultiplier: 100,
+    timeMultiplier: 20,
     time: 2_000_000_000,
     requirements: {
       action: "E11",

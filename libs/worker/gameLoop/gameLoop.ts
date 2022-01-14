@@ -163,14 +163,30 @@ const updateMessages: Updater = (state, delta) => {
     }
   }
 
-  for (const newsMessage of news) {
-    const timePassed =
-      newsMessage.time &&
-      newsMessage.time < state.time &&
-      newsMessage.time > state.time - delta;
+  for (const newsMessage of news.filter(
+    (message) => message.phase === state.phase,
+  )) {
+    let timePassed;
+    if (newsMessage.phase === "expand") {
+      timePassed =
+        newsMessage.time &&
+        newsMessage.time + state.expandStart! < state.time &&
+        newsMessage.time + state.expandStart! > state.time - delta;
+    } else if (newsMessage.phase === "collapse") {
+      timePassed =
+        newsMessage.time &&
+        newsMessage.time + state.collapseStart! < state.time &&
+        newsMessage.time + state.collapseStart! > state.time - delta;
+    } else {
+      timePassed =
+        newsMessage.time &&
+        newsMessage.time < state.time &&
+        newsMessage.time > state.time - delta;
+    }
+
     if (timePassed) {
       state.messages.push({
-        priority: "news",
+        priority: newsMessage.level ?? "news",
         text: newsMessage.text,
         time: state.time,
       });
@@ -220,6 +236,20 @@ const updateEvent: Updater = (state, delta) => {
 
 const updatePreResources: Updater = (state, delta) => {
   const { timers, phase } = state;
+  if (state.resources.barry >= 6_000_000_000 && phase === "expand") {
+    state.collapseStart = state.time;
+    state.phase = "collapse";
+  }
+  if (state.phase === "collapse" && state.resources.barry <= 0.99) {
+    state.resources.barry = 0;
+    state.phase = "done";
+    return;
+  }
+  if (state.phase === "collapse") {
+    // divide barrys by half every 10 seconds
+    state.resources.barry -= (state.resources.barry * 0.5) / (8_000 / delta);
+    return;
+  }
   if (!(phase === "preEvent" || phase === "expand" || phase === "collapse")) {
     return;
   }
@@ -299,6 +329,7 @@ const updatePostStats: Updater = (state, delta) => {
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
       state.skills[stat].current += (delta * rate) / 400000;
+      state.skills[stat].permanent += (delta * rate) / (400000 * 8);
     }
   }
 };
@@ -329,7 +360,8 @@ const updateExplore: Updater = (state, delta) => {
       if (!multiplier) {
         return acc;
       }
-      return state.skills[key].current * multiplier;
+      const skill = state.skills[key];
+      return skill.current * multiplier + skill.permanent * multiplier;
     },
     0,
   );
@@ -367,6 +399,10 @@ const updateExplore: Updater = (state, delta) => {
     if (unlock && !state.unlocks[unlock.key]) {
       state.unlocks[unlock.key] = true;
       state.messages.push({ ...unlock.message, time: state.time });
+    }
+    if (unlock?.key === "convergence") {
+      state.phase = "convergence";
+      state.expandStart = state.time;
     }
     if (exploration.message) {
       state.messages.push({

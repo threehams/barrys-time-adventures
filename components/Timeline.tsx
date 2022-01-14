@@ -1,5 +1,6 @@
 import {
   canPurchaseUpgrade,
+  findResource,
   findUpgrade,
   StateAction,
   Upgrade,
@@ -94,7 +95,7 @@ export const Timeline = ({
           </Button>
         )}
       </div>
-      {phase !== "preEvent" && <div>You Are Here</div>}
+      {/* {phase !== "preEvent" && <div>You Are Here</div>} */}
       <ul className="flex flex-nowrap">
         {range(0, 30).map((day) => {
           const availableUpgrades = !!timeline[day]?.find(
@@ -125,8 +126,8 @@ export const Timeline = ({
           return (
             <button
               className={clsx(
-                "inline-grid relative border-2 border-gray-800 dark:border-gray-300 w-[32px] h-[32px] grid-cols-2 grid-rows-2 -ml-[2px]",
-                muted && "border-opacity-20 dark:border-opacity-20",
+                "inline-grid relative border-2 border-gray-300 w-[32px] h-[32px] grid-cols-2 grid-rows-2 -ml-[2px]",
+                muted && "border-opacity-20",
                 day === selectedDay && "shadow-[0_0_0_3px_red] z-10",
               )}
               style={{
@@ -229,6 +230,7 @@ const DayDetail = ({
       {selectedUpgrade && (
         <div className="[grid-area:restart]">
           <Button
+            active
             onClick={() => {
               dispatch({
                 type: "BUY_TIMED_UPGRADE",
@@ -247,7 +249,9 @@ const DayDetail = ({
               currentLevel: timedUpgradeMap[selectedUpgrade.key]?.level,
               distance: 29 - selectedDay,
             })
-              .map((resource) => `${resource.cost} ${resource.key}`)
+              .map((resource) =>
+                findResource(resource.key).formatWithType(resource.cost),
+              )
               .join(",")}
             )
           </Button>
@@ -292,7 +296,12 @@ const DayDetail = ({
         </div>
       )}
       {events !== undefined && (
-        <ul className="[grid-area:events]">
+        <ul
+          className={clsx(
+            "[grid-area:events]",
+            selectedUpgrade && "opacity-30",
+          )}
+        >
           {events.map((event) => {
             return (
               <li

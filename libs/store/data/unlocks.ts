@@ -4,7 +4,8 @@ import { Message } from "..";
 export type UnlockKey =
   | "pastRestart"
   | "loop"
-  | "pastSpeed2x"
+  | "pastSpeed5x"
+  | "pastSpeed10x"
   | "autoPurchase"
   | "convergence"
   | "timelineEvents"
@@ -30,7 +31,17 @@ export const unlocks: Unlock[] = [
     },
   },
   {
-    key: "pastSpeed2x",
+    key: "pastSpeed5x",
+    requirements: {
+      exploration: "T3",
+    },
+    message: {
+      priority: "alert",
+      text: "Unlocked: Speed up time for Past Barry up to 5X.",
+    },
+  },
+  {
+    key: "pastSpeed10x",
     requirements: {
       exploration: "T3",
     },

@@ -136,6 +136,12 @@ const travel = (state: Draft<State>, day: number) => {
         }),
     ),
   };
+  // If you've never unlocked loop, permanent gains get reset
+  if (!state.unlocks.loop) {
+    for (const key of Object.keys(state.skills)) {
+      state.skills[key].permanent = 0;
+    }
+  }
   state.messages = [...initialState.messages];
   // get the current timeline before resetting it
   const timeline = state.timeline;

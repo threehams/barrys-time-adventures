@@ -133,7 +133,10 @@ export const Status = ({ className }: Props) => {
                 <li key={skill}>
                   <div className="flex justify-between">
                     <span>{findSkill(skill).name}</span>
-                    <span>{Math.floor(value.current)}</span>
+                    <span>
+                      {Math.floor(value.current)}{" "}
+                      {unlocks.loop && `/ ${Math.floor(value.permanent)}`}
+                    </span>
                   </div>
 
                   <Progress progress={((value.current ?? 0) * 100) % 100} />

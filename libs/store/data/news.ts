@@ -63,21 +63,40 @@ export const news: NewsMessage[] = [
     text: "BNN: President Barry Eases Concerns Over Drop in National Barry Index",
   },
   {
-    phase: "expand",
-    text: "Global Food Supply Strained by Number of Barrys",
-    resources: {
-      barry: 1_000_000_000,
-    },
+    phase: "collapse",
+    text: "BNN: Global Food Supply Strained by Number of Barrys",
+    time: hoursToSeconds(0) + minutesToSeconds(10),
   },
   {
-    phase: "expand",
-    text: "Barrys Unable to Multiply Faster Than Death Rate",
-    resources: {
-      barry: 6_000_000_000,
-    },
+    phase: "collapse",
+    text: "BNN: Worldwide Famine Strikes Barry-Run Nations",
+    time: hoursToSeconds(7) + minutesToSeconds(10),
+  },
+  {
+    phase: "collapse",
+    text: "BNN: Mass Protests in Barrytown",
+    time: hoursToSeconds(14) + minutesToSeconds(10),
+  },
+  {
+    phase: "collapse",
+    text: "BNN: Mutant Barrys and Average Barrys Clash Over Remaining Fresh Water",
+    time: hoursToSeconds(19) + minutesToSeconds(10),
+  },
+  {
+    phase: "collapse",
+    text: "BNN: Barry News Network Loses 95% of Workforce, Unable to Continue Operations",
+    time: hoursToSeconds(26) + minutesToSeconds(0),
+  },
+  {
+    phase: "collapse",
+    text: "I feel like this may have all gotten a little out of hand.",
+    level: "info",
+    time: hoursToSeconds(34) + minutesToSeconds(10),
+  },
+  {
+    phase: "collapse",
+    text: "[something depressing]",
+    level: "info",
+    time: hoursToSeconds(48) + minutesToSeconds(10),
   },
 ];
-
-/*
-"BNN: Are you eating too many cheese curls? Our dietician says you obviously are, because it's our favorite food."
-*/

@@ -18,15 +18,19 @@ export const initialState: State = {
   upgrades: {},
   timedUpgrades: {
     EW1: {
-      time: hoursToSeconds(12 * 24),
+      time: hoursToSeconds(12 * 24 + 2),
       level: 1,
     },
     EW2: {
-      time: hoursToSeconds(17 * 24),
+      time: hoursToSeconds(17 * 24 + 8),
+      level: 1,
+    },
+    EF1: {
+      time: hoursToSeconds(15 * 24 + 5),
       level: 1,
     },
     EM1: {
-      time: hoursToSeconds(9 * 24),
+      time: hoursToSeconds(9 * 24 + 4),
       level: 1,
     },
   },
@@ -96,4 +100,6 @@ export const initialState: State = {
   unlocks: {},
   autoUpgrade: {},
   autoUpgradeLevels: {},
+  expandStart: undefined,
+  collapseStart: undefined,
 };

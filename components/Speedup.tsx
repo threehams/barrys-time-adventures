@@ -57,5 +57,6 @@ export const Speedup = () => {
 };
 
 const speeds: { [Key in UnlockKey]?: number } = {
-  pastSpeed2x: 2,
+  pastSpeed5x: 5,
+  pastSpeed10x: 10,
 };

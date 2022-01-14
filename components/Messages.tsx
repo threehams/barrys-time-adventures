@@ -23,7 +23,7 @@ export const Messages = () => {
                   ? "bg-red-500"
                   : message.priority === "news"
                   ? "bg-blue-500"
-                  : " bg-gray-300 dark:bg-gray-600",
+                  : "bg-gray-600",
               )}
             ></span>
             <EffectText className="block pl-3">{message.text}</EffectText>
@@ -38,5 +38,5 @@ const textColor = (priority: MessageLevel, index: number) => {
   if (priority === "alert") {
     return index > 0 ? "text-red-700" : "text-red-500";
   }
-  return index > 0 && "text-gray-700 dark:text-gray-400";
+  return index > 0 && "text-gray-400";
 };

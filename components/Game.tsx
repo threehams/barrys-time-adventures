@@ -1,7 +1,5 @@
-import { Tab, Tabs } from "@laundry/ui";
 import { hoursToMilliseconds } from "date-fns";
 import React, { useMemo, useState } from "react";
-import { Explorations } from "./Explorations";
 import { Cheats } from "./Cheats";
 import { Messages } from "./Messages";
 import { Reset } from "./Reset";
@@ -15,8 +13,8 @@ import clsx from "clsx";
 import { Glitch } from "./Glitch";
 import { Ending } from "./Ending";
 import { Speedup } from "./Speedup";
-
-type Panel = "explorations" | "upgrades";
+import { ExplorationTabs } from "./ExplorationTabs";
+import { Panel } from "./types/Panel";
 
 export const Game = () => {
   const time = useSelector((state) => state.time);
@@ -32,6 +30,9 @@ export const Game = () => {
       <div className={clsx("relative min-h-screen", backgroundFor(phase))}>
         {phase === "event" && <Glitch />}
         {phase === "done" && <Ending />}
+        {selectedUpgrade && (
+          <div className="fixed z-10 w-screen h-screen bg-gray-900 opacity-70"></div>
+        )}
         <div
           className={clsx(
             "px-4 grid mx-auto min-w-[1080px] max-w-[1680px] gap-3 items-start",
@@ -65,33 +66,13 @@ export const Game = () => {
               </>
             )}
             {(phase === "postEvent" || phase === "traveling") && (
-              <div>
-                <Tabs className="mb-2">
-                  <Tab
-                    active={panel === "explorations"}
-                    onClick={() => {
-                      setPanel("explorations");
-                    }}
-                  >
-                    Exploration
-                  </Tab>
-                  <Tab
-                    active={panel === "upgrades"}
-                    onClick={() => {
-                      setPanel("upgrades");
-                    }}
-                  >
-                    Send Upgrades
-                  </Tab>
-                </Tabs>
-                {panel === "upgrades" && (
-                  <Upgrades
-                    selectedUpgrade={selectedUpgrade}
-                    setSelectedUpgrade={setSelectedUpgrade}
-                  />
-                )}
-                {panel === "explorations" && <Explorations />}
-              </div>
+              <ExplorationTabs
+                key={phase}
+                panel={panel}
+                setPanel={setPanel}
+                selectedUpgrade={selectedUpgrade}
+                setSelectedUpgrade={setSelectedUpgrade}
+              />
             )}
           </main>
           <Window className="[grid-area:window] my-2 h-[calc(100vh-40px)] self-stretch" />
@@ -100,7 +81,12 @@ export const Game = () => {
           </div>
 
           {unlocks.pastRestart && (
-            <div className="[grid-area:timeline]">
+            <div
+              className={clsx(
+                "[grid-area:timeline]",
+                selectedUpgrade && "relative z-20",
+              )}
+            >
               <Timeline
                 selectedUpgradeKey={selectedUpgrade}
                 setSelectedUpgrade={setSelectedUpgrade}
@@ -127,7 +113,7 @@ export const Game = () => {
 
 const backgroundFor = (phase: Phase) => {
   if (phase === "preEvent") {
-    return "bg-gray-50 dark:bg-gray-900 dark:text-gray-100";
+    return "bg-gray-900 text-gray-100";
   }
-  return "bg-stone-50 dark:bg-stone-900 dark:text-stone-100";
+  return "bg-stone-900 text-stone-100";
 };

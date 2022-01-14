@@ -19,7 +19,8 @@ describe("exploration", () => {
         produce(initialState, (draft) => {
           draft.unlocks = {
             pastRestart: true,
-            pastSpeed2x: true,
+            pastSpeed5x: true,
+            pastSpeed10x: true,
           };
           draft.explorations = {
             E1: { progress: 100 },

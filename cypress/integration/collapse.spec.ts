@@ -1,6 +1,7 @@
 import localForage from "localforage";
 import produce from "immer";
 import { initialState } from "@laundry/store";
+import hoursToSeconds from "date-fns/hoursToSeconds";
 
 describe("new game", () => {
   it("starts up without issues", () => {
@@ -16,22 +17,14 @@ describe("new game", () => {
       await localForage.setItem(
         savedGameKey,
         produce(initialState, (draft) => {
-          draft.unlocks.autoPurchase = true;
-          draft.autoUpgrade = {
-            ...initialState.autoUpgrade,
-            crafts: true,
-            letsy: true,
-            plants: true,
-            preserves: true,
-            rainfall: true,
-            scrap: true,
-            shopping: true,
-            stream: true,
-            well: true,
-          };
+          draft.phase = "collapse";
+          draft.loops = 30;
+          draft.resources.barry = 6_000_000_000;
+          draft.time = hoursToSeconds(24 * 60);
+          draft.collapseStart = hoursToSeconds(24 * 60);
         }),
       );
     });
-    cy.visit("/");
+    cy.visit("/?debug");
   });
 });

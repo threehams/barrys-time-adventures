@@ -12,6 +12,7 @@ import {
 } from "@laundry/store";
 import { Button } from "@laundry/ui";
 import clsx from "clsx";
+import { hoursToSeconds } from "date-fns";
 
 type Props = {
   className?: string;
@@ -109,7 +110,10 @@ export const Upgrades = ({
 
             <ul className={clsx("flex flex-col gap-2", className)}>
               {value.available.map((upgrade) => {
-                const level = purchasedUpgrades[upgrade.key]?.level ?? 0;
+                const level =
+                  purchasedUpgrades[upgrade.key]?.level ??
+                  timedUpgradeMap[upgrade.key]?.level ??
+                  0;
                 const flavorText = upgrade.flavorTexts[level];
                 const costs = Object.entries(upgrade.costs)
                   .map(([key, calc]) => {
@@ -122,6 +126,17 @@ export const Upgrades = ({
                   .filter(Boolean)
                   .join(", ");
 
+                let buyText;
+                if (phase === "postEvent" && level > 0) {
+                  buyText = "Move Upgrade";
+                } else {
+                  buyText = `Buy ${
+                    level > 0
+                      ? `(${level === upgrade.max ? "MAX" : level})`
+                      : ""
+                  }`;
+                }
+
                 return (
                   <li
                     className="flex flex-col p-2 border rounded-sm gap-x-2"
@@ -129,6 +144,9 @@ export const Upgrades = ({
                   >
                     <div className="flex flex-row gap-2">
                       <Button
+                        className={clsx(
+                          selectedUpgrade === upgrade.key && "z-20",
+                        )}
                         disabled={
                           !canPurchaseUpgrade({
                             upgrade,
@@ -156,10 +174,41 @@ export const Upgrades = ({
                           });
                         }}
                       >
-                        Buy{" "}
-                        {level > 0 &&
-                          `(${level !== upgrade.max ? level : "MAX"})`}
+                        {buyText}
                       </Button>
+                      {upgrade.phase === "postEvent" && level > 0 && (
+                        <Button
+                          disabled={
+                            !canPurchaseUpgrade({
+                              upgrade,
+                              phase,
+                              playerExplorations,
+                              purchasedUpgrades,
+                              timedUpgrades: timedUpgradeMap,
+                              distance: Math.floor(
+                                (timedUpgradeMap[upgrade.key]?.time ?? 0) /
+                                  hoursToSeconds(24),
+                              ),
+                              resources,
+                              maxResources,
+                            })
+                          }
+                          onClick={() => {
+                            dispatch({
+                              type: "BUY_TIMED_UPGRADE",
+                              payload: {
+                                key: upgrade.key,
+                                day: Math.floor(
+                                  timedUpgradeMap[upgrade.key]?.time ??
+                                    0 / hoursToSeconds(24),
+                                ),
+                              },
+                            });
+                          }}
+                        >
+                          Upgrade
+                        </Button>
+                      )}
                       <div>
                         {upgrade.name} {level !== upgrade.max && `(${costs})`}
                       </div>
@@ -170,7 +219,7 @@ export const Upgrades = ({
                           <label>
                             Max Auto Level{" "}
                             <input
-                              className="mt-1 dark:text-gray-900"
+                              className="mt-1 text-gray-900"
                               size={5}
                               value={maxLevels[upgrade.key] ?? ""}
                               onChange={(event) => {
