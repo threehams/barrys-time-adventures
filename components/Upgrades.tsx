@@ -267,7 +267,10 @@ const upgradeEffect = (upgrade: Upgrade, currentLevel: number) => {
     },
   )! as [Resource, (level: number) => number];
   const resource = findResource(resourceKey);
-  const diff = resourceFunc(currentLevel + 1) - resourceFunc(currentLevel);
+  const diff =
+    currentLevel === 0
+      ? resourceFunc(currentLevel + 1)
+      : resourceFunc(currentLevel + 1) - resourceFunc(currentLevel);
   if (upgrade.effect.type === "add") {
     return `+${Math.floor(diff)} ${resource.name} gain`;
   } else if (upgrade.effect.type === "multiply") {

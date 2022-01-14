@@ -42,9 +42,7 @@ export const unlocks: Unlock[] = [
   },
   {
     key: "pastSpeed10x",
-    requirements: {
-      exploration: "T3",
-    },
+    requirements: {},
     message: {
       priority: "alert",
       text: "Unlocked: Speed up time for Past Barry up to 2X.",
@@ -57,13 +55,13 @@ export const unlocks: Unlock[] = [
     },
     message: {
       priority: "alert",
-      text: "Unlocked: Restart after the timeskip, but keep some of your stats and knowledge. This may have consequences.",
+      text: "Unlocked: Restart after the timeskip, but keep some of your stats and knowledge, by clicking the Loop button above the timeline. This is only available after running out of resources. This may have consequences.",
     },
   },
   {
     key: "autoPurchase",
     requirements: {
-      exploration: "T4",
+      exploration: "F4",
     },
     message: {
       priority: "alert",

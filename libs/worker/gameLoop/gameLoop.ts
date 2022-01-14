@@ -376,7 +376,7 @@ const updateExplore: Updater = (state, delta) => {
 
   if (exploration.generates) {
     if (exploration.generates.power) {
-      const power = (totalTime * exploration.generates.power) / 1000;
+      const power = (totalTime * exploration.generates.power) / 5_000;
       state.resources.power += power;
       let resourceCost = power * 10;
       const resources = (["food", "water"] as ["food", "water"]).sort(

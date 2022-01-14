@@ -77,7 +77,7 @@ export const Game = () => {
               />
             )}
           </main>
-          <Window className="[grid-area:window] my-2 h-[calc(100vh-40px)] self-stretch" />
+          <Window className="[grid-area:window] my-2 h-[calc(100vh-40px)] self-stretch sticky top-[0px]" />
           <div className="[grid-area:messages] sticky top-[0px] py-2">
             <Messages />
           </div>

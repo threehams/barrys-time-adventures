@@ -43,11 +43,12 @@ export const Reset = ({ className }: Props) => {
             send("RESET");
           }}
         >
-          Reset
+          Hard Reset
         </Button>
       )}
       {resetState.value === "requiresConfirmation" && (
         <>
+          <div>This will completely reset your game.</div>
           <Button
             variant="danger"
             onClick={() => {

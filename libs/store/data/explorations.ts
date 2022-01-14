@@ -109,7 +109,7 @@ export const explorations: Exploration[] = [
     name: "Figure out lost time",
     description:
       "Time passes more slowly when I'm closer to a time hole, which makes the rest of the world move faster. I could find out how close I can get, and tell Past Barry about this.",
-    message: `For now, I could safely get time to pass about twice as fast. That'll be better than watching radishes grow.`,
+    message: `For now, I could safely get time to pass about 5X as fast. That'll be better than watching radishes grow.`,
     drain: {
       food: 2,
       water: 2,
@@ -162,9 +162,9 @@ export const explorations: Exploration[] = [
   },
   {
     key: "F1",
-    name: "Look for parts",
+    name: "Look for generator parts",
     description:
-      "Someone took this thing apart. I'm going to need some M8 bolts and a socket to match.",
+      "Someone took this generator apart. I'm going to need some M8 bolts and a socket to match.",
     message: `It's reassembled, but still won't start. Maybe there's a troubleshooting guide around here.`,
     drain: {
       food: 2,
@@ -482,8 +482,8 @@ export const explorations: Exploration[] = [
   {
     key: "E10",
     name: "Explore arcology",
-    description: "Things are bad here, but are they this bad everywhere?",
-    message: `Things are this bad everywhere. I didn't meet anyone.`,
+    description: "There's a huge structure here, still looks fairly intact.",
+    message: ``,
     drain: {
       food: 20,
       water: 20,

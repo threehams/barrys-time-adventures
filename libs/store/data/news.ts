@@ -14,7 +14,7 @@ export const news: NewsMessage[] = [
   },
   {
     phase: "preEvent",
-    time: hoursToSeconds(24 * 5 + 9) + minutesToSeconds(45),
+    time: hoursToSeconds(24 * 12 + 9) + minutesToSeconds(45),
     text: "News: Phillipines' Garcia Expands Lockdowns",
   },
   {

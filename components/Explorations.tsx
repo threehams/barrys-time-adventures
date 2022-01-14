@@ -53,6 +53,12 @@ export const Explorations = () => {
                 {exploration.name}
               </div>
               <p>{exploration.description}</p>
+              {exploration.generates && (
+                <div className="text-red-400">
+                  Note: This will drain your resources continuously in exchange
+                  for power. You can start or stop this at any time.
+                </div>
+              )}
               <div>
                 <p>{formatSkills(exploration.train)}</p>
                 {formatDrain(exploration.drain) && (

@@ -521,12 +521,12 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       water: (level) => {
-        return 1.25 ** level;
+        return 1.1 ** level;
       },
     },
     flavorTexts: {},
     requirements: {
-      exploration: "E3",
+      exploration: "T6", // not really, fix this
     },
     source: "rainfall",
   },
@@ -546,7 +546,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       money: (level) => {
-        return 1.25 ** level;
+        return 1.1 ** level;
       },
     },
     flavorTexts: {},
@@ -571,12 +571,12 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       water: (level) => {
-        return 1.25 ** level;
+        return 1.1 ** level;
       },
     },
     flavorTexts: {},
     requirements: {
-      exploration: "E3",
+      exploration: "E12",
     },
     source: "rainfall",
   },
@@ -596,7 +596,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       food: (level) => {
-        return 1.5 ** level;
+        return 1.1 ** level;
       },
     },
     flavorTexts: {},
