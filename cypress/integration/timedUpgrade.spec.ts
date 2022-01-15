@@ -49,6 +49,5 @@ describe("future", () => {
     });
     cy.visit("/");
     cy.findByText("Send Upgrades").click();
-    cy.findByRole("button", { name: /Buy/ }).click();
   });
 });
