@@ -106,12 +106,19 @@ export const eventHandler = (
       break;
     }
     case "LOOP":
+      state.replay = true;
       if (state.phase !== "traveling") {
         return;
       }
       travel(state, 29);
       state.loops += 1;
+      state.messages.push({
+        priority: "alert",
+        text: getloopText(state.loops),
+        time: state.time,
+      });
       state.phase = "postEvent";
+      state.replay = false;
       break;
     case "SET_AUTO_PURCHASE": {
       state.autoUpgrade[action.payload.key] = action.payload.enabled;
@@ -122,6 +129,21 @@ export const eventHandler = (
       break;
     }
   }
+};
+
+const getloopText = (count: number) => {
+  if (count > 5) {
+    return `I AM BARRY NUMBER ${count}. NONE SHALL STAND BEFORE ME.`;
+  } else if (count === 5) {
+    return "Can't...think good, but...it's a small price to pay for UNLIMITED POWER.";
+  } else if (count === 4) {
+    return "Oh god my brain feels full of alien memories. Am I going crazy? No, it is the world that is crazy.";
+  } else if (count === 3) {
+    return "That didn't feel as bad, but something is wroel as bad, but something is wrong. It's likeng. Wait, what?";
+  } else if (count === 2) {
+    return "I have a persistent nose bleed now. I'm, uh, sure it's fine.";
+  }
+  return "Argghhh I have a massive headache, and I can't seem to walk straight right now. Jumping through that felt better than being dead, but not by much.";
 };
 
 const buyTimedUpgrade = ({
@@ -158,8 +180,12 @@ const buyTimedUpgrade = ({
   };
 };
 
-const travel = (state: Draft<State>, day: number) => {
-  state.replay = true;
+type Options = { applySkills?: boolean };
+const travel = (
+  state: Draft<State>,
+  day: number,
+  { applySkills }: Options = {},
+) => {
   state.multiplier = 1;
   state.exploration = undefined;
   state.explorations = {};
@@ -186,9 +212,13 @@ const travel = (state: Draft<State>, day: number) => {
   // If you've never unlocked loop, permanent gains get reset
   for (const key of Object.keys(state.skills)) {
     state.skills[key].current = 1;
+    if (applySkills) {
+      state.skills[key].permanent += state.skills[key].thisLoop;
+    }
     if (!state.unlocks.loop) {
       state.skills[key].permanent = 1;
     }
+    state.skills[key].thisLoop = 0;
   }
   state.messages = [...initialState.messages];
   // get the current timeline before resetting it
@@ -205,5 +235,4 @@ const travel = (state: Draft<State>, day: number) => {
     last = event.time;
   }
   updateGame(state, hoursToSeconds(24) * day - last);
-  state.replay = false;
 };

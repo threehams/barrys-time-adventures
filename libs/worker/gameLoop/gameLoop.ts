@@ -166,6 +166,9 @@ const updateMessages: Updater = (state, delta) => {
   for (const newsMessage of news.filter(
     (message) => message.phase === state.phase,
   )) {
+    if (state.replay) {
+      continue;
+    }
     let timePassed;
     if (newsMessage.phase === "expand") {
       timePassed =
@@ -329,7 +332,7 @@ const updatePostStats: Updater = (state, delta) => {
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
       state.skills[stat].current += (delta * rate) / 400000;
-      state.skills[stat].permanent += (delta * rate) / (400000 * 4);
+      state.skills[stat].thisLoop += (delta * rate) / (400000 * 4);
     }
   }
 };
@@ -347,7 +350,9 @@ const updateExplore: Updater = (state, delta) => {
     state.messages.push({
       priority: "alert",
       time: state.time,
-      text: `I'm out of ${resource}. I should go help out Past Barry so I can be better prepared.`,
+      text: state.unlocks.loop
+        ? `I'm out of ${resource}. I could help out Past Barry, or loop myself with Future Barry and keep exploring.`
+        : `I'm out of ${resource}. I should go help out Past Barry so I can be better prepared.`,
     });
   }
 
@@ -365,7 +370,7 @@ const updateExplore: Updater = (state, delta) => {
         acc +
         Math.floor(skill.current) *
           multiplier *
-          Math.floor(skill.permanent) *
+          Math.floor(skill.permanent + skill.thisLoop) *
           multiplier
       );
     },

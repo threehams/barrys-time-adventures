@@ -135,15 +135,18 @@ export const Status = ({ className }: Props) => {
                     <span>{findSkill(skill).name}</span>
                     <span>
                       {Math.floor(value.current)}{" "}
-                      {unlocks.loop && `/ ${Math.floor(value.permanent)}`}
+                      {unlocks.loop &&
+                        `/ ${Math.floor(value.permanent + value.thisLoop)}`}
                     </span>
                   </div>
 
-                  <Progress progress={((value.current ?? 0) * 100) % 100} />
+                  <Progress progress={(value.current * 100) % 100} />
                   {unlocks.loop && (
                     <Progress
                       variant="primary"
-                      progress={((value.permanent ?? 0) * 100) % 100}
+                      progress={
+                        ((value.permanent + value.thisLoop) * 100) % 100
+                      }
                     />
                   )}
                 </li>

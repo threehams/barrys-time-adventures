@@ -88,6 +88,7 @@ export const Timeline = ({
           <Button
             variant="danger"
             onClick={() => {
+              setSelectedDay(undefined);
               dispatch({ type: "LOOP" });
             }}
           >
@@ -204,6 +205,7 @@ const DayDetail = ({
 }: DayDetailProps) => {
   const events = timeline[selectedDay];
   const phase = useSelector((state) => state.phase);
+  const unlocks = useSelector((state) => state.unlocks);
   const timedUpgradeMap = useSelector((state) => state.timedUpgrades);
   const resources = useSelector((state) => state.resources);
   const dispatch = useDispatch();
@@ -293,18 +295,27 @@ const DayDetail = ({
             {confirm ? "Confirm" : "Restart Here"}
           </Button>
           {confirm && (
-            <div>
-              <span>
-                This will reset your exploration progress, resources (including
-                power), and anything you&apos;ve done on the selected day and
-                after. You will keep all unlocks and Timed Upgrades.
-              </span>
-              {phase === "postEvent" && (
-                <span className="block mt-1">
-                  You may want to explore more before restarting.
+            <>
+              {unlocks.loop && phase === "traveling" && (
+                <span className="text-red-400">
+                  WARNING: You should loop before resetting to save any
+                  permanent stat progress from this loop.
                 </span>
               )}
-            </div>
+              <div>
+                <span>
+                  This will reset your exploration progress, resources
+                  (including power), and anything you&apos;ve done on the
+                  selected day and after. You will keep all unlocks and Timed
+                  Upgrades.
+                </span>
+                {phase === "postEvent" && (
+                  <span className="block mt-1">
+                    You may want to explore more before restarting.
+                  </span>
+                )}
+              </div>
+            </>
           )}
         </div>
       )}

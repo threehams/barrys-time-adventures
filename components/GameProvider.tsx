@@ -25,10 +25,9 @@ export const GameProvider = () => {
       <DispatchProvider value={dispatch}>
         <ErrorBoundary FallbackComponent={ErrorReset}>{children}</ErrorBoundary>
       </DispatchProvider>
-      {!process.env.NEXT_PUBLIC_DISABLE_CHEATS &&
-        router.query.debug !== undefined && (
-          <pre>{JSON.stringify(state, null, 2)}</pre>
-        )}
+      {router.query.debug !== undefined && (
+        <pre>{JSON.stringify(state, null, 2)}</pre>
+      )}
     </StateProvider>
   );
 };

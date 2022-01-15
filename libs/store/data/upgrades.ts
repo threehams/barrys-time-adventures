@@ -31,6 +31,7 @@ export type UpgradeKey =
   | "TW1"
   | "TW2"
   | "TF1"
+  | "TF2"
   | "TM1"
   | "EW1"
   | "EW2"
@@ -578,7 +579,7 @@ export const upgrades: Upgrade[] = [
     requirements: {
       exploration: "E12",
     },
-    source: "rainfall",
+    source: "stream",
   },
   {
     phase: "postEvent",
@@ -604,6 +605,31 @@ export const upgrades: Upgrade[] = [
       exploration: "F5",
     },
     source: "preserves",
+  },
+  {
+    phase: "postEvent",
+    key: "TF2",
+    type: "purchased",
+    name: "Fluxed Phyto-Gro",
+    description:
+      "Forces plants to grow more quickly than they probably should.",
+    max: 5,
+    costs: {
+      power: (level, distance) => {
+        return Math.pow(level, 3.5) + distance * 15;
+      },
+    },
+    effect: {
+      type: "multiply",
+      food: (level) => {
+        return 1.1 ** level;
+      },
+    },
+    flavorTexts: {},
+    requirements: {
+      exploration: "S5",
+    },
+    source: "plants",
   },
   {
     phase: "preEvent",
@@ -725,9 +751,9 @@ export const upgrades: Upgrade[] = [
     type: "purchased",
     name: "Create more Barrys",
     description: "Throw Barrys into time holes to create more Barrys.",
-    max: 100,
+    max: 200,
     costs: {
-      barry: (level) => level * 5,
+      barry: (level) => (level === 1 ? 0 : level * 5),
     },
     effect: {
       type: "add",
@@ -748,19 +774,19 @@ export const upgrades: Upgrade[] = [
       "Force time holes into other time holes to create more time holes. More time holes means more Barrys!",
     max: 100,
     costs: {
-      barry: (level) => level * 100,
+      barry: (level) => 5 ** level,
     },
     effect: {
       type: "multiply",
       barry: (level) => {
-        return level * 5;
+        return level ** 3.5;
       },
     },
     flavorTexts: {},
     requirements: {
       upgrade: {
         key: "BU1",
-        level: 10,
+        level: 5,
       },
     },
     source: "copies",
@@ -796,12 +822,13 @@ export const upgrades: Upgrade[] = [
     phase: "expand",
     key: "BU4",
     type: "purchased",
-    name: "Hire a Director Barry",
-    description: "Hire a Director Barry to deal with all these other Barrys.",
+    name: "Merge Director Barry",
+    description:
+      "Merge Barrys into a Director Barry to deal with all these other Barrys.",
     max: 1,
     costs: {
-      barry: (level) => {
-        return Math.pow(level, 3.5) + level * 10;
+      barry: () => {
+        return 1_000_000;
       },
     },
     effect: {
@@ -812,7 +839,7 @@ export const upgrades: Upgrade[] = [
     requirements: {
       upgrade: {
         key: "BU2",
-        level: 20,
+        level: 6,
       },
     },
     source: "copies",

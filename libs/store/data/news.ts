@@ -19,53 +19,53 @@ export const news: NewsMessage[] = [
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 1 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(16) + minutesToSeconds(10),
     text: "Barry News Network: Betting Starts for 1st Annual Running of the Barrys",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 3 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(22) + minutesToSeconds(10),
     text: "BNN: Talks Break Down Between Holy Kingdom of Barry and Free Barry Republic",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 5 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(27) + minutesToSeconds(10),
     text: "BNN: Don't Fall for Common Scam: Three-Eyed Barrys Can't Read Your Mind",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 7 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(36),
     text: "BNN: Local Barry Illegally Changes Name to Larry",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 9 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(42),
     text: "BNN: Dangerous Gangs of Average Barrys Targeting Mutant Barrys",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 11 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(50),
     text: "BNN: Great British Baking Barry Crowned This Year's Winner: One Very Berry Baking Barry Barry",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 13 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(58),
     text: "Hostage Situation at Barrytown National Bank: Hostage Takers and Hostages Lose Track of Who is Who, Take Each Other Hostage at Random",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 15 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(69),
     text: "BNN: Lead Actor Barry 617: \"It's all about being the best Barry you can be, y'know?\"",
   },
   {
     phase: "expand",
-    time: hoursToSeconds(24 * 17 + 9) + minutesToSeconds(10),
+    time: hoursToSeconds(82),
     text: "BNN: President Barry Eases Concerns Over Drop in National Barry Index",
   },
   {
-    phase: "collapse",
+    phase: "expand",
     text: "BNN: Global Food Supply Strained by Number of Barrys",
-    time: hoursToSeconds(0) + minutesToSeconds(10),
+    time: hoursToSeconds(90),
   },
   {
     phase: "collapse",
@@ -97,6 +97,6 @@ export const news: NewsMessage[] = [
     phase: "collapse",
     text: "[something depressing]",
     level: "info",
-    time: hoursToSeconds(54) + minutesToSeconds(10),
+    time: hoursToSeconds(58) + minutesToSeconds(10),
   },
 ];

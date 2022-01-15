@@ -1,6 +1,7 @@
 import localForage from "localforage";
 import produce from "immer";
 import { initialState } from "@laundry/store";
+import hoursToSeconds from "date-fns/hoursToSeconds";
 
 describe("new game", () => {
   it("starts up without issues", () => {
@@ -19,6 +20,11 @@ describe("new game", () => {
           draft.phase = "expand";
           draft.loops = 30;
           draft.resources.barry = 30;
+          draft.time = hoursToSeconds(24 * 45);
+          draft.expandStart = hoursToSeconds(24 * 45);
+          draft.upgrades = {
+            BU1: { level: 5 },
+          };
         }),
       );
     });

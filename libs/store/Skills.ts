@@ -2,6 +2,7 @@ export type Skills = {
   [Key in Skill]: {
     current: number;
     permanent: number;
+    thisLoop: number;
   };
 };
 export type Skill =

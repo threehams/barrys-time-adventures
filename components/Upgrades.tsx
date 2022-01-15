@@ -143,7 +143,8 @@ export const Upgrades = ({
                     key={upgrade.key}
                   >
                     <div className="flex flex-row gap-2">
-                      {upgrade.phase === "preEvent" && (
+                      {(upgrade.phase === "preEvent" ||
+                        upgrade.phase === "expand") && (
                         <Button
                           className={clsx(
                             selectedUpgrade === upgrade.key && "z-20",

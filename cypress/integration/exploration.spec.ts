@@ -1,11 +1,8 @@
 import localForage from "localforage";
-import produce from "immer";
-import { initialState } from "@laundry/store";
-import { hoursToSeconds } from "date-fns";
 
 describe("exploration", () => {
   it("completes the first three explorations", () => {
-    cy.fixture("exploration").then(async (data) => {
+    cy.fixture("manualExploration").then(async (data) => {
       const VERSION = 1;
       const databaseName = "reconciliation_game";
       const savedGameKey = "saved_game";

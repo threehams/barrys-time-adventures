@@ -55,22 +55,27 @@ export const initialState: State = {
     perception: {
       current: 1,
       permanent: 1,
+      thisLoop: 0,
     },
     endurance: {
       current: 1,
       permanent: 1,
+      thisLoop: 0,
     },
     patience: {
       current: 1,
       permanent: 1,
+      thisLoop: 0,
     },
     strength: {
       current: 1,
       permanent: 1,
+      thisLoop: 0,
     },
     tech: {
       current: 1,
       permanent: 1,
+      thisLoop: 0,
     },
   },
   explorations: {},

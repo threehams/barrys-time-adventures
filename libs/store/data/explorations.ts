@@ -17,6 +17,7 @@ export type ExplorationKey =
   | "E14"
   | "E15"
   | "E16"
+  | "E18"
   | "C1"
   | "C2"
   | "F1"
@@ -24,16 +25,24 @@ export type ExplorationKey =
   | "F3"
   | "F4"
   | "F5"
+  | "F6"
+  | "F7"
+  | "F8"
   | "S1"
   | "S2"
   | "S3"
+  | "S4"
+  | "S5"
+  | "S6"
+  | "S7"
   | "T1"
   | "T2"
   | "T3"
   | "T4"
   | "T5"
   | "T6"
-  | "G1";
+  | "G1"
+  | "G2";
 
 export const explorations: Exploration[] = [
   {
@@ -575,17 +584,16 @@ export const explorations: Exploration[] = [
     },
   },
   {
-    key: "E10",
+    key: "S4",
     name: "Hack through weeds",
     description: "The weeds here are as tall as trees. Better get hacking.",
-    message: ``,
+    message: `I got to a flight of stairs, and the higher levels look much clearer.`,
     drain: {
       food: 5,
       water: 5,
     },
     train: {
-      endurance: 1.4,
-      perception: 3,
+      strength: 3,
     },
     timeMultiplier: 4,
     time: 40_000_000,
@@ -594,59 +602,240 @@ export const explorations: Exploration[] = [
     },
   },
   {
-    key: "E13",
-    name: "Explore [other place]",
-    description: "Things are bad here, but are they this bad everywhere?",
-    message: `Things are this bad everywhere. I didn't meet anyone.`,
+    key: "S5",
+    name: "Climb the stairs",
+    description:
+      "There's nothing interesting on the first level. Maybe there's something intact up the stairs?",
+    message: `After 200 flights up the stairs, I reached the rooftop gardens... there's a small bag called "Fluxed Phyto-Gro" up here. Claims it's got What Plants Crave. I should send this stuff to Past Barry.`,
     drain: {
       food: 5,
       water: 5,
     },
     train: {
-      endurance: 2,
+      strength: 2.4,
+      endurance: 1.6,
     },
-    timeMultiplier: 5,
+    timeMultiplier: 4,
     time: 40_000_000,
     requirements: {
-      action: "E8",
+      action: "S4",
+    },
+  },
+  {
+    key: "S6",
+    name: "Break into the power room",
+    description:
+      "These arcologies are supposed to be completely self-contained, so there must be a power room here.",
+    message: `Found it, and the lock was no match for a crowbar and a lot of persistence. And hey! Another Mr. Fusion!`,
+    drain: {
+      food: 5,
+      water: 5,
+    },
+    train: {
+      strength: 2,
+      tech: 2.1,
+    },
+    timeMultiplier: 4,
+    time: 40_000_000,
+    requirements: {
+      action: "S5",
+    },
+  },
+  {
+    key: "G2",
+    name: "Generate power",
+    description:
+      "It's another Mr. Fusion, but this one's in better shape. Same deal, I'll start with any junk or money and move on to the rest.",
+    message: `It lasted longer this time, but *poof* it goes. This is way too advanced for me to fix.`,
+    drain: {
+      food: 1,
+      water: 1,
+    },
+    train: {
+      patience: 2,
+    },
+    time: 20_000_000,
+    requirements: {
+      action: "S5",
+    },
+    generates: {
+      power: 4,
     },
   },
   {
     key: "E11",
     name: "Travel to next city",
     description:
-      "Things are bad here, but are they this bad everywhere? This will be the longest trip so far.",
+      "Things are bad here, but are they this bad everywhere? I'll take the car as long as it'll go, and walk the rest of the way. This could be the longest trip so far.",
     message: `Things are this bad everywhere. I didn't meet anyone.`,
     drain: {
-      food: 10,
-      water: 10,
+      food: 1,
+      water: 1,
     },
     train: {
-      endurance: 2,
+      patience: 1.5,
+      endurance: 1.5,
+      strength: 1.5,
+      tech: 1.5,
+      perception: 1.5,
     },
     timeMultiplier: 20,
-    time: 2_000_000_000,
+    time: 500_000_000,
     requirements: {
       action: "E8",
     },
   },
   {
-    key: "T6",
-    name: "Converge timelines",
+    key: "E18",
+    name: "Walk to source of time holes",
     description:
-      "I can't leave my other selves trapped. We need to wait until we're all visible, then jump at the same time. This could take a very long time.",
-    message: "",
+      "The city's in the same condition as the last one, but there's something new here. There's a place, looks like a campus building... it's almost surrounded by that haze. I'm going to see why that is.",
+    message: ``,
     drain: {
-      food: 20,
-      water: 20,
+      food: 1,
+      water: 1,
     },
     train: {
-      patience: 2,
+      patience: 1.5,
+      endurance: 1.5,
+      strength: 1.5,
+      tech: 1.5,
+      perception: 1.5,
     },
-    timeMultiplier: 20,
-    time: 2_000_000_000,
+    timeMultiplier: 2,
+    time: 20_000_000,
     requirements: {
       action: "E11",
+    },
+  },
+  {
+    key: "S7",
+    name: "Break in",
+    description: "",
+    message: "",
+    drain: {
+      food: 1,
+      water: 1,
+    },
+    train: {
+      patience: 1.5,
+      endurance: 1.5,
+      strength: 1.5,
+      tech: 1.5,
+      perception: 1.5,
+    },
+    timeMultiplier: 2,
+    time: 20_000_000,
+    requirements: {
+      action: "E18",
+    },
+  },
+  {
+    key: "S7",
+    name: "Walk downstairs",
+    description:
+      "Something in the basement is calling to me. There are a lot of stairs.",
+    message:
+      "I lost count, 20 flights of stairs? There's a machine here. I don't know what it does, but I can somehow feel this was responsible.",
+    drain: {
+      food: 1,
+      water: 1,
+    },
+    train: {
+      patience: 1.5,
+      endurance: 1.5,
+      strength: 1.5,
+      tech: 1.5,
+      perception: 1.5,
+    },
+    timeMultiplier: 2,
+    time: 20_000_000,
+    requirements: {
+      action: "S7",
+    },
+  },
+  {
+    key: "F6",
+    name: "Get information off computers",
+    description:
+      "This building is still powered, which is strange. I should get any information I can off the computers running here.",
+    message: `This is it. Whatever they were doing here? This is the source of all my problems. It looks like once they created the first time hole, they tried to fix the problem by collapsing the anomaly in on itself, but it just caused it to multiply out of control.`,
+    drain: {
+      food: 10,
+      water: 10,
+    },
+    train: {
+      patience: 1.5,
+      endurance: 1.5,
+      strength: 1.5,
+      tech: 1.5,
+      perception: 1.5,
+    },
+    timeMultiplier: 2,
+    time: 20_000_000,
+    requirements: {
+      action: "S7",
+    },
+  },
+  {
+    key: "F7",
+    name: "Fix the problem",
+    description:
+      "As far as I can tell, they were on the right track, but they just didn't try hard enough. This console doesn't look that complicated, why not just get rid of the first time hole? Maybe that'll make the rest go away?",
+    message: `Oh god oh god oh god that didn't fix it at all. It's worse, it's so much worse. It's fracturing worse than ever, I can see all the other Barrys I switched with. I think that time itself might be... angry.`,
+    drain: {
+      food: 10,
+      water: 10,
+    },
+    train: {
+      patience: 1.5,
+      endurance: 1.5,
+      strength: 1.5,
+      tech: 1.5,
+      perception: 1.5,
+    },
+    timeMultiplier: 2,
+    time: 20_000_000,
+    requirements: {
+      action: "F6",
+    },
+  },
+  {
+    key: "F8",
+    name: "Fix the problem harder",
+    description:
+      "Just keep trying to collapse these things. Something has to work.",
+    message: `One of the Barrys just stepped through. Now all of the Barrys have stepped through. I don't think I'm going to fix this.`,
+    drain: {
+      food: 10,
+      water: 10,
+    },
+    train: {
+      patience: 1.5,
+      endurance: 1.5,
+      strength: 1.5,
+      tech: 1.5,
+      perception: 1.5,
+    },
+    timeMultiplier: 20,
+    time: 1_000_000_000,
+    requirements: {
+      action: "F7",
+    },
+  },
+  {
+    key: "T6",
+    name: "Converge timelines",
+    description: "I guess I should say hi to the other Barrys.",
+    message: "",
+    drain: {},
+    train: {
+      perception: 1.5,
+    },
+    timeMultiplier: 1,
+    time: 100,
+    requirements: {
+      action: "F8",
     },
   },
 ];
