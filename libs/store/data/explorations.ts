@@ -20,6 +20,8 @@ export type ExplorationKey =
   | "E16"
   | "E18"
   | "E19"
+  | "E20"
+  | "E21"
   | "C1"
   | "C2"
   | "F1"
@@ -30,6 +32,7 @@ export type ExplorationKey =
   | "F6"
   | "F7"
   | "F8"
+  | "F9"
   | "S1"
   | "S2"
   | "S3"
@@ -498,7 +501,7 @@ export const explorations: Exploration[] = [
     description:
       "There's no chance I'll find a live battery here. Best I can do is push it down the nearest hill and hope it starts on the way down.",
     message:
-      "I had to push the car a half-mile, but IT'S ALIVE! This thing is in rough shape, but I hope it'll make it to the next town.",
+      "I had to push the car a half-mile, but it started before I crashed into a fence! This thing is in rough shape, but I hope it'll make it to the next town.",
     drain: {
       food: 2,
       water: 3,
@@ -648,6 +651,65 @@ export const explorations: Exploration[] = [
     time: 20_000_000,
     requirements: {
       action: "E8",
+    },
+  },
+  {
+    key: "E20",
+    name: "Explore datacenter",
+    description:
+      "There's a small building that says it's a datacenter, but it looks so small. I should check it out.",
+    message: `This is a datacenter! Everything's just gotten so tiny.`,
+    drain: {
+      food: 4,
+      water: 2,
+    },
+    train: {
+      endurance: 2,
+      perception: 2.1,
+    },
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 20_000_000,
+    requirements: {
+      action: "E8",
+    },
+  },
+  {
+    key: "E21",
+    name: "Find a working server",
+    description:
+      "Power's still on here somehow, but most of the servers are gone or burned out.",
+    message: `I found four that look promising, but each one is missing something. Maybe I could put them together into one working server.`,
+    drain: {
+      food: 4,
+      water: 2,
+    },
+    train: {
+      patience: 2,
+      perception: 1.9,
+    },
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 20_000_000,
+    requirements: {
+      action: "E20",
+    },
+  },
+  {
+    key: "F9",
+    name: "Make a Frankenserver",
+    description: "Mash together parts from dead servers, then jolt it to life.",
+    message: `It's alive! It's ALIVE! Even better... it looks like it's already set to archive the Internet, even server-side code somehow. If Barry had this, he could make his own Letsy.`,
+    drain: {
+      food: 4,
+      water: 2,
+    },
+    train: {
+      endurance: 1.4,
+      perception: 3,
+    },
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 20_000_000,
+    requirements: {
+      action: "E21",
     },
   },
   {

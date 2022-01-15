@@ -101,7 +101,7 @@ export const news: NewsMessage[] = [
     phase: "collapse",
     text: "I feel like this may have all gotten a little out of hand.",
     level: "info",
-    time: hoursToSeconds(16 + 40) + minutesToSeconds(10),
+    time: hoursToSeconds(16 + 42) + minutesToSeconds(10),
   },
   {
     phase: "collapse",
