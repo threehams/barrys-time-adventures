@@ -116,7 +116,11 @@ export const Upgrades = ({
                   0;
                 const distance =
                   upgrade.phase === "postEvent"
-                    ? timedUpgradeMap[upgrade.key]?.level ?? 1
+                    ? Math.floor(
+                        30 -
+                          (timedUpgradeMap[upgrade.key]?.time ?? 0) /
+                            hoursToSeconds(24),
+                      ) ?? 1
                     : 0;
                 const flavorText = upgrade.flavorTexts[level];
                 const costs = Object.entries(upgrade.costs)
@@ -221,7 +225,7 @@ export const Upgrades = ({
                                 resources,
                                 maxResources,
                                 level,
-                              })
+                              }) || distance === 30
                             }
                             active={selectedUpgrade === upgrade.key}
                             onClick={() => {

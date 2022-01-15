@@ -98,3 +98,20 @@ const SKY_COLORS = [
   { time: 22, low: "#111827", high: "#111827" },
   { time: 24, low: "#111827", high: "#111827" },
 ];
+
+const FUTURE_SKY_COLORS = [
+  { time: 0, low: "#111827", high: "#111827" },
+  { time: 5, low: "#111827", high: "#111827" },
+  { time: 6, low: "#E67B09", high: "#112044" },
+  { time: 7, low: "#E79617", high: "#536875" },
+  { time: 8, low: "#FADA77", high: "#343E56" },
+  { time: 9, low: "#E2D7A9", high: "#343E61" },
+  { time: 10, low: "#ABC3BF", high: "#314C87" },
+  { time: 12, low: "#8DBACD", high: "#3A6DAE" },
+  { time: 18, low: "#6FACC7", high: "#085997" },
+  { time: 19, low: "#B59A6D", high: "#6C778A" },
+  { time: 20, low: "#42677B", high: "#3372A1" },
+  { time: 21, low: "#13203C", high: "#111827" },
+  { time: 22, low: "#111827", high: "#111827" },
+  { time: 24, low: "#111827", high: "#111827" },
+];

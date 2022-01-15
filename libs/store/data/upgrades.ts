@@ -800,7 +800,7 @@ export const upgrades: Upgrade[] = [
     max: 10,
     costs: {
       barry: (level) => {
-        return Math.pow(level, 3.5) + level * 10;
+        return Math.pow(level, 3.5) + level * 100;
       },
     },
     effect: {

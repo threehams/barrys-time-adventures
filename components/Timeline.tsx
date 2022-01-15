@@ -108,8 +108,13 @@ export const Timeline = ({
           const availableEvent = !!timeline[day]?.find(
             (event) => event.type === "event",
           );
-          const muted =
-            (selectedUpgrade &&
+          let muted;
+          if (selectedUpgrade) {
+            const upgradeDay = Math.floor(
+              (timedUpgradeMap[selectedUpgrade.key]?.time ?? 0) /
+                hoursToSeconds(24),
+            );
+            muted =
               !canPurchaseUpgrade({
                 phase,
                 upgrade: selectedUpgrade,
@@ -119,11 +124,14 @@ export const Timeline = ({
                 purchasedUpgrades,
                 timedUpgrades: timedUpgradeMap,
                 playerExplorations,
-              })) ||
-            (phase === "traveling" &&
-              selectedDay !== undefined &&
-              selectedDay <= day) ||
-            (phase === "preEvent" && day < currentDay);
+              }) || day >= upgradeDay;
+          } else {
+            muted =
+              (phase === "traveling" &&
+                selectedDay !== undefined &&
+                selectedDay <= day) ||
+              (phase === "preEvent" && day < currentDay);
+          }
           return (
             <button
               className={clsx(

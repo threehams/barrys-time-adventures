@@ -247,6 +247,7 @@ const updateConvergence: Updater = (state, delta) => {
     state.timers.convergence = 0;
     state.phase = "expand";
     state.resources.barry = state.loops;
+    state.multiplier = 2;
   }
 };
 
