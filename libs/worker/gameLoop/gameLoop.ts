@@ -146,7 +146,7 @@ const updateMessages: Updater = (state, delta) => {
       continue;
     }
 
-    if (value.time < state.time && value.time > state.time - delta) {
+    if (value.time <= state.time && value.time > state.time - delta) {
       let text = upgrade.description;
       if (upgrade.negated) {
         const negation = upgrade.negated.upgrade;
@@ -174,17 +174,17 @@ const updateMessages: Updater = (state, delta) => {
     if (newsMessage.phase === "expand") {
       timePassed =
         newsMessage.time &&
-        newsMessage.time + state.expandStart! < state.time &&
+        newsMessage.time + state.expandStart! <= state.time &&
         newsMessage.time + state.expandStart! > state.time - delta;
     } else if (newsMessage.phase === "collapse") {
       timePassed =
         newsMessage.time &&
-        newsMessage.time + state.collapseStart! < state.time &&
+        newsMessage.time + state.collapseStart! <= state.time &&
         newsMessage.time + state.collapseStart! > state.time - delta;
     } else {
       timePassed =
         newsMessage.time &&
-        newsMessage.time < state.time &&
+        newsMessage.time <= state.time &&
         newsMessage.time > state.time - delta;
     }
 

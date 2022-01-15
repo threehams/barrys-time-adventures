@@ -234,7 +234,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      money: 200,
+      money: 150,
     },
     source: "preserves",
   },
@@ -382,7 +382,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      money: 200,
+      money: 300,
     },
     source: "well",
   },
