@@ -110,6 +110,8 @@ export const Timeline = ({
           );
           let muted;
           if (selectedUpgrade) {
+            const currentLevel =
+              timedUpgradeMap[selectedUpgrade.key]?.level ?? 0;
             const upgradeDay = Math.floor(
               (timedUpgradeMap[selectedUpgrade.key]?.time ?? 0) /
                 hoursToSeconds(24),
@@ -124,6 +126,7 @@ export const Timeline = ({
                 purchasedUpgrades,
                 timedUpgrades: timedUpgradeMap,
                 playerExplorations,
+                level: currentLevel ?? 1,
               }) || day >= upgradeDay;
           } else {
             muted =
@@ -241,6 +244,12 @@ const DayDetail = ({
         <div className="[grid-area:restart]">
           <Button
             active
+            disabled={
+              Math.floor(
+                (timedUpgradeMap[selectedUpgrade.key]?.time ?? 0) /
+                  hoursToSeconds(24),
+              ) <= selectedDay
+            }
             onClick={() => {
               if (timedUpgradeMap[selectedUpgrade.key]?.level) {
                 dispatch({

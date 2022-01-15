@@ -45,7 +45,23 @@ export const Ending = () => {
             ThreeHams
           </a>
         </p>
-        <Reset className={clsx("opacity-0", phase > 3 && "opacity-100")} />
+        <p
+          className={clsx(
+            "mb-5 opacity-0 text-1xl transition-opacity duration-[1s]",
+            phase > 3 && "opacity-100",
+          )}
+        >
+          Additional writing:{" "}
+          <a
+            target="_blank"
+            className="underline"
+            href="https://twitter.com/zbeeblebroxIV"
+            rel="noreferrer"
+          >
+            Eugene
+          </a>
+        </p>
+        <Reset className={clsx("opacity-0", phase > 4 && "opacity-100")} />
       </div>
     </div>
   );
