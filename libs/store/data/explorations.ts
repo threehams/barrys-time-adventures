@@ -107,9 +107,11 @@ export const explorations: Exploration[] = [
   },
   {
     key: "E2",
-    name: "Explore something",
-    description: "[something something go out further?]",
-    message: "",
+    name: "Edge of Property",
+    description:
+      "I'm going to walk the perimeter of my land to see if there's an opening.",
+    message:
+      "The way to town seems pretty clear. Strangest thing, though... I swear the sun was up when I left, and it's only been an hour.",
     drain: {
       food: 2,
       water: 2,
@@ -147,7 +149,7 @@ export const explorations: Exploration[] = [
     name: "Explore outside home",
     description:
       "Guess it's time to head into what's left of town. This could be a very long trip.",
-    message: `[something about this taking a while]`,
+    message: `No one around. It's pretty dead, but there are a few buildings which could have something worth using.`,
     drain: {
       food: 2,
       water: 2,

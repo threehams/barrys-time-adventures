@@ -1745,23 +1745,28 @@
   "skills": {
     "perception": {
       "current": 1,
-      "permanent": 1
+      "permanent": 1,
+      "thisLoop": 0
     },
     "endurance": {
       "current": 1,
-      "permanent": 1
+      "permanent": 1,
+      "thisLoop": 0
     },
     "patience": {
       "current": 1,
-      "permanent": 1
+      "permanent": 1,
+      "thisLoop": 0
     },
     "strength": {
       "current": 1,
-      "permanent": 1
+      "permanent": 1,
+      "thisLoop": 0
     },
     "tech": {
       "current": 1,
-      "permanent": 1
+      "permanent": 1,
+      "thisLoop": 0
     }
   },
   "explorations": {},
@@ -1785,7 +1790,8 @@
     "junk": 0,
     "money": 0,
     "power": 0,
-    "water": 0
+    "water": 0,
+    "convergence": 0
   },
   "loops": 0,
   "unlocks": {},
