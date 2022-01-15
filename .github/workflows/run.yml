@@ -27,12 +27,12 @@ jobs:
       - name: typescript
         run: npx tsc
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          install: false
-          build: pnpm run build
-          start: pnpm start
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     install: false
+      #     build: pnpm run build
+      #     start: pnpm start
 
       - name: Build for Export
         env:

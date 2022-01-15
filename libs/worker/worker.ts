@@ -72,7 +72,7 @@ const main = async () => {
     }
 
     previous = time;
-    requestAnimationFrame(loop);
+    setTimeout(loop, 16);
   };
 
   loop();
