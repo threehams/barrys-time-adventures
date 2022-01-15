@@ -112,8 +112,8 @@ export const Timeline = ({
             const currentLevel =
               timedUpgradeMap[selectedUpgrade.key]?.level ?? 0;
             const upgradeDay = Math.floor(
-              (timedUpgradeMap[selectedUpgrade.key]?.time ?? 0) /
-                hoursToSeconds(24),
+              (timedUpgradeMap[selectedUpgrade.key]?.time ??
+                hoursToSeconds(24 * 30)) / hoursToSeconds(24),
             );
             muted =
               !canPurchaseUpgrade({
@@ -245,8 +245,8 @@ const DayDetail = ({
             active
             disabled={
               Math.floor(
-                (timedUpgradeMap[selectedUpgrade.key]?.time ?? 0) /
-                  hoursToSeconds(24),
+                (timedUpgradeMap[selectedUpgrade.key]?.time ??
+                  hoursToSeconds(24 * 30)) / hoursToSeconds(24),
               ) <= selectedDay
             }
             onClick={() => {
