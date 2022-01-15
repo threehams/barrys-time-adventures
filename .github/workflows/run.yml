@@ -36,12 +36,12 @@ jobs:
 
       - name: Build for Export
         env:
-          NEXT_PUBLIC_BASE_PATH: /incremental-game-jam-2022
+          NEXT_PUBLIC_BASE_PATH: /barrys-time-adventures
         run: pnpm run build
 
       - name: Export
         env:
-          NEXT_PUBLIC_BASE_PATH: /incremental-game-jam-2022
+          NEXT_PUBLIC_BASE_PATH: /barrys-time-adventures
         run: pnpm run export
 
       - name: Deploy
