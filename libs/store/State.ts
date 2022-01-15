@@ -36,6 +36,7 @@ export type MessageState = {
   time: number;
 };
 export type State = {
+  stuck: boolean;
   replay: boolean;
   unlocks: Unlocks;
   phase: Phase;

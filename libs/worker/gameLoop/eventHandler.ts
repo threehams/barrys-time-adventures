@@ -106,10 +106,12 @@ export const eventHandler = (
         !state.autoExplore[action.payload.location];
       break;
     case "TRAVEL": {
+      state.stuck = false;
       travel(state, action.payload.day, { applySkills: false });
       break;
     }
     case "LOOP":
+      state.stuck = false;
       state.replay = true;
       if (state.phase !== "traveling") {
         return;

@@ -96,7 +96,6 @@ export const Timeline = ({
           </Button>
         )}
       </div>
-      {/* {phase !== "preEvent" && <div>You Are Here</div>} */}
       <ul className="flex flex-nowrap">
         {range(0, 30).map((day) => {
           const availableUpgrades = !!timeline[day]?.find(

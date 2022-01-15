@@ -350,6 +350,15 @@ const updateExplore: Updater = (state, delta) => {
     state.multiplier = 1;
     state.timers = { ...initialState.timers };
     const resource = state.resources.food <= 0 ? "food" : "water";
+    if (!state.unlocks.pastRestart) {
+      state.stuck = true;
+      state.messages.push({
+        priority: "alert",
+        time: state.time,
+        text: "I'm completely unprepared for this. I feel like there's something I could have done differently in the past.",
+      });
+      return;
+    }
     state.messages.push({
       priority: "alert",
       time: state.time,

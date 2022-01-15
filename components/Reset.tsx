@@ -5,8 +5,10 @@ import { useDispatch } from "./StateProvider";
 
 type Props = {
   className?: string;
+  buttonText?: string;
+  message?: string;
 };
-export const Reset = ({ className }: Props) => {
+export const Reset = ({ className, message, buttonText }: Props) => {
   const dispatch = useDispatch();
   const [resetState, send] = useStateMachine()({
     initial: "inactive",
@@ -43,12 +45,15 @@ export const Reset = ({ className }: Props) => {
             send("RESET");
           }}
         >
-          Hard Reset
+          {buttonText || "Hard Reset"}
         </Button>
       )}
       {resetState.value === "requiresConfirmation" && (
         <>
-          <div>This will completely reset your game.</div>
+          <div>
+            {message ||
+              "This will completely reset your game. Do this only if you're stuck or want to start over."}
+          </div>
           <Button
             variant="danger"
             onClick={() => {

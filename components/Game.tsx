@@ -19,6 +19,7 @@ import { Convergence } from "./Convergence";
 
 export const Game = () => {
   const time = useSelector((state) => state.time);
+  const stuck = useSelector((state) => state.stuck);
   const phase = useSelector((state) => state.phase);
   const [panel, setPanel] = useState<Panel>("explorations");
   const [selectedUpgrade, setSelectedUpgrade] = useState<
@@ -99,10 +100,18 @@ export const Game = () => {
               />
             </div>
           )}
+          {stuck && (
+            <div>
+              <Reset
+                buttonText="Reset"
+                message="Make some different choices?"
+              />
+            </div>
+          )}
         </div>
       </div>
     );
-  }, [panel, phase, selectedUpgrade, unlocks.pastRestart]);
+  }, [panel, phase, selectedUpgrade, stuck, unlocks.pastRestart]);
 
   return (
     <div
