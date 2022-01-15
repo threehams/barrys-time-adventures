@@ -588,7 +588,7 @@ export const upgrades: Upgrade[] = [
     name: "Food Compression",
     description:
       "Cram more food into a single jar. Canning supply shortages won't affect Past Barry!",
-    max: 5,
+    max: 50,
     costs: {
       power: (level, distance) => {
         return Math.pow(level, 3.5) + distance * 10;
