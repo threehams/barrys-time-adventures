@@ -4,6 +4,11 @@ import { NewsMessage } from "../NewsMessage";
 export const news: NewsMessage[] = [
   {
     phase: "preEvent",
+    time: hoursToSeconds(5 + 8),
+    text: "News: Mysterious Time Events Occurring in Georgia, US",
+  },
+  {
+    phase: "preEvent",
     time: hoursToSeconds(24 * 5 + 8),
     text: "News: All Crops in State of Indiana Wither Overnight",
   },
@@ -15,6 +20,16 @@ export const news: NewsMessage[] = [
   {
     phase: "preEvent",
     time: hoursToSeconds(24 * 12 + 9) + minutesToSeconds(45),
+    text: "News: Phillipines' Garcia Expands Lockdowns",
+  },
+  {
+    phase: "preEvent",
+    time: hoursToSeconds(24 * 19 + 2) + minutesToSeconds(45),
+    text: "News: CDC Director: 'Time is Broken'",
+  },
+  {
+    phase: "preEvent",
+    time: hoursToSeconds(24 * 24 + 9) + minutesToSeconds(45),
     text: "News: Phillipines' Garcia Expands Lockdowns",
   },
   {

@@ -102,7 +102,7 @@ export const eventHandler = (
       state.exploration = action.payload.location;
       break;
     case "TRAVEL": {
-      travel(state, action.payload.day);
+      travel(state, action.payload.day, { applySkills: false });
       break;
     }
     case "LOOP":
@@ -110,7 +110,7 @@ export const eventHandler = (
       if (state.phase !== "traveling") {
         return;
       }
-      travel(state, 29);
+      travel(state, 29, { applySkills: true });
       state.loops += 1;
       state.messages.push({
         priority: "alert",
@@ -181,11 +181,7 @@ const buyTimedUpgrade = ({
 };
 
 type Options = { applySkills?: boolean };
-const travel = (
-  state: Draft<State>,
-  day: number,
-  { applySkills }: Options = {},
-) => {
+const travel = (state: Draft<State>, day: number, { applySkills }: Options) => {
   state.multiplier = 1;
   state.exploration = undefined;
   state.explorations = {};

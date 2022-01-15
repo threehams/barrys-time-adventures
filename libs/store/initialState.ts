@@ -8,13 +8,7 @@ export const initialState: State = {
   phase: "preEvent",
   exploration: undefined,
   time: 0,
-  messages: [
-    {
-      priority: "info",
-      text: "The news has been weird lately. I feel like I should prepare.",
-      time: 0,
-    },
-  ],
+  messages: [],
   upgrades: {},
   timedUpgrades: {
     EW1: {
@@ -82,6 +76,7 @@ export const initialState: State = {
   multiplier: 2,
   timers: {
     copies: 0,
+    convergence: 0,
     barry: 0,
     autoPurchase: 0,
     scrap: 0,

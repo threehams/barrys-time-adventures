@@ -15,6 +15,7 @@ import { Ending } from "./Ending";
 import { Speedup } from "./Speedup";
 import { ExplorationTabs } from "./ExplorationTabs";
 import { Panel } from "./types/Panel";
+import { Convergence } from "./Convergence";
 
 export const Game = () => {
   const time = useSelector((state) => state.time);
@@ -28,6 +29,9 @@ export const Game = () => {
   const layout = useMemo(() => {
     if (phase === "done") {
       return <Ending />;
+    }
+    if (phase === "convergence") {
+      return <Convergence />;
     }
     return (
       <div className={clsx("relative min-h-screen", backgroundFor(phase))}>

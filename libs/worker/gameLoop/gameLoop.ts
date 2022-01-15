@@ -45,6 +45,7 @@ export const updateGame: Updater = (state, delta) => {
   updateAutoPurchase(state, elapsedTime);
   updateTime(state, elapsedTime);
   updateEvent(state, delta);
+  updateConvergence(state, delta);
   updatePreResources(state, elapsedTime);
   updatePostResources(state, elapsedTime);
   updatePostStats(state, elapsedTime);
@@ -237,6 +238,18 @@ const updateEvent: Updater = (state, delta) => {
   }
 };
 
+const updateConvergence: Updater = (state, delta) => {
+  if (state.phase !== "convergence") {
+    return;
+  }
+  state.timers.convergence += delta;
+  if (state.timers.convergence > 14_500) {
+    state.timers.convergence = 0;
+    state.phase = "expand";
+    state.resources.barry = state.loops;
+  }
+};
+
 const updatePreResources: Updater = (state, delta) => {
   const { timers, phase } = state;
   if (state.resources.barry >= 6_000_000_000 && phase === "expand") {
@@ -301,22 +314,10 @@ const updatePostResources: Updater = (state, delta) => {
 
   if (counts) {
     for (const resource of ["food", "water"] as const) {
-      const upgradedCounts = Object.entries(state.upgrades).reduce(
-        (acc, [key, level]) => {
-          const upgrade = findUpgrade(key);
-          if (upgrade.phase !== phase) {
-            return acc;
-          }
-          if (upgrade.effect[resource]) {
-            return upgrade.effect[resource]!(level?.level ?? 0);
-          }
-          return counts;
-        },
-        counts,
-      );
+      const exploration = findExploration(state.exploration);
       timers[resource] = timers[resource] % RESOURCE_DRAIN_BASE_TIME;
       state.resources[resource] = Math.max(
-        state.resources[resource] - upgradedCounts,
+        state.resources[resource] - counts * (exploration.drain[resource] ?? 1),
         0,
       );
     }
@@ -332,7 +333,7 @@ const updatePostStats: Updater = (state, delta) => {
   for (const [stat, rate] of Object.entries(exploration.train)) {
     if (rate) {
       state.skills[stat].current += (delta * rate) / 400000;
-      state.skills[stat].thisLoop += (delta * rate) / (400000 * 4);
+      state.skills[stat].thisLoop += (delta * rate) / (400000 * 3);
     }
   }
 };

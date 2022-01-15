@@ -1,5 +1,6 @@
 import { Exploration } from "../Exploration";
 
+const BASE_MULTIPLIER = 2;
 export type ExplorationKey =
   | "E1"
   | "E2"
@@ -18,6 +19,7 @@ export type ExplorationKey =
   | "E15"
   | "E16"
   | "E18"
+  | "E19"
   | "C1"
   | "C2"
   | "F1"
@@ -61,6 +63,7 @@ export const explorations: Exploration[] = [
       endurance: 2,
     },
     time: 400_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {},
   },
   {
@@ -78,6 +81,7 @@ export const explorations: Exploration[] = [
       patience: 2.1,
     },
     time: 600_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E1",
     },
@@ -96,6 +100,7 @@ export const explorations: Exploration[] = [
       patience: 3,
     },
     time: 800_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "T1",
     },
@@ -113,6 +118,7 @@ export const explorations: Exploration[] = [
       endurance: 2.5,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "T2",
     },
@@ -131,6 +137,7 @@ export const explorations: Exploration[] = [
       perception: 1.9,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E2",
     },
@@ -145,7 +152,7 @@ export const explorations: Exploration[] = [
       food: 2,
       water: 2,
     },
-    timeMultiplier: 4,
+    timeMultiplier: BASE_MULTIPLIER,
     train: {
       endurance: 3,
     },
@@ -169,6 +176,7 @@ export const explorations: Exploration[] = [
       endurance: 1.7,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E3",
     },
@@ -189,6 +197,7 @@ export const explorations: Exploration[] = [
       tech: 3,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E4",
     },
@@ -209,6 +218,7 @@ export const explorations: Exploration[] = [
       endurance: 1.5,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "F1",
     },
@@ -228,6 +238,7 @@ export const explorations: Exploration[] = [
       patience: 1,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "F2",
     },
@@ -248,6 +259,7 @@ export const explorations: Exploration[] = [
       patience: 1,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "F3",
     },
@@ -268,6 +280,7 @@ export const explorations: Exploration[] = [
       endurance: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "T5",
     },
@@ -288,6 +301,7 @@ export const explorations: Exploration[] = [
       endurance: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E3",
     },
@@ -307,6 +321,7 @@ export const explorations: Exploration[] = [
       strength: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E5",
     },
@@ -326,6 +341,7 @@ export const explorations: Exploration[] = [
       perception: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "S2",
     },
@@ -345,6 +361,7 @@ export const explorations: Exploration[] = [
       patience: 2,
     },
     time: 10_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E7",
     },
@@ -367,6 +384,7 @@ export const explorations: Exploration[] = [
       endurance: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E3",
     },
@@ -386,6 +404,7 @@ export const explorations: Exploration[] = [
       strength: 3,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E6",
     },
@@ -405,6 +424,7 @@ export const explorations: Exploration[] = [
       patience: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "S1",
     },
@@ -424,6 +444,7 @@ export const explorations: Exploration[] = [
       patience: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "T4",
     },
@@ -443,6 +464,7 @@ export const explorations: Exploration[] = [
       endurance: 2,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E3",
     },
@@ -462,6 +484,7 @@ export const explorations: Exploration[] = [
       tech: 3,
     },
     time: 1_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E14",
     },
@@ -481,6 +504,7 @@ export const explorations: Exploration[] = [
       strength: 2.5,
     },
     time: 2_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "E15",
     },
@@ -492,8 +516,8 @@ export const explorations: Exploration[] = [
       "Head out to the light industrial zone. This will be a long drive. If I have anything to do here first, I should do it.",
     message: `Rough trip, but I'm finally glad I lived near a tech hub. Lots of places to explore here.`,
     drain: {
-      food: 20,
-      water: 20,
+      food: 1,
+      water: 1,
     },
     train: {
       tech: 2,
@@ -511,14 +535,14 @@ export const explorations: Exploration[] = [
     description: "A factory! Factory HAS to mean automation, right?",
     message: ``,
     drain: {
-      food: 5,
-      water: 5,
+      food: 1,
+      water: 1,
     },
     train: {
       perception: 2,
       tech: 1.5,
     },
-    timeMultiplier: 4,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 40_000_000,
     requirements: {
       action: "E8",
@@ -531,13 +555,13 @@ export const explorations: Exploration[] = [
       "There's a room that looks intact on the second floor, but I'll have to pile things up to reach it.",
     message: `There's a whole stockpile of smartphone-looking things, and nearly every battery on every one of these is dead. Maybe one of them is still alive.`,
     drain: {
-      food: 5,
-      water: 5,
+      food: 1,
+      water: 1,
     },
     train: {
       strength: 3,
     },
-    timeMultiplier: 4,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 40_000_000,
     requirements: {
       action: "E9",
@@ -550,17 +574,37 @@ export const explorations: Exploration[] = [
       "One of thigns things has to still have a working battery. Hope I don't have anything else to do today.",
     message: `Found one! This is way beyond a smartphone - it could purchase just about anything in the world in one tap. Future people were even more into buying stuff than we were. I'll send one of these to Past Barry right away.`,
     drain: {
-      food: 3,
-      water: 5,
+      food: 1,
+      water: 2,
     },
     train: {
       patience: 2.5,
       tech: 2,
     },
-    timeMultiplier: 4,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 40_000_000,
     requirements: {
       action: "S3",
+    },
+  },
+  {
+    key: "E19",
+    name: "Look around for anything else",
+    description:
+      "It's a factory! They make stuff! Come on, there has to be something of use here.",
+    message: `Found something - a compact condensate capture system. This can pull water right out of the air instead of waiting for rainfall. Past Barry would have loved this. It's too bad the air's too dry for it to be of any use here.`,
+    drain: {
+      food: 1,
+      water: 2,
+    },
+    train: {
+      patience: 2,
+      tech: 2.1,
+    },
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 40_000_000,
+    requirements: {
+      action: "F4",
     },
   },
   {
@@ -570,15 +614,15 @@ export const explorations: Exploration[] = [
       "There's a huge skyscraper here, bigger than anything we ever had. Bet they have all kinds of great agriculture advancements here, at least.",
     message: `Oh man, everything is huge here! Especially the weeds. This could take a while.`,
     drain: {
-      food: 5,
-      water: 5,
+      food: 4,
+      water: 2,
     },
     train: {
       endurance: 1.4,
       perception: 3,
     },
-    timeMultiplier: 4,
-    time: 40_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 20_000_000,
     requirements: {
       action: "E8",
     },
@@ -589,14 +633,14 @@ export const explorations: Exploration[] = [
     description: "The weeds here are as tall as trees. Better get hacking.",
     message: `I got to a flight of stairs, and the higher levels look much clearer.`,
     drain: {
-      food: 5,
-      water: 5,
+      food: 4,
+      water: 4,
     },
     train: {
       strength: 3,
     },
-    timeMultiplier: 4,
-    time: 40_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 20_000_000,
     requirements: {
       action: "E10",
     },
@@ -608,15 +652,15 @@ export const explorations: Exploration[] = [
       "There's nothing interesting on the first level. Maybe there's something intact up the stairs?",
     message: `After 200 flights up the stairs, I reached the rooftop gardens... there's a small bag called "Fluxed Phyto-Gro" up here. Claims it's got What Plants Crave. I should send this stuff to Past Barry.`,
     drain: {
-      food: 5,
-      water: 5,
+      food: 2,
+      water: 2,
     },
     train: {
       strength: 2.4,
       endurance: 1.6,
     },
-    timeMultiplier: 4,
-    time: 40_000_000,
+    time: 20_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "S4",
     },
@@ -628,15 +672,15 @@ export const explorations: Exploration[] = [
       "These arcologies are supposed to be completely self-contained, so there must be a power room here.",
     message: `Found it, and the lock was no match for a crowbar and a lot of persistence. And hey! Another Mr. Fusion!`,
     drain: {
-      food: 5,
-      water: 5,
+      food: 2,
+      water: 2,
     },
     train: {
       strength: 2,
       tech: 2.1,
     },
-    timeMultiplier: 4,
-    time: 40_000_000,
+    time: 20_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "S5",
     },
@@ -654,7 +698,8 @@ export const explorations: Exploration[] = [
     train: {
       patience: 2,
     },
-    time: 20_000_000,
+    time: 10_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
     requirements: {
       action: "S5",
     },
@@ -669,18 +714,18 @@ export const explorations: Exploration[] = [
       "Things are bad here, but are they this bad everywhere? I'll take the car as long as it'll go, and walk the rest of the way. This could be the longest trip so far.",
     message: `Things are this bad everywhere. I didn't meet anyone.`,
     drain: {
-      food: 1,
-      water: 1,
+      food: 2,
+      water: 2,
     },
     train: {
-      patience: 1.5,
-      endurance: 1.5,
-      strength: 1.5,
-      tech: 1.5,
-      perception: 1.5,
+      patience: 1,
+      endurance: 1,
+      strength: 1,
+      tech: 1,
+      perception: 1,
     },
     timeMultiplier: 20,
-    time: 500_000_000,
+    time: 1_600_000_000,
     requirements: {
       action: "E8",
     },
@@ -702,7 +747,7 @@ export const explorations: Exploration[] = [
       tech: 1.5,
       perception: 1.5,
     },
-    timeMultiplier: 2,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 20_000_000,
     requirements: {
       action: "E11",
@@ -724,7 +769,7 @@ export const explorations: Exploration[] = [
       tech: 1.5,
       perception: 1.5,
     },
-    timeMultiplier: 2,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 20_000_000,
     requirements: {
       action: "E18",
@@ -748,7 +793,7 @@ export const explorations: Exploration[] = [
       tech: 1.5,
       perception: 1.5,
     },
-    timeMultiplier: 2,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 20_000_000,
     requirements: {
       action: "S7",
@@ -761,8 +806,8 @@ export const explorations: Exploration[] = [
       "This building is still powered, which is strange. I should get any information I can off the computers running here.",
     message: `This is it. Whatever they were doing here? This is the source of all my problems. It looks like once they created the first time hole, they tried to fix the problem by collapsing the anomaly in on itself, but it just caused it to multiply out of control.`,
     drain: {
-      food: 10,
-      water: 10,
+      food: 2,
+      water: 2,
     },
     train: {
       patience: 1.5,
@@ -771,7 +816,7 @@ export const explorations: Exploration[] = [
       tech: 1.5,
       perception: 1.5,
     },
-    timeMultiplier: 2,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 20_000_000,
     requirements: {
       action: "S7",
@@ -784,8 +829,8 @@ export const explorations: Exploration[] = [
       "As far as I can tell, they were on the right track, but they just didn't try hard enough. This console doesn't look that complicated, why not just get rid of the first time hole? Maybe that'll make the rest go away?",
     message: `Oh god oh god oh god that didn't fix it at all. It's worse, it's so much worse. It's fracturing worse than ever, I can see all the other Barrys I switched with. I think that time itself might be... angry.`,
     drain: {
-      food: 10,
-      water: 10,
+      food: 1,
+      water: 1,
     },
     train: {
       patience: 1.5,
@@ -794,7 +839,7 @@ export const explorations: Exploration[] = [
       tech: 1.5,
       perception: 1.5,
     },
-    timeMultiplier: 2,
+    timeMultiplier: BASE_MULTIPLIER,
     time: 20_000_000,
     requirements: {
       action: "F6",
@@ -807,8 +852,8 @@ export const explorations: Exploration[] = [
       "Just keep trying to collapse these things. Something has to work.",
     message: `One of the Barrys just stepped through. Now all of the Barrys have stepped through. I don't think I'm going to fix this.`,
     drain: {
-      food: 10,
-      water: 10,
+      food: 1,
+      water: 1,
     },
     train: {
       patience: 1.5,
@@ -817,8 +862,8 @@ export const explorations: Exploration[] = [
       tech: 1.5,
       perception: 1.5,
     },
-    timeMultiplier: 20,
-    time: 1_000_000_000,
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 20_000_000,
     requirements: {
       action: "F7",
     },

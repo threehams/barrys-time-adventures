@@ -54,7 +54,13 @@ export type State = {
   }>;
   multiplier: number;
   timers: {
-    [Key in SourceKey | "event" | "action" | Resource | "autoPurchase"]: number;
+    [Key in
+      | SourceKey
+      | "event"
+      | "action"
+      | "convergence"
+      | Resource
+      | "autoPurchase"]: number;
   };
   loops: number;
   autoUpgrade: {

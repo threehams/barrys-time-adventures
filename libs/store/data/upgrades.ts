@@ -527,7 +527,7 @@ export const upgrades: Upgrade[] = [
     },
     flavorTexts: {},
     requirements: {
-      exploration: "T6", // not really, fix this
+      exploration: "E19",
     },
     source: "rainfall",
   },

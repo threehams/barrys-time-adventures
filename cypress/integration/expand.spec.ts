@@ -22,9 +22,6 @@ describe("new game", () => {
           draft.resources.barry = 30;
           draft.time = hoursToSeconds(24 * 45);
           draft.expandStart = hoursToSeconds(24 * 45);
-          draft.upgrades = {
-            BU1: { level: 5 },
-          };
         }),
       );
     });
