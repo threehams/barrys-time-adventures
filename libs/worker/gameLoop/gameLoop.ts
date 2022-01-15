@@ -1,6 +1,7 @@
 import {
   canPurchaseUpgrade,
   canShowUpgrade,
+  explorations,
   findExploration,
   findUnlockFor,
   findUpgrade,
@@ -356,6 +357,30 @@ const updateExplore: Updater = (state, delta) => {
         ? `I'm out of ${resource}. I could help out Past Barry, or loop myself with Future Barry and keep exploring.`
         : `I'm out of ${resource}. I should go help out Past Barry so I can be better prepared.`,
     });
+  }
+
+  if (!state.exploration && state.unlocks.autoExplore) {
+    const availableActions = explorations.filter((action) => {
+      if (state.explorations[action.key]?.progress === 100) {
+        return false;
+      }
+      if (
+        action.removed &&
+        state.explorations[action.removed]?.progress === 100
+      ) {
+        return false;
+      }
+      if (!action.requirements.action) {
+        return true;
+      }
+      return state.explorations[action.requirements.action]?.progress === 100;
+    });
+    for (const available of availableActions) {
+      if (state.autoExplore[available.key]) {
+        state.exploration = available.key;
+        break;
+      }
+    }
   }
 
   if (!state.exploration) {

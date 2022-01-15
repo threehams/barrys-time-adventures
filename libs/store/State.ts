@@ -69,7 +69,7 @@ export type State = {
   autoUpgradeLevels: {
     [Key in UpgradeKey]?: number;
   };
-  autoExploreLevels: {
+  autoExplore: {
     [Key in ExplorationKey]?: boolean;
   };
   expandStart: number | undefined;

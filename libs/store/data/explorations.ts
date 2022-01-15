@@ -43,6 +43,7 @@ export type ExplorationKey =
   | "T4"
   | "T5"
   | "T6"
+  | "T7"
   | "G1"
   | "G2";
 
@@ -111,7 +112,7 @@ export const explorations: Exploration[] = [
     description:
       "I'm going to walk the perimeter of my land to see if there's an opening.",
     message:
-      "The way to town seems pretty clear. Strangest thing, though... I swear the sun was up when I left, and it's only been an hour.",
+      "The way to town seems pretty clear. Strangest thing, though... I swear the sun was in the east when I left, and it's only been an hour.",
     drain: {
       food: 2,
       water: 2,
@@ -590,6 +591,26 @@ export const explorations: Exploration[] = [
     },
   },
   {
+    key: "T7",
+    name: "Duplicate the smartphone thing",
+    description:
+      "You know what? I want one of these. I bet if I find myself in a time hole, I could trick myself into giving me a second phone thing.",
+    message: `Ha! It worked! Barry from 5 minutes ago tossed me the same phone. I just have to make sure I do the same thing for him back then.`,
+    drain: {
+      food: 1,
+      water: 2,
+    },
+    train: {
+      patience: 2.5,
+      tech: 2,
+    },
+    timeMultiplier: BASE_MULTIPLIER,
+    time: 40_000_000,
+    requirements: {
+      action: "F4",
+    },
+  },
+  {
     key: "E19",
     name: "Look around for anything else",
     description:
@@ -632,7 +653,8 @@ export const explorations: Exploration[] = [
   {
     key: "S4",
     name: "Hack through weeds",
-    description: "The weeds here are as tall as trees. Better get hacking.",
+    description:
+      "The weeds here are as tall as trees. Better get hacking. The machete kind.",
     message: `I got to a flight of stairs, and the higher levels look much clearer.`,
     drain: {
       food: 4,

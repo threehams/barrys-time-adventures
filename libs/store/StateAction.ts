@@ -40,6 +40,12 @@ type ExploreAction = {
     location: ExplorationKey;
   };
 };
+type AutoExploreAction = {
+  type: "SET_AUTO_EXPLORE";
+  payload: {
+    location: ExplorationKey;
+  };
+};
 type LoopAction = {
   type: "LOOP";
 };
@@ -70,4 +76,5 @@ export type StateAction =
   | ExploreAction
   | LoopAction
   | SetAutoPurchaseAction
-  | SetAutoMaxLevelAction;
+  | SetAutoMaxLevelAction
+  | AutoExploreAction;

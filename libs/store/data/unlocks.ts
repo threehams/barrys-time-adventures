@@ -9,7 +9,8 @@ export type UnlockKey =
   | "autoPurchase"
   | "convergence"
   | "timelineEvents"
-  | "autoPurchaseExpand";
+  | "autoPurchaseExpand"
+  | "autoExplore";
 export type Unlock = {
   key: UnlockKey;
   requirements: {
@@ -66,6 +67,16 @@ export const unlocks: Unlock[] = [
     message: {
       priority: "alert",
       text: "Unlocked: Automatically purchase upgrades in the past! Click 'Auto' to enable for each source.",
+    },
+  },
+  {
+    key: "autoExplore",
+    requirements: {
+      exploration: "T7",
+    },
+    message: {
+      priority: "alert",
+      text: "Unlocked: Set explorations to run automatically.",
     },
   },
   {

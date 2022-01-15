@@ -25,6 +25,7 @@ const main = async () => {
     return produce(savedGame, (draft) => {
       draft.timers.autoPurchase ??= 0;
       draft.autoUpgrade ??= {};
+      draft.autoExplore ??= {};
     });
   };
 

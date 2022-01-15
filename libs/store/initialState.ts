@@ -102,5 +102,5 @@ export const initialState: State = {
   autoUpgradeLevels: {},
   expandStart: undefined,
   collapseStart: undefined,
-  autoExploreLevels: {},
+  autoExplore: {},
 };

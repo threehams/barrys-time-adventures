@@ -101,6 +101,10 @@ export const eventHandler = (
 
       state.exploration = action.payload.location;
       break;
+    case "SET_AUTO_EXPLORE":
+      state.autoExplore[action.payload.location] =
+        !state.autoExplore[action.payload.location];
+      break;
     case "TRAVEL": {
       travel(state, action.payload.day, { applySkills: false });
       break;

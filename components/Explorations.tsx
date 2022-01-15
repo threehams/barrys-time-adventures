@@ -12,6 +12,8 @@ export const Explorations = () => {
   const currentExploration = useSelector((state) => state.exploration);
   const phase = useSelector((state) => state.phase);
   const playerExplorations = useSelector((state) => state.explorations);
+  const autoExplore = useSelector((state) => state.autoExplore);
+  const unlocks = useSelector((state) => state.unlocks);
   const dispatch = useDispatch();
 
   const availableActions = explorations.filter((action) => {
@@ -56,6 +58,21 @@ export const Explorations = () => {
                 >
                   {exploration.key === currentExploration ? "Stop" : "Go"}
                 </Button>
+                {unlocks.autoExplore && (
+                  <Button
+                    active={autoExplore[exploration.key]}
+                    onClick={() => {
+                      dispatch({
+                        type: "SET_AUTO_EXPLORE",
+                        payload: {
+                          location: exploration.key,
+                        },
+                      });
+                    }}
+                  >
+                    Auto
+                  </Button>
+                )}
                 {exploration.name}
               </div>
               <p>{exploration.description}</p>
