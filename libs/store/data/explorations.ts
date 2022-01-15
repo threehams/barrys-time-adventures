@@ -13,6 +13,10 @@ export type ExplorationKey =
   | "E10"
   | "E11"
   | "E12"
+  | "E13"
+  | "E14"
+  | "E15"
+  | "E16"
   | "C1"
   | "C2"
   | "F1"
@@ -47,7 +51,7 @@ export const explorations: Exploration[] = [
       perception: 1.1,
       endurance: 2,
     },
-    time: 800_000,
+    time: 400_000,
     requirements: {},
   },
   {
@@ -64,7 +68,7 @@ export const explorations: Exploration[] = [
       perception: 2.2,
       patience: 2.1,
     },
-    time: 1_600_000,
+    time: 600_000,
     requirements: {
       action: "E1",
     },
@@ -80,9 +84,9 @@ export const explorations: Exploration[] = [
       water: 1,
     },
     train: {
-      patience: 2.4,
+      patience: 3,
     },
-    time: 1_600_000,
+    time: 800_000,
     requirements: {
       action: "T1",
     },
@@ -132,7 +136,7 @@ export const explorations: Exploration[] = [
       food: 2,
       water: 2,
     },
-    timeMultiplier: 10,
+    timeMultiplier: 4,
     train: {
       endurance: 3,
     },
@@ -159,10 +163,11 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "E3",
     },
+    removed: "E8",
   },
   {
     key: "F1",
-    name: "Look for generator parts",
+    name: "Look for gas generator parts",
     description:
       "Someone took this generator apart. I'm going to need some M8 bolts and a socket to match.",
     message: `It's reassembled, but still won't start. Maybe there's a troubleshooting guide around here.`,
@@ -178,6 +183,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "E4",
     },
+    removed: "E8",
   },
   {
     key: "F2",
@@ -191,16 +197,17 @@ export const explorations: Exploration[] = [
     },
     train: {
       perception: 3.3,
-      endurance: 2.1,
+      endurance: 1.5,
     },
     time: 1_000_000,
     requirements: {
       action: "F1",
     },
+    removed: "E8",
   },
   {
     key: "F3",
-    name: "Fix the generator",
+    name: "Fix the gas generator",
     description: "This is going to be a lot of trial and error.",
     message: `It's running! The lights are on. Time to see what else powered up. There isn't much that'll run off this.`,
     drain: {
@@ -215,6 +222,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "F2",
     },
+    removed: "E8",
   },
   {
     key: "T5",
@@ -234,6 +242,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "F3",
     },
+    removed: "E8",
   },
   {
     key: "F5",
@@ -253,6 +262,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "T5",
     },
+    removed: "E8",
   },
   {
     key: "E5",
@@ -272,6 +282,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "E3",
     },
+    removed: "E8",
   },
   {
     key: "S2",
@@ -290,6 +301,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "E5",
     },
+    removed: "E8",
   },
   {
     key: "E7",
@@ -308,6 +320,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "S2",
     },
+    removed: "E8",
   },
   {
     key: "G1",
@@ -348,6 +361,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "E3",
     },
+    removed: "E8",
   },
   {
     key: "S1",
@@ -366,6 +380,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "E6",
     },
+    removed: "E8",
   },
   {
     key: "T4",
@@ -384,6 +399,7 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "S1",
     },
+    removed: "E8",
   },
   {
     key: "E12",
@@ -402,24 +418,82 @@ export const explorations: Exploration[] = [
     requirements: {
       action: "T4",
     },
+    removed: "E8",
+  },
+  {
+    key: "E14",
+    name: "Search car lot",
+    description:
+      "There are hundreds of cars in a lot nearby. Most are wrecks by now, but maybe I can find a working one.",
+    message: `There's a promising RIMC coupe left on blocks with decent tires. Windows are smashed, battery's dead, fuel cell's empty. I'm not fixing the windows.`,
+    drain: {
+      food: 2,
+      water: 3,
+    },
+    train: {
+      endurance: 2,
+    },
+    time: 1_000_000,
+    requirements: {
+      action: "E3",
+    },
+  },
+  {
+    key: "E15",
+    name: "Replace fuel cell",
+    description:
+      "Lot of work, but it'll be easier to replace this cell than find a fueling station.",
+    message: `Found a half-full cell in a nearby car, and with a lot of effort, got it installed. I just have to deal with that battery now.`,
+    drain: {
+      food: 2,
+      water: 3,
+    },
+    train: {
+      strength: 3,
+      tech: 3,
+    },
+    time: 1_000_000,
+    requirements: {
+      action: "E14",
+    },
+  },
+  {
+    key: "E16",
+    name: "Start the car",
+    description:
+      "There's no chance I'll find a live battery here. Best I can do is push it down the nearest hill and hope it starts on the way down.",
+    message:
+      "I had to push the car a half-mile, but IT'S ALIVE! This thing is in rough shape, but I hope it'll make it to the next town.",
+    drain: {
+      food: 2,
+      water: 3,
+    },
+    train: {
+      strength: 2.5,
+    },
+    time: 2_000_000,
+    requirements: {
+      action: "E15",
+    },
   },
   {
     key: "E8",
     name: "Keep moving",
     description:
-      "Head out to the light industrial zone. This may be a long walk. If I have anything to do here first, I should do it.",
+      "Head out to the light industrial zone. This will be a long drive. If I have anything to do here first, I should do it.",
     message: `Rough trip, but I'm finally glad I lived near a tech hub. Lots of places to explore here.`,
     drain: {
-      food: 10,
-      water: 10,
+      food: 20,
+      water: 20,
     },
     train: {
-      endurance: 2,
+      tech: 2,
+      patience: 1.5,
     },
-    timeMultiplier: 20,
+    timeMultiplier: 15,
     time: 200_000_000,
     requirements: {
-      action: "E3",
+      action: "E16",
     },
   },
   {
@@ -428,14 +502,15 @@ export const explorations: Exploration[] = [
     description: "A factory! Factory HAS to mean automation, right?",
     message: ``,
     drain: {
-      food: 10,
-      water: 10,
+      food: 5,
+      water: 5,
     },
     train: {
-      endurance: 2,
+      perception: 2,
+      tech: 1.5,
     },
-    timeMultiplier: 20,
-    time: 200_000_000,
+    timeMultiplier: 4,
+    time: 40_000_000,
     requirements: {
       action: "E8",
     },
@@ -451,10 +526,10 @@ export const explorations: Exploration[] = [
       water: 5,
     },
     train: {
-      strength: 2,
+      strength: 3,
     },
-    timeMultiplier: 20,
-    time: 200_000_000,
+    timeMultiplier: 4,
+    time: 40_000_000,
     requirements: {
       action: "E9",
     },
@@ -470,11 +545,11 @@ export const explorations: Exploration[] = [
       water: 5,
     },
     train: {
-      patience: 2,
+      patience: 2.5,
       tech: 2,
     },
-    timeMultiplier: 20,
-    time: 200_000_000,
+    timeMultiplier: 4,
+    time: 40_000_000,
     requirements: {
       action: "S3",
     },
@@ -482,35 +557,56 @@ export const explorations: Exploration[] = [
   {
     key: "E10",
     name: "Explore arcology",
-    description: "There's a huge structure here, still looks fairly intact.",
-    message: ``,
+    description:
+      "There's a huge skyscraper here, bigger than anything we ever had. Bet they have all kinds of great agriculture advancements here, at least.",
+    message: `Oh man, everything is huge here! Especially the weeds. This could take a while.`,
     drain: {
-      food: 20,
-      water: 20,
+      food: 5,
+      water: 5,
     },
     train: {
-      endurance: 2,
+      endurance: 1.4,
+      perception: 3,
     },
-    timeMultiplier: 20,
-    time: 2_000_000_000,
+    timeMultiplier: 4,
+    time: 40_000_000,
     requirements: {
       action: "E8",
     },
   },
   {
     key: "E10",
+    name: "Hack through weeds",
+    description: "The weeds here are as tall as trees. Better get hacking.",
+    message: ``,
+    drain: {
+      food: 5,
+      water: 5,
+    },
+    train: {
+      endurance: 1.4,
+      perception: 3,
+    },
+    timeMultiplier: 4,
+    time: 40_000_000,
+    requirements: {
+      action: "E10",
+    },
+  },
+  {
+    key: "E13",
     name: "Explore [other place]",
     description: "Things are bad here, but are they this bad everywhere?",
     message: `Things are this bad everywhere. I didn't meet anyone.`,
     drain: {
-      food: 20,
-      water: 20,
+      food: 5,
+      water: 5,
     },
     train: {
       endurance: 2,
     },
-    timeMultiplier: 20,
-    time: 2_000_000_000,
+    timeMultiplier: 5,
+    time: 40_000_000,
     requirements: {
       action: "E8",
     },
@@ -522,8 +618,8 @@ export const explorations: Exploration[] = [
       "Things are bad here, but are they this bad everywhere? This will be the longest trip so far.",
     message: `Things are this bad everywhere. I didn't meet anyone.`,
     drain: {
-      food: 20,
-      water: 20,
+      food: 10,
+      water: 10,
     },
     train: {
       endurance: 2,

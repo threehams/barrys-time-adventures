@@ -16,6 +16,7 @@ export type Exploration = {
   requirements: {
     action?: ExplorationKey;
   };
+  removed?: ExplorationKey;
   unlock?: UnlockKey;
   generates?: {
     power?: number;

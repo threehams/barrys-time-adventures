@@ -18,6 +18,12 @@ export const Explorations = () => {
     if (playerExplorations[action.key]?.progress === 100) {
       return false;
     }
+    if (
+      action.removed &&
+      playerExplorations[action.removed]?.progress === 100
+    ) {
+      return false;
+    }
     if (!action.requirements.action) {
       return true;
     }

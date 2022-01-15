@@ -20,7 +20,7 @@ export const Messages = () => {
               className={clsx(
                 "absolute top-[0] bottom-[0] left-[0] w-1",
                 message.priority === "alert"
-                  ? "bg-red-500"
+                  ? "bg-red-400"
                   : message.priority === "news"
                   ? "bg-blue-500"
                   : "bg-gray-600",
@@ -36,7 +36,7 @@ export const Messages = () => {
 
 const textColor = (priority: MessageLevel, index: number) => {
   if (priority === "alert") {
-    return index > 0 ? "text-red-700" : "text-red-500";
+    return index > 0 ? "text-red-500" : "text-red-400";
   }
   return index > 0 && "text-gray-400";
 };

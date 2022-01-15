@@ -103,9 +103,6 @@ export const eventHandler = (
       break;
     case "TRAVEL": {
       travel(state, action.payload.day);
-      state.skills = {
-        ...initialState.skills,
-      };
       break;
     }
     case "LOOP":
@@ -143,15 +140,6 @@ const buyTimedUpgrade = ({
   const upgrade = findUpgrade(key);
   for (const costKey of Object.keys(upgrade.costs)) {
     const checker = upgrade.costs[costKey];
-    if (checker) {
-      console.log(
-        "cost for level",
-        level,
-        "and distance",
-        distance,
-        Math.floor(checker(level, distance)),
-      );
-    }
     if (
       checker &&
       Math.floor(checker(level, distance)) > state.resources[costKey]
@@ -197,9 +185,9 @@ const travel = (state: Draft<State>, day: number) => {
   };
   // If you've never unlocked loop, permanent gains get reset
   for (const key of Object.keys(state.skills)) {
-    state.skills[key].current = 0;
+    state.skills[key].current = 1;
     if (!state.unlocks.loop) {
-      state.skills[key].permanent = 0;
+      state.skills[key].permanent = 1;
     }
   }
   state.messages = [...initialState.messages];

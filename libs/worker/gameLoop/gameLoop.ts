@@ -361,12 +361,18 @@ const updateExplore: Updater = (state, delta) => {
         return acc;
       }
       const skill = state.skills[key];
-      return skill.current * multiplier + skill.permanent * multiplier;
+      return (
+        acc +
+        Math.floor(skill.current) *
+          multiplier *
+          Math.floor(skill.permanent) *
+          multiplier
+      );
     },
     0,
   );
 
-  const totalTime = delta * totalSkills * 0.25;
+  const totalTime = delta * Math.sqrt(totalSkills) ** 0.7;
   const progress = (100 / exploration.time) * totalTime;
   state.explorations[state.exploration] ??= { progress: 0 };
   state.explorations[state.exploration]!.progress = Math.min(
@@ -376,9 +382,9 @@ const updateExplore: Updater = (state, delta) => {
 
   if (exploration.generates) {
     if (exploration.generates.power) {
-      const power = (totalTime * exploration.generates.power) / 5_000;
+      const power = (totalTime * exploration.generates.power) / 10_000;
       state.resources.power += power;
-      let resourceCost = power * 10;
+      let resourceCost = power * 25;
       const resources = (["food", "water"] as ["food", "water"]).sort(
         (a, b) => {
           return state.resources[b] - state.resources[a];

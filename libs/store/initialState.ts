@@ -54,23 +54,23 @@ export const initialState: State = {
   skills: {
     perception: {
       current: 1,
-      permanent: 0,
+      permanent: 1,
     },
     endurance: {
       current: 1,
-      permanent: 0,
+      permanent: 1,
     },
     patience: {
       current: 1,
-      permanent: 0,
+      permanent: 1,
     },
     strength: {
       current: 1,
-      permanent: 0,
+      permanent: 1,
     },
     tech: {
       current: 1,
-      permanent: 0,
+      permanent: 1,
     },
   },
   explorations: {},

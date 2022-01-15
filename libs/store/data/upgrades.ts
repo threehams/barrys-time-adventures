@@ -154,7 +154,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       money: (level) => {
-        return level * 1.25 + 1;
+        return 1.15 ** level;
       },
     },
     flavorTexts: {},
@@ -204,7 +204,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       junk: (level) => {
-        return 1.25 ** level;
+        return 1.1 ** level;
       },
     },
     flavorTexts: {},
@@ -228,7 +228,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "add",
       food: (level) => {
-        return level * 5;
+        return level * 4;
       },
     },
     flavorTexts: {},
@@ -302,7 +302,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "add",
       food: (level) => {
-        return level * 5;
+        return level * 4;
       },
     },
     flavorTexts: {},
@@ -321,13 +321,13 @@ export const upgrades: Upgrade[] = [
     max: 50,
     costs: {
       money: (level) => {
-        return Math.pow(level, 3.5) + level * 10;
+        return Math.pow(level, 3.4) + level * 10;
       },
     },
     effect: {
       type: "time",
       food: (level) => {
-        return Math.pow(0.8, Math.log2(level) + 1);
+        return Math.pow(0.85, Math.log2(level) + 1);
       },
     },
     flavorTexts: {},
@@ -351,7 +351,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "multiply",
       food: (level) => {
-        return 1.15 ** level;
+        return 1.1 ** level;
       },
     },
     flavorTexts: {},
@@ -376,7 +376,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "add",
       water: (level) => {
-        return level * 5;
+        return level * 4;
       },
     },
     flavorTexts: {},
@@ -424,7 +424,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "add",
       water: (level) => {
-        return level * 5;
+        return level * 4;
       },
     },
     flavorTexts: {},
@@ -472,7 +472,7 @@ export const upgrades: Upgrade[] = [
     effect: {
       type: "add",
       water: (level) => {
-        return level * 5;
+        return level * 4;
       },
     },
     flavorTexts: {},

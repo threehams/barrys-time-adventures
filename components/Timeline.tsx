@@ -315,12 +315,9 @@ const DayDetail = ({
             selectedUpgrade && "opacity-30",
           )}
         >
-          {events.map((event) => {
+          {events.map((event, index) => {
             return (
-              <li
-                key={`${event.text}${event.time}`}
-                className="flex items-center"
-              >
+              <li key={index} className="flex items-center">
                 <div
                   className={clsx(
                     "w-[14px] h-[14px] inline-block mr-1",
