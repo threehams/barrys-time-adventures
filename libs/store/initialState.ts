@@ -103,4 +103,5 @@ export const initialState: State = {
   expandStart: undefined,
   collapseStart: undefined,
   autoExplore: {},
+  stuck: false,
 };
