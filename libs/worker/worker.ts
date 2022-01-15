@@ -4,7 +4,7 @@ import localForage from "localforage";
 import { eventHandler, updateGame } from "./gameLoop";
 
 const VERSION = 2;
-const databaseName = "reconciliation_game";
+const databaseName = "barry";
 const savedGameKey = "saved_game";
 
 localForage.config({

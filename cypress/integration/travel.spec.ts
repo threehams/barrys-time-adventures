@@ -7,7 +7,7 @@ describe("time travel", () => {
   it("travels to the past", () => {
     cy.wrap(null).then(async () => {
       const VERSION = 1;
-      const databaseName = "reconciliation_game";
+      const databaseName = "barry";
       const savedGameKey = "saved_game";
       localForage.config({
         version: VERSION,

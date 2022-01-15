@@ -4,7 +4,7 @@ describe("exploration", () => {
   it("completes the first three explorations", () => {
     cy.fixture("autoExplore").then(async (data) => {
       const VERSION = 1;
-      const databaseName = "reconciliation_game";
+      const databaseName = "barry";
       const savedGameKey = "saved_game";
       localForage.config({
         version: VERSION,

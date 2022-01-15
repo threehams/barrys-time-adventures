@@ -3,7 +3,7 @@ import { State } from "@laundry/store";
 import localForage from "localforage";
 
 const VERSION = 1;
-const databaseName = "reconciliation_game";
+const databaseName = "barry";
 const savedGameKey = "saved_game";
 
 localForage.config({

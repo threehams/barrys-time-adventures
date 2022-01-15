@@ -7,7 +7,7 @@ describe("exploration", () => {
   it("generates power and drains resources", () => {
     cy.wrap(null).then(async () => {
       const VERSION = 1;
-      const databaseName = "reconciliation_game";
+      const databaseName = "barry";
       const savedGameKey = "saved_game";
       localForage.config({
         version: VERSION,
