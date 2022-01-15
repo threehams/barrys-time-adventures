@@ -545,7 +545,7 @@ export const explorations: Exploration[] = [
       perception: 2,
       tech: 1.5,
     },
-    timeMultiplier: BASE_MULTIPLIER,
+    timeMultiplier: BASE_MULTIPLIER * 2,
     time: 40_000_000,
     requirements: {
       action: "E8",
@@ -562,9 +562,9 @@ export const explorations: Exploration[] = [
       water: 1,
     },
     train: {
-      strength: 3,
+      strength: 4,
     },
-    timeMultiplier: BASE_MULTIPLIER,
+    timeMultiplier: BASE_MULTIPLIER * 2,
     time: 40_000_000,
     requirements: {
       action: "E9",
@@ -584,7 +584,7 @@ export const explorations: Exploration[] = [
       patience: 2.5,
       tech: 2,
     },
-    timeMultiplier: BASE_MULTIPLIER,
+    timeMultiplier: BASE_MULTIPLIER * 2,
     time: 40_000_000,
     requirements: {
       action: "S3",
@@ -604,7 +604,7 @@ export const explorations: Exploration[] = [
       patience: 2.5,
       tech: 2,
     },
-    timeMultiplier: BASE_MULTIPLIER,
+    timeMultiplier: BASE_MULTIPLIER * 2,
     time: 40_000_000,
     requirements: {
       action: "F4",
@@ -624,7 +624,7 @@ export const explorations: Exploration[] = [
       patience: 2,
       tech: 2.1,
     },
-    timeMultiplier: BASE_MULTIPLIER,
+    timeMultiplier: BASE_MULTIPLIER * 2,
     time: 40_000_000,
     requirements: {
       action: "F4",

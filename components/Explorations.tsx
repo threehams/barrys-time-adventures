@@ -6,6 +6,7 @@ import {
 } from "@laundry/store";
 import { Button, Progress } from "@laundry/ui";
 import { isNonNullable } from "@laundry/utils";
+import { EffectText } from "./EffectText";
 import { useDispatch, useSelector } from "./StateProvider";
 
 export const Explorations = () => {
@@ -75,7 +76,7 @@ export const Explorations = () => {
                 )}
                 {exploration.name}
               </div>
-              <p>{exploration.description}</p>
+              <EffectText>{exploration.description}</EffectText>
               {exploration.generates && (
                 <div className="text-red-400">
                   Note: This will drain your resources continuously in exchange

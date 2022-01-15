@@ -13,6 +13,7 @@ import {
 import { Button } from "@laundry/ui";
 import clsx from "clsx";
 import { hoursToSeconds } from "date-fns";
+import { EffectText } from "./EffectText";
 
 type Props = {
   className?: string;
@@ -298,7 +299,7 @@ export const Upgrades = ({
                           </label>
                         )}{" "}
                         <p>{upgradeEffect(upgrade, level)}</p>
-                        <p>{upgrade.description}</p>
+                        <EffectText>{upgrade.description}</EffectText>
                       </>
                     )}
                     {flavorText && <p className="col-start-2">{flavorText}</p>}
