@@ -359,6 +359,10 @@ const updateExplore: Updater = (state, delta) => {
     });
   }
 
+  if (state.phase !== "postEvent") {
+    return;
+  }
+
   if (!state.exploration && state.unlocks.autoExplore) {
     const availableActions = explorations.filter((action) => {
       if (state.explorations[action.key]?.progress === 100) {

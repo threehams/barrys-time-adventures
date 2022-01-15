@@ -27,6 +27,8 @@ type SunProps = {
 };
 const Sun = ({ className }: SunProps) => {
   const time = useSelector((state) => state.time);
+  const phase = useSelector((state) => state.phase);
+  const sunPhase = phase === "preEvent" ? "pre" : "post";
   const currentHour = (time % hoursToSeconds(24)) / hoursToSeconds(1);
   const progress = (currentHour - 6) / 6;
   const yTransform = -(progress * 120 - 60);
@@ -36,7 +38,12 @@ const Sun = ({ className }: SunProps) => {
       className={clsx("flex items-center justify-center", className)}
       style={{ transform: `translate(25%, ${yTransform}%)` }}
     >
-      <div className="w-8 h-8 bg-yellow-300 rounded-full filter blur-md" />
+      <div
+        className={clsx(
+          "w-8 h-8 bg-yellow-300 rounded-full filter blur-md",
+          sunPhase === "post" && "opacity-20",
+        )}
+      />
     </div>
   );
 };
@@ -47,7 +54,8 @@ type SkyProps = {
 };
 const Sky = ({ children, className }: SkyProps) => {
   const time = useSelector((state) => state.time);
-  const [start, end] = findColors(time);
+  const phase = useSelector((state) => state.phase);
+  const [start, end] = findColors(time, phase === "preEvent" ? "pre" : "post");
   return (
     <div
       className={clsx("flex items-center justify-center", className)}
@@ -58,16 +66,17 @@ const Sky = ({ children, className }: SkyProps) => {
   );
 };
 
-const findColors = (time: number) => {
+const findColors = (time: number, phase: "pre" | "post") => {
   const currentHour = (time % hoursToSeconds(24)) / hoursToSeconds(1);
+  const colors = phase === "pre" ? SKY_COLORS : FUTURE_SKY_COLORS;
 
-  const found = SKY_COLORS.findIndex((color) => {
+  const found = colors.findIndex((color) => {
     return color.time > currentHour;
   })!;
   const firstIndex = Math.max(found - 1, 0);
-  const secondIndex = Math.min(firstIndex + 1, SKY_COLORS.length - 1);
-  const firstColor = SKY_COLORS[firstIndex];
-  const secondColor = SKY_COLORS[secondIndex];
+  const secondIndex = Math.min(firstIndex + 1, colors.length - 1);
+  const firstColor = colors[firstIndex];
+  const secondColor = colors[secondIndex];
 
   let progress;
   if (secondColor.time === firstColor.time) {
@@ -101,17 +110,5 @@ const SKY_COLORS = [
 
 const FUTURE_SKY_COLORS = [
   { time: 0, low: "#111827", high: "#111827" },
-  { time: 5, low: "#111827", high: "#111827" },
-  { time: 6, low: "#E67B09", high: "#112044" },
-  { time: 7, low: "#E79617", high: "#536875" },
-  { time: 8, low: "#FADA77", high: "#343E56" },
-  { time: 9, low: "#E2D7A9", high: "#343E61" },
-  { time: 10, low: "#ABC3BF", high: "#314C87" },
-  { time: 12, low: "#8DBACD", high: "#3A6DAE" },
-  { time: 18, low: "#6FACC7", high: "#085997" },
-  { time: 19, low: "#B59A6D", high: "#6C778A" },
-  { time: 20, low: "#42677B", high: "#3372A1" },
-  { time: 21, low: "#13203C", high: "#111827" },
-  { time: 22, low: "#111827", high: "#111827" },
-  { time: 24, low: "#111827", high: "#111827" },
+  { time: 0, low: "#111827", high: "#111827" },
 ];

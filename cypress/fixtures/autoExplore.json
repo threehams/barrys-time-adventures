@@ -1,0 +1,2766 @@
+{
+  "replay": false,
+  "phase": "traveling",
+  "time": 36141930,
+  "messages": [
+    {
+      "priority": "alert",
+      "text": "That didn't feel as bad, but something is wroel as bad, but something is wrong. It's likeng. Wait, what?",
+      "time": 2505600
+    },
+    {
+      "priority": "info",
+      "text": "Something is really messed up with the area around here. Looks like desert haze, but... I can see other places in it?",
+      "time": 2568150
+    },
+    {
+      "priority": "info",
+      "text": "I'm definitely looking at different time periods through these. Some of these go back thousands of years. I'm calling these \"time holes\" until I think of a better name.",
+      "time": 2641380
+    },
+    {
+      "priority": "info",
+      "text": "Hey! I saw another Barry in one of the holes and called out, and he seemed to notice. It looks like I could influence the past, at least with very short messages. Maybe I'll start with \"more water.\"",
+      "time": 2726280
+    },
+    {
+      "priority": "info",
+      "text": "The way to town seems pretty clear. Strangest thing, though... I swear the sun was in the east when I left, and it's only been an hour.",
+      "time": 2861280
+    },
+    {
+      "priority": "info",
+      "text": "For now, I could safely get time to pass about 5X as fast. That'll be better than watching radishes grow.",
+      "time": 3031680
+    },
+    {
+      "priority": "info",
+      "text": "No one around. It's pretty dead, but there are a few buildings which could have something worth using.",
+      "time": 3787380
+    },
+    {
+      "priority": "info",
+      "text": "Hey, there's an old #7291 generator here! I can't believe they still use these. It's not working, but I could fix it if I had the parts.",
+      "time": 3872580
+    },
+    {
+      "priority": "info",
+      "text": "It's reassembled, but still won't start. Maybe there's a troubleshooting guide around here.",
+      "time": 4037580
+    },
+    {
+      "priority": "info",
+      "text": "Hours later, I gave up, and finally found it taped to the bottom of the generator. Someone's laughing right now.",
+      "time": 4277580
+    },
+    {
+      "priority": "info",
+      "text": "Found a \"Mr Fusion\" in pretty good condition. Guess I should feed it?",
+      "time": 4387680
+    },
+    {
+      "priority": "info",
+      "text": "It's running! The lights are on. Time to see what else powered up. There isn't much that'll run off this.",
+      "time": 4497780
+    },
+    {
+      "priority": "info",
+      "text": "Turns out it's like focusing on one of those Magic Eye images - just defocus, and the computer takes over. I bet I can use this technique to shove much more information into Past Barry's head.",
+      "time": 4597980
+    },
+    {
+      "priority": "info",
+      "text": "Here we go. I found a method of compressing food into smaller containers. That should help out with preservation.",
+      "time": 4668180
+    },
+    {
+      "priority": "info",
+      "text": "There's a really interesting time hole up some stairs, but I'll have to move some wreckage out of the way to get to it.",
+      "time": 4738080
+    },
+    {
+      "priority": "info",
+      "text": "I'm exhausted and never want to lift heavy things again, but I can get to the time hole now.",
+      "time": 4843380
+    },
+    {
+      "priority": "info",
+      "text": "After a lot of arguing with Past Barry, we agreed to jump in and swap places when the time comes. I have no idea what'll happen to him, but that sounds like Future Barry problems, not mine.",
+      "time": 4953480
+    },
+    {
+      "priority": "info",
+      "text": "Here we go! One unused carbon nanotube filter. This would have been really useful back in the day. With enough power, I should be able to send this back to Past Barry.",
+      "time": 5053380
+    },
+    {
+      "priority": "info",
+      "text": "There's a promising RIMC coupe left on blocks with decent tires. Windows are smashed, battery's dead, fuel cell's empty. I'm not fixing the windows.",
+      "time": 5128380
+    },
+    {
+      "priority": "info",
+      "text": "Found a half-full cell in a nearby car, and with a lot of effort, got it installed. I just have to deal with that battery now.",
+      "time": 5188380
+    },
+    {
+      "priority": "info",
+      "text": "I had to push the car a half-mile, but IT'S ALIVE! This thing is in rough shape, but I hope it'll make it to the next town.",
+      "time": 5383680
+    },
+    {
+      "priority": "info",
+      "text": "Rough trip, but I'm finally glad I lived near a tech hub. Lots of places to explore here.",
+      "time": 13490430
+    },
+    {
+      "priority": "info",
+      "text": "Oh man, everything is huge here! Especially the weeds. This could take a while.",
+      "time": 14626530
+    },
+    {
+      "priority": "info",
+      "text": "I got to a flight of stairs, and the higher levels look much clearer.",
+      "time": 17339130
+    },
+    {
+      "priority": "info",
+      "text": "There's a whole stockpile of smartphone-looking things, and nearly every battery on every one of these is dead. Maybe one of them is still alive.",
+      "time": 19086030
+    },
+    {
+      "priority": "info",
+      "text": "After 200 flights up the stairs, I reached the rooftop gardens... there's a small bag called \"Fluxed Phyto-Gro\" up here. Claims it's got What Plants Crave. I should send this stuff to Past Barry.",
+      "time": 19896630
+    },
+    {
+      "priority": "info",
+      "text": "Found one! This is way beyond a smartphone - it could purchase just about anything in the world in one tap. Future people were even more into buying stuff than we were. I'll send one of these to Past Barry right away.",
+      "time": 20917530
+    },
+    {
+      "priority": "info",
+      "text": "Found it, and the lock was no match for a crowbar and a lot of persistence. And hey! Another Mr. Fusion!",
+      "time": 21462930
+    },
+    {
+      "priority": "info",
+      "text": "Ha! It worked! Barry from 5 minutes ago tossed me the same phone. I just have to make sure I do the same thing for him back then.",
+      "time": 22419030
+    },
+    {
+      "priority": "info",
+      "text": "Found something - a compact condensate capture system. This can pull water right out of the air instead of waiting for rainfall. Past Barry would have loved this. It's too bad the air's too dry for it to be of any use here.",
+      "time": 23379930
+    },
+    {
+      "priority": "alert",
+      "time": 36141930,
+      "text": "I'm out of water. I could help out Past Barry, or loop myself with Future Barry and keep exploring."
+    }
+  ],
+  "upgrades": {
+    "PM1": {
+      "level": 11
+    },
+    "PJ1": {
+      "level": 37
+    },
+    "PM2": {
+      "level": 10
+    },
+    "PM5": {
+      "level": 14
+    },
+    "PM3": {
+      "level": 17
+    },
+    "PM4": {
+      "level": 11
+    },
+    "PW5": {
+      "level": 16
+    },
+    "PW6": {
+      "level": 16
+    },
+    "PW1": {
+      "level": 8
+    },
+    "PW3": {
+      "level": 12
+    },
+    "PW4": {
+      "level": 10
+    },
+    "PW2": {
+      "level": 8
+    },
+    "PF1": {
+      "level": 13
+    },
+    "PF2": {
+      "level": 11
+    },
+    "PF6": {
+      "level": 11
+    },
+    "PF3": {
+      "level": 11
+    },
+    "PF4": {
+      "level": 11
+    },
+    "PF7": {
+      "level": 13
+    },
+    "PJ2": {
+      "level": 15
+    }
+  },
+  "timedUpgrades": {
+    "EW1": {
+      "time": 1044000,
+      "level": 1
+    },
+    "EW2": {
+      "time": 1497600,
+      "level": 1
+    },
+    "EF1": {
+      "time": 1314000,
+      "level": 1
+    },
+    "EM1": {
+      "time": 792000,
+      "level": 1
+    },
+    "TW2": {
+      "level": 4,
+      "time": 1468800
+    },
+    "TF1": {
+      "level": 4,
+      "time": 1296000
+    },
+    "TM1": {
+      "level": 3,
+      "time": 777600
+    },
+    "TF2": {
+      "level": 3,
+      "time": 0
+    }
+  },
+  "timeline": [
+    {
+      "time": 5188,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 5590,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 5956,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 56780,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 69440,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 79460,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 101140,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 130500,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 156860,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 174560,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 228600,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 267640,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 329380,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 342060,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 359400,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 392440,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 426460,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 458840,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 462500,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 466500,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 479520,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 483520,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 487200,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 490540,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 530580,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 533900,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 557600,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 560940,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 564280,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 567940,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 571280,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 583960,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 587300,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 590640,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 593960,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 597980,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 620000,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 625340,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 628680,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 632340,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 636000,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 667700,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 671720,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 676040,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 680060,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 684060,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 688060,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 692060,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 696080,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 700080,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 718760,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 722760,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 726100,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 729440,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 732780,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 736440,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 762800,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 766140,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 769140,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 772480,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 775480,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 778820,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 789160,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 792840,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 796160,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 799500,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 802840,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 825540,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 829200,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 832200,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 835540,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 838880,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 841880,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 848560,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 851900,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 855580,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 858900,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 862240,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 878240,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 881260,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 884580,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 887920,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 890940,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 894260,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 897600,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 905960,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 909280,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 912280,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 915620,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 918960,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 922300,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 942660,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 945660,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 949660,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 960340,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 983360,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 986700,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 989700,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 993360,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 996700,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1027740,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1031060,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1043740,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 1047080,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 1068780,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1072120,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1075780,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1088120,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1091800,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1095800,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1127160,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 1130500,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 1133500,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 1151860,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1155200,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1159520,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1202240,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 1212920,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 1233280,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM2"
+        }
+      }
+    },
+    {
+      "time": 1269980,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1273320,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1297501,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 1298453,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 1298770,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 1298953,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 1301122,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1301272,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1312803,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1318813,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1320643,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1338493,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 1344003,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 1347503,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 1359013,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 1361183,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 1370193,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 1379703,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 1381373,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 1398223,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 1404063,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 1409903,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 1411733,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 1416073,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 1436433,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 1447773,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 1456953,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 1463793,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 1501663,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 1549203,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 1550873,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 1573733,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 1575403,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 1579243,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 1621783,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1627953,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1629953,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1638633,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW4"
+        }
+      }
+    },
+    {
+      "time": 1661983,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 1721543,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 1723713,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW3"
+        }
+      }
+    },
+    {
+      "time": 1763253,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 1769263,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1770923,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 1799123,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1800963,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1802963,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 1829483,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1831153,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1832823,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1834493,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1836163,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1837833,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1839493,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1841163,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1842833,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1844503,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1846173,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 1850343,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1852003,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1853673,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1855343,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1857183,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1859013,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1861013,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1863353,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1868863,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1870523,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1872193,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1873863,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1875703,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1877533,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1879373,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1883203,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 1891883,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 1914233,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 1919573,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 1948933,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 1963283,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 2064723,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    },
+    {
+      "time": 2064723,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 2064723,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 2064723,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 2064723,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF3"
+        }
+      }
+    },
+    {
+      "time": 2064723,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 2064723,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 2093083,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 2097083,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 2122943,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2127783,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 2129613,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 2131283,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 2133123,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ2"
+        }
+      }
+    },
+    {
+      "time": 2137793,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2139463,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2141293,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2143293,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2145133,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2154643,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2156643,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2166653,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 2170323,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 2188173,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 2198353,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 2205693,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 2207853,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 2225713,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW2"
+        }
+      }
+    },
+    {
+      "time": 2230543,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW1"
+        }
+      }
+    },
+    {
+      "time": 2239223,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 2247233,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 2256573,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 2294443,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW5"
+        }
+      }
+    },
+    {
+      "time": 2301623,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 2304123,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PW6"
+        }
+      }
+    },
+    {
+      "time": 2331983,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 2333653,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 2335323,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 2339493,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 2341323,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 2343163,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 2344833,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM4"
+        }
+      }
+    },
+    {
+      "time": 2354003,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 2359173,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM3"
+        }
+      }
+    },
+    {
+      "time": 2372183,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM5"
+        }
+      }
+    },
+    {
+      "time": 2404893,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 2406563,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF1"
+        }
+      }
+    },
+    {
+      "time": 2412063,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF2"
+        }
+      }
+    },
+    {
+      "time": 2419903,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF6"
+        }
+      }
+    },
+    {
+      "time": 2442093,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF4"
+        }
+      }
+    },
+    {
+      "time": 2453933,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 2455773,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PF7"
+        }
+      }
+    },
+    {
+      "time": 2461613,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2463273,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2465113,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2470453,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PJ1"
+        }
+      }
+    },
+    {
+      "time": 2493473,
+      "action": {
+        "type": "BUY_UPGRADE",
+        "payload": {
+          "key": "PM1"
+        }
+      }
+    }
+  ],
+  "resources": {
+    "barry": 0,
+    "money": 98841,
+    "water": 0,
+    "food": 3205,
+    "junk": 5805,
+    "power": 0
+  },
+  "maxResources": {
+    "barry": 0,
+    "money": 98841,
+    "water": 58647,
+    "food": 60779,
+    "junk": 15073,
+    "power": 0
+  },
+  "skills": {
+    "perception": {
+      "current": 52.928402499999734,
+      "permanent": 31.7936575000002,
+      "thisLoop": 17.309467499999958
+    },
+    "endurance": {
+      "current": 49.02272499999963,
+      "permanent": 41.128234999998654,
+      "thisLoop": 16.007575000000053
+    },
+    "patience": {
+      "current": 83.06302,
+      "permanent": 61.212312500003726,
+      "thisLoop": 27.354339999999745
+    },
+    "strength": {
+      "current": 66.02972499999983,
+      "permanent": 38.560865625000105,
+      "thisLoop": 21.67657499999981
+    },
+    "tech": {
+      "current": 99.37082500000072,
+      "permanent": 75.98671249999988,
+      "thisLoop": 32.79027500000078
+    }
+  },
+  "explorations": {
+    "E1": {
+      "progress": 100
+    },
+    "T1": {
+      "progress": 100
+    },
+    "T2": {
+      "progress": 100
+    },
+    "E2": {
+      "progress": 100
+    },
+    "T3": {
+      "progress": 100
+    },
+    "E3": {
+      "progress": 100
+    },
+    "E4": {
+      "progress": 100
+    },
+    "E5": {
+      "progress": 100
+    },
+    "F1": {
+      "progress": 100
+    },
+    "S2": {
+      "progress": 100
+    },
+    "F2": {
+      "progress": 100
+    },
+    "E7": {
+      "progress": 100
+    },
+    "F3": {
+      "progress": 100
+    },
+    "T5": {
+      "progress": 100
+    },
+    "F5": {
+      "progress": 100
+    },
+    "E6": {
+      "progress": 100
+    },
+    "S1": {
+      "progress": 100
+    },
+    "T4": {
+      "progress": 100
+    },
+    "E12": {
+      "progress": 100
+    },
+    "E14": {
+      "progress": 100
+    },
+    "E15": {
+      "progress": 100
+    },
+    "E16": {
+      "progress": 100
+    },
+    "E8": {
+      "progress": 100
+    },
+    "E10": {
+      "progress": 100
+    },
+    "E9": {
+      "progress": 100
+    },
+    "S4": {
+      "progress": 100
+    },
+    "S3": {
+      "progress": 100
+    },
+    "S5": {
+      "progress": 100
+    },
+    "F4": {
+      "progress": 100
+    },
+    "S6": {
+      "progress": 100
+    },
+    "T7": {
+      "progress": 100
+    },
+    "E19": {
+      "progress": 100
+    },
+    "E11": {
+      "progress": 52.2117303831171
+    }
+  },
+  "multiplier": 1,
+  "timers": {
+    "copies": 0,
+    "convergence": 0,
+    "barry": 0,
+    "autoPurchase": 0,
+    "scrap": 0,
+    "action": 0,
+    "event": 0,
+    "letsy": 0,
+    "crafts": 0,
+    "shopping": 0,
+    "plants": 0,
+    "preserves": 0,
+    "rainfall": 0,
+    "stream": 0,
+    "well": 0,
+    "food": 0,
+    "junk": 0,
+    "money": 0,
+    "power": 0,
+    "water": 0
+  },
+  "loops": 3,
+  "unlocks": {
+    "pastRestart": true,
+    "pastSpeed5x": true,
+    "timelineEvents": true,
+    "loop": true,
+    "autoPurchase": true,
+    "autoExplore": true
+  },
+  "autoUpgrade": {},
+  "autoUpgradeLevels": {},
+  "autoExplore": {
+    "E10": true,
+    "E11": false,
+    "S4": true,
+    "E1": true,
+    "T1": true,
+    "T2": true,
+    "E2": true,
+    "T3": true,
+    "E3": true,
+    "E4": true,
+    "E5": true,
+    "F1": true,
+    "S2": true,
+    "F2": true,
+    "E7": true,
+    "F3": true,
+    "T5": true,
+    "F5": true,
+    "E6": true,
+    "S1": true,
+    "T4": true,
+    "E12": true,
+    "E14": true,
+    "E15": true,
+    "E16": true,
+    "E8": true,
+    "E9": true,
+    "S3": true,
+    "S5": true,
+    "F4": true,
+    "S6": true,
+    "E19": true,
+    "T7": true
+  },
+  "exploration": "E11"
+}
