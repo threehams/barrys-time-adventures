@@ -41,13 +41,8 @@ export const getAllUpgrades = ({
     .sort((a, b) => {
       const typeA = a.upgrade.effect.type;
       const typeB = b.upgrade.effect.type;
-      if (typeA === typeB) {
-        return 0;
-      }
-      if (typeA === "add" && typeB === "multiply") {
-        return -1;
-      }
-      return 1;
+      // sort add before multiply, nothing else matters
+      return typeA < typeB ? -1 : 1;
     });
 };
 
