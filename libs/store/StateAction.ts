@@ -22,6 +22,12 @@ type UpgradeTimedUpgradeAction = {
   };
 };
 type ResetGameAction = { type: "RESET_GAME" };
+type ImportGameAction = {
+  type: "IMPORT_GAME";
+  payload: {
+    value: string;
+  };
+};
 type SetMultiplier = {
   type: "SET_MULTIPLIER";
   payload: {
@@ -77,4 +83,5 @@ export type StateAction =
   | LoopAction
   | SetAutoPurchaseAction
   | SetAutoMaxLevelAction
-  | AutoExploreAction;
+  | AutoExploreAction
+  | ImportGameAction;

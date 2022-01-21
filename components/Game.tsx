@@ -16,6 +16,7 @@ import { Speedup } from "./Speedup";
 import { ExplorationTabs } from "./ExplorationTabs";
 import { Panel } from "./types/Panel";
 import { Convergence } from "./Convergence";
+import { Import } from "./Import";
 
 export const Game = () => {
   const time = useSelector((state) => state.time);
@@ -59,6 +60,7 @@ export const Game = () => {
             <Speedup />
             <Status className="mb-3" />
             <Reset />
+            <Import />
           </aside>
           <main className="[grid-area:main] py-2">
             {(phase === "preEvent" ||

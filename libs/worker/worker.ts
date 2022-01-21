@@ -40,6 +40,10 @@ const main = async () => {
     const action = message.data;
 
     const [nextState, patches] = produceWithPatches(state, (draft) => {
+      if (action.type === "IMPORT_GAME") {
+        localForage.setItem(savedGameKey, JSON.parse(action.payload.value));
+        return;
+      }
       if (action.type === "RESET_GAME") {
         localForage.removeItem(savedGameKey);
         return initialState;
