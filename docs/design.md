@@ -1,180 +1,122 @@
-# Laundry Incremental
+# Barry's Time Adventures
 
-- One "turn" is one day of work, where you wear one set of clothes
-- You start out with say 10 sets of clothes
-- You get money for working each day (I guess you work weekends)
-- After you run out, you can either buy more, or find ways of getting away with wearing the same clothes more than once. Buying more means you feel better about yourself, but you need to clear out space for the dirty laundry. These are the two main balancing mechanics
-- You can never get rid of clothing, you can only store it
-- The methods of freeing up space get progressively more absurd and time/money-consuming, like compressing dirty clothes with a vacuum sealer
-- The methods of reusing clothing get worse over time, like turning underwear inside out to wear it again
-- Reusing clothes eventually makes you embarrassed enough at work that you quit and get another one
-- Storing clothes has an upper limit at which point you move out and get a bigger apartment
-  The game will also show all the reminders you've set for yourself to do laundry, starting like "8:00PM do laundry" and progressing to "2:00AM SERIOUSLY YOU HAVE TO DO LAUNDRY YOU CAN'T LIVE LIKE THIS"
-  your only options are snooze or dismiss
-  I somehow have to make time pass faster over time... or appear to go faster
-  "play Factorio"
+[WARNING: SPOILERS] Read only if you've already finished the game, or don't mind knowing what's going to happen.
 
-## Trigger Warnings
+## Time Limit
 
-The game should be possible to play without specific psychological effects. A trigger warning screen should show between phase 3 and phase 4, allowing players to disable certain simulations (panic attacks and emotional outbursts).
+You have ~30 in-game days to prepare. This shouldn't be a surprise. It's possible that Barry receives a warning from a mysterious source - a source that appears to know personal information about him.
 
-## Phase 1: Dumb Game
+## Progression
 
-This is just a dumb game about putting on clothes, then they get dirty, then I do laundry. I don't know why I'm playing this.
+### Route 1: Barry
 
-## Phase 2: Procrastination
+Barry is confident and impulsive to the point of recklessness.
 
-The player will not do laundry, but they will compulsively set reminders, despite always snoozing/dismissing them. The reminders become more dire over time.
+#### Phase 1: Resource Collection
 
-## Phase 3: Absurd
+Barry has a set amount of time to prepare for The Event, getting as many basic needs as possible, while getting rid of fiat currency and anything else that would be less useful.
 
-The player goes to more desperate, absurd, and expensive lengths to avoid doing laundry, to the point of renting multiple apartments and abandoning them as they become full of dirty laundry.
+Remaining time is visible. It's not clear what will happen
 
-## Phase 4: Psychological Horror
+At the end of time, Barry is suddenly jumped to the future (100-2000 years).
 
-This is a game about procrastination, and the resulting shame, which loops to more procrastination. This causes increasingly negative effects on the player:
+#### Phase 2: Exploration
 
-- Panic attacks in the middle of the night
-- Insomnia (after / resulting from panic attacks)
-- Workaholism
+Barry explores the ruins of the dead world he ends up in. He uses up resources as he explores, and trains stats which allow. Eventually, he finds the source of the time holes, and attempts to fix it.
 
-As these effects worsen, performance at work improves due to the compulsive focus on work and self-improvement. This causes imposter syndrome, worsening anxiety.
+Along the way, he unlocks:
 
-The game has hidden stats for "anxiety" and "sleep" which aren't exposed directly, but affect various parts of the game. Anxiety combined with sleep deprivation may result in:
+- Ability to see what happened in the past (timeline).
+- Ability to see events that happened in the past (timeline detail).
+- Ability to communicate with Past Barry (change timeline).
+- Upgrades which can be applied to the past. These take effect immediately.
+- Ability to fix paradoxes caused by applied upgrades (restart in the past).
+- Ability to swap places with Future Barry (loop the future).
 
-- social isolation
-- compulsive social media usage
-- exhaustion, followed by napping for hours during the day
-- difficulty with reading comprehension
-- blurry vision
-- hallucinations
-- calling in sick
-- breaking down and crying during work
+Looping causes Barry to keep some permanent stat progress, but also causes him to lose a bit of sanity each time. Looping is essential to progression.
 
-This game does _not_ deal with depression or suicide.
+The last exploration results in Barry attempting to fix the time hole problem, but making it much worse. All Barrys from all timelines (from looping) end up together. They decide to fix the dead Earth problem by populating it with Barry copies.
 
-## Phase 5: Redemption
+#### Phase 3: Convergence
 
-The game ends with the player breaking the loop. This must be handled _very carefully_.
+Barry, Robert, and Melissa all end up together. Barry makes some terrible decisions, Robert feels too guilty to stand up to him, Melissa {TODO} can't bring herself to stop him due to some past thing with them.
 
-Guidelines:
+### Route 2: Robert
 
-- This should not follow the trope of hitting "rock bottom," which is overplayed and is not universally true. [Notes on addiction therapy and resource loss](https://sci-hub.se/https://www.tandfonline.com/doi/abs/10.3109/08039488.2015.1123293?journalCode=ipsc20)
-- The game cannot prescribe a specific solution to a procrastination loop. What works for one person will not necessarily work for another.
+Robert is Barry's neighbor. Despite being outwardly friendly, Robert hates Barry for petty reasons (HOA-type stuff), and goes out of his way to make his life difficult.
 
-## Loop
+#### Phase 1: Revenge
 
-- Sleep
-  Decide what to wear at work
-- Work
-  Decide how to spend free time
-- Play games, binge TV, maybe other options
-  Decide what to wear to sleep
+Robert's goal is to make life as difficult as possible for Barry. There is no time limit; he just needs to build up the resources necessary for each event.
 
-# Modeling
+#### Phase 2: Redemption
 
-## Inventory
+After Barry's disappearance, Robert learns (somehow?) that Barry knew of his hatred, and realizes that he's been the asshole all along.
 
-- $ Money
-- Clothing:
-  - Shirts
-  - Pants
-  - Undergarments
-  - Socks
-- Other laundry
-  - Bed sheets
-  - Bath towels
-  - Hand towels
-- Shame (from wearing old clothes)
-- Desperation
-- Anxiety (hidden)
-- Sleep (hidden)
-- Apartment space (m³) current/max
+Unlike Barry, Robert spent all he had on hurting Barry, so starts phase 2 with no resources, and has to build them up.
 
-## Upgrades
+{TODO} For some reason, Robert can only move forward in time, so each reset jumps a specific distance (10 years). Maybe he's just a reasonable person and understands that changing the past is a _terrible idea_.
 
-```typescript
-type Effect = {
-  // Compress clothing better
-  clothingVolume: (num: number) => number;
-  // Reuse clothing more times with less shame
-  reuse: (num: number) => number;
-  // Make time go faster / slower
-  time: (num: number) => number;
-  // Change rate of shame increase
-  shame: (num: number) => number;
-  // Change rate of desperation increase
-  desperation: (num: number) => number;
-  // Change rate of money increase
-  money: (num: number) => number;
-  // Is this additive or multiplicative with other upgrades?
-  type: "add" | "multiply";
-};
+Robert's focus is on survival (get more done before jumping) and redemption (leave documents or technology in places he knows Barry will visit in the future).
 
-type Upgrade = {
-  // Max level of this upgrade
-  max?: number;
-  // Required for this upgrade to appear. Once that happens, it's
-  // always visible
-  requirements: {
-    money: number;
-    shame: number;
-    desperation: number;
-    space: number;
-  };
-  // Required to buy this upgrade
-  costs: {
-    money: number;
-    shame: number;
-    desperation: number;
-  };
-  // Readable name in-game
-  name: string;
-  // Precise key for the upgrade (not string)
-  key: UpgradeKey;
-  // Changes caused by this upgrade
-  effects: Effect[];
-  // Message shown with each upgrade
-  flavorTexts: string[];
-};
-```
+#### Phase 3: Convergence
 
-## Jobs
+Same as Route 1, but from a Robert's perspective.
 
-Jobs have generic titles
+Barry, Robert, and Melissa all end up together. Robert has many different decisions he can make, but his guilt prevents him from doing what he needs to do (stop Barry from making bad decisions). All decisions eventually lead to the same place.
 
-## Prestige Upgrades
+### Route 3: Melissa
 
-Select aspects of a new apartment based on your experiences (highest desperation? determination? pickiness?)
+#### Phase 1: Research
 
-## Timers
+Melissa has powerful control over time anolmalies {TODO give this a unique name}, and can look forward at all possible decisions and see the consequences. She looks forward enough to see what Barry is going to do (destroy the world, then take over the world, then destroy the world again). In order to stop this, she needs to
 
-- Time of day and day of week\
-  No specified year, month, or date
+Her first phase requires her to manipulate Jim into hating Barry, so that Jim will help in the future.
 
-  Passage of time is relative. Buy upgrades to speed up time, e.g. play Factorio to make the entire day pass by almost instantly
+#### Phase 2: Decisions
 
-## Save Data
+Her second phase plays out like Barry's second, but is her planning out in advance how to reach the convergence, and the reset mechanic is starting over her planning from the beginning. The more decisions she sees, the more (realtime) time it takes to decide.
 
-```tsx
-type ReuseCount = number;
-type Day = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+#### Phase 3: Convergence
 
-type SaveData = {
-  day: Day;
-  time: number;
-  money: number;
-  shame: number;
-  desperation: number;
-  job: Job;
-  clothing: {
-    [Key in ClothingName]: {
-      [Key in ReuseCount]: number | undefined;
-    };
-  };
-  upgrades: {
-    [Key in UpgradeKey]: number;
-  };
-  apartmentSpace: number;
-};
-```
+Same as Route 1, but from Melissa's perspective.
+
+Barry, Robert, and Melissa all end up together. Melissa can see what will happen, but refuses to stop Barry, because all ways of stopping him result in his death.
+
+### Route 4: Continuation
+
+#### Phase 1: Expansion
+
+With no one to stop Barry #{loopCount}, he creates a copy of himself. The copies begin to
+
+The Barry population rapidly expands, straining the planet's resources. Mutations are rampant. Later Barrys aren't remotely viable, as each new copy strays farther from the original.
+
+When the population hits 6 billion, the creation of new Barrys can't outpace the deaths of existing Barrys, and the population begins to collapse.
+
+#### Phase 2: Collapse
+
+The Barry population quickly collapses, resulting in the death of every Barry on the planet.
+
+## UI
+
+### News/Messages
+
+These are always visible, as the story is a main draw of the game.
+
+### UI during phases
+
+UI can change during phases and routes. Only the news needs to stay static.
+
+### Minimize tab switching
+
+Tabs can be very useful, but can also hide important information, like when something new becomes available. Keep them to a minimum outside mobile.
+
+When using tabs, have a notification that something new is available.
+
+Make tabs VERY clear that they are tabs.
+
+### Column layout
+
+Multiple resources and upgrades visible at once. 3 resources may be the maximum while still leaving room for news.
+
+- [Idle Momentum](https://idlemomentum.com/) does a great job with this. There's no need for a separate resource box in the first phase.
