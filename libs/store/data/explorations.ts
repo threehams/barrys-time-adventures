@@ -787,7 +787,7 @@ export const explorations: Exploration[] = [
     time: 10_000_000,
     timeMultiplier: BASE_MULTIPLIER,
     requirements: {
-      action: "S5",
+      action: "S6",
     },
     generates: {
       power: 4,
